@@ -1,3 +1,13 @@
+# 0.2.0 — Movement and weapon sandbox
+
+Added a separate default movement range with imported rifle/pistol meshes, armed directional locomotion, shoulder ADS and shoulder swapping, firing/reload/equip actions, real retargeted crouch and sprint, a guarded dodge roll, and a standing melee jab. Static low/high cover supports attachment, movement along walls, low-cover pop-up aim, and checked physical exposure/return at high-cover edges. Targets and an owning-player HUD make weapon behavior visible.
+
+Native components own action guards, ammo, obstruction checks and movement; Blueprint/Data Assets compose the acquired Epic template and Quaternius CC0 content. Editable sources, licenses, IK retarget setup and guarded authoring tools are retained. Character appearance and the horde game remain deferred; the original foundation map is preserved.
+
+Validation: Editor and Game targets build. Two rendered PIE sessions pass 92 live checks each, including evaluated animation slots, actual target damage, cover return, roll collision/interruption, reload conservation and incompatible action guards. Real gameplay screenshots were inspected. See TEST_MATRIX for evidence and engine/environment warnings.
+
+Remaining motion gaps: dedicated cover transitions/lean/corners, vault, knife-specific handling, and directional crouched ADS. Current melee is a jab. This is a playable prototype, not a complete Gears-style animation set or packaged release.
+
 # 0.1.0 — Unreal foundation
 
 Project Gunner now starts from a clean UE 5.8.2 C++/Blueprint project. The README-only Godot remote was backed up, deleted and recreated under the same GitHub name.

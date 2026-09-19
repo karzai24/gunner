@@ -10,7 +10,7 @@ The current user request selects Unreal and supersedes all Godot implementation 
 
 | Old requirement | Decision | Unreal implementation |
 |---|---|---|
-| Original IP, readable cover, camera collision, two-stage aim | Retain design | Art direction, spring arm, future camera-to-target/muzzle obstruction traces |
+| Original IP, readable cover, camera collision, two-stage aim | Retain design | Art direction, spring arm, camera-to-target/muzzle obstruction traces |
 | Rebindable, isolated player input | Retain design | Enhanced Input contexts per LocalPlayer; remapping UI later |
 | Explicit guarded game/player/weapon/AI states | Retain intent | Domain enums/tags, components, AnimBP states and BT where suitable |
 | Every active system MUST have a Node FSM | Drop implementation rule | Native engine ownership; avoid ceremonial classes |
@@ -43,6 +43,12 @@ The current user request selects Unreal and supersedes all Godot implementation 
 | SessionManager local duo | LocalPlayers, viewport split and device routing | M4 |
 | Incapacitation/revive/pulse emitters | Authority-owned health/interaction/defense components | M4 |
 | ENet boundary | Unreal listen server, replication and session layer | M5 |
+
+## Authorized movement/combat sandbox — 2026-09-19
+
+The user requested a focused expansion beyond the M0 foundation: cover-shooter movement, aiming, rifle/pistol combat and reused animations, while deferring character appearance. The new `L_MotionRange` composes selected M1 animation work and bounded weapon/cover prototypes from later milestones. This authorization does not accept the complete M1/M2/M3 milestone gates or extend to horde AI, waves, multiplayer, revival or defenses.
+
+Epic template armed clips and weapon meshes are combined with Quaternius CC0 motion retargeted through Unreal IK rigs. Missing dedicated cover transitions, corner/vault and knife clips remain explicit content gaps. The original foundation map remains available. See `TEST_MATRIX.md` for measured current acceptance and `ASSET_RESEARCH.md` for sources and coverage.
 
 ## Delivery gates
 

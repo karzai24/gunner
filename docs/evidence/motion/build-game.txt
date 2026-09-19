@@ -1,0 +1,26 @@
+Command: ./Tools/build_macos.sh Gunner
+
+/Users/Shared/Epic Games/UE_5.8/Engine/Source/ThirdParty/Apple/MetalShaderConverter/MetalShaderConverter.build.cs: warning: Referenced directory '/Users/Shared/Epic Games/UE_5.8/Engine/Source/ThirdParty/Apple/MetalShaderConverter/include/metal_irconverter_ext' does not exist.
+[1/18] Compile [Apple] SharedPCH.Engine.Project.ValApi.ValExpApi.Cpp20.h
+[2/18] Compile [Apple] Gunner.cpp
+[3/18] Compile [Apple] GunnerGameMode.cpp
+[4/18] Compile [Apple] GunnerHUD.cpp
+[5/18] Compile [Apple] GunnerAnimInstance.cpp
+[6/18] Compile [Apple] GunnerCoverComponent.cpp
+[7/18] Compile [Apple] GunnerDodgeComponent.cpp
+[8/18] Compile [Apple] GunnerCombatComponent.cpp
+[9/18] Compile [Apple] GunnerCharacter.cpp
+[10/18] Compile [Apple] GunnerFoundationProbe.cpp
+[11/18] Compile [Apple] GunnerMotionProbe.cpp
+[12/18] Compile [Apple] GunnerTarget.cpp
+[13/18] Compile [Apple] GunnerPlayerController.cpp
+[14/18] Compile [Apple] Module.Gunner.gen.cpp
+[15/18] Link [Apple] Gunner
+[16/18] Updating version file: /Users/moe/Documents/ChatGPT/Gunner/Intermediate/Build/Versions.xcconfig [NoUba]
+[17/18] ApplePostBuildSync Executing PostBuildSync [/Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner] [NoUba]
+/Users/Shared/Epic Games/UE_5.8/Engine/Source/ThirdParty/Apple/MetalShaderConverter/MetalShaderConverter.build.cs: warning: Referenced directory '/Users/Shared/Epic Games/UE_5.8/Engine/Source/ThirdParty/Apple/MetalShaderConverter/include/metal_irconverter_ext' does not exist.
+WARNING: To run, you must have a valid staged build directory. The Staged location is:
+** BUILD SUCCEEDED **
+[18/18] WriteMetadata Gunner.target [NoUba]
+Result: Succeeded
+Total execution time: 24.40 seconds

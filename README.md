@@ -1,8 +1,8 @@
 # Project Gunner: Rift Bastion
 
-An original cooperative third-person horde shooter being rebuilt in **Unreal Engine 5.8.2**, using C++ foundations and Blueprint content.
+An original cooperative third-person shooter being rebuilt in **Unreal Engine 5.8.2**, using C++ gameplay and Blueprint content.
 
-**Current scope: M0 foundation.** This repository provides a mannequin player, shoulder camera, Enhanced Input and an editable metric test map. The three-wave horde game, proper crouch, sprint, aiming/combat, cover, revive, split-screen setup and LAN are later milestones. Historical Godot feature lists are not claims about this build.
+**Current scope: movement and weapon sandbox.** The new range composes a shoulder camera, armed movement, crouch, sprint, a dodge roll, rifle/pistol aiming and shooting, reload/equip animations, a melee jab, and high/low cover attachment with a physical step out at valid high-cover edges. The sandbox has passed build and live gameplay checks; see [TEST_MATRIX](docs/TEST_MATRIX.md) for actual validation and limitations. This is not yet the three-wave horde game or a complete polished cover-shooter movement set. Character art remains an Epic mannequin placeholder.
 
 ## Open and play on macOS
 
@@ -13,38 +13,59 @@ Requires UE 5.8 with C++ support, Xcode and its Metal toolchain. The development
 ./Tools/open_editor_macos.sh
 ```
 
-The editor opens `Content/Gunner/Maps/L_Foundation`. Press **Play**. For a standalone editor-hosted game window:
+You can also double-click `Gunner.uproject`. The default map is **`Content/Gunner/Motion/Maps/L_MotionRange`**. Press **Play** to enter the range. If an older editor session restores the foundation map, open `L_MotionRange` from the Content Browser. The original `Content/Gunner/Maps/L_Foundation` is preserved.
+
+For a separate editor-hosted game window:
 
 ```bash
 ./Tools/run_macos.sh
 ```
 
-Controls: **WASD** move, **mouse** look, **Space** grounded jump. Gamepad: left stick move, right stick look, bottom face button jump. Crouch and sprint are intentionally unavailable until their proper animations are integrated. Escape stops Play in Editor; close the window to exit standalone. There is no pause/menu UI yet.
+| Action | Keyboard / mouse | Controller mapping |
+|---|---|---|
+| Move / look | WASD / mouse | Left / right stick |
+| Shoulder ADS / fire | Hold RMB / LMB | Left / right trigger |
+| Reload while standing | R | Left face button |
+| Rifle / pistol while standing | 1 / 2 | D-pad up / down |
+| Melee jab | F | Right-stick click |
+| Toggle crouch | C or Left Ctrl | Right face button |
+| Sprint | Hold Left Shift while moving forward | Hold left-stick click |
+| Dodge roll | E | Left shoulder button |
+| Attach to cover / detach / jump fallback | Space | Bottom face button |
+| Jump without seeking cover | J | No separate mapping |
+| Swap camera shoulder | Q | Right shoulder button |
 
-To build the Game target: `./Tools/build_macos.sh Gunner`. Running its executable requires cooked content; `run_macos.sh` uses the editor's uncooked game mode. No packaged release is included.
+Escape stops Play in Editor. Close the standalone window to exit. Controller mappings are authored; physical hardware verification is recorded separately in the test matrix.
 
-On Windows, use UE 5.8 with its supported Visual Studio C++ toolchain, generate project files from `Gunner.uproject`, build GunnerEditor Development, and open the project. Windows has not been validated in this milestone.
+ADS tightens the over-the-shoulder camera and aiming pose. The rifle fires automatically while held; the pistol fires once per press. Range targets show damage and reset after depletion. The HUD shows ammunition, current action, hit feedback and blocked muzzle feedback. There is no enemy AI or player health loop.
+
+## Current movement limits
+
+- **Crouch uses real imported motion.** The free source provides idle and forward movement, so crouched travel turns the body toward movement. Outside ADS, the armed upper-body layer fades out to preserve the source's low protective torso pose. Crouched ADS restores the armed pose and is stationary until proper directional crouch clips are available.
+- **Reload and weapon switching require standing.** They are blocked while crouched, requesting crouch, or attached to low cover, including its standing ADS position, because only upright handling clips are available. Detach from low cover and stand first. Crouch input is blocked during reload/equip; standing high-cover reload remains available.
+- **Cover supports attachment and movement along a static wall.** Low cover crouches while protected and requests standing when aiming. At a valid high-cover edge, holding ADS physically steps the standing character out; releasing ADS returns to cover. Q chooses the shoulder. High-cover firing requires ADS at that open edge, and shots still check obstruction between body, muzzle and aim target.
+- **Roll uses a real retargeted animation** and travels up to 350 cm along movement, or camera facing when stationary. It requires standing, grounded clearance and supported floor; crouch, cover, reload, equip and melee block it.
+- Dedicated wall-lean poses, corner turns, cover entry/exit montages, vaults and knife handling are not implemented. High-cover peeking uses the existing directional armed gait; melee uses a standing jab.
+- Sprint and roll lower combat readiness; airborne combat and crouched melee are disabled. There is no local duo, LAN, waves, revival, pulse defense, menu or packaged release in this sandbox.
+
+All motion comes from installed Epic template clips and licensed **Quaternius CC0 animations retargeted to Manny**. No custom character art or manually keyed replacement motions were created. [Asset research](docs/ASSET_RESEARCH.md) records free coverage and optional paid sources; no pack purchase was made.
 
 ## Development and validation
 
-Read [AGENTS.md](AGENTS.md), [technical design](docs/TECHNICAL_DESIGN.md), [migration plan](docs/MIGRATION_PLAN.md), [milestones](docs/MILESTONES.md) and [animation contract](docs/ANIMATION_PIPELINE.md).
+Read [AGENTS.md](AGENTS.md), [technical design](docs/TECHNICAL_DESIGN.md), [milestones](docs/MILESTONES.md), [animation contract](docs/ANIMATION_PIPELINE.md) and [asset provenance](docs/ASSET_PROVENANCE.md).
 
-`Source/Gunner` owns the runtime foundation. `Content/Gunner` contains project Blueprint/data/map assets. `Content/Characters` contains Epic template assets with provenance in [ASSET_PROVENANCE](docs/ASSET_PROVENANCE.md). Binary assets are committed directly for this small foundation; no external LFS fetch is needed. Adopt Git LFS before growing large production art history.
+`Source/Gunner` owns runtime behavior. `Source/GunnerEditor` contains editor-only asset authoring helpers. Project assets live under `Content/Gunner`; installed Epic package paths remain under `Content/Characters` and `Content/Weapons`. Editable animation source and licenses are retained under `ArtSource`. Binary assets are stored directly for this prototype; adopt Git LFS before substantially expanding production art history.
 
-The map and assets are already committed. **Do not run `Tools/create_foundation.py` during ordinary setup.** It is a one-time editor bootstrap, refuses to overwrite existing assets, and is preserved for review/reproduction in a blank project.
+The maps and assets are already authored. **Do not rerun `create_foundation.py`, `import_motion_source.py`, `retarget_motion.py` or `create_motion_sandbox.py` for ordinary setup.** The one-time `install_dodge.py` and `repair_motion_montage_slots.py` migrations are already applied. Their creation guards preserve existing assets; they are reproduction/authoring tools, not launch requirements.
 
-Run the opt-in live smoke harness:
-
-```bash
-./Tools/run_macos.sh -GunnerSmoke -stdout
-```
-
-It drives real key events through Enhanced Input, checks movement/jump/collision/possession, captures gameplay under `Saved/Screenshots`, and logs `GUNNER_SMOKE_COMPLETE failures=0` on success. It does not exit the window. For two full Play-in-Editor cycles (exits that editor when finished):
+The opt-in live range probe is:
 
 ```bash
-./Tools/open_editor_macos.sh -GunnerSmoke "-ExecCmds=py $(pwd)/Tools/validate_editor.py" -stdout
+./Tools/run_macos.sh -GunnerMotionSmoke -stdout
 ```
 
-The editor driver logs `GUNNER_EDITOR_CYCLES_COMPLETE`; both smoke summaries must also have zero failures. The harness is not spawned in normal gameplay or Shipping. See [TEST_MATRIX](docs/TEST_MATRIX.md) for evidence and limitations; automated checks do not replace animation/visual inspection.
+It exercises live input and gameplay, logs `GUNNER_MOTION_COMPLETE failures=0` only when its checks pass, and captures screenshots under `Saved/Screenshots`. Its existence is not a test result; consult the test matrix and inspect actual motion. The old `-GunnerSmoke` probe belongs to the preserved foundation scenario.
 
-Original supplied documents are preserved in `docs/reference/godot`. The former README-only remote was backed up separately before replacement. No Godot runtime files are part of this Unreal project.
+To compile the Game target, use `./Tools/build_macos.sh Gunner`; its executable needs cooked content. The run script uses the editor's uncooked game mode. Windows setup requires UE 5.8 and its supported Visual Studio C++ toolchain; Windows and a cooked release have not been validated for this pass.
+
+Original supplied documents remain in `docs/reference/godot`. The former remote contained only a README and was backed up before replacement; no inspected Godot implementation or inherited Godot test results are claimed.

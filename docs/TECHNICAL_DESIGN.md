@@ -1,62 +1,93 @@
 # Unreal technical design
 
-## Baseline and first milestone
+## Scope and inspected baseline
 
-Engine inspected: Epic Launcher UE 5.8.2 (CL 56702186), Apple Silicon macOS 26.6.2, Xcode 26.6, Mac SDK 26.5, Metal toolchain installed. Project: `Gunner.uproject`; one runtime module, `Gunner`, and Game/Editor targets. AndroidFileServer is disabled because Android deployment is outside this foundation; its editor-generated local connection settings are not source-controlled. No existing Unreal project or Godot source was present. The remote's only commit was a README. Historical design documents are preserved under `reference/godot/` and do not certify the new implementation.
+Engine: Epic Launcher UE 5.8.2 (CL 56702186), Apple Silicon macOS 26.6.2, Xcode 26.6, Mac SDK 26.5 and installed Metal toolchain. `Gunner.uproject` has the runtime `Gunner` module, editor-only `GunnerEditor` authoring module, and Game/Editor targets. AndroidFileServer remains disabled. The former remote contained only a README; historical Godot documents do not certify any current implementation.
 
-M0 establishes a saved 44 x 32 m test map, a composed mannequin character, collision-aware shoulder camera, locomotion/jump, and Enhanced Input. It deliberately has no combat, crouch action, sprint action, cover logic, enemies, menu, network session or match loop. Metric cover blocks are collision/camera fixtures, not working cover. The map is a metric test room, not the complete Rift Bastion layout.
+The user authorized a **movement and weapon sandbox** extending M0. The default map is `/Game/Gunner/Motion/Maps/L_MotionRange`, derived from the preserved 44 x 32 m `/Game/Gunner/Maps/L_Foundation`. It adds three resetting targets and composes movement, dodge roll, aiming, weapons, melee and bounded static-wall attachment with physical edge exposure. No enemy AI, waves, player health/incapacitation, match loop, menu, local duo or LAN is implemented in this pass. Character appearance stays provisional.
 
-## Implemented structure
+Implementation and asset composition are ready for live verification; actual build/play/visual acceptance belongs in `TEST_MATRIX.md`. A generated asset or a passing compiler does not complete a milestone.
 
-| Location/type | Responsibility |
+## Runtime and authoring ownership
+
+| Owner / location | Responsibility |
 |---|---|
-| `Source/Gunner` | Runtime C++ module, no UnrealEd dependency |
-| `AGunnerCharacter` | ACharacter/CharacterMovement, capsule, spring arm, camera, input handlers; supports Blueprint composition |
-| `AGunnerPlayerController` | Adds/removes its own context in the owning LocalPlayer subsystem on possession, acknowledgment, setup and teardown |
-| `UGunnerInputConfig` | Designer-owned context and action references; avoids runtime key construction |
-| `AGunnerGameMode` | Default controller/pawn types; Blueprint selects the composed pawn |
-| `Content/Gunner/Characters/BP_Warden` | Manny mesh and Animation Blueprint; input configuration |
-| `Content/Gunner/Input` | Move, mouse/stick look and traversal actions; mapping context and data asset |
-| `Content/Gunner/Core/BP_GunnerGameMode` | Foundation composition |
-| `Content/Gunner/Maps/L_Foundation` | Saved, editable map with spawn, collision and metric fixtures |
-| `Content/Characters/Mannequins` | Epic template skeleton, animations, rig, mesh and materials |
-| `Tools` | Reproducible editor bootstrap and local build/run entry points |
+| `AGunnerCharacter` | ACharacter/CharacterMovement, capsule, shoulder camera, movement/stance guards, sprint, contextual traversal and input handlers |
+| `AGunnerPlayerController` | Adds/removes only its own Enhanced Input context in the owning LocalPlayer subsystem across possession, acknowledgment, setup and teardown |
+| `UGunnerCombatComponent` | Explicit Idle/Firing/Reloading/Equipping/Melee states; per-weapon ammo; rate limits; montage lifecycle; obstruction traces; guarded target damage |
+| `UGunnerCoverComponent` | Bounded static-wall query, attachment normal, low/high classification, movement constraint, edge checks, guarded step-out/return states and detach cleanup |
+| `UGunnerDodgeComponent` | Validates grounded roll route/standing clearance, plays the acquired montage, applies a native CharacterMovement root-motion source and cleans it up on completion/interruption |
+| `UGunnerAnimInstance` | Game-thread snapshot of velocity, stance, air/aim/sprint/cover and weapon selection for graph evaluation; no independent gameplay decisions |
+| `UGunnerInputConfig` | Authored actions/context, isolated per player; no runtime key construction |
+| `UGunnerMotionSettings` | Movement speeds, aim camera tuning and authoring gates for actual animation coverage |
+| `UGunnerWeaponData` | Identity, static visual, grip/muzzle offsets, montages and weapon tuning; mutable ammunition belongs to combat component |
+| `AGunnerTarget` | Authority-owned range durability and timed reset; fixture only, not an enemy or health framework |
+| `AGunnerHUD` | Owning-controller canvas presentation of reticle, hit/obstruction feedback, ammunition and action state |
+| `AGunnerGameMode` / `BP_MotionGameMode` | Pawn/controller/HUD composition; opt-in development probes |
+| `Content/Gunner/Motion` | Range map, BP_WardenMotion, weapon/motion/input Data Assets, graph, blend spaces and montages |
+| `Content/Gunner/Animation` | Separate imported Quaternius source, project IK rigs/retargeter and Manny retarget outputs |
+| `Content/Characters` / `Content/Weapons` | Installed Epic template package paths; provenance retained |
+| `Source/GunnerEditor` | Editor-only native helpers to author/compile Blend Spaces and AnimGraph; no UnrealEd dependency in runtime module |
+| `Tools` / `ArtSource` | Guarded reproducible authoring scripts, local launch/build tools, retained editable animation source and licenses |
 
-Keyboard axes combine cumulatively so opposing directions cancel; CharacterMovement constrains diagonal speed. Mouse input is a delta; stick input is a rate scaled by delta time, with a dead zone. Legacy controller input scaling is explicitly disabled, so it cannot double-apply sensitivity or pitch inversion. Positive MouseY/right-stick Y means look up; camera pitch is limited to -60°/+50°. The traversal action is currently only the grounded jump fallback. Gamepad mappings are authored for one local player; device assignment for a second player is M4.
+Keyboard movement axes accumulate so opposing keys cancel; CharacterMovement limits diagonal speed. Mouse input is a delta, stick input is a rate scaled by delta time with a dead zone. Legacy controller scales are disabled. Positive mouse/right-stick Y means look up; pitch limits are -60/+50 degrees. Controller mappings exist for one local player; physical device and duo routing acceptance is separate.
 
-No global input clearing or actor discovery happens during normal gameplay. Do not create gameplay singletons to replace Unreal ownership. The controller's possession hooks are future-compatible seams, not evidence that multiplayer has been implemented.
+## Movement and camera
 
-## Planned ownership and replication boundaries
+The capsule is radius 36/standing half-height 90 cm and crouched half-height 62 cm. Crouch/stand uses native CharacterMovement clearance handling. The animation graph contains a real crouch idle/forward cycle. Because the acquired set has no sideways/backward crouch clips, free crouched movement faces travel, while crouched ADS rejects movement input. The authoring flag `bDirectionalCrouchReady` remains false. Never enable fixed-facing crouch strafing by renaming the forward gait.
 
-| System | C++/Unreal owner | Blueprint/data authoring | Authority |
-|---|---|---|---|
-| Match and waves | GunnerGameMode + wave director component; timers and reserved/live counts | Wave Data Assets | Server only |
-| Shared match presentation | GunnerGameState; phase, wave number, remaining enemies, outcome | Per-player UMG views | Server writes; clients observe |
-| Player identity | GunnerPlayerState with stable content ID | Selection UI | Server validated |
-| Health/incapacitation/revival | Replicated Health component and guarded life state | Reaction/revive presentation | Server owns damage, timers and revive checks |
-| Weapon/ammunition | Weapon actor/component; camera target then muzzle obstruction trace | Weapon Data Asset, montages, Niagara | Server validates rate, aim, ammo and reload; local cosmetics |
-| Locomotion | CharacterMovement; custom movement mode only when cover/vault requires it | Animation Blueprint/blend spaces/aim offsets | Native movement prediction; extend saved moves when adding predicted state |
-| Cover/vault | Character component with bounded geometry queries and explicit attachment state | Cover metadata, montages, Motion Warping | Server-validated geometry and destination |
-| Enemy | AIController, perception, navigation; start with Behavior Tree | Blackboard/BT, enemy Data Asset | Server |
-| Environmental pulse | Replicated defense actor/component | Field shape, VFX, cooldown display | Server activation, slow and damage; 8-second baseline |
-| Local session/travel | GameInstance subsystem, LocalPlayers; ordinary level travel | Frontend widgets | Local selection now; OnlineSubsystem sessions later |
-| UI | Owning-player UMG; delegates/view models tied to appropriate state owners | Widget Blueprints | Passive presentation, no gameplay decisions |
-| Audio/settings | Audio Mixer/submix/concurrency; GameUserSettings/SaveGame | Sound assets, settings UI | Local preferences; versioned validation |
+The armed upper-body layer fades to zero during non-ADS crouch so its upright torso cannot replace the imported protective crouch pose. Standing and crouched ADS restore that layer; sprint also fades it out. This is runtime blending of existing clips, with no manually keyed torso correction. Crouch input rejects an active reload or equip action.
 
-LAN is later. Do not implement custom ENet snapshots, rollback or lag compensation in M0. Choose listen-server sessions and native replication first when LAN work is authorized. No GAS dependency until ability complexity justifies it. StateTree/EQS are optional based on actual AI needs.
+Current Data Asset defaults are 380 cm/s travel, 190 aim, 650 sprint and 140 crouch. Cover travel uses 150 cm/s, with the native crouch speed applying when crouched. Acceleration is 1200 cm/s², braking 1600 cm/s², rotation 480 degrees/s, jump velocity 440 cm/s and air control 0.2. These are prototype tuning choices, not values recovered from Godot.
 
-## Units and tuning
+Normal camera: 320 cm arm, 50 cm shoulder offset and 75-degree FOV. Aim camera: 220 cm arm and 58-degree FOV. Sprint camera: 350 cm arm and 82-degree FOV. Vertical target offset blends from 65 cm standing to 45 cm crouched; shoulder swaps interpolate. Spring-arm sweeps use a 12 cm probe. These camera changes preserve the original 320 cm normal baseline.
 
-Unreal is centimeters, Z up, X forward. Capsule sizes use radius and half-height: 36/90 cm standing, 36/62 crouched. The crouch value is reserved but disabled pending animation. Camera arm 320 cm with 50 cm shoulder offset and 65 cm target height offset. Spring-arm sweep handles occlusion. Cover dimensions and 44 x 32 m floor match source metrics without intentional dimension deviations.
+Sprint requires forward input, grounded standing movement, no aim, no roll and no cover. Sprint, roll and falling block combat. Melee locks travel; low-cover and active-peek melee are rejected, and crouched/pending-crouch melee is disabled because its acquired jab is a standing full-body action. Space first detaches if attached, otherwise tries cover in camera-yaw direction, then falls back to grounded jump. J requests jump without a cover search. E/controller left shoulder requests the separate dodge roll. There is no vault branch.
 
-M0 provisional locomotion tuning: 450 cm/s maximum, 1200 cm/s² acceleration, 1600 cm/s² braking, 480°/s yaw rotation, jump velocity 440 cm/s, 75° field of view. These values are new tuning choices, not recovered prototype values. Foot planting and heavy movement feel remain M1 acceptance work.
+The roll uses `AM_DodgeRoll`, the acquired in-place UAL Roll at a montage rate scale of 1.65. `UGunnerDodgeComponent` selects current travel direction above 30 cm/s, otherwise camera yaw, and validates up to 350 cm of travel. A standing-capsule sweep may shorten the route; less than 100 cm rejects. Floor samples along the route and full destination clearance reject gaps, non-static support and excessive height differences. A native `FRootMotionSource_MoveToForce` drives CharacterMovement over the montage duration; the animation track itself remains in-place. Crouch, cover, reload, equip and melee reject a roll. Completion, interruption, unpossession, teardown, timeout or leaving walking removes the motion source and releases state. The capsule remains standing-sized throughout. During the roll, the camera arm extends to 350 cm and its target height drops from 65 to 5 cm above capsule center, interpolating back afterward to keep the low pose in view.
 
-Use a conventional raster baseline (no Lumen, virtual shadow maps or motion blur) to establish correctness on this 16 GB development Mac. This is not an eventual performance promise. Profile cooked builds and two local views before adopting expensive rendering features.
+## Cover geometry and current limits
 
-## Official references
+`UGunnerCoverComponent` queries at most 135 cm, accepts a near-vertical static wall, rejects ankle-height objects using a body-height trace, and classifies low/high using a higher trace. It sweeps the capsule to a 52 cm offset, then enables a native CharacterMovement plane constraint. Failed snaps do not teleport through geometry. Attached wall validity is normally checked on a 0.04-second component interval; step-out/return transitions tick each frame. Detach, unpossession and teardown remove the constraint.
+
+Movement projects onto the wall tangent and checks geometry ahead before allowing travel. Corners require explicit detach/re-attach. Low cover requests crouch while protected and standing for ADS; native standing clearance still applies. High cover has None/SteppingOut/Exposed/Returning states: ADS at the selected open edge requests a 70 cm lateral step, with capsule and supported-floor checks before moving. Existing armed directional locomotion animates the step. Releasing ADS or invalidating its selected side requests return to the stored cover anchor. Normal player movement is suppressed during this transition/exposure; a blocked return times out and detaches at the safe swept position. High-cover peeking is standing only while directional crouch coverage is missing. Fire still requires ADS, an allowed edge and the final obstruction traces.
+
+This provides a geometry/state prototype using the available armed/crouch movement and an actual step into exposure. It does not contain dedicated cover entry/exit, wall-lean, corner-turn or vault poses. Fixture heights remain 115/180 cm and the room remains 4400 x 3200 cm. Full M3 cover-animation acceptance is still outstanding.
+
+## Weapon and melee actions
+
+Rifle: 30-round magazine, 240 initial reserve, automatic fire every 0.12 seconds, 20 damage. Pistol: 12-round magazine, 120 reserve, one shot per press with a 0.27-second rate limit, 35 damage. Both default to 10000 cm range. Each weapon retains its own magazine/reserve through swaps. Weapon visuals are hand-attached static template meshes; separately moving magazines/bolts and production weapon effects/audio are not implemented.
+
+A camera trace selects the aim point; a body-to-muzzle check rejects a barrel protruding through geometry; a muzzle-to-target trace resolves the actual impact. Only `AGunnerTarget` fixtures receive sandbox damage. A blocked shot still consumes the fired round. Short-lived debug lines/points and a local HUD provide prototype feedback; no per-shot actor spawning is needed.
+
+Fire/equip/reload require a valid animation and grounded authority. Reload commits a conserved magazine/reserve transfer only on uninterrupted montage completion. A serial token rejects stale callbacks, and a timeout clears locks without awarding ammo. Native montage delegates are the current completion contract; no unguarded notify changes ammunition. Equip starts the incoming montage and updates its selected visual after the montage starts successfully.
+
+The acquired reload/equip clips require an upright torso. Both actions reject actual or pending crouch and any attached low-cover state, including its standing ADS position: ending ADS there would otherwise return to protective crouch during the action. Detaching and standing permits them again. Standing high-cover reload remains available.
+
+Melee uses the retargeted `Punch_Jab` full-body montage. Its single timer requests impact at 38% of duration; code validates authority, possession, current action and active montage before damage. A bounded 135 cm sweep with 35 cm radius, forward-angle gate and occlusion trace applies up to 40 damage to a range target. It is a standing jab, not knife combat. Timers/delegates are canceled during interruption, unpossession and teardown.
+
+## Future authority boundaries
+
+The sandbox uses native authority checks but does **not** implement replicated weapons, combat RPCs, predicted cover or network sessions. Local camera/HUD remain tied to their owner. Preserve these boundaries as later work expands:
+
+| Future system | Planned owner |
+|---|---|
+| Waves, reservations and match rules | GameMode / wave director; GameState exposes shared state |
+| Stable participant identity | PlayerState |
+| Health, incapacitation and revive | Authority-owned replicated health/interaction components |
+| Enemy perception/navigation | AIController and Unreal navigation/Behavior Tree |
+| Pulse defenses | Authority-owned replicated defense actor/component |
+| Local duo | LocalPlayers, device assignment, separate cameras/HUDs |
+| LAN | Native listen-server replication and session facilities; extend predicted movement when required |
+
+No custom allocator, renderer, global event bus, engine loop or networking protocol is introduced. Use ordinary engine timers, delegates and movement. Add pooling or heavier systems only after representative profiling.
+
+Use the existing raster baseline without Lumen, virtual shadow maps or motion blur on the 16 GB development Mac. This is not a measured performance guarantee. Cooked, representative two-view profiling remains future acceptance work.
+
+## References
 
 - [Enhanced Input](https://dev.epicgames.com/documentation/unreal-engine/enhanced-input-in-unreal-engine)
-- [C++ character movement](https://dev.epicgames.com/documentation/unreal-engine/coder-03-configure-character-movement-with-cplusplus-in-unreal-engine)
+- [Character movement](https://dev.epicgames.com/documentation/unreal-engine/coder-03-configure-character-movement-with-cplusplus-in-unreal-engine)
 - [macOS requirements](https://dev.epicgames.com/documentation/en-us/unreal-engine/macos-development-requirements-for-unreal-engine)
 
-Installed 5.8 headers and templates govern API details. See `TEST_MATRIX.md` for measured validation rather than inferring it from these references.
+Installed 5.8 headers/templates govern API details. See `ANIMATION_PIPELINE.md`, `ASSET_PROVENANCE.md` and `TEST_MATRIX.md` for coverage, source rights and observed verification.

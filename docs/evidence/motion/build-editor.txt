@@ -1,0 +1,6 @@
+Command: ./Tools/build_macos.sh GunnerEditor
+
+[1/2] Compile [Apple] GunnerHUD.cpp
+[2/2] Link [Apple] libUnrealEditor-Gunner.dylib
+Result: Succeeded
+Total execution time: 4.50 seconds

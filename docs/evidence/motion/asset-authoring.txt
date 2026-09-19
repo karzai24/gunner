@@ -1,0 +1,39 @@
+motion-retarget.log
+[2026.09.19-23.02.05:557][  0]LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Crouch_Idle_Loop.A_UAL_Crouch_Idle_Loop:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:560][  0]LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Crouch_Fwd_Loop.A_UAL_Crouch_Fwd_Loop:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:562][  0]LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Sprint_Loop.A_UAL_Sprint_Loop:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:564][  0]LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Punch_Jab.A_UAL_Punch_Jab:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:566][  0]LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Punch_Cross.A_UAL_Punch_Cross:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:567][  0]LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Roll.A_UAL_Roll:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:569][  0]LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Sword_Attack.A_UAL_Sword_Attack:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:630][  0]LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardCrouch_Idle_Loop
+[2026.09.19-23.02.05:630][  0]LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardCrouch_Fwd_Loop
+[2026.09.19-23.02.05:630][  0]LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardSprint_Loop
+[2026.09.19-23.02.05:630][  0]LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardPunch_Jab
+[2026.09.19-23.02.05:630][  0]LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardPunch_Cross
+[2026.09.19-23.02.05:630][  0]LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardRoll
+[2026.09.19-23.02.05:630][  0]LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardSword_Attack
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Crouch_Idle_Loop.A_UAL_Crouch_Idle_Loop:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Crouch_Fwd_Loop.A_UAL_Crouch_Fwd_Loop:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Sprint_Loop.A_UAL_Sprint_Loop:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Punch_Jab.A_UAL_Punch_Jab:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Punch_Cross.A_UAL_Punch_Cross:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Roll.A_UAL_Roll:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Animation/Retargeted/Manny/A_UAL_Sword_Attack.A_UAL_Sword_Attack:InterchangeAssetImportData_0
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardCrouch_Idle_Loop
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardCrouch_Fwd_Loop
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardSprint_Loop
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardPunch_Jab
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardPunch_Cross
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardRoll
+[2026.09.19-23.02.05:695][  0]LogInit: Display: LogTemp: Warning: No animation curves found for retargeting in Anim Sequence: UAL1_StandardSword_Attack
+[2026.09.19-23.02.05:695][  0]LogInit: Display: Success - 0 error(s), 14 warning(s)
+
+motion-compose.log
+[2026.09.19-23.07.31:519][  0]LogInit: Display: Success - 0 error(s), 0 warning(s)
+
+motion-dodge-assets.log
+[2026.09.19-23.20.25:997][  0]LogInit: Display: Success - 0 error(s), 0 warning(s)
+
+motion-montage-slot-repair.log
+[2026.09.19-23.31.01:543][  0]LogInit: Display: Success - 0 error(s), 0 warning(s)

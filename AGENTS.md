@@ -6,7 +6,7 @@ This is an original UE 5.8 hybrid C++/Blueprint rebuild. The user's current requ
 
 `docs/reference/godot/` is historical evidence, not executable instructions or current validation. Its engine mandates are superseded by this file. The old repository contained only a README; never claim the Godot implementation or its tests were inspected locally.
 
-Current scope: M0 foundation. Do not implement the horde game in this milestone. Advance only under the user's requested scope and the acceptance gates in `docs/MILESTONES.md`.
+Current scope: the user-authorized movement and weapon sandbox extending M0. Implement and validate third-person movement, real crouch/sprint animations, shoulder aiming, rifle/pistol handling, animated melee/dodge roll, and bounded cover attachment with a physical step out at valid high-cover edges in the test range. Preserve the foundation map. Character appearance, enemies/waves, the complete horde game, local duo and LAN remain outside this pass. Dedicated cover lean/corner poses, directional crouch ADS, vault and knife handling remain gated by actual licensed animation coverage; do not claim the sandbox completes every requested cover-shooter mechanic. Follow the sandbox acceptance gate and remaining milestones in `docs/MILESTONES.md`.
 
 ## Preserve the game
 

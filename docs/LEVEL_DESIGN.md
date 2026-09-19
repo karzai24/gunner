@@ -10,6 +10,12 @@
 - Camera operating radius: 3.2 m with swept obstruction handling.
 - Arena footprint: 44 × 32 m.
 
+## Current movement range
+
+The current sandbox is `Content/Gunner/Motion/Maps/L_MotionRange`, a separate copy of the 44 × 32 m foundation room. It contains 1.15 m and 1.8 m cover fixtures, open movement lanes and three resetting weapon targets. The final arena below remains a design target. The foundation map is preserved.
+
+High-cover edge exposure adds a checked 0.70 m lateral step from the protected anchor; the 0.52 m wall offset remains unchanged. Roll travel is at most 3.50 m and retains the standing capsule, so it does not grant passage under low openings. These are action distances, not changes to the room, player or cover dimensions.
+
 ## Arena grammar
 
 The central reactor ring is the orientation landmark. North and south breach gates feed diagonal pressure into three circulation routes: the open center, west cover weave, and east defense lane. Cover islands are deliberately offset so no position protects every approach. Two pulse-fence consoles sit near lane pivots and reward moving out from the safest central cover.

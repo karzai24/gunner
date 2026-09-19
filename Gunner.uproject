@@ -2,12 +2,17 @@
   "FileVersion": 3,
   "EngineAssociation": "5.8",
   "Category": "Games",
-  "Description": "Project Gunner: Rift Bastion \u2014 Unreal foundation",
+  "Description": "Project Gunner: Rift Bastion \u2014 movement and weapon sandbox",
   "Modules": [
     {
       "Name": "Gunner",
       "Type": "Runtime",
       "LoadingPhase": "Default"
+    },
+    {
+      "Name": "GunnerEditor",
+      "Type": "Editor",
+      "LoadingPhase": "PostEngineInit"
     }
   ],
   "Plugins": [
@@ -17,6 +22,10 @@
     },
     {
       "Name": "ControlRig",
+      "Enabled": true
+    },
+    {
+      "Name": "IKRig",
       "Enabled": true
     },
     {

@@ -1,0 +1,42 @@
+[
+  {
+    "asset": "/Game/Gunner/Motion/Animation/Montages/AM_Rifle_Fire.AM_Rifle_Fire",
+    "before": "DefaultSlot",
+    "after": "UpperBody"
+  },
+  {
+    "asset": "/Game/Gunner/Motion/Animation/Montages/AM_Rifle_Reload.AM_Rifle_Reload",
+    "before": "DefaultSlot",
+    "after": "UpperBody"
+  },
+  {
+    "asset": "/Game/Gunner/Motion/Animation/Montages/AM_Rifle_Equip.AM_Rifle_Equip",
+    "before": "DefaultSlot",
+    "after": "UpperBody"
+  },
+  {
+    "asset": "/Game/Gunner/Motion/Animation/Montages/AM_Pistol_Fire.AM_Pistol_Fire",
+    "before": "DefaultSlot",
+    "after": "UpperBody"
+  },
+  {
+    "asset": "/Game/Gunner/Motion/Animation/Montages/AM_Pistol_Reload.AM_Pistol_Reload",
+    "before": "DefaultSlot",
+    "after": "UpperBody"
+  },
+  {
+    "asset": "/Game/Gunner/Motion/Animation/Montages/AM_Pistol_Equip.AM_Pistol_Equip",
+    "before": "DefaultSlot",
+    "after": "UpperBody"
+  },
+  {
+    "asset": "/Game/Gunner/Motion/Animation/Montages/AM_MeleeJab.AM_MeleeJab",
+    "before": "DefaultSlot",
+    "after": "FullBody"
+  },
+  {
+    "asset": "/Game/Gunner/Motion/Animation/Montages/AM_DodgeRoll.AM_DodgeRoll",
+    "before": "DefaultSlot",
+    "after": "FullBody"
+  }
+]

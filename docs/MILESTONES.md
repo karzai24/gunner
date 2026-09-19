@@ -2,7 +2,21 @@
 
 Every milestone requires a successful build, a real launch, exercised gameplay, visual inspection, fixed attributable errors/warnings, evidence and limitations in TEST_MATRIX. A checkbox/compilation/import is not evidence by itself.
 
-## M0 — Foundation (current scope)
+## Current pass — Movement and weapon sandbox
+
+The user explicitly authorized movement/weapon work beyond M0, before the full horde game. This bounded pass exercises reusable M1/M2/M3 mechanics in `L_MotionRange`; it does not certify completion of those broader milestones. Implementation and asset composition exist; live acceptance is recorded in `TEST_MATRIX.md`.
+
+- Build the Editor and Game targets; launch the real range, possess BP_WardenMotion, and inspect movement from both camera shoulders.
+- Exercise standing directional rifle/pistol movement, real retargeted crouch idle/forward motion, sprint, airborne transitions and camera collision. Verify standing-clearance rejection. Crouched travel faces its direction; crouched ADS stays stationary until directional coverage exists.
+- Verify ADS framing and aim offsets, weapon hand alignment, automatic rifle, semiautomatic pistol, per-weapon magazines/reserves, guarded equip and interrupted/completed reload. Ammo transfers only on validated completion.
+- Verify camera-to-target, body-to-muzzle and muzzle-to-target obstruction checks against target and cover geometry. Damage and ammunition are authority-owned in this standalone sandbox; no networking acceptance is implied.
+- Exercise a genuine standing melee jab, one guarded damage window, interruption cleanup, movement lock and rejection while crouched/airborne.
+- Exercise the real retargeted dodge roll on E/controller left shoulder, bounded native movement up to 350 cm, route/landing clearance and floor support, action guards and cleanup after interruption or loss of grounded movement.
+- Verify 135 cm cover search, 52 cm attachment offset, 115/180 cm low/high fixtures, safe wall movement, edge limits and detach. Low cover requests standing for ADS; high cover uses a checked 70 cm standing step out at the selected edge and returns on ADS release. Fire remains gated by ADS, edge validity and muzzle obstruction. Dedicated wall-lean/corner poses remain missing.
+- Exercise repeated possession/play and action cancellation without stale input contexts, timers, ammunition grants or attachment constraints.
+- Keep the original foundation map recoverable. Record animation source, retarget setup, actual gameplay evidence and remaining gaps. Do not claim dedicated cover entry/exit/lean/corner motion, a vault/knife animation, AI/waves, local duo or LAN.
+
+## M0 — Foundation baseline
 
 - Editor and game target compile on inspected UE version.
 - Project opens a saved test map and Play possesses exactly one BP_Warden through the project GameMode/PlayerController.

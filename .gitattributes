@@ -2,6 +2,9 @@
 *.uasset binary
 *.umap binary
 *.png binary
+*.glb binary
+# Retain acquired editable sources and license files byte-for-byte for provenance hashes.
+ArtSource/** -text -whitespace
 
 # Preserve supplied historical documents byte-for-byte, including original whitespace.
 docs/reference/godot/* -text -whitespace
