@@ -1,0 +1,3 @@
+Running dotnet Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.dll -Mode=ValidatePlatforms -OutputSDKs -AllPlatforms -project=/Users/moe/Documents/ChatGPT/Gunner/Gunner.uproject -log=/Users/moe/Library/Logs/Unreal Engine/GunnerEditor/AutoSDKInfo.txt -verbose -timestamps
+[2026.09.19-22.11.50:068][  0]LogPythonScriptCommandlet: Display: Python script executed successfully
+[2026.09.19-22.11.50:068][  0]LogInit: Display: Success - 0 error(s), 0 warning(s)

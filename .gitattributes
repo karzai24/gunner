@@ -1,0 +1,7 @@
+* text=auto
+*.uasset binary
+*.umap binary
+*.png binary
+
+# Preserve supplied historical documents byte-for-byte, including original whitespace.
+docs/reference/godot/* -text -whitespace

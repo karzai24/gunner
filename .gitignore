@@ -1,0 +1,12 @@
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+.idea/
+*.xcworkspace/
+*.xcodeproj/
+*.sln
+.DS_Store
+__pycache__/

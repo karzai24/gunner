@@ -1,0 +1,9 @@
+Running dotnet Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.dll GunnerEditor Mac Development /Users/moe/Documents/ChatGPT/Gunner/Gunner.uproject -WaitMutex -NoHotReloadFromIDE
+Building GunnerEditor...
+Using Clang compiler 21.1.6 (/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
+[1/4] Compile [Apple] GunnerGameMode.cpp
+[2/4] Compile [Apple] Module.Gunner.gen.cpp
+[3/4] Compile [Apple] GunnerFoundationProbe.cpp
+[4/4] Link [Apple] libUnrealEditor-Gunner.dylib
+Result: Succeeded
+Total execution time: 11.15 seconds

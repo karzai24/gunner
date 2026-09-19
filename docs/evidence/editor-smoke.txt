@@ -1,0 +1,48 @@
+[2026.09.19-22.22.39:843][ 36]LogTemp: Display: GUNNER_CHECK PASS GameMode possesses Gunner character
+[2026.09.19-22.22.39:843][ 36]LogTemp: Display: GUNNER_CHECK PASS Exactly one player pawn
+[2026.09.19-22.22.39:843][ 36]LogTemp: Display: GUNNER_CHECK PASS Animation Blueprint instantiated
+[2026.09.19-22.22.39:843][ 36]LogTemp: Display: GUNNER_CHECK PASS Standing capsule metrics
+[2026.09.19-22.22.39:843][ 36]LogTemp: Display: GUNNER_CHECK PASS Spawn settles on floor
+[2026.09.19-22.22.39:843][ 36]LogTemp: Display: GUNNER_CHECK PASS Local player context active
+[2026.09.19-22.22.42:185][ 41]LogTemp: Display: GUNNER_CHECK PASS W mapping drives forward movement
+[2026.09.19-22.22.42:185][ 41]LogTemp: Display: GUNNER_CHECK PASS Moving velocity drives locomotion
+[2026.09.19-22.22.43:852][ 46]LogTemp: Display: GUNNER_CHECK PASS Key release stops movement
+[2026.09.19-22.22.45:519][ 51]LogTemp: Display: GUNNER_CHECK PASS Opposing keyboard axes cancel
+[2026.09.19-22.22.47:186][ 56]LogTemp: Display: GUNNER_CHECK PASS Mouse look mapping rotates view
+[2026.09.19-22.22.47:186][ 56]LogTemp: Display: GUNNER_CHECK PASS Mouse up looks up
+[2026.09.19-22.22.47:520][ 57]LogTemp: Display: GUNNER_CHECK PASS Traversal mapping performs jump
+[2026.09.19-22.22.49:186][ 62]LogTemp: Display: GUNNER_CHECK PASS Jump lands cleanly
+[2026.09.19-22.22.50:854][ 67]LogTemp: Display: GUNNER_CHECK PASS Boundary wall blocks pawn
+[2026.09.19-22.22.52:522][ 72]LogTemp: Display: GUNNER_CHECK PASS Shoulder camera retracts at wall
+[2026.09.19-22.22.54:196][ 77]LogTemp: Display: GUNNER_CHECK PASS Unpossess removes owned context
+[2026.09.19-22.22.55:856][ 82]LogTemp: Display: GUNNER_CHECK PASS Repossess restores input and strafe mapping
+[2026.09.19-22.22.59:193][ 92]LogTemp: Display: GUNNER_CHECK PASS Right stick up looks up
+[2026.09.19-22.23.00:857][ 97]LogTemp: Display: GUNNER_CHECK PASS Left stick moves forward
+[2026.09.19-22.23.02:525][102]LogTemp: Display: GUNNER_SMOKE_COMPLETE failures=0
+[2026.09.19-22.23.02:532][102]LogPython: GUNNER_EDITOR_CYCLE_FINISHED 1
+[2026.09.19-22.23.02:936][103]LogWorld: UWorld::CleanupWorld for L_Foundation, bSessionEnded=true, bCleanupResources=true
+[2026.09.19-22.23.17:525][147]LogTemp: Display: GUNNER_CHECK PASS GameMode possesses Gunner character
+[2026.09.19-22.23.17:525][147]LogTemp: Display: GUNNER_CHECK PASS Exactly one player pawn
+[2026.09.19-22.23.17:525][147]LogTemp: Display: GUNNER_CHECK PASS Animation Blueprint instantiated
+[2026.09.19-22.23.17:525][147]LogTemp: Display: GUNNER_CHECK PASS Standing capsule metrics
+[2026.09.19-22.23.17:525][147]LogTemp: Display: GUNNER_CHECK PASS Spawn settles on floor
+[2026.09.19-22.23.17:525][147]LogTemp: Display: GUNNER_CHECK PASS Local player context active
+[2026.09.19-22.23.19:191][152]LogTemp: Display: GUNNER_CHECK PASS W mapping drives forward movement
+[2026.09.19-22.23.19:191][152]LogTemp: Display: GUNNER_CHECK PASS Moving velocity drives locomotion
+[2026.09.19-22.23.20:859][157]LogTemp: Display: GUNNER_CHECK PASS Key release stops movement
+[2026.09.19-22.23.22:525][162]LogTemp: Display: GUNNER_CHECK PASS Opposing keyboard axes cancel
+[2026.09.19-22.23.24:192][167]LogTemp: Display: GUNNER_CHECK PASS Mouse look mapping rotates view
+[2026.09.19-22.23.24:192][167]LogTemp: Display: GUNNER_CHECK PASS Mouse up looks up
+[2026.09.19-22.23.24:526][168]LogTemp: Display: GUNNER_CHECK PASS Traversal mapping performs jump
+[2026.09.19-22.23.26:033][213]LogTemp: Display: GUNNER_CHECK PASS Jump lands cleanly
+[2026.09.19-22.23.29:768][588]LogTemp: Display: GUNNER_CHECK PASS Boundary wall blocks pawn
+[2026.09.19-22.23.31:275][712]LogTemp: Display: GUNNER_CHECK PASS Shoulder camera retracts at wall
+[2026.09.19-22.23.32:781][817]LogTemp: Display: GUNNER_CHECK PASS Unpossess removes owned context
+[2026.09.19-22.23.34:281][940]LogTemp: Display: GUNNER_CHECK PASS Repossess restores input and strafe mapping
+[2026.09.19-22.23.37:283][166]LogTemp: Display: GUNNER_CHECK PASS Right stick up looks up
+[2026.09.19-22.23.38:784][280]LogTemp: Display: GUNNER_CHECK PASS Left stick moves forward
+[2026.09.19-22.23.40:296][397]LogTemp: Display: GUNNER_SMOKE_COMPLETE failures=0
+[2026.09.19-22.23.40:298][397]LogPython: GUNNER_EDITOR_CYCLE_FINISHED 2
+[2026.09.19-22.23.40:360][398]LogWorld: UWorld::CleanupWorld for L_Foundation, bSessionEnded=true, bCleanupResources=true
+[2026.09.19-22.23.42:324][520]LogWorld: UWorld::CleanupWorld for L_Foundation, bSessionEnded=true, bCleanupResources=true
+[2026.09.19-22.23.44:944][520]LogExit: Exiting.
