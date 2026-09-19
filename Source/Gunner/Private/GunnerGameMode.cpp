@@ -1,8 +1,8 @@
+#include "GunnerGameMode.h"
 #include "Tests/GunnerFoundationProbe.h"
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
 #include "Engine/World.h"
-#include "GunnerGameMode.h"
 #include "GunnerCharacter.h"
 #include "GunnerPlayerController.h"
 AGunnerGameMode::AGunnerGameMode()

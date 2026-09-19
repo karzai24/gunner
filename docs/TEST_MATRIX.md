@@ -4,8 +4,8 @@ M0 is validated on UE 5.8.2, macOS 26.6.2 Apple Silicon, Xcode 26.6 / Mac SDK 26
 
 | Gate | Evidence | Result |
 |---|---|---|
-| Editor C++ build | `Tools/build_macos.sh`; `evidence/build-editor.txt` | Succeeded, no compiler errors/warnings |
-| Game C++ build | `Tools/build_macos.sh Gunner`; `evidence/build-game.txt` | Succeeded, no compiler errors/warnings; not a cooked/package test |
+| Editor C++ build | `Tools/build_macos.sh`; `evidence/build-editor.txt` | Succeeded, no project compiler errors/warnings |
+| Game C++ build | `Tools/build_macos.sh Gunner`; `evidence/build-game.txt` | Succeeded, no project compiler errors/warnings; not a cooked/package test |
 | Authored assets/map bootstrap | Editor Python commandlet; `evidence/bootstrap.txt` | Success, 0 errors and 0 warnings |
 | Launch/possession | Real rendered standalone run, then two full PIE cycles | Exactly one Gunner pawn, project controller/input context, valid AnimBP instance |
 | Keyboard movement | Synthetic W/D key presses through PlayerController → Enhanced Input → CharacterMovement | Forward/strafe movement, release stopping, opposite W/S cancellation passed |
@@ -45,6 +45,7 @@ These prove the baseline renders and changes pose in the launched scene. They do
 
 ## Fixes made during validation
 
+- Corrected the GameMode translation unit to include its own header first, resolving Unreal build-tool include-order diagnostics.
 - Updated bootstrap Python to the installed 5.8 struct APIs and removed an editor-viewport call from commandlet generation. Rebuilt authored assets successfully; partial generated output was preserved outside the repository.
 - Made smoke initial camera orientation independent of desktop cursor motion during launch and bounded gameplay pitch to -60°/+50°.
 - Disabled legacy controller input scaling and removed redundant pitch inversion in Enhanced Input, then verified upward mouse and stick input in the live pawn.
@@ -52,7 +53,7 @@ These prove the baseline renders and changes pose in the launched scene. They do
 
 ## Warnings and known limits
 
-No project compile, Blueprint, Python, asset-load or gameplay errors were present in the final validation. The final editor log still reports an AudioUnit sample-rate query warning (`2003332927`) and an engine `r.MotionVectorSimulation` render-thread safety warning. Audio is outside M0 and was not certified. Earlier standalone editor-hosted runs also emitted Unreal editor data-storage widget-registration warnings. Do not describe this environment as universally warning-free.
+No project compile, Blueprint, Python, asset-load or gameplay errors were present in the final validation. A final Game-target build also reports a bundled-engine include-directory warning for `MetalShaderConverter/include/metal_irconverter_ext`; the target still builds successfully. This is an installed engine SDK-layout issue, not a project source diagnostic. The final editor log still reports an AudioUnit sample-rate query warning (`2003332927`) and an engine `r.MotionVectorSimulation` render-thread safety warning. Audio is outside M0 and was not certified. Earlier standalone editor-hosted runs also emitted Unreal editor data-storage widget-registration warnings. Do not describe this environment as universally warning-free.
 
 No physical controller, cooked package, Windows build, performance benchmark, second local player or LAN validation was performed. Editor background throttling and first-load shader compilation make these runs unsuitable for performance claims. At extreme wall proximity the character occupies much of the frame; camera fade/shoulder switching and cover-camera polish remain later work.
 
