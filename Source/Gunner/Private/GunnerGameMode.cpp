@@ -3,6 +3,7 @@
 #include "Tests/GunnerMotionProbe.h"
 #include "Tests/GunnerLookProbe.h"
 #include "Tests/GunnerBlindFireProbe.h"
+#include "Tests/GunnerCrouchReloadProbe.h"
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
 #include "Engine/World.h"
@@ -18,6 +19,8 @@ void AGunnerGameMode::BeginPlay()
 {
     Super::BeginPlay();
 #if !UE_BUILD_SHIPPING
+    if (FParse::Param(FCommandLine::Get(), TEXT("GunnerCrouchReloadSmoke")))
+        GetWorld()->SpawnActor<AGunnerCrouchReloadProbe>();
     if (FParse::Param(FCommandLine::Get(), TEXT("GunnerBlindFireSmoke")))
         GetWorld()->SpawnActor<AGunnerBlindFireProbe>();
     if (FParse::Param(FCommandLine::Get(), TEXT("GunnerLookSmoke")))

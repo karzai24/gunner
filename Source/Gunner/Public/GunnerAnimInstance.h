@@ -55,6 +55,17 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Weapon")
     float UpperBodyWeight = 1.f;
 
+    /** Enabled only by a graph which preserves the crouch body beneath reload arms. */
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Crouch Reload")
+    bool bCrouchReloadPoseReady = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Crouch Reload")
+    bool bCrouchReloading = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Crouch Reload")
+    float CrouchReloadAlpha = 0.f;
+    /** Shared arm mask; its source remains the existing UpperBody action slot. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Crouch Reload")
+    float ProtectiveArmsWeight = 0.f;
+
     /** Enabled only on the validated graph with the protective arm IK branch. */
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Blind Fire")
     bool bBlindFirePoseReady = false;

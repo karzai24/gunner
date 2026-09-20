@@ -73,7 +73,7 @@ void AGunnerCharacter::Tick(float DeltaSeconds)
     auto* Movement = GetCharacterMovement();
     const bool InCover = IsInCover();
     const bool Dodging = Dodge->IsDodging();
-    if (InCover) Cover->SetPeekDesired(bAimHeld && !Combat->IsMeleeing(), ShoulderSide);
+    if (InCover) Cover->SetPeekDesired(bAimHeld && !Combat->IsMeleeing() && !Combat->IsReloading(), ShoulderSide);
     bSprinting = bSprintHeld && MotionSettings->bSprintReady && MoveAxis.Y > 0.4f && !bAimHeld
         && !bIsCrouched && !InCover && !Dodging && Movement->IsMovingOnGround();
     Combat->SetCombatBlocked(bSprinting || Dodging || !Controller || Movement->IsFalling());

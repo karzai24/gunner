@@ -96,6 +96,7 @@ AStaticMeshActor* AGunnerMotionProbe::SpawnBox(const FVector& Location, const FV
 
 void AGunnerMotionProbe::Cleanup()
 {
+    InputGuard.Restore();
     while (!HeldKeys.IsEmpty())
     {
         const FKey ToRelease = HeldKeys.Last();
@@ -126,6 +127,7 @@ void AGunnerMotionProbe::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 #if !UE_BUILD_SHIPPING
+    InputGuard.Begin(GetWorld());
     if (bTrackTarget && Player && Character && Target)
     {
         // Recompute against the live shoulder camera while its focus distance converges.
@@ -137,6 +139,7 @@ void AGunnerMotionProbe::Tick(float DeltaSeconds)
     if (Stage == 0)
     {
         Player = GetWorld()->GetFirstPlayerController(); // Explicitly single-player diagnostic only.
+        if (Player) Player->FlushPressedKeys();
         Character = Player ? Cast<AGunnerCharacter>(Player->GetPawn()) : nullptr;
         Check(Character && Character->GetCombat() && Character->GetCover(), TEXT("Motion pawn and components ready"));
         if (!Character) { Finish(); return; }
@@ -393,12 +396,12 @@ void AGunnerMotionProbe::Tick(float DeltaSeconds)
             FMath::IsNearlyEqual(Character->GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight(), 62.f),
             TEXT("Action guard fixture enters authored crouch state"));
         ShotsBefore = Combat->GetShotsFired(); Key(EKeys::LeftMouseButton, true); Key(EKeys::F, true);
-        Key(EKeys::R, true); Key(EKeys::Two, true); Advance(0.3f); break;
+        Key(EKeys::Two, true); Advance(0.3f); break;
     case 57:
         Key(EKeys::LeftMouseButton, false); Key(EKeys::F, false);
-        Key(EKeys::R, false); Key(EKeys::Two, false);
+        Key(EKeys::Two, false);
         Check(Combat->GetActionState() == EGunnerCombatAction::Idle && Combat->GetWeaponKind() == EGunnerWeaponKind::Rifle,
-            TEXT("Protected crouch rejects upright reload and equip animations"));
+            TEXT("Protected crouch rejects the unsupported upright equip animation"));
         Check(Combat->GetShotsFired() == ShotsBefore, TEXT("Crouched hip fire is rejected without an authored firing pose"));
         Check(!Combat->IsMeleeing(), TEXT("Crouched melee is rejected without an authored attack pose"));
         Key(EKeys::RightMouseButton, true); Advance(0.5f); break;
@@ -547,12 +550,12 @@ void AGunnerMotionProbe::Tick(float DeltaSeconds)
         Key(EKeys::RightMouseButton, true); Advance(0.45f); break;
     case 86:
         Check(Combat->IsAiming() && !Character->bIsCrouched, TEXT("Low-cover melee guard fixture pops up into standing ADS"));
-        Key(EKeys::F, true); Key(EKeys::R, true); Key(EKeys::Two, true); Advance(0.2f); break;
+        Key(EKeys::F, true); Key(EKeys::Two, true); Advance(0.2f); break;
     case 87:
         Key(EKeys::F, false);
-        Key(EKeys::R, false); Key(EKeys::Two, false);
+        Key(EKeys::Two, false);
         Check(Combat->GetActionState() == EGunnerCombatAction::Idle && Combat->GetWeaponKind() == EGunnerWeaponKind::Rifle,
-            TEXT("Low-cover pop-up rejects reload and equip that would force unsupported protected poses"));
+            TEXT("Low-cover pop-up rejects equip that would force an unsupported protected pose"));
         Check(!Combat->IsMeleeing() && Combat->IsAiming() && !Character->bIsCrouched,
             TEXT("Low-cover pop-up rejects standing melee without triggering automatic crouch"));
         Key(EKeys::RightMouseButton, false); Key(EKeys::SpaceBar, true); Advance(0.2f); break;

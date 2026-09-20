@@ -1,3 +1,42 @@
+# Crouched reload acceptance — 2026-09-19
+
+Rifle and pistol reload now retain the real crouch torso, head and legs while the existing Epic reload montage drives the arms. `ABP_WardenCrouchReload` composes the protective arm layer; the old graph is preserved and source animation tracks are unchanged. This supersedes the earlier standing-only reload limitation. Weapon switching still requires standing outside low cover. The HUD's stale reload hint and overwritten cover status were corrected.
+
+| Gate | Actual result / evidence |
+|---|---|
+| Editor C++ build | Succeeded with the focused probe and scoped input guard. `evidence/crouch-reload/build-editor.txt`. |
+| Asset authoring | `Tools/install_crouch_reload.py` completed with **0 errors / 0 warnings**. The persisted assignment is `ABP_WardenCrouchReload`; both blind-fire and crouch-reload readiness flags are true. `authoring.txt`, `authoring-report.json` under `evidence/crouch-reload/`. |
+| Focused rendered acceptance | Two PIE sessions, **112 checks each / 224 passes / zero failures**; both native summaries and the two-cycle driver report zero failures. [Focused log](evidence/crouch-reload/editor-smoke.txt). |
+| Context and real pose | Rifle/pistol each tested in free crouch and attached low cover. The selected montage advances through the active `UpperBody` slot; evaluated left-hand travel is **29.22–82.30 cm** in mesh space after blend-in, so actor movement cannot satisfy the motion check. |
+| Protection and stance | Sampled maximum head heights are **88.22–88.77 cm** against measured **115 cm** cover. The crouched capsule half-height remains 62 cm. Samples cover the active reload after a **0.35-second ADS-to-crouch transition allowance**; these measurements do not certify the initial handoff as fully hidden. Crouch toggling is blocked during reload and works again afterward. |
+| Ammunition and interruption | Ammo changes once, on uninterrupted completion, with magazine-plus-reserve conserved. Deliberately interrupting the actual montage transfers no ammo, including after its former completion/timeout window. Full-magazine reload is a no-op. |
+| Layer and action handoffs | A graph with readiness disabled rejects crouched reload. Blind-fire-to-reload clears arm IK so it cannot pin the handling pose. Held low-cover ADS returns to crouch while reloading, then resumes standing ADS after completion. Movement and aim remain available afterward. |
+| Rendered evidence | Eight untouched early/mid captures: [rifle free early](evidence/crouch-reload/crouch_reload_rifle_free_early.png), [mid](evidence/crouch-reload/crouch_reload_rifle_free_mid.png); [rifle cover early](evidence/crouch-reload/crouch_reload_rifle_cover_early.png), [mid](evidence/crouch-reload/crouch_reload_rifle_cover_mid.png); [pistol free early](evidence/crouch-reload/crouch_reload_pistol_free_early.png), [mid](evidence/crouch-reload/crouch_reload_pistol_free_mid.png); [pistol cover early](evidence/crouch-reload/crouch_reload_pistol_cover_early.png), [mid](evidence/crouch-reload/crouch_reload_pistol_cover_mid.png). The second session replaces the first session's image filenames; both sessions retain separate log records. |
+| Existing motion regression | Two rendered PIE sessions, **92 checks each / 184 passes / zero failures**. Standing reload, aim, movement, cover return, obstruction, melee, dodge and possession remain passing. `evidence/crouch-reload/motion-regression.txt`. |
+| Blind-fire regression | Two rendered PIE sessions, **34 checks each / 68 passes / zero failures**. Both weapons retain actual muzzle clearance, protected head height, obstruction checks and cancellation. `evidence/crouch-reload/blind-fire-regression.txt`. |
+| Game C++ build | Succeeded, no project compiler diagnostics. `evidence/crouch-reload/build-game.txt`; this is not a cooked package test. |
+
+Run one Unreal process at a time:
+
+```bash
+./Tools/build_macos.sh GunnerEditor
+./Tools/open_editor_macos.sh -GunnerCrouchReloadSmoke -nosound \
+  "-ExecCmds=py $(pwd)/Tools/validate_crouch_reload_editor.py" "-LogCmds=LogPython Log" -stdout
+./Tools/open_editor_macos.sh -GunnerMotionSmoke -nosound \
+  "-ExecCmds=py $(pwd)/Tools/validate_motion_editor.py" "-LogCmds=LogPython Log" -stdout
+./Tools/open_editor_macos.sh -GunnerBlindFireSmoke -nosound \
+  "-ExecCmds=py $(pwd)/Tools/validate_blind_fire_editor.py" "-LogCmds=LogPython Log" -stdout
+./Tools/build_macos.sh Gunner
+```
+
+The focused implementation is `Source/Gunner/Private/Tests/GunnerCrouchReloadProbe.{h,cpp}` with `Tools/validate_crouch_reload_editor.py`. Raw accepted inputs are `Saved/crouch-reload-pie-final-native.log`, `Saved/crouch-reload-authoring-native.log`, and `Saved/crouch_reload_authoring_report.json`. The authoring report records unchanged Epic rifle/pistol reload sources, their existing montages and `UpperBody` slots, 2.2/2.0-second source lengths, the assigned graph and recoverable asset backup. Authoring is already applied and is not an ordinary launch step.
+
+The initial focused run is **not acceptance**: its first cycle passed, but its second recorded 13 failures beginning with an interrupted reload. That log also contains two `DebugManager.CycleToPreviousColumn` commands, bound by the installed engine to LeftShift, which this probe never injects. The synthetic tests now temporarily ignore viewport-originated physical input through `FGunnerProbeInputGuard`, flush existing key state once before injection, and restore the prior viewport setting during cleanup/EndPlay. Direct `PlayerController::InputKey` still enters Enhanced Input. This isolates test input without changing normal gameplay. The guarded rerun passed both cycles; observational montage-end and ammo diagnostics remain in the probe.
+
+All three final probe runs passed across six PIE sessions: **476 live checks, zero failures**. No project compile, Blueprint, Python, asset-load or gameplay errors appeared in those runs. Engine warnings remain `r.MotionVectorSimulation` render-thread access and an outstanding analytics HTTP request during shutdown. The Game build repeats the installed `MetalShaderConverter/include/metal_irconverter_ext` missing-directory warning. Physical mouse/controller delivery, audio, cooked packages, Windows, multiplayer, player damage/invulnerability and production animation polish are outside this acceptance.
+
+---
+
 # Crouched low-cover blind fire — 2026-09-19
 
 Implemented LMB blind fire without ADS while attached to low static cover, using the real crouch pose, arm-only native IK and the existing Epic additive fire clips. RMB retains standing pop-up ADS. The old graph remains available; no source motion tracks were modified.

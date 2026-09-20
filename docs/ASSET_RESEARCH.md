@@ -33,7 +33,7 @@ Original archives, unused Unity/root-motion variants and the complete UAL2 resea
 
 Relevant actual clips: `Crouch_Idle_Loop`, `Crouch_Fwd_Loop`, `Sprint_Loop`, `Roll`, `Punch_Cross`, `Punch_Jab`, `Sword_Attack`, `Sword_Idle`, pistol aim up/neutral/down, pistol idle/fire/reload, and jump phases. **No backward/lateral crouch, wall-cover, or vault clips are in Standard.** Do not use the forward crouch gait to represent strafing/backpedaling while the body continues facing forward.
 
-The current graph preserves the imported crouch torso outside ADS by fading out the upright armed layer. The selected Epic reload/equip clips do not establish protective crouched handling coverage. Those actions remain blocked during actual/pending crouch and low-cover attachment, including its standing ADS position; acquiring proper crouched handling clips is a separate gap from directional crouch locomotion.
+The current graph preserves the imported crouch torso outside ADS by fading out the upright armed layer. The selected Epic reload/equip clips are standing source motions. Crouched reload now uses project-authored arm-only composition over genuine crouch, with live acceptance in TEST_MATRIX; it is not a newly acquired source clip. Equip remains blocked during actual/pending crouch and low-cover attachment. Dedicated crouched handling sources remain a separate acquisition gap from directional crouch locomotion.
 
 The source rig uses `root`, `pelvis`, `spine_01..03`, paired clavicles/arms/hands and legs, plus `Head`. Similar bone names do not prove Manny compatibility: source rest pose, proportions and extra Manny spine/twist bones still need an IK Retargeter and real pose checks.
 

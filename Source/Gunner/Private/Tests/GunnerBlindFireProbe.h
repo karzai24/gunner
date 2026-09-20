@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Tests/GunnerProbeInputGuard.h"
 #include "GunnerBlindFireProbe.generated.h"
 class AGunnerCharacter;
 class AGunnerTarget;
@@ -18,6 +19,7 @@ public:
     virtual void Tick(float DeltaSeconds) override;
     virtual void EndPlay(const EEndPlayReason::Type Reason) override;
 private:
+    FGunnerProbeInputGuard InputGuard;
     UPROPERTY() TObjectPtr<AGunnerCharacter> Character;
     UPROPERTY() TObjectPtr<APlayerController> Player;
     UPROPERTY() TObjectPtr<AGunnerTarget> Target;

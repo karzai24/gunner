@@ -30,6 +30,8 @@ void UGunnerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
         bInAir = bCrouched = bAiming = bSprinting = bInCover = bPistol = false;
         UpperBodyWeight = 1.f;
         BlindFireAlpha = 0.f;
+        CrouchReloadAlpha = ProtectiveArmsWeight = 0.f;
+        bCrouchReloading = false;
         bBlindFiring = bBlindFireTargetsValid = false;
         return;
     }
@@ -94,5 +96,15 @@ void UGunnerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
     // modifies the authored crouch pelvis, spine or head.
     BlindFireAlpha = FMath::FInterpConstantTo(BlindFireAlpha,
         bBlindFireTargetsValid ? 1.f : 0.f, DeltaSeconds, 5.f);
-    bBlindFiring = BlindFireAlpha > KINDA_SMALL_NUMBER;
+    // A reload montage supplies the complete arm motion. Its non-additive pose
+    // must remain free to move the hands instead of using the blind-fire IK base.
+    const bool bReloading = Combat && Combat->IsReloading();
+    bBlindFiring = BlindFireAlpha > KINDA_SMALL_NUMBER && !bReloading;
+    const bool bCrouchReloadRequested = bCrouchReloadPoseReady && bCrouched && !bInAir && bReloading;
+    // IsReloading remains true through the montage's authored blend-out. Fade the
+    // protective arm layer only after its ended callback (or an interruption).
+    CrouchReloadAlpha = FMath::FInterpConstantTo(CrouchReloadAlpha,
+        bCrouchReloadRequested ? 1.f : 0.f, DeltaSeconds, 12.f);
+    bCrouchReloading = CrouchReloadAlpha > KINDA_SMALL_NUMBER;
+    ProtectiveArmsWeight = FMath::Max(BlindFireAlpha, CrouchReloadAlpha);
 }

@@ -77,6 +77,7 @@ void AGunnerBlindFireProbe::CheckPose()
 }
 void AGunnerBlindFireProbe::Cleanup()
 {
+    InputGuard.Restore();
     while (!HeldKeys.IsEmpty()) Key(HeldKeys.Last(), false);
     if (Character) Character->GetCombat()->StopAllActions();
     if (Blocker) Blocker->Destroy();
@@ -94,6 +95,7 @@ void AGunnerBlindFireProbe::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 #if !UE_BUILD_SHIPPING
+    InputGuard.Begin(GetWorld());
     if (bTrackTarget && Player && Character && Target)
         if (const auto* Camera = Character->FindComponentByClass<UCameraComponent>())
             Player->SetControlRotation((Target->GetActorLocation() - Camera->GetComponentLocation()).Rotation());
@@ -102,6 +104,7 @@ void AGunnerBlindFireProbe::Tick(float DeltaSeconds)
     if (Stage == 0)
     {
         Player = GetWorld()->GetFirstPlayerController(); // Explicitly single-player diagnostic.
+        if (Player) Player->FlushPressedKeys();
         Character = Player ? Cast<AGunnerCharacter>(Player->GetPawn()) : nullptr;
         Check(Character != nullptr, TEXT("Motion pawn possessed"));
         if (!Character) { Finish(); return; }

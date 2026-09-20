@@ -331,10 +331,15 @@ void UGunnerCombatComponent::Reload()
 {
     if (!CanStartAction() || !ActiveData->ReloadMontage || GetReserve() <= 0 ||
         GetMagazine() >= FMath::Clamp(ActiveData->MagazineCapacity, 1, 200)) return;
-    // The acquired reload is an upright weapon action. Protected crouch keeps its
-    // authored torso, so never commit ammo for an action that cannot be displayed.
-    if (Character->bIsCrouched || Character->GetCharacterMovement()->bWantsToCrouch) return;
-    if (Cover && Cover->IsLowCover()) return;
+    // Protected reload needs the authored arms-only layer so the crouched torso
+    // stays below cover. Low-cover ADS will settle into crouch after StopAim.
+    const bool bNeedsCrouchPose = Character->bIsCrouched ||
+        Character->GetCharacterMovement()->bWantsToCrouch || (Cover && Cover->IsLowCover());
+    if (bNeedsCrouchPose)
+    {
+        const auto* Anim = Cast<UGunnerAnimInstance>(GetAnimInstance());
+        if (!Anim || !Anim->bCrouchReloadPoseReady) return;
+    }
     StopFire();
     StopAim();
     BeginAction(EGunnerCombatAction::Reloading, ActiveData->ReloadMontage);

@@ -178,7 +178,7 @@ namespace GunnerAnimationBuilder
         }
 
         UAnimGraphNode_LayeredBoneBlend* Arms(UEdGraphNode* Base, UEdGraphNode* ArmsPose,
-            int32 X, int32 Y, bool bVariableWeight)
+            int32 X, int32 Y, FName WeightProperty = NAME_None)
         {
             auto* Blend = Node<UAnimGraphNode_LayeredBoneBlend>(Graph, X, Y,
                 [](UAnimGraphNode_LayeredBoneBlend* N)
@@ -195,13 +195,13 @@ namespace GunnerAnimationBuilder
                 });
             Pose(Base, Blend, TEXT("BasePose"));
             Pose(ArmsPose, Blend, TEXT("BlendPoses_0"));
-            if (bVariableWeight) Read(TEXT("BlindFireAlpha"), Blend, TEXT("BlendWeights_0"));
+            if (!WeightProperty.IsNone()) Read(WeightProperty, Blend, TEXT("BlendWeights_0"));
             return Blend;
         }
 
         UEdGraphNode* BlindArms(UEdGraphNode* Base, UEdGraphNode* ArmedPose, int32 X, int32 Y)
         {
-            auto* Grip = Arms(Base, ArmedPose, X, Y, false);
+            auto* Grip = Arms(Base, ArmedPose, X, Y);
             auto* Component = Node<UAnimGraphNode_LocalToComponentSpace>(Graph, X + 400, Y);
             Pose(Grip, Component, TEXT("LocalPose"));
             UEdGraphNode* Previous = Component;
@@ -343,9 +343,16 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
     UBlendSpace* RifleLocomotion, UBlendSpace* PistolLocomotion,
     UAnimSequence* RifleFall, UAnimSequence* PistolFall,
     UBlendSpace* CrouchLocomotion, UAnimSequence* Sprint,
-    UBlendSpace* RifleAimOffset, UBlendSpace* PistolAimOffset, bool bIncludeBlindFire)
+    UBlendSpace* RifleAimOffset, UBlendSpace* PistolAimOffset, bool bIncludeBlindFire,
+    bool bIncludeCrouchReload)
 {
     using namespace GunnerAnimationBuilder;
+    const bool bIncludeProtectiveArms = bIncludeBlindFire || bIncludeCrouchReload;
+    if (bIncludeProtectiveArms && !CrouchLocomotion)
+    {
+        UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Protective weapon actions require authored crouch locomotion"));
+        return nullptr;
+    }
     if (!Skeleton || !PreviewMesh || !RifleLocomotion || !PistolLocomotion || !RifleFall || !PistolFall
         || PreviewMesh->GetSkeleton() != Skeleton)
     {
@@ -426,22 +433,25 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
     auto* Aim = B.Choose(TEXT("bPistol"), PistolAim, RifleAim, 0, -500, 0.22f);
     UEdGraphNode* BodySource = Body;
     UEdGraphNode* SlotSource = Aim;
-    if (bIncludeBlindFire)
+    if (bIncludeProtectiveArms)
     {
         auto* BodyCache = B.Cache(TEXT("Protective body"), Body, 500, 700);
         auto* AimCache = B.Cache(TEXT("Armed aim"), Aim, 400, -850);
-        auto* Blind = B.BlindArms(B.Use(BodyCache, 900, 1700),
-            B.Use(AimCache, 900, 1400), 1400, 1500);
-        // Only the final arm mask blends into the crouch. Recoil is evaluated after
-        // the IK solve, so a fire montage remains visible rather than being pinned.
-        SlotSource = B.Choose(TEXT("bBlindFiring"), Blind,
-            B.Use(AimCache, 4700, 500), 5100, 750, 0.f);
+        SlotSource = B.Use(AimCache, 4700, 500);
+        if (bIncludeBlindFire)
+        {
+            auto* Blind = B.BlindArms(B.Use(BodyCache, 900, 1700),
+                B.Use(AimCache, 900, 1400), 1400, 1500);
+            // Recoil evaluates after the IK solve. During reload this branch is
+            // bypassed and the montage supplies the unpinned handling motion.
+            SlotSource = B.Choose(TEXT("bBlindFiring"), Blind, SlotSource, 5100, 750, 0.f);
+        }
         BodySource = B.Use(BodyCache, 5200, 1500);
     }
-    auto* UpperSlot = B.Slot(TEXT("UpperBody"), SlotSource, bIncludeBlindFire ? 5600 : 500, -500);
+    auto* UpperSlot = B.Slot(TEXT("UpperBody"), SlotSource, bIncludeProtectiveArms ? 5600 : 500, -500);
     UEdGraphNode* UpperPose = UpperSlot;
     UAnimGraphNode_SaveCachedPose* SlotCache = nullptr;
-    if (bIncludeBlindFire)
+    if (bIncludeProtectiveArms)
     {
         SlotCache = B.Cache(TEXT("Weapon action"), UpperSlot, 6000, -500);
         UpperPose = B.Use(SlotCache, 6300, -500);
@@ -459,13 +469,14 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
     B.Pose(UpperPose, UpperBlend, TEXT("BlendPoses_0"));
     B.Read(TEXT("UpperBodyWeight"), UpperBlend, TEXT("BlendWeights_0"));
     UEdGraphNode* FinalBody = UpperBlend;
-    if (bIncludeBlindFire)
+    if (bIncludeProtectiveArms)
     {
         UpperBlend->NodePosX = 6700;
-        FinalBody = B.Arms(UpperBlend, B.Use(SlotCache, 6800, 600), 7200, 0, true);
+        FinalBody = B.Arms(UpperBlend, B.Use(SlotCache, 6800, 600), 7200, 0,
+            bIncludeCrouchReload ? FName(TEXT("ProtectiveArmsWeight")) : FName(TEXT("BlindFireAlpha")));
         Root->NodePosX = 8100;
     }
-    auto* FullBody = B.Slot(TEXT("FullBody"), FinalBody, bIncludeBlindFire ? 7700 : 1900, 0);
+    auto* FullBody = B.Slot(TEXT("FullBody"), FinalBody, bIncludeProtectiveArms ? 7700 : 1900, 0);
     B.Pose(FullBody, Root, TEXT("Result"));
     if (!B.bValid) return nullptr;
 
@@ -489,6 +500,7 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
     if (!Defaults) return nullptr;
     Defaults->Modify();
     Defaults->bBlindFirePoseReady = bIncludeBlindFire;
+    Defaults->bCrouchReloadPoseReady = bIncludeCrouchReload;
     Blueprint->Modify();
     return SaveNewAsset(Blueprint) ? Blueprint : nullptr;
 }

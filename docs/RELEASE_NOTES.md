@@ -1,3 +1,9 @@
+# 0.3.1 — Reload while crouched
+
+R now reloads the rifle or pistol while crouched, including behind low cover. Existing reload clips drive only the arms over the real crouch pose. Reload stops blind fire and temporarily lowers low-cover ADS; held ADS resumes after completion. Ammo still transfers only on uninterrupted completion, and stance toggles are disabled during reload.
+
+The new animation graph preserves both previous graphs and reuses existing licensed clips. Weapon switching remains standing-only outside low cover; static weapon magazines/bolts remain provisional. Editor and Game builds succeed; six rendered PIE sessions pass 476 live checks, including 224 focused crouched-reload checks. Real gameplay captures were inspected. See TEST_MATRIX for evidence and limits.
+
 # 0.3.0 — Crouched low-cover blind fire
 
 LMB without ADS now raises the rifle or pistol above low cover while keeping the character crouched and the head hidden. The first shot waits for the actual evaluated weapon pose and clear path; rifle fire repeats while held, pistol fire stays one shot per press, and quick clicks queue one shot. RMB retains standing pop-up ADS. Blind fire uses a wider spread and the real muzzle; intervening walls still block damage.

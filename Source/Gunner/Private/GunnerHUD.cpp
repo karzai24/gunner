@@ -72,18 +72,23 @@ void AGunnerHUD::DrawHUD()
         case EGunnerCombatAction::Melee: Status = TEXT("MELEE"); break;
         default: break;
     }
-    if (Combat->IsCombatBlocked()) Status = TEXT("WEAPON LOWERED");
-    else if (Combat->IsBlindFiring()) Status = TEXT("BLIND FIRE");
-    else if (Combat->IsFireBlocked() && Combat->GetActionState() == EGunnerCombatAction::Idle)
+    // Context hints must not replace the active handling action, particularly
+    // a protected reload that stays in low cover throughout the montage.
+    if (Combat->GetActionState() == EGunnerCombatAction::Idle || Combat->GetActionState() == EGunnerCombatAction::Firing)
     {
-        const auto* Warden = Cast<AGunnerCharacter>(Pawn);
-        if (Warden && Warden->IsInCover())
-            Status = Warden->GetCover()->IsLowCover() ? TEXT("LMB BLIND FIRE / RMB EXPOSE") : TEXT("HIGH COVER / HOLD ADS AT EDGE");
-        else Status = TEXT("ADS TO FIRE / STAND TO RELOAD");
+        if (Combat->IsCombatBlocked()) Status = TEXT("WEAPON LOWERED");
+        else if (Combat->IsBlindFiring()) Status = TEXT("BLIND FIRE");
+        else if (Combat->IsFireBlocked() && Combat->GetActionState() == EGunnerCombatAction::Idle)
+        {
+            const auto* Warden = Cast<AGunnerCharacter>(Pawn);
+            if (Warden && Warden->IsInCover())
+                Status = Warden->GetCover()->IsLowCover() ? TEXT("LMB BLIND FIRE / RMB EXPOSE") : TEXT("HIGH COVER / HOLD ADS AT EDGE");
+            else Status = TEXT("ADS TO FIRE / R RELOAD");
+        }
+        else if (bObstructed) Status = TEXT("MUZZLE BLOCKED");
+        else if (const auto* Warden = Cast<AGunnerCharacter>(Pawn); Warden && Warden->GetCover()->IsLowCover())
+            Status = TEXT("LMB BLIND FIRE / RMB EXPOSE");
     }
-    else if (bObstructed) Status = TEXT("MUZZLE BLOCKED");
-    else if (const auto* Warden = Cast<AGunnerCharacter>(Pawn); Warden && Warden->GetCover()->IsLowCover())
-        Status = TEXT("LMB BLIND FIRE / RMB EXPOSE");
     DrawText(Status, Muted, X + 14.f * Scale, Y + 71.f * Scale, Font, 0.85f * Scale);
     DrawText(TEXT("GUNNER  /  MOVEMENT RANGE"), Ink, Margin, Margin, Font, Scale);
     DrawText(TEXT("WASD Move   Mouse Aim   RMB Focus   LMB Fire   R Reload   1/2 Weapon   F Melee"), Muted,

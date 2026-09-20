@@ -17,10 +17,12 @@ The current playable composition is the movement/weapon range. Implemented conte
 
 The current melee action is a retargeted standing jab (`AM_MeleeJab`), shared by the two weapon definitions. Dodge uses the retargeted `AM_DodgeRoll` full-body montage and a guarded native movement source. Both live under `Content/Gunner/Motion/Animation/Montages`. No knife item, knife-specific animation or vault action is claimed.
 
-The crouch idle/forward clips retain their protective torso outside ADS by fading out the upright armed layer. Rifle and pistol reload/equip clips are upright-only: those actions are blocked during actual/pending crouch and throughout low-cover attachment, including standing ADS. Dedicated crouched handling clips remain missing.
+The crouch idle/forward clips retain their protective torso outside ADS by fading out the upright armed layer. Rifle and pistol reloads reuse the installed Epic clips through an arm-only layer over genuine crouch in `ABP_WardenCrouchReload`. Both work while crouched or attached to low cover. Equip remains blocked during actual/pending crouch and throughout low-cover attachment; dedicated crouched handling source clips remain missing.
 
 Animation assets are grouped under `Content/Gunner/Animation/Source`, `Animation/Rigs`, `Animation/Retargeted/Manny`, and the composed `Content/Gunner/Motion/Animation`. Original Epic character and weapon paths are retained under `Content/Characters` and `Content/Weapons`. See `ASSET_PROVENANCE.md` for creators, licenses, source hashes and modifications.
 
 No old `.tscn` or `.gd` path is a runtime dependency. Stable IDs are content contracts, not an implemented character selection or save system.
 
 Low-cover blind fire composes `ABP_WardenBlindFire`, native arm IK and sampled left-hand grips in the existing two weapon Data Assets. The prior animation graph is retained. Rifle/pistol use the actual raised muzzle while preserving protective crouch; no new character art or third-party blind-fire clip is imported.
+
+`ABP_WardenCrouchReload` is the active motion character graph and includes the prior blind-fire composition. Both earlier graphs remain available. No new source animations are imported for crouched reload.

@@ -1,0 +1,86 @@
+[2026.09.20-01.13.33:250][  0]LogConsoleManager: Warning: Console variable 'r.MotionVectorSimulation' used in the render thread. Rendering artifacts could happen. Use ECVF_RenderThreadSafe or don't use in render thread.
+[2026.09.20-01.13.33:305][  0]LogPython: GUNNER_BLIND_MAC_NEW_MOUSE_BACKEND value=0
+[2026.09.20-01.13.39:321][330]LogTemp: Display: GUNNER_BLIND_CHECK PASS Motion pawn possessed
+[2026.09.20-01.13.39:321][330]LogTemp: Display: GUNNER_BLIND_CHECK PASS Authored blind-fire graph is active
+[2026.09.20-01.13.39:322][330]LogTemp: Display: GUNNER_BLIND_CHECK PASS Transient blind-fire target ready
+[2026.09.20-01.13.40:422][396]LogTemp: Display: GUNNER_BLIND_CHECK PASS Low cover starts protected and crouched
+[2026.09.20-01.13.40:522][402]LogTemp: Display: GUNNER_BLIND_CHECK PASS First shot waits for raised evaluated pose
+[2026.09.20-01.13.41:172][441]LogTemp: Display: GUNNER_BLIND_CHECK PASS Actual barricade top measured at 115 cm
+[2026.09.20-01.13.41:172][441]LogTemp: Display: GUNNER_BLIND_POSE stage=5 top=115.00 head=88.36 right=124.83 left=126.75 muzzle=135.10 left_error=4.55 alpha=1.000
+[2026.09.20-01.13.41:172][441]LogTemp: Display: GUNNER_BLIND_STATE class=/Game/Gunner/Motion/Animation/ABP_WardenCrouchReload.ABP_WardenCrouchReload_C active=1 pending=0 reason=Ready shots=4
+[2026.09.20-01.13.41:172][441]LogTemp: Display: GUNNER_BLIND_CHECK PASS Blind fire preserves actual crouch and 62 cm capsule
+[2026.09.20-01.13.41:172][441]LogTemp: Display: GUNNER_BLIND_CHECK PASS Head stays protected below barricade top
+[2026.09.20-01.13.41:172][441]LogTemp: Display: GUNNER_BLIND_CHECK PASS Evaluated firing hand and attached muzzle clear barricade
+[2026.09.20-01.13.41:172][441]LogTemp: Display: GUNNER_BLIND_CHECK PASS Blind arm animation is evaluated without replacing crouch torso
+[2026.09.20-01.13.41:172][441]LogTemp: Display: GUNNER_BLIND_CHECK PASS Support hand reaches its actual weapon grip
+[2026.09.20-01.13.41:172][441]LogTemp: Display: GUNNER_BLIND_CHECK PASS Held rifle blind fire repeatedly damages target beyond wall
+[2026.09.20-01.13.41:782][442]LogTemp: Display: GUNNER_BLIND_CHECK PASS Blind fire blocks travel while arms are raised
+[2026.09.20-01.13.42:282][472]LogTemp: Display: GUNNER_BLIND_CHECK PASS Rifle release stops fire and lowers arms
+[2026.09.20-01.13.43:353][524]LogTemp: Display: GUNNER_BLIND_CHECK PASS Quick rifle click queues exactly one raised shot
+[2026.09.20-01.13.43:687][544]LogTemp: Display: GUNNER_BLIND_CHECK PASS Detach cancels pending blind-fire shot
+[2026.09.20-01.13.46:087][688]LogTemp: Display: GUNNER_BLIND_CHECK PASS Pistol equipped for second fixture
+[2026.09.20-01.13.47:687][784]LogTemp: Display: GUNNER_BLIND_CHECK PASS Actual barricade top measured at 115 cm
+[2026.09.20-01.13.47:687][784]LogTemp: Display: GUNNER_BLIND_POSE stage=17 top=115.00 head=88.03 right=125.05 left=121.19 muzzle=134.33 left_error=1.68 alpha=1.000
+[2026.09.20-01.13.47:687][784]LogTemp: Display: GUNNER_BLIND_STATE class=/Game/Gunner/Motion/Animation/ABP_WardenCrouchReload.ABP_WardenCrouchReload_C active=1 pending=0 reason=Ready shots=7
+[2026.09.20-01.13.47:687][784]LogTemp: Display: GUNNER_BLIND_CHECK PASS Blind fire preserves actual crouch and 62 cm capsule
+[2026.09.20-01.13.47:687][784]LogTemp: Display: GUNNER_BLIND_CHECK PASS Head stays protected below barricade top
+[2026.09.20-01.13.47:687][784]LogTemp: Display: GUNNER_BLIND_CHECK PASS Evaluated firing hand and attached muzzle clear barricade
+[2026.09.20-01.13.47:687][784]LogTemp: Display: GUNNER_BLIND_CHECK PASS Blind arm animation is evaluated without replacing crouch torso
+[2026.09.20-01.13.47:687][784]LogTemp: Display: GUNNER_BLIND_CHECK PASS Support hand reaches its actual weapon grip
+[2026.09.20-01.13.47:687][784]LogTemp: Display: GUNNER_BLIND_CHECK PASS Pistol blind fire commits one target hit
+[2026.09.20-01.13.48:102][797]LogTemp: Display: GUNNER_BLIND_CHECK PASS Held pistol does not repeat blind fire
+[2026.09.20-01.13.49:336][871]LogTemp: Display: GUNNER_BLIND_CHECK PASS Quick pistol click queues exactly one raised shot
+[2026.09.20-01.13.49:886][904]LogTemp: Display: GUNNER_BLIND_CHECK PASS RMB still enters existing standing low-cover ADS
+[2026.09.20-01.13.50:186][922]LogTemp: Display: GUNNER_BLIND_CHECK PASS Normal cover ADS still fires
+[2026.09.20-01.13.50:636][949]LogTemp: Display: GUNNER_BLIND_CHECK PASS ADS release restores protected crouch
+[2026.09.20-01.13.51:019][972]LogTemp: Display: GUNNER_BLIND_CHECK PASS Unpossession clears pending shot without delayed damage
+[2026.09.20-01.13.52:070][ 35]LogTemp: Display: GUNNER_BLIND_CHECK PASS Intervening wall fixture spawned
+[2026.09.20-01.13.52:770][ 77]LogTemp: Display: GUNNER_BLIND_CHECK PASS Raised muzzle cannot damage through intervening geometry
+[2026.09.20-01.13.54:270][167]LogTemp: Display: GUNNER_BLIND_CHECK PASS Looking away from cover rejects overhead firing without consuming ammo
+[2026.09.20-01.13.55:153][220]LogTemp: Display: GUNNER_BLIND_CHECK PASS ADS cancels a queued blind shot before exposure
+[2026.09.20-01.13.55:454][238]LogTemp: Display: GUNNER_BLIND_COMPLETE failures=0
+[2026.09.20-01.13.55:455][238]LogPython: GUNNER_BLIND_PIE_CYCLE_FINISHED 1
+[2026.09.20-01.13.55:471][239]LogWorld: BeginTearingDown for /Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange
+[2026.09.20-01.14.02:471][655]LogTemp: Display: GUNNER_BLIND_CHECK PASS Motion pawn possessed
+[2026.09.20-01.14.02:471][655]LogTemp: Display: GUNNER_BLIND_CHECK PASS Authored blind-fire graph is active
+[2026.09.20-01.14.02:471][655]LogTemp: Display: GUNNER_BLIND_CHECK PASS Transient blind-fire target ready
+[2026.09.20-01.14.03:571][721]LogTemp: Display: GUNNER_BLIND_CHECK PASS Low cover starts protected and crouched
+[2026.09.20-01.14.03:671][727]LogTemp: Display: GUNNER_BLIND_CHECK PASS First shot waits for raised evaluated pose
+[2026.09.20-01.14.04:321][766]LogTemp: Display: GUNNER_BLIND_CHECK PASS Actual barricade top measured at 115 cm
+[2026.09.20-01.14.04:321][766]LogTemp: Display: GUNNER_BLIND_POSE stage=5 top=115.00 head=88.36 right=124.83 left=126.75 muzzle=135.10 left_error=4.55 alpha=1.000
+[2026.09.20-01.14.04:321][766]LogTemp: Display: GUNNER_BLIND_STATE class=/Game/Gunner/Motion/Animation/ABP_WardenCrouchReload.ABP_WardenCrouchReload_C active=1 pending=0 reason=Ready shots=4
+[2026.09.20-01.14.04:321][766]LogTemp: Display: GUNNER_BLIND_CHECK PASS Blind fire preserves actual crouch and 62 cm capsule
+[2026.09.20-01.14.04:321][766]LogTemp: Display: GUNNER_BLIND_CHECK PASS Head stays protected below barricade top
+[2026.09.20-01.14.04:321][766]LogTemp: Display: GUNNER_BLIND_CHECK PASS Evaluated firing hand and attached muzzle clear barricade
+[2026.09.20-01.14.04:321][766]LogTemp: Display: GUNNER_BLIND_CHECK PASS Blind arm animation is evaluated without replacing crouch torso
+[2026.09.20-01.14.04:321][766]LogTemp: Display: GUNNER_BLIND_CHECK PASS Support hand reaches its actual weapon grip
+[2026.09.20-01.14.04:321][766]LogTemp: Display: GUNNER_BLIND_CHECK PASS Held rifle blind fire repeatedly damages target beyond wall
+[2026.09.20-01.14.04:633][772]LogTemp: Display: GUNNER_BLIND_CHECK PASS Blind fire blocks travel while arms are raised
+[2026.09.20-01.14.05:133][802]LogTemp: Display: GUNNER_BLIND_CHECK PASS Rifle release stops fire and lowers arms
+[2026.09.20-01.14.06:215][854]LogTemp: Display: GUNNER_BLIND_CHECK PASS Quick rifle click queues exactly one raised shot
+[2026.09.20-01.14.06:548][874]LogTemp: Display: GUNNER_BLIND_CHECK PASS Detach cancels pending blind-fire shot
+[2026.09.20-01.14.08:948][ 18]LogTemp: Display: GUNNER_BLIND_CHECK PASS Pistol equipped for second fixture
+[2026.09.20-01.14.10:549][114]LogTemp: Display: GUNNER_BLIND_CHECK PASS Actual barricade top measured at 115 cm
+[2026.09.20-01.14.10:549][114]LogTemp: Display: GUNNER_BLIND_POSE stage=17 top=115.00 head=88.15 right=125.05 left=121.19 muzzle=134.33 left_error=1.68 alpha=1.000
+[2026.09.20-01.14.10:549][114]LogTemp: Display: GUNNER_BLIND_STATE class=/Game/Gunner/Motion/Animation/ABP_WardenCrouchReload.ABP_WardenCrouchReload_C active=1 pending=0 reason=Ready shots=7
+[2026.09.20-01.14.10:549][114]LogTemp: Display: GUNNER_BLIND_CHECK PASS Blind fire preserves actual crouch and 62 cm capsule
+[2026.09.20-01.14.10:549][114]LogTemp: Display: GUNNER_BLIND_CHECK PASS Head stays protected below barricade top
+[2026.09.20-01.14.10:549][114]LogTemp: Display: GUNNER_BLIND_CHECK PASS Evaluated firing hand and attached muzzle clear barricade
+[2026.09.20-01.14.10:549][114]LogTemp: Display: GUNNER_BLIND_CHECK PASS Blind arm animation is evaluated without replacing crouch torso
+[2026.09.20-01.14.10:549][114]LogTemp: Display: GUNNER_BLIND_CHECK PASS Support hand reaches its actual weapon grip
+[2026.09.20-01.14.10:549][114]LogTemp: Display: GUNNER_BLIND_CHECK PASS Pistol blind fire commits one target hit
+[2026.09.20-01.14.10:962][125]LogTemp: Display: GUNNER_BLIND_CHECK PASS Held pistol does not repeat blind fire
+[2026.09.20-01.14.12:195][199]LogTemp: Display: GUNNER_BLIND_CHECK PASS Quick pistol click queues exactly one raised shot
+[2026.09.20-01.14.12:745][232]LogTemp: Display: GUNNER_BLIND_CHECK PASS RMB still enters existing standing low-cover ADS
+[2026.09.20-01.14.13:046][250]LogTemp: Display: GUNNER_BLIND_CHECK PASS Normal cover ADS still fires
+[2026.09.20-01.14.13:496][277]LogTemp: Display: GUNNER_BLIND_CHECK PASS ADS release restores protected crouch
+[2026.09.20-01.14.13:879][300]LogTemp: Display: GUNNER_BLIND_CHECK PASS Unpossession clears pending shot without delayed damage
+[2026.09.20-01.14.14:930][363]LogTemp: Display: GUNNER_BLIND_CHECK PASS Intervening wall fixture spawned
+[2026.09.20-01.14.15:630][405]LogTemp: Display: GUNNER_BLIND_CHECK PASS Raised muzzle cannot damage through intervening geometry
+[2026.09.20-01.14.17:130][495]LogTemp: Display: GUNNER_BLIND_CHECK PASS Looking away from cover rejects overhead firing without consuming ammo
+[2026.09.20-01.14.18:013][548]LogTemp: Display: GUNNER_BLIND_CHECK PASS ADS cancels a queued blind shot before exposure
+[2026.09.20-01.14.18:314][566]LogTemp: Display: GUNNER_BLIND_COMPLETE failures=0
+[2026.09.20-01.14.18:315][566]LogPython: GUNNER_BLIND_PIE_CYCLE_FINISHED 2
+[2026.09.20-01.14.18:331][567]LogWorld: BeginTearingDown for /Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange
+[2026.09.20-01.14.19:316][625]LogPython: GUNNER_BLIND_PIE_COMPLETE cycles=2
+[2026.09.20-01.14.21:321][626]LogHttp: Warning: [FHttpManager::Shutdown] Unbinding delegates for 1 outstanding Http Requests:
