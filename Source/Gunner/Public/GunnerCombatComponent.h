@@ -66,6 +66,9 @@ public:
     UFUNCTION(BlueprintPure, Category="Combat") UGunnerWeaponData* GetWeaponData() const { return ActiveData; }
     UFUNCTION(BlueprintPure, Category="Combat") int32 GetMagazine() const;
     UFUNCTION(BlueprintPure, Category="Combat") int32 GetReserve() const;
+    UFUNCTION(BlueprintPure, Category="Combat") int32 GetDryFireCount() const { return DryFireCount; }
+    UFUNCTION(BlueprintPure, Category="Combat") bool IsDryFiring() const;
+    UFUNCTION(BlueprintPure, Category="Combat") int32 GetMeleeVariant() const { return LastMeleeVariant; }
     UFUNCTION(BlueprintPure, Category="Combat") int32 GetShotsFired() const { return ShotsFired; }
     UFUNCTION(BlueprintPure, Category="Combat") float GetLastHitTime() const { return LastHitTime; }
     UFUNCTION(BlueprintPure, Category="Combat") float GetLastFireTime() const { return LastFireTime; }
@@ -85,6 +88,10 @@ private:
     int32 ActiveSlot = 0;
     int32 ActionSerial = 0;
     int32 ShotsFired = 0;
+    int32 DryFireCount = 0;
+    int32 NextMeleeVariant = 0;
+    int32 LastMeleeVariant = 0;
+    float LastDryFireTime = -100.f;
     float LastFireTime = -100.f;
     float LastHitTime = -100.f;
     float BlindFireRaiseStartTime = -100.f;
@@ -107,6 +114,7 @@ private:
     bool HasCombatAuthority() const;
     UAnimInstance* GetAnimInstance() const;
     void FireOnce();
+    void PlayDryFire();
     bool IsBlindFirePoseReady(float CoverTop);
     void WaitForBlindFirePose(FName Reason);
     void EquipSlot(int32 Slot);

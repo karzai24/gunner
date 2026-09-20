@@ -1,0 +1,65 @@
+{
+  "weapons": {
+    "Rifle": {
+      "jump_start_montage": {
+        "asset": "/Game/Gunner/Motion/Animation/Montages/AM_Rifle_JumpStart.AM_Rifle_JumpStart",
+        "slot": "FullBody"
+      },
+      "jump_land_montage": {
+        "asset": "/Game/Gunner/Motion/Animation/Montages/AM_Rifle_JumpLand.AM_Rifle_JumpLand",
+        "slot": "FullBody"
+      },
+      "dry_fire_montage": {
+        "asset": "/Game/Gunner/Motion/Animation/Montages/AM_Rifle_DryFire.AM_Rifle_DryFire",
+        "slot": "UpperBody"
+      },
+      "alternate_melee_montage": {
+        "asset": "/Game/Gunner/Motion/Animation/Montages/AM_MeleeCross.AM_MeleeCross",
+        "slot": "FullBody"
+      },
+      "JumpStart": {
+        "copy": "/Game/Gunner/Motion/Animation/InPlace/A_Rifle_JumpStart.A_Rifle_JumpStart",
+        "root_motion": false,
+        "root_lock": "REF_POSE",
+        "original_root_motion": true
+      },
+      "JumpLand": {
+        "copy": "/Game/Gunner/Motion/Animation/InPlace/A_Rifle_JumpLand.A_Rifle_JumpLand",
+        "root_motion": false,
+        "root_lock": "REF_POSE",
+        "original_root_motion": true
+      }
+    },
+    "Pistol": {
+      "jump_start_montage": {
+        "asset": "/Game/Gunner/Motion/Animation/Montages/AM_Pistol_JumpStart.AM_Pistol_JumpStart",
+        "slot": "FullBody"
+      },
+      "jump_land_montage": {
+        "asset": "/Game/Gunner/Motion/Animation/Montages/AM_Pistol_JumpLand.AM_Pistol_JumpLand",
+        "slot": "FullBody"
+      },
+      "dry_fire_montage": {
+        "asset": "/Game/Gunner/Motion/Animation/Montages/AM_Pistol_DryFire.AM_Pistol_DryFire",
+        "slot": "UpperBody"
+      },
+      "alternate_melee_montage": {
+        "asset": "/Game/Gunner/Motion/Animation/Montages/AM_MeleeCross.AM_MeleeCross",
+        "slot": "FullBody"
+      },
+      "JumpStart": {
+        "copy": "/Game/Gunner/Motion/Animation/InPlace/A_Pistol_JumpStart.A_Pistol_JumpStart",
+        "root_motion": false,
+        "root_lock": "REF_POSE",
+        "original_root_motion": true
+      },
+      "JumpLand": {
+        "copy": "/Game/Gunner/Motion/Animation/InPlace/A_Pistol_JumpLand.A_Pistol_JumpLand",
+        "root_motion": false,
+        "root_lock": "REF_POSE",
+        "original_root_motion": true
+      }
+    }
+  },
+  "graph": "/Game/Gunner/Motion/Animation/ABP_WardenMotionPolish.ABP_WardenMotionPolish_C"
+}

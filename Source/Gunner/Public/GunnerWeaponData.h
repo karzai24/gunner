@@ -43,11 +43,21 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Animation")
     TObjectPtr<UAnimMontage> FireMontage;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Animation")
+    TObjectPtr<UAnimMontage> DryFireMontage;
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Animation")
+    TObjectPtr<UAnimMontage> JumpStartMontage;
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Animation")
+    TObjectPtr<UAnimMontage> JumpLandMontage;
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Animation")
     TObjectPtr<UAnimMontage> ReloadMontage;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Animation")
     TObjectPtr<UAnimMontage> EquipMontage;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Animation")
     TObjectPtr<UAnimMontage> MeleeMontage;
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Animation")
+    TObjectPtr<UAnimMontage> AlternateMeleeMontage;
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Melee", meta=(ClampMin="0.1", ClampMax="0.85"))
+    float AlternateMeleeImpactFraction = 0.28f;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Fire", meta=(ClampMin="1", ClampMax="200"))
     int32 MagazineCapacity = 30;

@@ -1,0 +1,225 @@
+Setting up bundled DotNet SDK
+/Users/Shared/Epic Games/UE_5.8/Engine/Binaries/ThirdParty/DotNet/10.0/mac-arm64
+Running dotnet Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.dll Gunner Mac Development /Users/moe/Documents/ChatGPT/Gunner/Gunner.uproject -WaitMutex -NoHotReloadFromIDE
+Log file: /Users/moe/Library/Application Support/Epic/UnrealBuildTool/Log.txt
+Determining max actions to execute in parallel (10 physical cores, 10 logical cores)
+  Executing up to 10 processes, one per physical core
+Using 'git status' to determine working set for adaptive non-unity build (/Users/moe/Documents/ChatGPT/Gunner).
+UbaServer - Listening on 0.0.0.0:1345
+Invalidating makefile for Gunner (source file added)
+/Users/Shared/Epic Games/UE_5.8/Engine/Source/ThirdParty/Apple/MetalShaderConverter/MetalShaderConverter.build.cs: warning: Referenced directory '/Users/Shared/Epic Games/UE_5.8/Engine/Source/ThirdParty/Apple/MetalShaderConverter/include/metal_irconverter_ext' does not exist.
+Compiling with Mac SDK 26.5, minimum Target OS version 14.00
+UHT compiled-in object format Default
+Building Gunner...
+===== Toolchain Information =====
+Using Clang compiler 21.1.6 (/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
+  Apple clang version 21.0.0 (clang-2100.1.1.101) Target: arm64-apple-darwin25.6.0 Thread model: posix InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+Using Clang archiver (/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
+  Apple clang version 21.0.0 (clang-2100.1.1.101) Target: arm64-apple-darwin25.6.0 Thread model: posix InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+[Adaptive Build] Excluded from Gunner unity file: GunnerAnimInstance.cpp, GunnerCombatComponent.cpp, GunnerCharacter.cpp, GunnerGameMode.cpp, GunnerHUD.cpp, GunnerPolishProbe.cpp, GunnerMotionProbe.cpp
+=================================
+Using Unreal Build Accelerator local executor to run 13 action(s)
+  CPU 10 physical cores, 10 logical cores
+  Memory 16 GB physical, 11.1 GB/16 GB committed
+  UBA Storage capacity 40 GB
+[1/13] Compile [Apple] SharedPCH.Engine.Project.ValApi.ValExpApi.Cpp20.h
+[2/13] Compile [Apple] GunnerGameMode.cpp
+[3/13] Compile [Apple] GunnerHUD.cpp
+[4/13] Compile [Apple] GunnerAnimInstance.cpp
+[5/13] Compile [Apple] GunnerPolishProbe.cpp
+[6/13] Compile [Apple] GunnerCombatComponent.cpp
+[7/13] Compile [Apple] GunnerCharacter.cpp
+[8/13] Compile [Apple] GunnerMotionProbe.cpp
+[9/13] Compile [Apple] Module.Gunner.cpp
+[10/13] Link [Apple] Gunner
+[11/13] Updating version file: /Users/moe/Documents/ChatGPT/Gunner/Intermediate/Build/Versions.xcconfig [NoUba]
+[12/13] ApplePostBuildSync Executing PostBuildSync [/Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner] [NoUba]
+Discovering modules, targets and source code for project...
+Adding projects for all targets...
+Adding projects for all targets took 0.16s
+Adding projects for all game projects took 0.00s
+Adding projects for all modules took 0.49s
+/Users/Shared/Epic Games/UE_5.8/Engine/Source/ThirdParty/Apple/MetalShaderConverter/MetalShaderConverter.build.cs: warning: Referenced directory '/Users/Shared/Epic Games/UE_5.8/Engine/Source/ThirdParty/Apple/MetalShaderConverter/include/metal_irconverter_ext' does not exist.
+Compiling with Mac SDK 26.5, minimum Target OS version 14.00
+Adding additional Xcode project info took 0.43s
+Writing project files...
+Writing xcode workspace /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFiles/Gunner_Mac_Gunner.xcworkspace
+Writing project files... 100%
+Writing project files took 0.11s
+params: UBT_NO_POST_DEPLOY=true /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild build -workspace "/Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFiles/Gunner_Mac_Gunner.xcworkspace" -scheme "Gunner" -configuration "Development" -destination generic/platform="macOS" CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION=YES  -allowProvisioningUpdates UE_XCODE_BUILD_MODE=PostBuildSync -hideShellScriptEnvironment
+No certs of truth reported, skipping certificate verification...
+Known Apple certificate for this team is installed!
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild build -workspace /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFiles/Gunner_Mac_Gunner.xcworkspace -scheme Gunner -configuration Development -destination generic/platform=macOS CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION=YES -allowProvisioningUpdates UE_XCODE_BUILD_MODE=PostBuildSync -hideShellScriptEnvironment
+
+Build settings from command line:
+    CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES
+    UE_XCODE_BUILD_MODE = PostBuildSync
+
+Run pre-actions
+
+SchemeAction Touch\ UBT\ generated\ tiles /var/folders/tj/1_qgybsn1l500363nnwyd5hm0000gn/T/SchemeScriptAction-Pp0pky.sh
+    cd /var/folders/tj/1_qgybsn1l500363nnwyd5hm0000gn/T/
+    /bin/sh -c /var/folders/tj/1_qgybsn1l500363nnwyd5hm0000gn/T/SchemeScriptAction-Pp0pky.sh
+
+ComputePackagePrebuildTargetDependencyGraph
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'Gunner' in project 'Gunner (Mac)' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+Build description signature: 34dbf534b8511e4b0e7e5f93f9e5bd64
+Build description path: /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac/build/XCBuildData/34dbf534b8511e4b0e7e5f93f9e5bd64.xcbuilddata
+WriteAuxiliaryFile /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ (Mac).build/Mac/Gunner.build/Script-8E6F00BCF1A5F8C63FF72DF8.sh (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    write-file /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/Script-8E6F00BCF1A5F8C63FF72DF8.sh
+
+WriteAuxiliaryFile /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ (Mac).build/Mac/Gunner.build/Gunner.DependencyStaticMetadataFileList (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    write-file /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/Gunner.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ (Mac).build/Mac/Gunner.build/Gunner.DependencyMetadataFileList (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    write-file /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/Gunner.DependencyMetadataFileList
+
+MkDir /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    /bin/mkdir -p /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents
+
+MkDir /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    /bin/mkdir -p /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app
+
+MkDir /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents/Resources (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    /bin/mkdir -p /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents/Resources
+
+WriteAuxiliaryFile /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ (Mac).build/Mac/Gunner.build/DerivedSources/Entitlements.plist (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    write-file /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/DerivedSources/Entitlements.plist
+
+ProcessProductPackaging /Users/moe/Documents/ChatGPT/Gunner/Build/Mac/Resources/Sandbox.Server.entitlements /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ (Mac).build/Mac/Gunner.build/Gunner.app-Simulated.xcent (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+
+    Entitlements:
+
+    {
+}
+
+    builtin-productPackagingUtility /Users/moe/Documents/ChatGPT/Gunner/Build/Mac/Resources/Sandbox.Server.entitlements -entitlements -format xml -o /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/Gunner.app-Simulated.xcent
+
+ProcessProductPackaging /Users/moe/Documents/ChatGPT/Gunner/Build/Mac/Resources/Sandbox.Server.entitlements /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ (Mac).build/Mac/Gunner.build/Gunner.app.xcent (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+
+    Entitlements:
+
+    {
+    "com.apple.security.app-sandbox" = 1;
+    "com.apple.security.get-task-allow" = 1;
+    "com.apple.security.network.client" = 1;
+    "com.apple.security.network.server" = 1;
+}
+
+    builtin-productPackagingUtility /Users/moe/Documents/ChatGPT/Gunner/Build/Mac/Resources/Sandbox.Server.entitlements -entitlements -format xml -o /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/Gunner.app.xcent
+
+ProcessProductPackagingDER /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ (Mac).build/Mac/Gunner.build/Gunner.app.xcent /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ (Mac).build/Mac/Gunner.build/Gunner.app.xcent.der (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    /usr/bin/derq query -f xml -i /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/Gunner.app.xcent -o /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/Gunner.app.xcent.der --raw
+
+ProcessProductPackagingDER /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ (Mac).build/Mac/Gunner.build/Gunner.app-Simulated.xcent /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ (Mac).build/Mac/Gunner.build/Gunner.app-Simulated.xcent.der (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    /usr/bin/derq query -f xml -i /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/Gunner.app-Simulated.xcent -o /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/Gunner.app-Simulated.xcent.der --raw
+
+MkDir /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ (Mac).build/Mac/Gunner.build/assetcatalog_output/unthinned (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    /bin/mkdir -p /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/assetcatalog_output/unthinned
+
+CpResource /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents/Resources/UEMetadata /Users/Shared/Epic\ Games/UE_5.8/Engine/Build/Mac/Resources/UEMetadata (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -strip-unsigned-binaries -strip-deterministic -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip -resolve-src-symlinks /Users/Shared/Epic\ Games/UE_5.8/Engine/Build/Mac/Resources/UEMetadata /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents/Resources
+
+MkDir /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ (Mac).build/Mac/Gunner.build/assetcatalog_output/thinned (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    /bin/mkdir -p /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/assetcatalog_output/thinned
+
+CompileAssetCatalogVariant thinned /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents/Resources /Users/Shared/Epic\ Games/UE_5.8/Engine/Build/Mac/Resources/Assets.xcassets (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/Shared/Epic\ Games/UE_5.8/Engine/Build/Mac/Resources/Assets.xcassets --compile /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/assetcatalog_output/thinned --output-format human-readable-text --notices --warnings --export-dependency-info /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/assetcatalog_dependencies_thinned --output-partial-info-plist /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/assetcatalog_generated_info.plist_thinned --app-icon AppIcon --enable-on-demand-resources NO --development-region English --target-device mac --minimum-deployment-target 14.00 --platform macosx
+/* com.apple.actool.compilation-results */
+/Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner (Mac).build/Mac/Gunner.build/assetcatalog_generated_info.plist_thinned
+/Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner (Mac).build/Mac/Gunner.build/assetcatalog_output/thinned/AppIcon.icns
+/Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner (Mac).build/Mac/Gunner.build/assetcatalog_output/thinned/Assets.car
+
+
+LinkAssetCatalog /Users/Shared/Epic\ Games/UE_5.8/Engine/Build/Mac/Resources/Assets.xcassets (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    builtin-linkAssetCatalog --thinned /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/assetcatalog_output/thinned --thinned-dependencies /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/assetcatalog_dependencies_thinned --thinned-info-plist-content /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/assetcatalog_generated_info.plist_thinned --unthinned /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/assetcatalog_output/unthinned --unthinned-dependencies /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/assetcatalog_dependencies_unthinned --unthinned-info-plist-content /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/assetcatalog_generated_info.plist_unthinned --output /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents/Resources --plist-output /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/assetcatalog_generated_info.plist
+note: Emplaced /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents/Resources/AppIcon.icns (in target 'Gunner' from project 'Gunner (Mac)')
+note: Emplaced /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents/Resources/Assets.car (in target 'Gunner' from project 'Gunner (Mac)')
+
+ProcessInfoPlistFile /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents/Info.plist /Users/moe/Documents/ChatGPT/Gunner/Build/Mac/Resources/Info.Template.plist (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    builtin-infoPlistUtility /Users/moe/Documents/ChatGPT/Gunner/Build/Mac/Resources/Info.Template.plist -producttype com.apple.product-type.application -genpkginfo /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents/PkgInfo -expandbuildsettings -format xml -platform macosx -additionalcontentfile /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/assetcatalog_generated_info.plist -o /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents/Info.plist
+
+PhaseScriptExecution Copy\ Executable\ and\ Staged\ Data\ into\ .app /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ (Mac).build/Mac/Gunner.build/Script-8E6F00BCF1A5F8C63FF72DF8.sh (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    /bin/sh -c /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\\\ \\\(Mac\\\).build/Mac/Gunner.build/Script-8E6F00BCF1A5F8C63FF72DF8.sh
+Copying executable and any standalone dylibs into /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app/Contents/MacOS but do not overwrite unless src is newer
+=========================================================================================
+WARNING: To run, you must have a valid staged build directory. The Staged location is:
+  /Users/moe/Documents/ChatGPT/Gunner/Saved/StagedBuilds/Mac
+Use the editor's Platforms menu, or run a command like::
+./RunUAT.sh BuildCookRun -platform=Mac -project=<project> -build -cook -stage -pak
+=========================================================================================
+
+CodeSign /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+
+    Signing Identity:     "Sign to Run Locally"
+
+    /usr/bin/codesign --force --sign - --entitlements /Users/moe/Documents/ChatGPT/Gunner/Binaries/Gunner\ \(Mac\).build/Mac/Gunner.build/Gunner.app.xcent --timestamp\=none --generate-entitlement-der /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app
+/Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app: replacing existing signature
+
+RegisterExecutionPolicyException /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    builtin-RegisterExecutionPolicyException /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app
+
+Validate /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    builtin-validationUtility /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app -no-validate-extension -infoplist-subpath Contents/Info.plist
+
+RegisterWithLaunchServices /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    /System/Library/Frameworks/CoreServices.framework/Versions/Current/Frameworks/LaunchServices.framework/Versions/Current/Support/lsregister -f -R -trusted /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app
+
+Touch /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app (in target 'Gunner' from project 'Gunner (Mac)')
+    cd /Users/moe/Documents/ChatGPT/Gunner/Intermediate/ProjectFilesMac
+    /usr/bin/touch -c /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner.app
+
+** BUILD SUCCEEDED **
+
+[13/13] WriteMetadata Gunner.target [NoUba]
+
+Total time in Unreal Build Accelerator local executor: 23.93 seconds
+Output binary: /Users/moe/Documents/ChatGPT/Gunner/Binaries/Mac/Gunner
+Deploying Gunner Mac Development...
+Deploying now!
+
+Result: Succeeded
+Total execution time: 27.06 seconds
+Trace written to file /Users/moe/Library/Application Support/Epic/UnrealBuildTool/Trace.uba with size 7.7kb

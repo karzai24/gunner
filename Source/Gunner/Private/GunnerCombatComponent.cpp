@@ -1,6 +1,7 @@
 #include "GunnerCombatComponent.h"
 
 #include "GunnerTarget.h"
+#include "GunnerCharacter.h"
 #include "GunnerCoverComponent.h"
 #include "GunnerAnimInstance.h"
 #include "Animation/AnimInstance.h"
@@ -106,7 +107,9 @@ void UGunnerCombatComponent::SetFireBlocked(bool bBlocked)
 
 void UGunnerCombatComponent::StartFire()
 {
-    if (!CanStartAction() || bFireBlocked || !ActiveData->FireMontage || !ActiveData->GunMesh || bFireHeld) return;
+    if (!CanStartAction() || !ActiveData->FireMontage || !ActiveData->GunMesh || bFireHeld) return;
+    if (GetMagazine() <= 0) { PlayDryFire(); return; }
+    if (bFireBlocked) return;
     if (bBlindFirePending)
     {
         // A second press during the same raise keeps automatic fire held, without
@@ -142,6 +145,28 @@ void UGunnerCombatComponent::StartFire()
     {
         GetWorld()->GetTimerManager().SetTimer(FireTimer, this, &UGunnerCombatComponent::FireOnce,
             FMath::Max(0.03f, ActiveData->FireInterval), true);
+    }
+}
+
+bool UGunnerCombatComponent::IsDryFiring() const
+{
+    const UAnimInstance* Anim = GetAnimInstance();
+    return ActiveData && ActiveData->DryFireMontage && Anim && Anim->Montage_IsActive(ActiveData->DryFireMontage);
+}
+
+void UGunnerCombatComponent::PlayDryFire()
+{
+    auto* Anim = Cast<UGunnerAnimInstance>(GetAnimInstance());
+    if (!Anim || !ActiveData->DryFireMontage || GetWorld()->GetTimeSeconds() - LastDryFireTime < 0.8f) return;
+    // A low-cover action can settle into crouch on the next character tick.
+    if ((Character->bIsCrouched || Character->GetCharacterMovement()->bWantsToCrouch ||
+        (Cover && Cover->IsLowCover())) && !Anim->bCrouchDryFirePoseReady) return;
+    StopFire();
+    if (auto* Warden = Cast<AGunnerCharacter>(Character)) Warden->StopJumpPresentation();
+    if (Anim->Montage_Play(ActiveData->DryFireMontage, 1.f) > 0.f)
+    {
+        LastDryFireTime = GetWorld()->GetTimeSeconds();
+        ++DryFireCount;
     }
 }
 
@@ -216,11 +241,12 @@ bool UGunnerCombatComponent::IsBlindFirePoseReady(float CoverTop)
 
 void UGunnerCombatComponent::FireOnce()
 {
-    if (!CanStartAction() || bFireBlocked || (!bFireHeld && !bBlindFirePending) || !ActiveData->FireMontage || GetMagazine() <= 0)
+    if (!CanStartAction() || bFireBlocked || (!bFireHeld && !bBlindFirePending) || !ActiveData->FireMontage)
     {
         StopFire();
         return;
     }
+    if (GetMagazine() <= 0) { PlayDryFire(); StopFire(); return; }
     const float Now = GetWorld()->GetTimeSeconds();
     const bool bBlindShot = bBlindFiring;
     if (bBlindShot)
@@ -286,6 +312,7 @@ void UGunnerCombatComponent::FireOnce()
         BlindFireWaitSince = -1.f;
         BlindFireWaitReason = TEXT("Ready");
     }
+    if (auto* Warden = Cast<AGunnerCharacter>(Character)) Warden->StopJumpPresentation();
     if (Anim->Montage_Play(ActiveData->FireMontage, 1.f) <= 0.f)
     {
         StopFire();
@@ -352,8 +379,11 @@ void UGunnerCombatComponent::EquipSlot(int32 Slot)
 {
     UGunnerWeaponData* NewData = Slot == 0 ? RifleData.Get() : PistolData.Get();
     if (!CanStartAction() || ActiveSlot == Slot || !NewData || !NewData->GunMesh || !NewData->EquipMontage) return;
-    if (Character->bIsCrouched || Character->GetCharacterMovement()->bWantsToCrouch) return;
-    if (Cover && Cover->IsLowCover()) return;
+    if (Character->bIsCrouched || Character->GetCharacterMovement()->bWantsToCrouch || (Cover && Cover->IsLowCover()))
+    {
+        const auto* Anim = Cast<UGunnerAnimInstance>(GetAnimInstance());
+        if (!Anim || !Anim->bCrouchEquipPoseReady) return;
+    }
     StopFire();
     StopAim();
     if (!BeginAction(EGunnerCombatAction::Equipping, NewData->EquipMontage)) return;
@@ -383,6 +413,7 @@ bool UGunnerCombatComponent::BeginAction(EGunnerCombatAction NewAction, UAnimMon
 {
     UAnimInstance* Anim = GetAnimInstance();
     if (!HasCombatAuthority() || !Anim || !Montage) return false;
+    if (auto* Warden = Cast<AGunnerCharacter>(Character)) Warden->StopJumpPresentation();
     const float Duration = Anim->Montage_Play(Montage, 1.f, EMontagePlayReturnType::Duration);
     if (Duration <= 0.f) return false;
     ActionState = NewAction;
@@ -428,6 +459,7 @@ void UGunnerCombatComponent::StopAllActions()
 {
     StopFire();
     StopAim();
+    if (IsDryFiring()) GetAnimInstance()->Montage_Stop(0.08f, ActiveData->DryFireMontage);
     UAnimMontage* ToStop = ActionMontage;
     if (GetWorld())
     {
@@ -445,19 +477,23 @@ void UGunnerCombatComponent::StopAllActions()
 
 void UGunnerCombatComponent::Melee()
 {
-    // The acquired jab is a standing, planted full-body action. A crouched attack
+    // The acquired punches are standing, planted full-body actions. A crouched attack
     // requires its own clip; never stand the mesh inside a crouched capsule.
     if (!CanStartAction() || Character->bIsCrouched || Character->GetCharacterMovement()->bWantsToCrouch || !ActiveData->MeleeMontage) return;
-    // Low-cover stance automatically crouches when aim stops; it cannot host the standing jab.
+    // Low-cover stance automatically crouches when aim stops; it cannot host a standing punch.
     if (Cover && (Cover->IsLowCover() || Cover->IsPeeking())) return;
     StopFire();
     StopAim();
-    if (!BeginAction(EGunnerCombatAction::Melee, ActiveData->MeleeMontage)) return;
+    const bool bAlternate = NextMeleeVariant == 1 && ActiveData->AlternateMeleeMontage;
+    UAnimMontage* Selected = bAlternate ? ActiveData->AlternateMeleeMontage.Get() : ActiveData->MeleeMontage.Get();
+    if (!BeginAction(EGunnerCombatAction::Melee, Selected)) return;
+    LastMeleeVariant = bAlternate ? 1 : 0;
+    NextMeleeVariant = bAlternate ? 0 : 1;
     Character->GetCharacterMovement()->StopMovementImmediately();
     bMeleeCommitted = false;
     const float Duration = ActionMontage->GetPlayLength() / FMath::Max(0.01f, ActionMontage->RateScale);
     GetWorld()->GetTimerManager().SetTimer(MeleeImpactTimer, this, &UGunnerCombatComponent::CommitMelee,
-        FMath::Max(0.05f, Duration * FMath::Clamp(ActiveData->MeleeImpactFraction, 0.1f, 0.85f)), false);
+        FMath::Max(0.05f, Duration * FMath::Clamp(bAlternate ? ActiveData->AlternateMeleeImpactFraction : ActiveData->MeleeImpactFraction, 0.1f, 0.85f)), false);
 }
 
 void UGunnerCombatComponent::CommitMelee()

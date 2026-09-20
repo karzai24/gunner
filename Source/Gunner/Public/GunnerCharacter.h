@@ -2,6 +2,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "GunnerCharacter.generated.h"
+class UAnimMontage;
 class USpringArmComponent;
 class UCameraComponent;
 class UGunnerInputConfig;
@@ -21,6 +22,9 @@ public:
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaSeconds) override;
     virtual void UnPossessed() override;
+    virtual void OnJumped_Implementation() override;
+    virtual void Landed(const FHitResult& Hit) override;
+    void StopJumpPresentation();
     const UGunnerInputConfig* GetInputConfig() const { return InputConfig; }
     UFUNCTION(BlueprintPure) bool IsSprinting() const { return bSprinting; }
     UFUNCTION(BlueprintPure) bool IsInCover() const;
@@ -42,6 +46,8 @@ protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input", meta=(ClampMin="0"))
     float StickLookDegreesPerSecond = 120.f;
 private:
+    void PlayJumpPresentation(UAnimMontage* Montage);
+    UPROPERTY(Transient) TObjectPtr<UAnimMontage> JumpPresentation;
     void Move(const FInputActionValue& Value);
     void MouseLook(const FInputActionValue& Value);
     void StickLook(const FInputActionValue& Value);

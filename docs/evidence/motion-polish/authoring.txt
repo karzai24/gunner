@@ -1,0 +1,11 @@
+[2026.09.20-21.25.06:476][  0]LogPythonScriptCommandlet: Display: Running Python script: /Users/moe/Documents/ChatGPT/Gunner/Tools/install_motion_polish.py
+[2026.09.20-21.25.06:845][  0]LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Motion/Animation/InPlace/A_Rifle_JumpStart.A_Rifle_JumpStart:FbxAnimSequenceImportData_0
+[2026.09.20-21.25.06:902][  0]LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Motion/Animation/InPlace/A_Rifle_JumpLand.A_Rifle_JumpLand:FbxAnimSequenceImportData_0
+[2026.09.20-21.25.06:919][  0]LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Motion/Animation/InPlace/A_Pistol_JumpStart.A_Pistol_JumpStart:FbxAnimSequenceImportData_0
+[2026.09.20-21.25.06:968][  0]LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Motion/Animation/InPlace/A_Pistol_JumpLand.A_Pistol_JumpLand:FbxAnimSequenceImportData_0
+[2026.09.20-21.25.07:074][  0]LogPythonScriptCommandlet: Display: Python script executed successfully
+[2026.09.20-21.25.07:074][  0]LogInit: Display: LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Motion/Animation/InPlace/A_Rifle_JumpStart.A_Rifle_JumpStart:FbxAnimSequenceImportData_0
+[2026.09.20-21.25.07:074][  0]LogInit: Display: LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Motion/Animation/InPlace/A_Rifle_JumpLand.A_Rifle_JumpLand:FbxAnimSequenceImportData_0
+[2026.09.20-21.25.07:074][  0]LogInit: Display: LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Motion/Animation/InPlace/A_Pistol_JumpStart.A_Pistol_JumpStart:FbxAnimSequenceImportData_0
+[2026.09.20-21.25.07:074][  0]LogInit: Display: LogAnimationCompression: Warning: EnsureDependenciesAreLoaded: [ConditionalPostLoad Dependency] /Game/Gunner/Motion/Animation/InPlace/A_Pistol_JumpLand.A_Pistol_JumpLand:FbxAnimSequenceImportData_0
+[2026.09.20-21.25.07:074][  0]LogInit: Display: Success - 0 error(s), 4 warning(s)

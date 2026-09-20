@@ -62,6 +62,12 @@ public:
     bool bCrouchReloading = false;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Crouch Reload")
     float CrouchReloadAlpha = 0.f;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Crouch Handling")
+    bool bCrouchEquipPoseReady = false;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Crouch Handling")
+    bool bCrouchDryFirePoseReady = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Crouch Handling")
+    float CrouchHandlingAlpha = 0.f;
     /** Shared arm mask; its source remains the existing UpperBody action slot. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Crouch Reload")
     float ProtectiveArmsWeight = 0.f;

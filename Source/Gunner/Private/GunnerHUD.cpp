@@ -76,7 +76,8 @@ void AGunnerHUD::DrawHUD()
     // a protected reload that stays in low cover throughout the montage.
     if (Combat->GetActionState() == EGunnerCombatAction::Idle || Combat->GetActionState() == EGunnerCombatAction::Firing)
     {
-        if (Combat->IsCombatBlocked()) Status = TEXT("WEAPON LOWERED");
+        if (Combat->IsDryFiring()) Status = TEXT("EMPTY / R RELOAD");
+        else if (Combat->IsCombatBlocked()) Status = TEXT("WEAPON LOWERED");
         else if (Combat->IsBlindFiring()) Status = TEXT("BLIND FIRE");
         else if (Combat->IsFireBlocked() && Combat->GetActionState() == EGunnerCombatAction::Idle)
         {

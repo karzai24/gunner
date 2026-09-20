@@ -396,12 +396,11 @@ void AGunnerMotionProbe::Tick(float DeltaSeconds)
             FMath::IsNearlyEqual(Character->GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight(), 62.f),
             TEXT("Action guard fixture enters authored crouch state"));
         ShotsBefore = Combat->GetShotsFired(); Key(EKeys::LeftMouseButton, true); Key(EKeys::F, true);
-        Key(EKeys::Two, true); Advance(0.3f); break;
+        Advance(0.3f); break;
     case 57:
         Key(EKeys::LeftMouseButton, false); Key(EKeys::F, false);
-        Key(EKeys::Two, false);
         Check(Combat->GetActionState() == EGunnerCombatAction::Idle && Combat->GetWeaponKind() == EGunnerWeaponKind::Rifle,
-            TEXT("Protected crouch rejects the unsupported upright equip animation"));
+            TEXT("Rejected crouched hip fire and melee leave the selected weapon idle"));
         Check(Combat->GetShotsFired() == ShotsBefore, TEXT("Crouched hip fire is rejected without an authored firing pose"));
         Check(!Combat->IsMeleeing(), TEXT("Crouched melee is rejected without an authored attack pose"));
         Key(EKeys::RightMouseButton, true); Advance(0.5f); break;
@@ -550,12 +549,11 @@ void AGunnerMotionProbe::Tick(float DeltaSeconds)
         Key(EKeys::RightMouseButton, true); Advance(0.45f); break;
     case 86:
         Check(Combat->IsAiming() && !Character->bIsCrouched, TEXT("Low-cover melee guard fixture pops up into standing ADS"));
-        Key(EKeys::F, true); Key(EKeys::Two, true); Advance(0.2f); break;
+        Key(EKeys::F, true); Advance(0.2f); break;
     case 87:
         Key(EKeys::F, false);
-        Key(EKeys::Two, false);
         Check(Combat->GetActionState() == EGunnerCombatAction::Idle && Combat->GetWeaponKind() == EGunnerWeaponKind::Rifle,
-            TEXT("Low-cover pop-up rejects equip that would force an unsupported protected pose"));
+            TEXT("Rejected low-cover melee leaves the selected weapon idle"));
         Check(!Combat->IsMeleeing() && Combat->IsAiming() && !Character->bIsCrouched,
             TEXT("Low-cover pop-up rejects standing melee without triggering automatic crouch"));
         Key(EKeys::RightMouseButton, false); Key(EKeys::SpaceBar, true); Advance(0.2f); break;

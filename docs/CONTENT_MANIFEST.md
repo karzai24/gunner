@@ -15,9 +15,9 @@ The current playable composition is the movement/weapon range. Implemented conte
 | `level_rift_bastion` | Rift Bastion arena | Deferred; test rooms are not the complete arena |
 | `defense_pulse_fence` | Eight-second pulse slow/damage defense | Deferred |
 
-The current melee action is a retargeted standing jab (`AM_MeleeJab`), shared by the two weapon definitions. Dodge uses the retargeted `AM_DodgeRoll` full-body montage and a guarded native movement source. Both live under `Content/Gunner/Motion/Animation/Montages`. No knife item, knife-specific animation or vault action is claimed.
+Current melee alternates the retargeted standing jab and cross (`AM_MeleeJab`, `AM_MeleeCross`), shared by both weapon definitions. Dodge uses the retargeted `AM_DodgeRoll` full-body montage and a guarded native movement source. Both live under `Content/Gunner/Motion/Animation/Montages`. No knife item, knife-specific animation or vault action is claimed.
 
-The crouch idle/forward clips retain their protective torso outside ADS by fading out the upright armed layer. Rifle and pistol reloads reuse the installed Epic clips through an arm-only layer over genuine crouch in `ABP_WardenCrouchReload`. Both work while crouched or attached to low cover. Equip remains blocked during actual/pending crouch and throughout low-cover attachment; dedicated crouched handling source clips remain missing.
+The crouch idle/forward clips retain their protective torso outside ADS by fading out the upright armed layer. Rifle and pistol reloads reuse the installed Epic clips through an arm-only layer over genuine crouch in `ABP_WardenMotionPolish`. Both work while crouched or attached to low cover. Equip and dry fire use an analogous protective arm layer during crouch/low cover; dedicated crouched handling source clips remain missing.
 
 Animation assets are grouped under `Content/Gunner/Animation/Source`, `Animation/Rigs`, `Animation/Retargeted/Manny`, and the composed `Content/Gunner/Motion/Animation`. Original Epic character and weapon paths are retained under `Content/Characters` and `Content/Weapons`. See `ASSET_PROVENANCE.md` for creators, licenses, source hashes and modifications.
 
@@ -25,4 +25,6 @@ No old `.tscn` or `.gd` path is a runtime dependency. Stable IDs are content con
 
 Low-cover blind fire composes `ABP_WardenBlindFire`, native arm IK and sampled left-hand grips in the existing two weapon Data Assets. The prior animation graph is retained. Rifle/pistol use the actual raised muzzle while preserving protective crouch; no new character art or third-party blind-fire clip is imported.
 
-`ABP_WardenCrouchReload` is the active motion character graph and includes the prior blind-fire composition. Both earlier graphs remain available. No new source animations are imported for crouched reload.
+`ABP_WardenMotionPolish` is the active graph and includes prior blind-fire/reload composition. All earlier graphs remain available. No new source animations are imported for crouched reload.
+
+Motion polish adds four project-owned root-locked Epic copies under `Content/Gunner/Motion/Animation/InPlace`: `A_Rifle_JumpStart`, `A_Rifle_JumpLand`, `A_Pistol_JumpStart`, `A_Pistol_JumpLand`. Seven montages under `Animation/Montages` compose those copies, the two original Epic dry-fire clips, and `AM_MeleeCross`. Both weapon Data Assets reference their selected variants. `Tools/install_motion_polish.py` is guarded against overwriting any generated output and backs up the existing character/weapon packages.

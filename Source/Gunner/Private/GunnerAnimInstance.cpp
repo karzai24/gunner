@@ -30,7 +30,7 @@ void UGunnerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
         bInAir = bCrouched = bAiming = bSprinting = bInCover = bPistol = false;
         UpperBodyWeight = 1.f;
         BlindFireAlpha = 0.f;
-        CrouchReloadAlpha = ProtectiveArmsWeight = 0.f;
+        CrouchReloadAlpha = CrouchHandlingAlpha = ProtectiveArmsWeight = 0.f;
         bCrouchReloading = false;
         bBlindFiring = bBlindFireTargetsValid = false;
         return;
@@ -48,7 +48,7 @@ void UGunnerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
         FRotator::NormalizeAxis(Character->GetBaseAimRotation().Pitch), -60.f, 60.f);
     AimPitch = FMath::FInterpTo(AimPitch, TargetPitch, DeltaSeconds, 18.f);
     AimPitchNormalized = AimPitch / 90.f;
-    const bool bUpperBodyReady = !bSprinting && (!bCrouched || bAiming);
+    const bool bUpperBodyReady = !bSprinting && !bInAir && (!bCrouched || bAiming);
     UpperBodyWeight = FMath::FInterpTo(UpperBodyWeight, bUpperBodyReady ? 1.f : 0.f, DeltaSeconds, 12.f);
 
     const AGunnerCharacter* Gunner = Cast<AGunnerCharacter>(Character);
@@ -99,12 +99,17 @@ void UGunnerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
     // A reload montage supplies the complete arm motion. Its non-additive pose
     // must remain free to move the hands instead of using the blind-fire IK base.
     const bool bReloading = Combat && Combat->IsReloading();
-    bBlindFiring = BlindFireAlpha > KINDA_SMALL_NUMBER && !bReloading;
+    const bool bEquipping = Combat && Combat->GetActionState() == EGunnerCombatAction::Equipping;
+    const bool bDryFiring = Combat && Combat->IsDryFiring();
+    bBlindFiring = BlindFireAlpha > KINDA_SMALL_NUMBER && !bReloading && !bEquipping && !bDryFiring;
     const bool bCrouchReloadRequested = bCrouchReloadPoseReady && bCrouched && !bInAir && bReloading;
     // IsReloading remains true through the montage's authored blend-out. Fade the
     // protective arm layer only after its ended callback (or an interruption).
     CrouchReloadAlpha = FMath::FInterpConstantTo(CrouchReloadAlpha,
         bCrouchReloadRequested ? 1.f : 0.f, DeltaSeconds, 12.f);
     bCrouchReloading = CrouchReloadAlpha > KINDA_SMALL_NUMBER;
-    ProtectiveArmsWeight = FMath::Max(BlindFireAlpha, CrouchReloadAlpha);
+    const bool bHandling = bCrouched && !bInAir &&
+        ((bCrouchEquipPoseReady && bEquipping) || (bCrouchDryFirePoseReady && bDryFiring));
+    CrouchHandlingAlpha = FMath::FInterpConstantTo(CrouchHandlingAlpha, bHandling ? 1.f : 0.f, DeltaSeconds, 12.f);
+    ProtectiveArmsWeight = FMath::Max3(BlindFireAlpha, CrouchReloadAlpha, CrouchHandlingAlpha);
 }

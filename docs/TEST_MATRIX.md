@@ -1,3 +1,62 @@
+# Motion and weapon handling polish — 2026-09-20
+
+The sandbox now uses weapon-specific takeoff/landing, empty-trigger animations, protective crouched equip, and alternating standing jab/cross attacks. Existing licensed clips supply all motion. `ABP_WardenMotionPolish` preserves earlier blind-fire and crouched-reload composition; source animations, earlier graphs and the foundation map remain intact. This entry supersedes the standing-only equip and dormant jump/dry-fire/cross limitations below.
+
+| Gate | Actual result / evidence |
+|---|---|
+| Editor and Game C++ builds | Both succeeded. [Editor](evidence/motion-polish/build-editor.txt), [Game](evidence/motion-polish/build-game.txt). No project compiler diagnostics; Game retains the installed-engine include warning described below. |
+| Saved asset reload | A fresh commandlet loaded both weapon definitions, verified montage slots, all four graph capabilities, project-copy root settings and unchanged original root-motion settings: **0 errors / 0 warnings**. [Persisted assets](evidence/motion-polish/persisted-assets.json), [log](evidence/motion-polish/persisted-assets.txt). |
+| Focused rendered acceptance | **121 checks per session, 242 passes, zero failures**, two uninterrupted PIE sessions and successful driver completion. [Focused log](evidence/motion-polish/editor-smoke.txt). Four scenarios cover each weapon in free crouch and attached low cover. |
+| Jump and recovery | Actual takeoff and landing montages play for both weapons. Capsule apex is approximately 190 cm from a standing center near 92 cm; measured horizontal root drift is zero. Pelvis compresses to approximately 57–61 cm and recovers to 95 cm. A repeated jump then firing interrupts recovery immediately and creates one normal shot. |
+| Empty trigger | Magazines are emptied through input: held automatic rifle and repeated pistol presses. Empty trigger evaluates the weapon's UpperBody montage and crouch arm layer, causes no shot/ammo/damage change, and does not repeat while held. A fresh press replays feedback; R immediately replaces it with a functioning crouched reload. Missing readiness rejects the presentation. |
+| Crouched switching | Existing equip arms visibly travel more than 60 cm in mesh space during sampled handling; the 62 cm crouched capsule and genuine crouch torso persist. Sampled low-cover head maxima stay below 89 cm behind the 115 cm barricade. Missing capability rejects switching; actual montage interruption clears action/layer without changing ammunition. Switching during held low-cover ADS returns to crouch and resumes ADS after completion. |
+| Melee variation | Accepted F presses alternate actual jab/cross FullBody montages. No early damage, exactly one hit on completed attacks, zero hits after pre-impact interruption, and action locks release. Both variants retain the existing range/occlusion/stance guards. |
+| Existing movement/cover regression | **184 passes / zero failures**, two completed PIE sessions. [Log](evidence/motion-polish/motion-regression.txt). Obsolete assertions that crouched equip must be rejected were removed; hip-fire/melee restrictions remain checked. |
+| Blind-fire regression | **68 passes / zero failures**, two completed PIE sessions. [Log](evidence/motion-polish/blind-fire-regression.txt). Actual muzzle clearance, protected head, hit/obstruction and interruption checks retained. |
+| Crouched-reload regression | **224 passes / zero failures**, two completed PIE sessions on the final build. [Log](evidence/motion-polish/crouch-reload-regression.txt). Live hand motion, protected stance, one conserved completion transfer and cancellation safety remain passing. |
+
+**718 passing live checks across eight completed PIE sessions.** The broad movement/blind-fire regressions preceded the final conservative dry-fire readiness guard for the low-cover attachment frame; focused motion-polish and crouched reload were rerun on that final build. No project Blueprint, Python, asset-load or gameplay errors appear in accepted runs.
+
+Protection measurements sample handling after a **0.35-second ADS-to-crouch settling allowance**. They do not certify the initial transition as already hidden. Dry fire has visual/HUD feedback; this pass adds no click sound. Static weapon meshes switch to the selected incoming model at equip start; interruption retains that selection. There is no animated holster inventory, knife action or new character appearance.
+
+## Rendered inspection
+
+Untouched gameplay screenshots were inspected for actual pose, handling and cover protection:
+
+- [Rifle takeoff](evidence/motion-polish/polish_0_takeoff.png), [landing](evidence/motion-polish/polish_0_landing.png); [pistol takeoff](evidence/motion-polish/polish_2_takeoff.png), [landing](evidence/motion-polish/polish_2_landing.png).
+- [Crouched pistol equip](evidence/motion-polish/polish_1_equip.png), [rifle equip from low-cover ADS](evidence/motion-polish/polish_3_equip_from_ads.png).
+- [Rifle dry fire](evidence/motion-polish/polish_1_dry_fire.png), [pistol dry fire](evidence/motion-polish/polish_3_dry_fire.png).
+- [Jab](evidence/motion-polish/polish_0_jab.png), [cross](evidence/motion-polish/polish_0_cross.png).
+
+The same names are replaced by the second session's captures; both complete sessions retain separate log records. Shoulder-camera captures do not provide a production foot-contact or every-angle grip review. Dedicated cover entry/exit/lean/corners, directional crouched ADS, vault, knife and life-state motions remain deferred. No physical-controller/mouse delivery, audio, cooked package, Windows, co-op/LAN or representative encounter performance certification is implied.
+
+## Reproduction and authoring notes
+
+Run one Unreal process at a time:
+
+```bash
+./Tools/build_macos.sh GunnerEditor
+./Tools/open_editor_macos.sh -GunnerPolishSmoke -nosound \
+  "-ExecCmds=py $(pwd)/Tools/validate_polish_editor.py" "-LogCmds=LogPython Log" -stdout
+./Tools/open_editor_macos.sh -GunnerMotionSmoke -nosound \
+  "-ExecCmds=py $(pwd)/Tools/validate_motion_editor.py" "-LogCmds=LogPython Log" -stdout
+./Tools/open_editor_macos.sh -GunnerBlindFireSmoke -nosound \
+  "-ExecCmds=py $(pwd)/Tools/validate_blind_fire_editor.py" "-LogCmds=LogPython Log" -stdout
+./Tools/open_editor_macos.sh -GunnerCrouchReloadSmoke -nosound \
+  "-ExecCmds=py $(pwd)/Tools/validate_crouch_reload_editor.py" "-LogCmds=LogPython Log" -stdout
+./Tools/open_editor_macos.sh -run=pythonscript \
+  "-script=$(pwd)/Tools/validate_motion_polish_assets.py" -unattended -nosound -nop4 -stdout
+./Tools/build_macos.sh Gunner
+```
+
+The native probe uses real PlayerController input, evaluated montage slots/bones and target/ammo state, with scoped viewport-input isolation. The focused driver rejects PIE teardown before probe completion. An intermediate run contained an incomplete play session that was stopped/restarted; it is excluded from these counts. Final acceptance contains exactly two full focused sessions. The read-only persisted-assets check was executed from `Saved/check_polish_assets.py`; the identical reusable script is tracked as `Tools/validate_motion_polish_assets.py`.
+
+`Tools/install_motion_polish.py` is already applied and refuses existing outputs. It backs up the character and two weapon definitions, creates four root-locked copies/seven montages/a new graph, and preserves existing packages. [Authoring report](evidence/motion-polish/authoring-report.json). Its initial slot assignment attempt failed its assertion; that incomplete output was preserved, the Python array-struct copy-back was corrected, and the installer then succeeded. During duplication, Unreal emitted four lazy `FbxAnimSequenceImportData` dependency post-load warnings and resolved those dependencies; [authoring log](evidence/motion-polish/authoring.txt). Fresh persisted loading and final gameplay do not reproduce them.
+
+Remaining engine/environment warnings are `r.MotionVectorSimulation` render-thread access and analytics HTTP shutdown; the Game build repeats the installed `MetalShaderConverter/include/metal_irconverter_ext` missing directory warning. Analytics URLs/identifiers are excluded from committed evidence. No engine code was changed.
+
+---
+
 # Crouched reload acceptance — 2026-09-19
 
 Rifle and pistol reload now retain the real crouch torso, head and legs while the existing Epic reload montage drives the arms. `ABP_WardenCrouchReload` composes the protective arm layer; the old graph is preserved and source animation tracks are unchanged. This supersedes the earlier standing-only reload limitation. Weapon switching still requires standing outside low cover. The HUD's stale reload hint and overwritten cover status were corrected.

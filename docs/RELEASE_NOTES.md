@@ -1,3 +1,11 @@
+# Motion and weapon handling polish — 2026-09-20
+
+Connected existing licensed motion for rifle/pistol jump takeoff and additive landing recovery, empty-trigger animation, protected crouched weapon switching, and a second standing melee attack. Jump clips are project-owned root-locked copies; CharacterMovement owns travel. Empty trigger causes no shot/ammo/damage and yields immediately to reload. F alternates jab/cross on accepted presses with one guarded impact per attack.
+
+Weapon switching now works in free crouch and low cover. Existing equip arms compose over genuine crouch; switching from low-cover ADS lowers the character until the handling action finishes, then held ADS resumes. The previous graph and authoring backups remain recoverable. No source pack was acquired and no motion tracks were manually keyed. Static weapon models, dedicated cover/vault/knife gaps and the deferred horde/co-op scope remain as documented. Editor and Game builds succeed. Eight completed rendered PIE sessions pass 718 checks with zero failures; see TEST_MATRIX for actual evidence and limits.
+
+---
+
 # 0.3.1 — Reload while crouched
 
 R now reloads the rifle or pistol while crouched, including behind low cover. Existing reload clips drive only the arms over the real crouch pose. Reload stops blind fire and temporarily lowers low-cover ADS; held ADS resumes after completion. Ammo still transfers only on uninterrupted completion, and stance toggles are disabled during reload.

@@ -6,6 +6,7 @@
 #include "GunnerCoverComponent.h"
 #include "GunnerDodgeComponent.h"
 #include "GunnerAnimInstance.h"
+#include "Animation/AnimMontage.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputComponent.h"
@@ -73,9 +74,10 @@ void AGunnerCharacter::Tick(float DeltaSeconds)
     auto* Movement = GetCharacterMovement();
     const bool InCover = IsInCover();
     const bool Dodging = Dodge->IsDodging();
-    if (InCover) Cover->SetPeekDesired(bAimHeld && !Combat->IsMeleeing() && !Combat->IsReloading(), ShoulderSide);
+    if (InCover) Cover->SetPeekDesired(bAimHeld && !Combat->IsMeleeing() && !Combat->IsReloading() && Combat->GetActionState() != EGunnerCombatAction::Equipping, ShoulderSide);
     bSprinting = bSprintHeld && MotionSettings->bSprintReady && MoveAxis.Y > 0.4f && !bAimHeld
         && !bIsCrouched && !InCover && !Dodging && Movement->IsMovingOnGround();
+    if (JumpPresentation && (InCover || bIsCrouched || Dodging || bSprinting)) StopJumpPresentation();
     Combat->SetCombatBlocked(bSprinting || Dodging || !Controller || Movement->IsFalling());
     const bool LowCoverBlind = InCover && Cover->IsLowCover() && bIsCrouched && !bAimHeld;
     Combat->SetFireBlocked((InCover && !LowCoverBlind && (!bAimHeld || !Cover->CanPeek(ShoulderSide))) ||
@@ -116,9 +118,42 @@ void AGunnerCharacter::UnPossessed()
     bSprintHeld = bSprinting = bAimHeld = false;
     MoveAxis = FVector2D::ZeroVector;
     Combat->StopAllActions();
+    StopJumpPresentation();
     Dodge->CancelDodge();
     Cover->Detach();
     Super::UnPossessed();
+}
+
+void AGunnerCharacter::StopJumpPresentation()
+{
+    if (JumpPresentation && GetMesh()->GetAnimInstance())
+        GetMesh()->GetAnimInstance()->Montage_Stop(0.06f, JumpPresentation);
+    JumpPresentation = nullptr;
+}
+
+void AGunnerCharacter::PlayJumpPresentation(UAnimMontage* Montage)
+{
+    StopJumpPresentation();
+    if (Montage && GetMesh()->GetAnimInstance() && GetMesh()->GetAnimInstance()->Montage_Play(Montage, 1.f) > 0.f)
+        JumpPresentation = Montage;
+}
+
+void AGunnerCharacter::OnJumped_Implementation()
+{
+    Super::OnJumped_Implementation();
+    Combat->StopAllActions();
+    const auto* Weapon = Combat->GetWeaponData();
+    PlayJumpPresentation(Weapon ? Weapon->JumpStartMontage.Get() : nullptr);
+}
+
+void AGunnerCharacter::Landed(const FHitResult& Hit)
+{
+    const float ImpactSpeed = -GetVelocity().Z;
+    Super::Landed(Hit);
+    const auto* Weapon = Combat->GetWeaponData();
+    if (Controller && ImpactSpeed > 100.f && !IsInCover() && !bIsCrouched && !Dodge->IsDodging())
+        PlayJumpPresentation(Weapon ? Weapon->JumpLandMontage.Get() : nullptr);
+    else StopJumpPresentation();
 }
 
 void AGunnerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

@@ -344,10 +344,10 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
     UAnimSequence* RifleFall, UAnimSequence* PistolFall,
     UBlendSpace* CrouchLocomotion, UAnimSequence* Sprint,
     UBlendSpace* RifleAimOffset, UBlendSpace* PistolAimOffset, bool bIncludeBlindFire,
-    bool bIncludeCrouchReload)
+    bool bIncludeCrouchReload, bool bIncludeCrouchHandling)
 {
     using namespace GunnerAnimationBuilder;
-    const bool bIncludeProtectiveArms = bIncludeBlindFire || bIncludeCrouchReload;
+    const bool bIncludeProtectiveArms = bIncludeBlindFire || bIncludeCrouchReload || bIncludeCrouchHandling;
     if (bIncludeProtectiveArms && !CrouchLocomotion)
     {
         UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Protective weapon actions require authored crouch locomotion"));
@@ -473,7 +473,7 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
     {
         UpperBlend->NodePosX = 6700;
         FinalBody = B.Arms(UpperBlend, B.Use(SlotCache, 6800, 600), 7200, 0,
-            bIncludeCrouchReload ? FName(TEXT("ProtectiveArmsWeight")) : FName(TEXT("BlindFireAlpha")));
+            (bIncludeCrouchReload || bIncludeCrouchHandling) ? FName(TEXT("ProtectiveArmsWeight")) : FName(TEXT("BlindFireAlpha")));
         Root->NodePosX = 8100;
     }
     auto* FullBody = B.Slot(TEXT("FullBody"), FinalBody, bIncludeProtectiveArms ? 7700 : 1900, 0);
@@ -501,6 +501,8 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
     Defaults->Modify();
     Defaults->bBlindFirePoseReady = bIncludeBlindFire;
     Defaults->bCrouchReloadPoseReady = bIncludeCrouchReload;
+    Defaults->bCrouchEquipPoseReady = bIncludeCrouchHandling;
+    Defaults->bCrouchDryFirePoseReady = bIncludeCrouchHandling;
     Blueprint->Modify();
     return SaveNewAsset(Blueprint) ? Blueprint : nullptr;
 }
