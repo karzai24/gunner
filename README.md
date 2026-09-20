@@ -37,6 +37,8 @@ For a separate editor-hosted game window:
 
 Escape stops Play in Editor. Close the standalone window to exit. Controller mappings are authored; physical hardware verification is recorded separately in the test matrix.
 
+The Mac build uses Unreal's AppKit mouse-input path as a compatibility workaround for mouse look freezing after ADS. Restart Unreal after updating this setting; it is read only at startup. Mouse look should remain active while aiming and after releasing RMB. Physical-mouse confirmation of this workaround is still pending; see the latest test matrix entry.
+
 ADS tightens the over-the-shoulder camera and aiming pose. The rifle fires automatically while held; the pistol fires once per press. Range targets show damage and reset after depletion. The HUD shows ammunition, current action, hit feedback and blocked muzzle feedback. There is no enemy AI or player health loop.
 
 ## Current movement limits

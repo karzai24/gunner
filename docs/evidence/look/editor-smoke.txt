@@ -1,0 +1,211 @@
+Rendered UE 5.8.2 PIE on macOS. Two cycles; 196 synthetic input checks passed.
+Physical hardware verification remains separate. Analytics URL identifiers omitted.
+
+[2026.09.20-00.11.52:976][  0]LogConfig: Set CVar [[Slate.MacUseNewMouseControllerMovement:0]]
+[2026.09.20-00.12.03:786][  0]LogLayoutService: Warning: While key "UnrealEd_Layout_v1.5" was not found, and older version exists (key "UnrealEd_Layout_v1.6"). This means section "EditorLayouts" was created with a previous version of UE and is no longer compatible. The old key has been removed and updated with the new one.
+[2026.09.20-00.12.04:130][  0]LogConsoleManager: Warning: Console variable 'r.MotionVectorSimulation' used in the render thread. Rendering artifacts could happen. Use ECVF_RenderThreadSafe or don't use in render thread.
+[2026.09.20-00.12.04:182][  0]LogPython: GUNNER_LOOK_MAC_NEW_MOUSE_BACKEND value=0
+[2026.09.20-00.12.10:200][326]LogTemp: Display: GUNNER_LOOK_CHECK PASS setup: Motion pawn, camera and weapon data are ready
+[2026.09.20-00.12.10:200][326]LogTemp: Display: GUNNER_LOOK_BEGIN synthetic Enhanced Input only; physical macOS mouse capture requires separate verification
+[2026.09.20-00.12.10:550][347]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_free: Expected ADS transition completed
+[2026.09.20-00.12.10:550][347]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_free: Expected weapon active
+[2026.09.20-00.12.10:800][362]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_free: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.10:800][362]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_free: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.10:800][362]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_free: Rendered camera rotation follows the controller
+[2026.09.20-00.12.10:800][362]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_free: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.11:715][384]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads: Expected ADS transition completed
+[2026.09.20-00.12.11:715][384]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads: Expected weapon active
+[2026.09.20-00.12.11:965][399]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.11:965][399]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.11:965][399]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads: Rendered camera rotation follows the controller
+[2026.09.20-00.12.11:965][399]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.12:527][421]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released: Expected ADS transition completed
+[2026.09.20-00.12.12:527][421]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released: Expected weapon active
+[2026.09.20-00.12.12:777][436]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.12:777][436]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.12:777][436]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released: Rendered camera rotation follows the controller
+[2026.09.20-00.12.12:777][436]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.13:330][458]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads_repeat: Expected ADS transition completed
+[2026.09.20-00.12.13:330][458]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads_repeat: Expected weapon active
+[2026.09.20-00.12.13:580][473]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads_repeat: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.13:580][473]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads_repeat: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.13:580][473]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads_repeat: Rendered camera rotation follows the controller
+[2026.09.20-00.12.13:580][473]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads_repeat: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.14:145][495]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released_repeat: Expected ADS transition completed
+[2026.09.20-00.12.14:146][495]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released_repeat: Expected weapon active
+[2026.09.20-00.12.14:396][510]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released_repeat: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.14:396][510]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released_repeat: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.14:396][510]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released_repeat: Rendered camera rotation follows the controller
+[2026.09.20-00.12.14:396][510]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released_repeat: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.16:244][610]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_free: Expected ADS transition completed
+[2026.09.20-00.12.16:244][610]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_free: Expected weapon active
+[2026.09.20-00.12.16:494][625]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_free: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.16:494][625]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_free: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.16:494][625]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_free: Rendered camera rotation follows the controller
+[2026.09.20-00.12.16:494][625]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_free: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.17:042][647]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_ads: Expected ADS transition completed
+[2026.09.20-00.12.17:042][647]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_ads: Expected weapon active
+[2026.09.20-00.12.17:292][662]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_ads: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.17:292][662]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_ads: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.17:292][662]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_ads: Rendered camera rotation follows the controller
+[2026.09.20-00.12.17:292][662]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_ads: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.17:857][684]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_released: Expected ADS transition completed
+[2026.09.20-00.12.17:857][684]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_released: Expected weapon active
+[2026.09.20-00.12.18:107][699]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_released: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.18:107][699]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_released: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.18:107][699]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_released: Rendered camera rotation follows the controller
+[2026.09.20-00.12.18:107][699]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_released: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.18:655][721]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Expected ADS transition completed
+[2026.09.20-00.12.18:655][721]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Expected weapon active
+[2026.09.20-00.12.18:655][721]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Crouched look fixture remains crouched
+[2026.09.20-00.12.18:905][736]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.18:905][736]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.18:905][736]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Rendered camera rotation follows the controller
+[2026.09.20-00.12.18:905][736]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.19:454][758]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Expected ADS transition completed
+[2026.09.20-00.12.19:454][758]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Expected weapon active
+[2026.09.20-00.12.19:454][758]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Crouched look fixture remains crouched
+[2026.09.20-00.12.19:704][773]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.19:704][773]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.19:704][773]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Rendered camera rotation follows the controller
+[2026.09.20-00.12.19:704][773]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.20:269][795]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Expected ADS transition completed
+[2026.09.20-00.12.20:269][795]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Expected weapon active
+[2026.09.20-00.12.20:269][795]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Crouched look fixture remains crouched
+[2026.09.20-00.12.20:519][810]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.20:519][810]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.20:519][810]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Rendered camera rotation follows the controller
+[2026.09.20-00.12.20:519][810]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.21:226][840]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Expected ADS transition completed
+[2026.09.20-00.12.21:226][840]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Expected weapon active
+[2026.09.20-00.12.21:226][840]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Cover look fixture remains attached
+[2026.09.20-00.12.21:476][855]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.21:476][855]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.21:476][855]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Rendered camera rotation follows the controller
+[2026.09.20-00.12.21:476][855]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.22:024][877]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Expected ADS transition completed
+[2026.09.20-00.12.22:024][877]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Expected weapon active
+[2026.09.20-00.12.22:024][877]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Cover look fixture remains attached
+[2026.09.20-00.12.22:274][892]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.22:274][892]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.22:274][892]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Rendered camera rotation follows the controller
+[2026.09.20-00.12.22:274][892]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.22:825][914]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Expected ADS transition completed
+[2026.09.20-00.12.22:825][914]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Expected weapon active
+[2026.09.20-00.12.22:825][914]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Cover look fixture remains attached
+[2026.09.20-00.12.23:075][929]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.23:075][929]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.23:075][929]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Rendered camera rotation follows the controller
+[2026.09.20-00.12.23:075][929]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.23:631][951]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Expected ADS transition completed
+[2026.09.20-00.12.23:631][951]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Expected weapon active
+[2026.09.20-00.12.23:631][951]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Cover detach completed
+[2026.09.20-00.12.23:881][966]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.23:881][966]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.23:881][966]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Rendered camera rotation follows the controller
+[2026.09.20-00.12.23:881][966]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.24:086][967]LogTemp: Display: GUNNER_LOOK_COMPLETE failures=0 input=synthetic hardware_mouse_verified=false
+[2026.09.20-00.12.24:087][967]LogPython: GUNNER_LOOK_PIE_CYCLE_FINISHED 1
+[2026.09.20-00.12.31:101][384]LogTemp: Display: GUNNER_LOOK_CHECK PASS setup: Motion pawn, camera and weapon data are ready
+[2026.09.20-00.12.31:101][384]LogTemp: Display: GUNNER_LOOK_BEGIN synthetic Enhanced Input only; physical macOS mouse capture requires separate verification
+[2026.09.20-00.12.31:451][405]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_free: Expected ADS transition completed
+[2026.09.20-00.12.31:451][405]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_free: Expected weapon active
+[2026.09.20-00.12.31:701][420]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_free: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.31:701][420]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_free: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.31:701][420]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_free: Rendered camera rotation follows the controller
+[2026.09.20-00.12.31:701][420]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_free: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.32:251][443]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads: Expected ADS transition completed
+[2026.09.20-00.12.32:251][443]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads: Expected weapon active
+[2026.09.20-00.12.32:499][457]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.32:499][457]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.32:499][457]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads: Rendered camera rotation follows the controller
+[2026.09.20-00.12.32:499][457]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.33:060][479]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released: Expected ADS transition completed
+[2026.09.20-00.12.33:060][479]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released: Expected weapon active
+[2026.09.20-00.12.33:310][494]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.33:310][494]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.33:310][494]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released: Rendered camera rotation follows the controller
+[2026.09.20-00.12.33:310][494]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.33:861][516]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads_repeat: Expected ADS transition completed
+[2026.09.20-00.12.33:861][516]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads_repeat: Expected weapon active
+[2026.09.20-00.12.34:111][531]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads_repeat: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.34:111][531]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads_repeat: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.34:111][531]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads_repeat: Rendered camera rotation follows the controller
+[2026.09.20-00.12.34:111][531]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_ads_repeat: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.34:679][553]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released_repeat: Expected ADS transition completed
+[2026.09.20-00.12.34:679][553]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released_repeat: Expected weapon active
+[2026.09.20-00.12.34:929][568]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released_repeat: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.34:929][568]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released_repeat: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.34:929][568]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released_repeat: Rendered camera rotation follows the controller
+[2026.09.20-00.12.34:929][568]LogTemp: Display: GUNNER_LOOK_CHECK PASS rifle_released_repeat: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.36:778][668]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_free: Expected ADS transition completed
+[2026.09.20-00.12.36:778][668]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_free: Expected weapon active
+[2026.09.20-00.12.37:028][683]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_free: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.37:028][683]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_free: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.37:028][683]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_free: Rendered camera rotation follows the controller
+[2026.09.20-00.12.37:028][683]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_free: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.37:575][705]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_ads: Expected ADS transition completed
+[2026.09.20-00.12.37:575][705]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_ads: Expected weapon active
+[2026.09.20-00.12.37:825][720]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_ads: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.37:825][720]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_ads: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.37:825][720]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_ads: Rendered camera rotation follows the controller
+[2026.09.20-00.12.37:825][720]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_ads: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.38:390][742]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_released: Expected ADS transition completed
+[2026.09.20-00.12.38:390][742]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_released: Expected weapon active
+[2026.09.20-00.12.38:640][757]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_released: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.38:640][757]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_released: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.38:640][757]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_released: Rendered camera rotation follows the controller
+[2026.09.20-00.12.38:640][757]LogTemp: Display: GUNNER_LOOK_CHECK PASS pistol_released: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.39:188][779]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Expected ADS transition completed
+[2026.09.20-00.12.39:188][779]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Expected weapon active
+[2026.09.20-00.12.39:188][779]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Crouched look fixture remains crouched
+[2026.09.20-00.12.39:438][794]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.39:438][794]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.39:438][794]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Rendered camera rotation follows the controller
+[2026.09.20-00.12.39:438][794]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_free: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.39:986][816]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Expected ADS transition completed
+[2026.09.20-00.12.39:986][816]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Expected weapon active
+[2026.09.20-00.12.39:986][816]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Crouched look fixture remains crouched
+[2026.09.20-00.12.40:236][831]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.40:236][831]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.40:236][831]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Rendered camera rotation follows the controller
+[2026.09.20-00.12.40:236][831]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_ads: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.40:803][853]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Expected ADS transition completed
+[2026.09.20-00.12.40:803][853]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Expected weapon active
+[2026.09.20-00.12.40:803][853]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Crouched look fixture remains crouched
+[2026.09.20-00.12.41:053][868]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.41:053][868]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.41:053][868]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Rendered camera rotation follows the controller
+[2026.09.20-00.12.41:053][868]LogTemp: Display: GUNNER_LOOK_CHECK PASS crouched_released: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.41:753][899]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Expected ADS transition completed
+[2026.09.20-00.12.41:753][899]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Expected weapon active
+[2026.09.20-00.12.41:753][899]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Cover look fixture remains attached
+[2026.09.20-00.12.42:003][914]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.42:003][914]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.42:003][914]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Rendered camera rotation follows the controller
+[2026.09.20-00.12.42:003][914]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_free: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.42:551][936]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Expected ADS transition completed
+[2026.09.20-00.12.42:551][936]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Expected weapon active
+[2026.09.20-00.12.42:551][936]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Cover look fixture remains attached
+[2026.09.20-00.12.42:801][951]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.42:801][951]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.42:801][951]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Rendered camera rotation follows the controller
+[2026.09.20-00.12.42:801][951]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_ads: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.43:353][973]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Expected ADS transition completed
+[2026.09.20-00.12.43:353][973]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Expected weapon active
+[2026.09.20-00.12.43:353][973]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Cover look fixture remains attached
+[2026.09.20-00.12.43:603][988]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.43:603][988]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.43:603][988]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Rendered camera rotation follows the controller
+[2026.09.20-00.12.43:603][988]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_released: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.44:159][ 10]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Expected ADS transition completed
+[2026.09.20-00.12.44:159][ 10]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Expected weapon active
+[2026.09.20-00.12.44:159][ 10]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Cover detach completed
+[2026.09.20-00.12.44:409][ 25]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Mouse X still changes controller yaw in the requested direction
+[2026.09.20-00.12.44:409][ 25]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Mouse Y still changes controller pitch in the requested direction
+[2026.09.20-00.12.44:409][ 25]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Rendered camera rotation follows the controller
+[2026.09.20-00.12.44:409][ 25]LogTemp: Display: GUNNER_LOOK_CHECK PASS cover_detached: Look remains enabled and game cursor remains hidden
+[2026.09.20-00.12.44:616][ 26]LogTemp: Display: GUNNER_LOOK_COMPLETE failures=0 input=synthetic hardware_mouse_verified=false
+[2026.09.20-00.12.44:617][ 26]LogPython: GUNNER_LOOK_PIE_CYCLE_FINISHED 2
+[2026.09.20-00.12.45:618][ 85]LogPython: GUNNER_LOOK_PIE_COMPLETE cycles=2
+[2026.09.20-00.12.47:901][ 86]LogHttp: Warning: [FHttpManager::Shutdown] Unbinding delegates for 1 outstanding Http Requests:

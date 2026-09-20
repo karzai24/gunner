@@ -1,3 +1,31 @@
+# ADS mouse-look compatibility — 2026-09-19
+
+The user reported physical mouse look remaining stuck after releasing RMB on macOS. No gameplay ADS branch suppresses look input. The project now selects Unreal's AppKit path with `Slate.MacUseNewMouseControllerMovement=0` in `Config/Mac/MacEngine.ini`; the default captured-input path uses the Apple mouse-controller bridge. Installed engine source supports this configuration and its startup timing. This is a candidate compatibility fix, not a hardware failure proven by synthetic tests. **Physical-mouse confirmation remains pending.**
+
+| Check | Actual result / evidence |
+|---|---|
+| Editor and Game builds | Both succeeded, no project compiler diagnostics. `evidence/look/build-editor.txt`, `build-game.txt`. |
+| Mac startup configuration | Native startup log sets the CVar to 0; the Python runtime getter also reports 0. `evidence/look/editor-smoke.txt`. |
+| Repeated ADS look | Two rendered PIE sessions, 98 checks each: **196 passes, zero failures**. Rifle aim/release/repeat, pistol aim/release, crouched aim/release, low-cover aim/release and detach. |
+| Controller and view | Signed synthetic MouseX/MouseY inputs rotate yaw/pitch in the expected directions, the live camera follows control rotation, look input remains enabled and the cursor remains hidden. |
+| Visual inspection | Untouched [rifle ADS](evidence/look/look_rifle_ads.png), [released ADS](evidence/look/look_rifle_released.png) and [released low-cover ADS](evidence/look/look_cover_released.png) frames inspected. Normal camera distance and protective crouch return after release. |
+| Hardware verification | Normal editor restarted with CVar 0 and no smoke flags; the user was asked to test their physical mouse. Awaiting confirmation. |
+
+Reproduce with one Unreal process at a time:
+
+```bash
+./Tools/build_macos.sh GunnerEditor
+./Tools/build_macos.sh Gunner
+./Tools/open_editor_macos.sh -GunnerLookSmoke -nosound \
+  "-ExecCmds=py $(pwd)/Tools/validate_look_editor.py" "-LogCmds=LogPython Log" -stdout
+```
+
+Require both native `GUNNER_LOOK_COMPLETE failures=0` summaries and `GUNNER_LOOK_PIE_COMPLETE cycles=2`; cycle completion alone does not certify passing checks. The driver temporarily disables background CPU throttling in memory, restores it on exit, and limits this session to 60 FPS. Keep physical mouse input out of the test viewport. `PlayerController::InputKey` injects input after the platform layer; these results do **not** exercise AppKit/GCMouse hardware delivery, focus loss or device reconnect. Manual acceptance requires free look before/during/after repeated RMB holds with the actual mouse, including after stopping and restarting Play.
+
+No project compile, Blueprint, Python, asset-load or gameplay errors appeared in the accepted run. Engine/environment warnings: editor layout-version reconciliation, `r.MotionVectorSimulation` render-thread access and one outstanding analytics HTTP request at shutdown. The Game build repeats the installed `MetalShaderConverter/include/metal_irconverter_ext` missing-directory warning. Audio was disabled; cooked builds, Windows and physical controllers were not tested. Prior motion acceptance below is retained; that full probe was not repeated for this platform-input setting.
+
+---
+
 # Movement and weapon sandbox validation — 2026-09-19
 
 Environment: UE 5.8.2, macOS 26.6.2 Apple Silicon, 16 GB physical memory, Xcode 26.6 / Mac SDK 26.5, Metal renderer. This accepts the bounded single-player movement range described below, not the full M1/M2/M3 gates or a finished cover shooter.

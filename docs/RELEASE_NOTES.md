@@ -1,3 +1,9 @@
+# 0.2.1 — Mac mouse-input compatibility
+
+Select Unreal's AppKit mouse-input path on macOS to address the reported loss of free look after releasing ADS. The change takes effect after restarting Unreal. Physical-mouse confirmation remains pending; automated checks cannot reproduce native hardware delivery.
+
+Editor and Game targets build. Two rendered PIE sessions pass 98 look checks each across rifle/pistol aim and release, crouch, low cover and detach. The checks verify controller yaw/pitch, actual camera rotation and look-enabled state using synthetic Enhanced Input. Startup logs confirm the intended Mac backend setting is active. See TEST_MATRIX for evidence and limitations.
+
 # 0.2.0 — Movement and weapon sandbox
 
 Added a separate default movement range with imported rifle/pistol meshes, armed directional locomotion, shoulder ADS and shoulder swapping, firing/reload/equip actions, real retargeted crouch and sprint, a guarded dodge roll, and a standing melee jab. Static low/high cover supports attachment, movement along walls, low-cover pop-up aim, and checked physical exposure/return at high-cover edges. Targets and an owning-player HUD make weapon behavior visible.
