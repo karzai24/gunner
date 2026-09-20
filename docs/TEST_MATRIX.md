@@ -1,3 +1,37 @@
+# Crouched low-cover blind fire — 2026-09-19
+
+Implemented LMB blind fire without ADS while attached to low static cover, using the real crouch pose, arm-only native IK and the existing Epic additive fire clips. RMB retains standing pop-up ADS. The old graph remains available; no source motion tracks were modified.
+
+| Gate | Actual result / evidence |
+|---|---|
+| Editor and Game builds | Both succeeded, no project diagnostics. `evidence/blind-fire/build-editor.txt`, `build-game.txt`. Game build is not a cooked package test. |
+| Existing motion/combat regression | Two further rendered PIE sessions: **184 passes, zero failures**. Standing/crouched ADS, reload/equip, cover exposure/return, shot obstruction, melee, roll and possession lifecycle remain passing. `evidence/blind-fire/motion-regression.txt`. |
+| Blind-fire live checks | Two rendered PIE sessions, **34 checks each / 68 passes / zero failures**. `evidence/blind-fire/editor-smoke.txt`. |
+| Evaluated protection and clearance | Against measured 115 cm cover, head 88.05–88.36 cm; rifle hand 124.83 cm / muzzle 135.10 cm, pistol hand 125.05 cm / muzzle 134.33 cm. Actual crouch/capsule remains 62 cm; upright torso overlay stays below 0.05 weight. |
+| Weapon contact | Actual support-hand target errors: rifle 4.55 cm during recoil, pistol 1.68 cm. Both pass the <=5 cm firing guard without bone stretching. This is provisional contact, not production-quality hand polish. |
+| Rifle and pistol | Rifle repeats while held; pistol fires once per press; quick clicks queue one raised shot; actual target beyond the wall takes damage. Release stops repeat fire and lowers arms. |
+| Lifecycle and geometry | No ammo spent while raising or looking away. Movement blocked during blind fire. Detach, unpossess and switching to ADS cancel pending shots. Actual muzzle trace cannot damage through an intervening wall. |
+| Existing ADS | RMB still exposes the standing low-cover pose, fires normally and restores crouch on release. |
+| Asset persistence | Fresh process confirms `ABP_WardenBlindFire` is assigned and ready. Character assignment repaired after initial compile/save order discarded it; original packages backed up. `asset-assignment.txt`, authoring and repair JSON reports. |
+| Visual inspection | Untouched [rifle blind fire](evidence/blind-fire/blind_rifle_fire.png), [pistol blind fire](evidence/blind-fire/blind_pistol_fire.png) and [release](evidence/blind-fire/blind_rifle_released.png) inspected from the real gameplay camera. Both hands/weapon raise while torso/head remain hidden; release returns to the acquired protective crouch. |
+
+Reproduce with one Unreal process at a time:
+
+```bash
+./Tools/build_macos.sh GunnerEditor
+./Tools/build_macos.sh Gunner
+./Tools/open_editor_macos.sh -GunnerBlindFireSmoke -nosound \
+  "-ExecCmds=py $(pwd)/Tools/validate_blind_fire_editor.py" "-LogCmds=LogPython Log" -stdout
+```
+
+Require both `GUNNER_BLIND_COMPLETE failures=0` native summaries and `GUNNER_BLIND_PIE_COMPLETE cycles=2`; driver completion alone is insufficient. The test adds transient broad targets and a blocking wall, injects ordinary gameplay input, measures evaluated hands/head/muzzle and target damage, and restores background throttling before exit. It does not certify physical controller hardware or native macOS mouse delivery.
+
+The accepted blind-fire run contains no project compile, Blueprint, Python, asset-load or gameplay errors. Its engine warnings are the existing `r.MotionVectorSimulation` render-thread access and an outstanding analytics HTTP request during shutdown. The Game build repeats the installed `MetalShaderConverter/include/metal_irconverter_ext` missing-directory warning. Initial failed runs are excluded: the first loaded the previous graph because the changed component assignment was not persisted; the next found 11.42 cm rifle support-hand error. The installer now compiles before setting/force-saving the component assignment, and the rifle grip target moved rearward/closer without relaxing the reach gate. The broader motion run also found a test timing issue: screenshot capture delayed the high-cover return completion flag until 1.024–1.040 seconds, with the first cycle already within 1.9 cm of its anchor at 1.007 seconds. That assertion now waits for the same state/position conditions up to 2.6 seconds, immediately fails a detach, and logs actual completion. The runtime return logic and its 2.5-second failure timeout are unchanged.
+
+Scope limits: low static cover with a reachable flat top; stationary procedural arms, 4-degree shot spread, no high-cover blind fire or dedicated source cover clips. This is not a new damage/invulnerability system; protection is the visible crouch/geometry already present in the sandbox. Audio, cooked builds, Windows, multiplayer and performance budgets remain untested. The explicit inventory of useful available-but-unused clips is in [ANIMATION_BACKLOG](ANIMATION_BACKLOG.md).
+
+---
+
 # ADS mouse-look compatibility — 2026-09-19
 
 The user reported physical mouse look remaining stuck after releasing RMB on macOS. No gameplay ADS branch suppresses look input. The project now selects Unreal's AppKit path with `Slate.MacUseNewMouseControllerMovement=0` in `Config/Mac/MacEngine.ini`; the default captured-input path uses the Apple mouse-controller bridge. Installed engine source supports this configuration and its startup timing. This is a candidate compatibility fix, not a hardware failure proven by synthetic tests. **Physical-mouse confirmation remains pending.**

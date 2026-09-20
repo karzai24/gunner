@@ -24,6 +24,8 @@ public:
     UFUNCTION(BlueprintPure) bool CanPeek(float Side) const;
     FVector ConstrainMovement(const FVector& DesiredDirection) const;
     FVector GetNormal() const { return WallNormal; }
+    /** Trace the real static barricade top; never assume the fixture's authored height. */
+    bool GetLowCoverTop(float& OutWorldZ) const;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Cover", meta=(ClampMin="1")) float QueryReach = 135.f;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Cover", meta=(ClampMin="36")) float AttachedOffset = 52.f;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Cover") float MoveSpeed = 150.f;

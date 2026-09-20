@@ -34,7 +34,7 @@ void AGunnerHUD::DrawHUD()
 
     const float CX = W * 0.5f;
     const float CY = H * 0.5f;
-    const float Gap = Combat->IsAiming() ? 4.f : 9.f;
+    const float Gap = Combat->IsBlindFiring() ? 18.f : (Combat->IsAiming() ? 4.f : 9.f);
     const bool bObstructed = Combat->WasLastShotObstructed() && GetWorld()->GetTimeSeconds() - Combat->GetLastFireTime() < 0.3f;
     const FLinearColor ReticleColor = bObstructed ? FLinearColor(1.f, 0.6f, 0.2f) : Ink;
     if (!Combat->IsCombatBlocked() && !Combat->IsFireBlocked())
@@ -73,14 +73,17 @@ void AGunnerHUD::DrawHUD()
         default: break;
     }
     if (Combat->IsCombatBlocked()) Status = TEXT("WEAPON LOWERED");
+    else if (Combat->IsBlindFiring()) Status = TEXT("BLIND FIRE");
     else if (Combat->IsFireBlocked() && Combat->GetActionState() == EGunnerCombatAction::Idle)
     {
         const auto* Warden = Cast<AGunnerCharacter>(Pawn);
         if (Warden && Warden->IsInCover())
-            Status = Warden->GetCover()->IsLowCover() ? TEXT("LOW COVER / HOLD ADS TO EXPOSE") : TEXT("HIGH COVER / HOLD ADS AT EDGE");
+            Status = Warden->GetCover()->IsLowCover() ? TEXT("LMB BLIND FIRE / RMB EXPOSE") : TEXT("HIGH COVER / HOLD ADS AT EDGE");
         else Status = TEXT("ADS TO FIRE / STAND TO RELOAD");
     }
     else if (bObstructed) Status = TEXT("MUZZLE BLOCKED");
+    else if (const auto* Warden = Cast<AGunnerCharacter>(Pawn); Warden && Warden->GetCover()->IsLowCover())
+        Status = TEXT("LMB BLIND FIRE / RMB EXPOSE");
     DrawText(Status, Muted, X + 14.f * Scale, Y + 71.f * Scale, Font, 0.85f * Scale);
     DrawText(TEXT("GUNNER  /  MOVEMENT RANGE"), Ink, Margin, Margin, Font, Scale);
     DrawText(TEXT("WASD Move   Mouse Aim   RMB Focus   LMB Fire   R Reload   1/2 Weapon   F Melee"), Muted,

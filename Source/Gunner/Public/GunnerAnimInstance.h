@@ -54,4 +54,26 @@ public:
     /** Preserve the full authored sprint/protective crouch; crouched ADS deliberately exposes the armed torso. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Weapon")
     float UpperBodyWeight = 1.f;
+
+    /** Enabled only on the validated graph with the protective arm IK branch. */
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Blind Fire")
+    bool bBlindFirePoseReady = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Blind Fire")
+    bool bBlindFiring = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Blind Fire")
+    bool bBlindFireTargetsValid = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Blind Fire")
+    float BlindFireAlpha = 0.f;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Blind Fire")
+    FVector BlindRightHandLocation = FVector::ZeroVector;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Blind Fire")
+    FVector BlindLeftHandLocation = FVector::ZeroVector;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Blind Fire")
+    FVector BlindRightElbowLocation = FVector::ZeroVector;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Blind Fire")
+    FVector BlindLeftElbowLocation = FVector::ZeroVector;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Blind Fire")
+    FRotator BlindRightHandRotation = FRotator::ZeroRotator;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Blind Fire")
+    FRotator BlindLeftHandRotation = FRotator::ZeroRotator;
 };

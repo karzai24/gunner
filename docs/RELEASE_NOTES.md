@@ -1,3 +1,9 @@
+# 0.3.0 — Crouched low-cover blind fire
+
+LMB without ADS now raises the rifle or pistol above low cover while keeping the character crouched and the head hidden. The first shot waits for the actual evaluated weapon pose and clear path; rifle fire repeats while held, pistol fire stays one shot per press, and quick clicks queue one shot. RMB retains standing pop-up ADS. Blind fire uses a wider spread and the real muzzle; intervening walls still block damage.
+
+The new animation graph combines the licensed crouch/weapon clips with native arm IK and preserves the previous graph. No replacement animation tracks were manually keyed and no new pack was purchased. Useful omitted animations—jump phases, dry fire, melee variants and future life-state motions—are now itemized in ANIMATION_BACKLOG instead of being conflated with missing sources. Editor and Game builds succeed; two blind-fire PIE sessions pass 68 checks and two broader motion sessions pass 184 checks. See TEST_MATRIX for rendered gameplay and visual evidence, including initial issues found and corrected.
+
 # 0.2.1 — Mac mouse-input compatibility
 
 Select Unreal's AppKit mouse-input path on macOS to address the reported loss of free look after releasing ADS. The change takes effect after restarting Unreal. Physical-mouse confirmation remains pending; automated checks cannot reproduce native hardware delivery.

@@ -156,6 +156,20 @@ bool UGunnerCoverComponent::CanPeek(float Side) const
     return FindPeekDestination(Character->GetActorLocation(), Side, Destination, Direction);
 }
 
+bool UGunnerCoverComponent::GetLowCoverTop(float& OutWorldZ) const
+{
+    if (!IsLowCover() || !Character || !Wall.IsValid()) return false;
+    const float Feet = Character->GetActorLocation().Z - Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+    FVector OverWall = Character->GetActorLocation() - WallNormal * (AttachedOffset + 8.f);
+    OverWall.Z = Feet + 155.f;
+    FHitResult Top;
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(GunnerCoverTop), false, Character);
+    if (!GetWorld()->LineTraceSingleByChannel(Top, OverWall, FVector(OverWall.X, OverWall.Y, Feet + 85.f),
+        ECC_WorldStatic, Query) || Top.Component != Wall || Top.ImpactNormal.Z < 0.9f) return false;
+    OutWorldZ = Top.ImpactPoint.Z;
+    return OutWorldZ - Feet >= 90.f && OutWorldZ - Feet <= 145.f;
+}
+
 bool UGunnerCoverComponent::FindOpenEdge(const FVector& Anchor, float Side, FVector& OutDirection) const
 {
     if (!Character || !Character->GetController() || !Wall.IsValid()) return false;

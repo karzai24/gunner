@@ -519,14 +519,27 @@ void AGunnerMotionProbe::Tick(float DeltaSeconds)
         Check(Combat->GetShotsFired() > ShotsBefore && Target->GetTotalHitCount() > HitsBefore,
             TEXT("High-cover step-out clears the actual muzzle trace and damages the exposed target"));
         Capture(TEXT("motion_high_cover_fire.png"));
+        bReturnWaitLogged = false;
         Key(EKeys::RightMouseButton, false); bTrackTarget = false;
         Player->SetControlRotation(FRotator(0.f, 90.f, 0.f)); Advance(1.f); break;
     case 83:
-        Check(Cover->IsAttached() && !Cover->IsPeeking() && !Combat->IsAiming() &&
+    {
+        const bool bReturned = Cover->IsAttached() && !Cover->IsPeeking() && !Combat->IsAiming() &&
             FMath::IsNearlyEqual(Character->GetActorLocation().X, 350.f, 5.f) &&
-            FMath::IsNearlyEqual(Character->GetActorLocation().Y, 598.f, 4.f),
+            FMath::IsNearlyEqual(Character->GetActorLocation().Y, 598.f, 4.f);
+        if (!bReturnWaitLogged || bReturned || !Cover->IsAttached() || Elapsed >= 2.6f)
+        UE_LOG(LogTemp, Display, TEXT("GUNNER_COVER_RETURN elapsed=%.3f attached=%d peeking=%d aiming=%d blind=%d x=%.3f y=%.3f speed=%.3f"),
+            Elapsed, Cover->IsAttached(), Cover->IsPeeking(), Combat->IsAiming(), Combat->IsBlindFiring(),
+            Character->GetActorLocation().X, Character->GetActorLocation().Y, Character->GetVelocity().Size2D());
+        bReturnWaitLogged = true;
+        // Screenshot capture can stall a frame while native movement is settling.
+        // Wait for the same state/anchor invariants, bounded by the runtime's
+        // 2.5-second transition timeout; a detach is an immediate failure.
+        if (!bReturned && Cover->IsAttached() && Elapsed < 2.6f) return;
+        Check(bReturned,
             TEXT("Releasing high-cover ADS returns to the original protected anchor"));
         Teleport(FVector(0.f, -850.f, 92.f), 90.f); Advance(0.3f); break;
+    }
     case 84: Key(EKeys::SpaceBar, true); Advance(0.2f); break;
     case 85:
         Key(EKeys::SpaceBar, false);

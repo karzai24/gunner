@@ -22,3 +22,5 @@ The crouch idle/forward clips retain their protective torso outside ADS by fadin
 Animation assets are grouped under `Content/Gunner/Animation/Source`, `Animation/Rigs`, `Animation/Retargeted/Manny`, and the composed `Content/Gunner/Motion/Animation`. Original Epic character and weapon paths are retained under `Content/Characters` and `Content/Weapons`. See `ASSET_PROVENANCE.md` for creators, licenses, source hashes and modifications.
 
 No old `.tscn` or `.gd` path is a runtime dependency. Stable IDs are content contracts, not an implemented character selection or save system.
+
+Low-cover blind fire composes `ABP_WardenBlindFire`, native arm IK and sampled left-hand grips in the existing two weapon Data Assets. The prior animation graph is retained. Rifle/pistol use the actual raised muzzle while preserving protective crouch; no new character art or third-party blind-fire clip is imported.

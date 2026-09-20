@@ -77,25 +77,34 @@ void AGunnerCharacter::Tick(float DeltaSeconds)
     bSprinting = bSprintHeld && MotionSettings->bSprintReady && MoveAxis.Y > 0.4f && !bAimHeld
         && !bIsCrouched && !InCover && !Dodging && Movement->IsMovingOnGround();
     Combat->SetCombatBlocked(bSprinting || Dodging || !Controller || Movement->IsFalling());
-    Combat->SetFireBlocked((InCover && (!bAimHeld || !Cover->CanPeek(ShoulderSide))) || (bIsCrouched && !bAimHeld));
+    const bool LowCoverBlind = InCover && Cover->IsLowCover() && bIsCrouched && !bAimHeld;
+    Combat->SetFireBlocked((InCover && !LowCoverBlind && (!bAimHeld || !Cover->CanPeek(ShoulderSide))) ||
+        (bIsCrouched && !bAimHeld && !LowCoverBlind));
     if (bAimHeld && !bSprinting && (!InCover || Cover->CanPeek(ShoulderSide))) Combat->StartAim();
     const bool Aiming = Combat->IsAiming();
+    const bool BlindFiring = Combat->IsBlindFiring();
     if (InCover && Cover->IsLowCover())
     {
         if (Aiming) UnCrouch(); else Crouch();
     }
     Movement->MaxWalkSpeed = bSprinting ? MotionSettings->SprintSpeed :
         (InCover ? Cover->MoveSpeed : (Aiming ? MotionSettings->AimSpeed : MotionSettings->WalkSpeed));
-    Movement->bOrientRotationToMovement = bSprinting || (bIsCrouched && !Aiming && !MotionSettings->bDirectionalCrouchReady);
+    if (BlindFiring)
+    {
+        ConsumeMovementInputVector();
+        Movement->StopMovementImmediately();
+    }
+    Movement->bOrientRotationToMovement = bSprinting || (bIsCrouched && !Aiming && !BlindFiring && !MotionSettings->bDirectionalCrouchReady);
     if (Controller && !Dodging && !Movement->bOrientRotationToMovement)
     {
-        const FRotator Desired = InCover && !Aiming ? Cover->GetNormal().Rotation() : FRotator(0, Controller->GetControlRotation().Yaw, 0);
-        SetActorRotation(FMath::RInterpTo(GetActorRotation(), FRotator(0, Desired.Yaw, 0), DeltaSeconds, Aiming ? 18.f : 10.f));
+        const FRotator Desired = InCover && !Aiming && !BlindFiring ? Cover->GetNormal().Rotation() : FRotator(0, Controller->GetControlRotation().Yaw, 0);
+        SetActorRotation(FMath::RInterpTo(GetActorRotation(), FRotator(0, Desired.Yaw, 0), DeltaSeconds, (Aiming || BlindFiring) ? 18.f : 10.f));
     }
     CameraBoom->TargetArmLength = FMath::FInterpTo(CameraBoom->TargetArmLength,
         Aiming ? MotionSettings->AimArmLength : ((bSprinting || Dodging) ? 350.f : 320.f), DeltaSeconds, 10.f);
     CameraBoom->SocketOffset.Y = FMath::FInterpTo(CameraBoom->SocketOffset.Y, 50.f * ShoulderSide, DeltaSeconds, 10.f);
-    CameraBoom->TargetOffset.Z = FMath::FInterpTo(CameraBoom->TargetOffset.Z, Dodging ? 5.f : (bIsCrouched ? 45.f : 65.f), DeltaSeconds, 10.f);
+    CameraBoom->TargetOffset.Z = FMath::FInterpTo(CameraBoom->TargetOffset.Z,
+        Dodging ? 5.f : (BlindFiring ? 90.f : (bIsCrouched ? 45.f : 65.f)), DeltaSeconds, 10.f);
     FollowCamera->FieldOfView = FMath::FInterpTo(FollowCamera->FieldOfView,
         Aiming ? MotionSettings->AimFOV : (bSprinting ? 82.f : 75.f), DeltaSeconds, 10.f);
     if (auto* Anim = Cast<UGunnerAnimInstance>(GetMesh()->GetAnimInstance()))
@@ -135,7 +144,7 @@ void AGunnerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
     if (InputConfig->Fire)
     {
         Input->BindAction(InputConfig->Fire, ETriggerEvent::Started, Combat.Get(), &UGunnerCombatComponent::StartFire);
-        Input->BindAction(InputConfig->Fire, ETriggerEvent::Completed, Combat.Get(), &UGunnerCombatComponent::StopFire);
+        Input->BindAction(InputConfig->Fire, ETriggerEvent::Completed, Combat.Get(), &UGunnerCombatComponent::ReleaseFire);
         Input->BindAction(InputConfig->Fire, ETriggerEvent::Canceled, Combat.Get(), &UGunnerCombatComponent::StopFire);
     }
     if (InputConfig->Sprint)
@@ -164,7 +173,7 @@ void AGunnerCharacter::Move(const FInputActionValue& Value)
     if (!Controller) return;
     const FVector2D Axis = Value.Get<FVector2D>();
     MoveAxis = Axis;
-    if (Combat->IsMeleeing() || Dodge->IsDodging() || Cover->IsPeeking()) return;
+    if (Combat->IsMeleeing() || Combat->IsBlindFiring() || Dodge->IsDodging() || Cover->IsPeeking()) return;
     const FRotationMatrix Yaw(FRotator(0.f, Controller->GetControlRotation().Yaw, 0.f));
     FVector Direction = Yaw.GetUnitAxis(EAxis::X) * Axis.Y + Yaw.GetUnitAxis(EAxis::Y) * Axis.X;
     if (MotionSettings && bIsCrouched && Combat->IsAiming() && !MotionSettings->bDirectionalCrouchReady) return;
@@ -172,7 +181,12 @@ void AGunnerCharacter::Move(const FInputActionValue& Value)
     AddMovementInput(Direction.GetSafeNormal(), FMath::Min(Direction.Size(), 1.f));
 }
 void AGunnerCharacter::StopMove() { MoveAxis = FVector2D::ZeroVector; }
-void AGunnerCharacter::StartAim() { bAimHeld = true; bSprintHeld = false; }
+void AGunnerCharacter::StartAim()
+{
+    if (Combat->IsBlindFiring()) Combat->StopFire();
+    bAimHeld = true;
+    bSprintHeld = false;
+}
 void AGunnerCharacter::StopAim() { bAimHeld = false; Combat->StopAim(); }
 void AGunnerCharacter::StartSprint() { bSprintHeld = true; }
 void AGunnerCharacter::StopSprint() { bSprintHeld = false; }
@@ -211,7 +225,7 @@ void AGunnerCharacter::StickLook(const FInputActionValue& Value)
 void AGunnerCharacter::Traverse()
 {
     if (Dodge->IsDodging() || Combat->IsMeleeing()) return;
-    if (IsInCover()) { Cover->Detach(); StopAim(); return; }
+    if (IsInCover()) { Combat->StopFire(); Cover->Detach(); StopAim(); return; }
     if (MotionSettings && MotionSettings->bCoverReady && Controller)
     {
         const FVector Direction = FRotationMatrix(FRotator(0, Controller->GetControlRotation().Yaw, 0)).GetUnitAxis(EAxis::X);

@@ -33,6 +33,11 @@ public:
     FName HandSocket = TEXT("hand_r");
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Presentation")
     FTransform GripTransform;
+    /** Derived from the authored armed idle: left hand relative to the held weapon. */
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Presentation")
+    FTransform LeftHandGripTransform;
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Presentation")
+    bool bBlindFireGripReady = false;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Presentation")
     FVector MuzzleOffset = FVector(65.f, 0.f, 0.f);
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Animation")

@@ -9,12 +9,16 @@
 #include "AnimationGraphSchema.h"
 #include "AnimGraphNode_BlendListByBool.h"
 #include "AnimGraphNode_BlendSpacePlayer.h"
+#include "AnimGraphNode_ComponentToLocalSpace.h"
 #include "AnimGraphNode_LayeredBoneBlend.h"
+#include "AnimGraphNode_LocalToComponentSpace.h"
+#include "AnimGraphNode_ModifyBone.h"
 #include "AnimGraphNode_Root.h"
 #include "AnimGraphNode_RotationOffsetBlendSpace.h"
 #include "AnimGraphNode_SaveCachedPose.h"
 #include "AnimGraphNode_SequencePlayer.h"
 #include "AnimGraphNode_Slot.h"
+#include "AnimGraphNode_TwoBoneIK.h"
 #include "AnimGraphNode_UseCachedPose.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "EdGraph/EdGraph.h"
@@ -165,6 +169,79 @@ namespace GunnerAnimationBuilder
                 [Saved](UAnimGraphNode_UseCachedPose* N) { N->SaveCachedPoseNode = Saved; });
         }
 
+        UAnimGraphNode_SaveCachedPose* Cache(FName Name, UEdGraphNode* Source, int32 X, int32 Y)
+        {
+            auto* Saved = Node<UAnimGraphNode_SaveCachedPose>(Graph, X, Y,
+                [Name](UAnimGraphNode_SaveCachedPose* N) { N->CacheName = Name.ToString(); });
+            Pose(Source, Saved, TEXT("Pose"));
+            return Saved;
+        }
+
+        UAnimGraphNode_LayeredBoneBlend* Arms(UEdGraphNode* Base, UEdGraphNode* ArmsPose,
+            int32 X, int32 Y, bool bVariableWeight)
+        {
+            auto* Blend = Node<UAnimGraphNode_LayeredBoneBlend>(Graph, X, Y,
+                [](UAnimGraphNode_LayeredBoneBlend* N)
+                {
+                    N->Node.bMeshSpaceRotationBlend = true;
+                    N->Node.BlendWeights[0] = 1.f;
+                    for (const FName Bone : {FName(TEXT("clavicle_l")), FName(TEXT("clavicle_r"))})
+                    {
+                        FBranchFilter Filter;
+                        Filter.BoneName = Bone;
+                        Filter.BlendDepth = 1;
+                        N->Node.LayerSetup[0].BranchFilters.Add(Filter);
+                    }
+                });
+            Pose(Base, Blend, TEXT("BasePose"));
+            Pose(ArmsPose, Blend, TEXT("BlendPoses_0"));
+            if (bVariableWeight) Read(TEXT("BlindFireAlpha"), Blend, TEXT("BlendWeights_0"));
+            return Blend;
+        }
+
+        UEdGraphNode* BlindArms(UEdGraphNode* Base, UEdGraphNode* ArmedPose, int32 X, int32 Y)
+        {
+            auto* Grip = Arms(Base, ArmedPose, X, Y, false);
+            auto* Component = Node<UAnimGraphNode_LocalToComponentSpace>(Graph, X + 400, Y);
+            Pose(Grip, Component, TEXT("LocalPose"));
+            UEdGraphNode* Previous = Component;
+            FName PreviousPin = TEXT("ComponentPose");
+            for (int32 Side = 0; Side < 2; ++Side)
+            {
+                const bool bRight = Side == 0;
+                const FName Bone = bRight ? FName(TEXT("hand_r")) : FName(TEXT("hand_l"));
+                auto* IK = Node<UAnimGraphNode_TwoBoneIK>(Graph, X + 900 + Side * 1000, Y,
+                    [Bone](UAnimGraphNode_TwoBoneIK* N)
+                    {
+                        N->Node.IKBone.BoneName = Bone;
+                        N->Node.EffectorLocationSpace = BCS_ComponentSpace;
+                        N->Node.JointTargetLocationSpace = BCS_ComponentSpace;
+                        N->Node.bAllowStretching = false;
+                        N->Node.bMaintainEffectorRelRot = false;
+                        N->Node.bTakeRotationFromEffectorSpace = false;
+                        N->Node.Alpha = 1.f;
+                    });
+                Connect(Previous, PreviousPin, IK, TEXT("ComponentPose"));
+                Read(bRight ? FName(TEXT("BlindRightHandLocation")) : FName(TEXT("BlindLeftHandLocation")), IK, TEXT("EffectorLocation"));
+                Read(bRight ? FName(TEXT("BlindRightElbowLocation")) : FName(TEXT("BlindLeftElbowLocation")), IK, TEXT("JointTargetLocation"));
+                auto* Hand = Node<UAnimGraphNode_ModifyBone>(Graph, X + 1400 + Side * 1000, Y,
+                    [Bone](UAnimGraphNode_ModifyBone* N)
+                    {
+                        N->Node.BoneToModify.BoneName = Bone;
+                        N->Node.RotationMode = BMM_Replace;
+                        N->Node.RotationSpace = BCS_ComponentSpace;
+                        N->Node.Alpha = 1.f;
+                    });
+                Pose(IK, Hand, TEXT("ComponentPose"));
+                Read(bRight ? FName(TEXT("BlindRightHandRotation")) : FName(TEXT("BlindLeftHandRotation")), Hand, TEXT("Rotation"));
+                Previous = Hand;
+                PreviousPin = TEXT("Pose");
+            }
+            auto* Local = Node<UAnimGraphNode_ComponentToLocalSpace>(Graph, X + 2900, Y);
+            Pose(Previous, Local, TEXT("ComponentPose"));
+            return Local;
+        }
+
         UEdGraphNode* Aim(UBlendSpace* Asset, UEdGraphNode* Base, int32 X, int32 Y)
         {
             if (!Asset) return Base;
@@ -266,7 +343,7 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
     UBlendSpace* RifleLocomotion, UBlendSpace* PistolLocomotion,
     UAnimSequence* RifleFall, UAnimSequence* PistolFall,
     UBlendSpace* CrouchLocomotion, UAnimSequence* Sprint,
-    UBlendSpace* RifleAimOffset, UBlendSpace* PistolAimOffset)
+    UBlendSpace* RifleAimOffset, UBlendSpace* PistolAimOffset, bool bIncludeBlindFire)
 {
     using namespace GunnerAnimationBuilder;
     if (!Skeleton || !PreviewMesh || !RifleLocomotion || !PistolLocomotion || !RifleFall || !PistolFall
@@ -347,7 +424,28 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
     auto* RifleAim = B.Aim(RifleAimOffset, B.Use(ArmedCache, -1000, -800), -500, -800);
     auto* PistolAim = B.Aim(PistolAimOffset, B.Use(ArmedCache, -1000, -350), -500, -350);
     auto* Aim = B.Choose(TEXT("bPistol"), PistolAim, RifleAim, 0, -500, 0.22f);
-    auto* UpperSlot = B.Slot(TEXT("UpperBody"), Aim, 500, -500);
+    UEdGraphNode* BodySource = Body;
+    UEdGraphNode* SlotSource = Aim;
+    if (bIncludeBlindFire)
+    {
+        auto* BodyCache = B.Cache(TEXT("Protective body"), Body, 500, 700);
+        auto* AimCache = B.Cache(TEXT("Armed aim"), Aim, 400, -850);
+        auto* Blind = B.BlindArms(B.Use(BodyCache, 900, 1700),
+            B.Use(AimCache, 900, 1400), 1400, 1500);
+        // Only the final arm mask blends into the crouch. Recoil is evaluated after
+        // the IK solve, so a fire montage remains visible rather than being pinned.
+        SlotSource = B.Choose(TEXT("bBlindFiring"), Blind,
+            B.Use(AimCache, 4700, 500), 5100, 750, 0.f);
+        BodySource = B.Use(BodyCache, 5200, 1500);
+    }
+    auto* UpperSlot = B.Slot(TEXT("UpperBody"), SlotSource, bIncludeBlindFire ? 5600 : 500, -500);
+    UEdGraphNode* UpperPose = UpperSlot;
+    UAnimGraphNode_SaveCachedPose* SlotCache = nullptr;
+    if (bIncludeBlindFire)
+    {
+        SlotCache = B.Cache(TEXT("Weapon action"), UpperSlot, 6000, -500);
+        UpperPose = B.Use(SlotCache, 6300, -500);
+    }
     auto* UpperBlend = Node<UAnimGraphNode_LayeredBoneBlend>(Graph, 1100, 0,
         [](UAnimGraphNode_LayeredBoneBlend* N)
         {
@@ -357,10 +455,17 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
             Filter.BlendDepth = 3;
             N->Node.LayerSetup[0].BranchFilters.Add(Filter);
         });
-    B.Pose(Body, UpperBlend, TEXT("BasePose"));
-    B.Pose(UpperSlot, UpperBlend, TEXT("BlendPoses_0"));
+    B.Pose(BodySource, UpperBlend, TEXT("BasePose"));
+    B.Pose(UpperPose, UpperBlend, TEXT("BlendPoses_0"));
     B.Read(TEXT("UpperBodyWeight"), UpperBlend, TEXT("BlendWeights_0"));
-    auto* FullBody = B.Slot(TEXT("FullBody"), UpperBlend, 1900, 0);
+    UEdGraphNode* FinalBody = UpperBlend;
+    if (bIncludeBlindFire)
+    {
+        UpperBlend->NodePosX = 6700;
+        FinalBody = B.Arms(UpperBlend, B.Use(SlotCache, 6800, 600), 7200, 0, true);
+        Root->NodePosX = 8100;
+    }
+    auto* FullBody = B.Slot(TEXT("FullBody"), FinalBody, bIncludeBlindFire ? 7700 : 1900, 0);
     B.Pose(FullBody, Root, TEXT("Result"));
     if (!B.bValid) return nullptr;
 
@@ -380,5 +485,79 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
         UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Animation Blueprint compilation failed with %d errors"), Results.NumErrors);
         return nullptr;
     }
+    auto* Defaults = Cast<UGunnerAnimInstance>(Blueprint->GeneratedClass->GetDefaultObject());
+    if (!Defaults) return nullptr;
+    Defaults->Modify();
+    Defaults->bBlindFirePoseReady = bIncludeBlindFire;
+    Blueprint->Modify();
     return SaveNewAsset(Blueprint) ? Blueprint : nullptr;
+}
+
+bool UGunnerAnimationBuilder::RepairBlindFireReadiness(UAnimBlueprint* Blueprint)
+{
+    if (!Blueprint || Blueprint->GetOutermost()->GetName() !=
+        TEXT("/Game/Gunner/Motion/Animation/ABP_WardenBlindFire") ||
+        !Blueprint->GeneratedClass || Blueprint->Status == BS_Error)
+        return false;
+    UEdGraph* Graph = nullptr;
+    for (UEdGraph* Candidate : Blueprint->FunctionGraphs)
+        if (Candidate && Candidate->GetFName() == UEdGraphSchema_K2::GN_AnimGraph) Graph = Candidate;
+    if (!Graph) return false;
+    TArray<UAnimGraphNode_TwoBoneIK*> IKNodes;
+    TArray<UAnimGraphNode_ModifyBone*> HandNodes;
+    TArray<UAnimGraphNode_LayeredBoneBlend*> Layers;
+    TArray<UAnimGraphNode_Slot*> Slots;
+    Graph->GetNodesOfClass(IKNodes);
+    Graph->GetNodesOfClass(HandNodes);
+    Graph->GetNodesOfClass(Layers);
+    Graph->GetNodesOfClass(Slots);
+    if (IKNodes.Num() != 2 || HandNodes.Num() != 2 || Layers.Num() != 3 || Slots.Num() != 2)
+        return false;
+    for (const FName Hand : {FName(TEXT("hand_r")), FName(TEXT("hand_l"))})
+    {
+        const auto* IK = IKNodes.FindByPredicate([Hand](const UAnimGraphNode_TwoBoneIK* N)
+            { return N->Node.IKBone.BoneName == Hand; });
+        const auto* Rotation = HandNodes.FindByPredicate([Hand](const UAnimGraphNode_ModifyBone* N)
+            { return N->Node.BoneToModify.BoneName == Hand; });
+        if (!IK || !Rotation || (*IK)->Node.bAllowStretching ||
+            (*IK)->Node.EffectorLocationSpace != BCS_ComponentSpace ||
+            (*Rotation)->Node.RotationMode != BMM_Replace ||
+            (*Rotation)->Node.RotationSpace != BCS_ComponentSpace)
+            return false;
+        for (const FName PinName : {FName(TEXT("ComponentPose")), FName(TEXT("EffectorLocation")), FName(TEXT("JointTargetLocation"))})
+        {
+            const UEdGraphPin* Pin = (*IK)->FindPin(PinName, EGPD_Input);
+            if (!Pin || Pin->LinkedTo.Num() != 1) return false;
+        }
+    }
+    int32 ArmMasks = 0;
+    bool bDrivenArmMask = false;
+    for (const auto* Layer : Layers)
+    {
+        if (Layer->Node.LayerSetup.Num() != 1) return false;
+        const auto& Filters = Layer->Node.LayerSetup[0].BranchFilters;
+        if (Filters.Num() == 2 &&
+            Filters.ContainsByPredicate([](const FBranchFilter& F) { return F.BoneName == TEXT("clavicle_l"); }) &&
+            Filters.ContainsByPredicate([](const FBranchFilter& F) { return F.BoneName == TEXT("clavicle_r"); }))
+        {
+            ++ArmMasks;
+            const UEdGraphPin* Weight = Layer->FindPin(TEXT("BlendWeights_0"), EGPD_Input);
+            if (Weight && Weight->LinkedTo.Num() == 1)
+            {
+                const auto* Getter = Cast<UK2Node_VariableGet>(Weight->LinkedTo[0]->GetOwningNode());
+                bDrivenArmMask |= Getter && Getter->VariableReference.GetMemberName() == TEXT("BlindFireAlpha");
+            }
+        }
+    }
+    if (ArmMasks != 2 || !bDrivenArmMask ||
+        !Slots.ContainsByPredicate([](const UAnimGraphNode_Slot* N) { return N->Node.SlotName == TEXT("UpperBody"); }) ||
+        !Slots.ContainsByPredicate([](const UAnimGraphNode_Slot* N) { return N->Node.SlotName == TEXT("FullBody"); }))
+        return false;
+    auto* Defaults = Cast<UGunnerAnimInstance>(Blueprint->GeneratedClass->GetDefaultObject());
+    if (!Defaults) return false;
+    Defaults->Modify();
+    Blueprint->Modify();
+    Defaults->bBlindFirePoseReady = true;
+    Blueprint->MarkPackageDirty();
+    return true;
 }

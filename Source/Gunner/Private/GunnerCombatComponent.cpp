@@ -2,6 +2,7 @@
 
 #include "GunnerTarget.h"
 #include "GunnerCoverComponent.h"
+#include "GunnerAnimInstance.h"
 #include "Animation/AnimInstance.h"
 #include "Animation/AnimMontage.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -24,6 +25,7 @@ void UGunnerCombatComponent::BeginPlay()
     Super::BeginPlay();
     Character = Cast<ACharacter>(GetOwner());
     if (!Character) return;
+    Cover = Character->FindComponentByClass<UGunnerCoverComponent>();
 
     const UGunnerWeaponData* Definitions[2] = { RifleData, PistolData };
     for (int32 Slot = 0; Slot < 2; ++Slot)
@@ -78,6 +80,7 @@ int32 UGunnerCombatComponent::GetReserve() const { return Reserves[ActiveSlot]; 
 
 void UGunnerCombatComponent::StartAim()
 {
+    if (bBlindFiring) StopFire();
     if (CanStartAction() && !bFireBlocked && ActiveData->GunMesh) bAiming = true;
 }
 
@@ -104,6 +107,34 @@ void UGunnerCombatComponent::SetFireBlocked(bool bBlocked)
 void UGunnerCombatComponent::StartFire()
 {
     if (!CanStartAction() || bFireBlocked || !ActiveData->FireMontage || !ActiveData->GunMesh || bFireHeld) return;
+    if (bBlindFirePending)
+    {
+        // A second press during the same raise keeps automatic fire held, without
+        // restarting the pose or queuing several rounds behind one animation.
+        bFireHeld = true;
+        return;
+    }
+    if (Cover && Cover->IsLowCover() && !bAiming)
+    {
+        const auto* Anim = Cast<UGunnerAnimInstance>(GetAnimInstance());
+        float CoverTop = 0.f;
+        if (!Anim || !Anim->bBlindFirePoseReady || !Cover->GetLowCoverTop(CoverTop) || GetMagazine() <= 0)
+        {
+            BlindFireWaitReason = TEXT("MissingPoseOrCover");
+            return;
+        }
+        bFireHeld = bBlindFiring = bBlindFirePending = true;
+        bBlindFireTimedOut = false;
+        BlindFireRaiseStartTime = BlindFireWaitSince = GetWorld()->GetTimeSeconds();
+        BlindFireWaitReason = TEXT("Raising");
+        ActionState = EGunnerCombatAction::Firing;
+        Character->ConsumeMovementInputVector();
+        Character->GetCharacterMovement()->StopMovementImmediately();
+        // Active only while raising/holding blind fire. The first round waits for
+        // evaluated hands and muzzle, even when the input was a brief click.
+        GetWorld()->GetTimerManager().SetTimer(FireTimer, this, &UGunnerCombatComponent::FireOnce, 0.03f, true);
+        return;
+    }
     bFireHeld = true;
     ActionState = EGunnerCombatAction::Firing;
     FireOnce();
@@ -114,33 +145,111 @@ void UGunnerCombatComponent::StartFire()
     }
 }
 
+void UGunnerCombatComponent::ReleaseFire()
+{
+    bFireHeld = false;
+    if (!bBlindFiring || !bBlindFirePending) StopFire();
+}
+
 void UGunnerCombatComponent::StopFire()
 {
     bFireHeld = false;
+    bBlindFiring = bBlindFirePending = false;
+    BlindFireWaitSince = -1.f;
     if (GetWorld()) GetWorld()->GetTimerManager().ClearTimer(FireTimer);
     if (ActionState == EGunnerCombatAction::Firing) ActionState = EGunnerCombatAction::Idle;
 }
 
+void UGunnerCombatComponent::WaitForBlindFirePose(FName Reason)
+{
+    BlindFireWaitReason = Reason;
+    const float Now = GetWorld()->GetTimeSeconds();
+    if (BlindFireWaitSince < 0.f) BlindFireWaitSince = Now;
+    if (Now - BlindFireWaitSince >= 0.9f)
+    {
+        bBlindFireTimedOut = true;
+        StopFire();
+    }
+}
+
+bool UGunnerCombatComponent::IsBlindFirePoseReady(float CoverTop)
+{
+    const auto* Anim = Cast<UGunnerAnimInstance>(GetAnimInstance());
+    const auto* Mesh = Character->GetMesh();
+    if (!Character->bIsCrouched || !Anim || !Anim->bBlindFireTargetsValid || Anim->BlindFireAlpha < 0.95f)
+    {
+        WaitForBlindFirePose(TEXT("Raising"));
+        return false;
+    }
+    if (!Mesh->DoesSocketExist(TEXT("hand_r")) || !Mesh->DoesSocketExist(TEXT("hand_l")) || !Mesh->DoesSocketExist(TEXT("head")))
+    {
+        WaitForBlindFirePose(TEXT("MissingPoseBones"));
+        return false;
+    }
+    const FVector Hand = Mesh->GetSocketLocation(TEXT("hand_r"));
+    const FVector LeftHand = Mesh->GetSocketLocation(TEXT("hand_l"));
+    const FVector LeftTarget = Mesh->GetComponentTransform().TransformPosition(Anim->BlindLeftHandLocation);
+    if (Hand.Z <= CoverTop + 4.f || GetMuzzleLocation().Z <= CoverTop + 4.f)
+    {
+        WaitForBlindFirePose(TEXT("WeaponBelowCover"));
+        return false;
+    }
+    if (Mesh->GetSocketLocation(TEXT("head")).Z > CoverTop - 5.f)
+    {
+        WaitForBlindFirePose(TEXT("HeadExposed"));
+        return false;
+    }
+    if (FVector::DistSquared(LeftHand, LeftTarget) > FMath::Square(5.f))
+    {
+        WaitForBlindFirePose(TEXT("SupportHandNotReady"));
+        return false;
+    }
+    const FVector ViewForward = FRotator(0.f, Character->GetController()->GetControlRotation().Yaw, 0.f).Vector();
+    if (FVector::DotProduct(Character->GetActorForwardVector(), ViewForward) < 0.866f ||
+        FVector::DotProduct(ViewForward, -Cover->GetNormal()) < 0.5f)
+    {
+        WaitForBlindFirePose(TEXT("FacingAwayFromCover"));
+        return false;
+    }
+    return true;
+}
+
 void UGunnerCombatComponent::FireOnce()
 {
-    if (!CanStartAction() || bFireBlocked || !bFireHeld || !ActiveData->FireMontage || GetMagazine() <= 0)
+    if (!CanStartAction() || bFireBlocked || (!bFireHeld && !bBlindFirePending) || !ActiveData->FireMontage || GetMagazine() <= 0)
     {
         StopFire();
         return;
     }
     const float Now = GetWorld()->GetTimeSeconds();
+    const bool bBlindShot = bBlindFiring;
+    if (bBlindShot)
+    {
+        const auto* BlindAnim = Cast<UGunnerAnimInstance>(GetAnimInstance());
+        float CoverTop = 0.f;
+        if (!Cover || !Cover->IsLowCover() || bAiming || !BlindAnim || !BlindAnim->bBlindFirePoseReady ||
+            !Cover->GetLowCoverTop(CoverTop))
+        {
+            BlindFireWaitReason = TEXT("CoverOrPoseLost");
+            StopFire();
+            return;
+        }
+        if (!IsBlindFirePoseReady(CoverTop)) return;
+        // Keep validating the held pistol's context, but never repeat its shot.
+        if (!ActiveData->bAutomatic && !bBlindFirePending)
+        {
+            BlindFireWaitSince = -1.f;
+            BlindFireWaitReason = TEXT("Ready");
+            return;
+        }
+    }
     if (Now - LastFireTime + KINDA_SMALL_NUMBER < FMath::Max(0.03f, ActiveData->FireInterval)) return;
     UAnimInstance* Anim = GetAnimInstance();
-    if (!Anim || Anim->Montage_Play(ActiveData->FireMontage, 1.f) <= 0.f)
+    if (!Anim)
     {
         StopFire();
         return;
     }
-    LastFireTime = Now;
-    --Magazines[ActiveSlot];
-    ++ShotsFired;
-    bLastShotObstructed = false;
-
     FVector CameraLocation;
     FRotator CameraRotation;
     Character->GetController()->GetPlayerViewPoint(CameraLocation, CameraRotation);
@@ -156,18 +265,51 @@ void UGunnerCombatComponent::FireOnce()
     const FVector Body = Character->GetMesh()->DoesSocketExist(TEXT("spine_03"))
         ? Character->GetMesh()->GetSocketLocation(TEXT("spine_03")) : Character->GetActorLocation();
 
+    if (bBlindShot)
+    {
+        const FVector Hand = Character->GetMesh()->GetSocketLocation(TEXT("hand_r"));
+        FHitResult RaisedPathHit;
+        // Follow the real raised arm/barrel route. A direct torso-to-muzzle ray
+        // would cut diagonally through the cover despite the grip clearing it.
+        if (GetWorld()->LineTraceSingleByChannel(RaisedPathHit, Body, Hand, ECC_Visibility, Query) ||
+            GetWorld()->LineTraceSingleByChannel(RaisedPathHit, Hand, Muzzle, ECC_Visibility, Query))
+        {
+            WaitForBlindFirePose(TEXT("RaisedWeaponPathBlocked"));
+            return;
+        }
+        if (FVector::DotProduct(AimPoint - Muzzle, ViewDirection) <= 0.f ||
+            FVector::DotProduct((AimPoint - Muzzle).GetSafeNormal2D(), -Cover->GetNormal()) < 0.5f)
+        {
+            WaitForBlindFirePose(TEXT("AimBlockedByCover"));
+            return;
+        }
+        BlindFireWaitSince = -1.f;
+        BlindFireWaitReason = TEXT("Ready");
+    }
+    if (Anim->Montage_Play(ActiveData->FireMontage, 1.f) <= 0.f)
+    {
+        StopFire();
+        return;
+    }
+    LastFireTime = Now;
+    --Magazines[ActiveSlot];
+    ++ShotsFired;
+    bLastShotObstructed = false;
+    if (bBlindShot) bBlindFirePending = false;
+
     // A protruding barrel must never originate a shot through a wall or behind the shooter.
     FHitResult BodyHit;
-    if (GetWorld()->LineTraceSingleByChannel(BodyHit, Body, Muzzle, ECC_Visibility, Query) ||
-        FVector::DotProduct(AimPoint - Muzzle, ViewDirection) <= 0.f)
+    if (!bBlindShot && (GetWorld()->LineTraceSingleByChannel(BodyHit, Body, Muzzle, ECC_Visibility, Query) ||
+        FVector::DotProduct(AimPoint - Muzzle, ViewDirection) <= 0.f))
     {
         bLastShotObstructed = true;
         DrawShot(Body, BodyHit.bBlockingHit ? BodyHit.ImpactPoint : Muzzle, false);
         return;
     }
 
-    const FVector ShotDirection = (AimPoint - Muzzle).GetSafeNormal();
-    const FVector ShotEnd = Muzzle + ShotDirection * FMath::Min(ShotRange, FVector::Distance(Muzzle, AimPoint) + 3.f);
+    const FVector AimDirection = (AimPoint - Muzzle).GetSafeNormal();
+    const FVector ShotDirection = bBlindShot ? FMath::VRandCone(AimDirection, FMath::DegreesToRadians(4.f)) : AimDirection;
+    const FVector ShotEnd = Muzzle + ShotDirection * (bBlindShot ? ShotRange : FMath::Min(ShotRange, FVector::Distance(Muzzle, AimPoint) + 3.f));
     FHitResult MuzzleHit;
     const bool bMuzzleHit = GetWorld()->LineTraceSingleByChannel(MuzzleHit, Muzzle, ShotEnd, ECC_Visibility, Query);
     bool bDamaged = false;
@@ -182,6 +324,7 @@ void UGunnerCombatComponent::FireOnce()
     }
     bLastShotObstructed = bMuzzleHit && !bDamaged && (!bCameraHit || MuzzleHit.GetActor() != CameraHit.GetActor());
     DrawShot(Muzzle, bMuzzleHit ? MuzzleHit.ImpactPoint : ShotEnd, bDamaged);
+    if (bBlindShot && !bFireHeld) StopFire();
 }
 
 void UGunnerCombatComponent::Reload()
@@ -191,7 +334,7 @@ void UGunnerCombatComponent::Reload()
     // The acquired reload is an upright weapon action. Protected crouch keeps its
     // authored torso, so never commit ammo for an action that cannot be displayed.
     if (Character->bIsCrouched || Character->GetCharacterMovement()->bWantsToCrouch) return;
-    if (const auto* Cover = Character->FindComponentByClass<UGunnerCoverComponent>(); Cover && Cover->IsLowCover()) return;
+    if (Cover && Cover->IsLowCover()) return;
     StopFire();
     StopAim();
     BeginAction(EGunnerCombatAction::Reloading, ActiveData->ReloadMontage);
@@ -205,7 +348,7 @@ void UGunnerCombatComponent::EquipSlot(int32 Slot)
     UGunnerWeaponData* NewData = Slot == 0 ? RifleData.Get() : PistolData.Get();
     if (!CanStartAction() || ActiveSlot == Slot || !NewData || !NewData->GunMesh || !NewData->EquipMontage) return;
     if (Character->bIsCrouched || Character->GetCharacterMovement()->bWantsToCrouch) return;
-    if (const auto* Cover = Character->FindComponentByClass<UGunnerCoverComponent>(); Cover && Cover->IsLowCover()) return;
+    if (Cover && Cover->IsLowCover()) return;
     StopFire();
     StopAim();
     if (!BeginAction(EGunnerCombatAction::Equipping, NewData->EquipMontage)) return;
@@ -301,7 +444,7 @@ void UGunnerCombatComponent::Melee()
     // requires its own clip; never stand the mesh inside a crouched capsule.
     if (!CanStartAction() || Character->bIsCrouched || Character->GetCharacterMovement()->bWantsToCrouch || !ActiveData->MeleeMontage) return;
     // Low-cover stance automatically crouches when aim stops; it cannot host the standing jab.
-    if (const auto* Cover = Character->FindComponentByClass<UGunnerCoverComponent>(); Cover && (Cover->IsLowCover() || Cover->IsPeeking())) return;
+    if (Cover && (Cover->IsLowCover() || Cover->IsPeeking())) return;
     StopFire();
     StopAim();
     if (!BeginAction(EGunnerCombatAction::Melee, ActiveData->MeleeMontage)) return;

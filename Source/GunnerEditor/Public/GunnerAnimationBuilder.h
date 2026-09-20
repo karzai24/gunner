@@ -32,5 +32,10 @@ public:
         UBlendSpace* RifleLocomotion, UBlendSpace* PistolLocomotion,
         UAnimSequence* RifleFall, UAnimSequence* PistolFall,
         UBlendSpace* CrouchLocomotion, UAnimSequence* Sprint,
-        UBlendSpace* RifleAimOffset, UBlendSpace* PistolAimOffset);
+        UBlendSpace* RifleAimOffset, UBlendSpace* PistolAimOffset,
+        bool bIncludeBlindFire = false);
+
+    /** Repair only the generated blind-fire graph after verifying both IK chains and arm masks. */
+    UFUNCTION(BlueprintCallable, Category="Gunner|Authoring")
+    static bool RepairBlindFireReadiness(UAnimBlueprint* Blueprint);
 };

@@ -1,0 +1,10 @@
+{
+  "asset": "/Game/Gunner/Motion/Animation/ABP_WardenBlindFire",
+  "prior_ready": true,
+  "assigned_class_before": "/Game/Gunner/Motion/Animation/ABP_WardenMotion.ABP_WardenMotion_C",
+  "assignment_repaired": true,
+  "prior_sha256": "dc63c191cdbfe8c331c598a391bea4408eccbb507918532622ff02ae1797483b",
+  "assigned_class_after": "/Game/Gunner/Motion/Animation/ABP_WardenBlindFire.ABP_WardenBlindFire_C",
+  "ready_after_save": true,
+  "saved_sha256": "dc63c191cdbfe8c331c598a391bea4408eccbb507918532622ff02ae1797483b"
+}

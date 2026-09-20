@@ -9,6 +9,7 @@ class ACharacter;
 class UAnimInstance;
 class UAnimMontage;
 class UStaticMeshComponent;
+class UGunnerCoverComponent;
 
 UENUM(BlueprintType)
 enum class EGunnerCombatAction : uint8
@@ -36,6 +37,9 @@ public:
     TObjectPtr<UGunnerWeaponData> PistolData;
 
     UFUNCTION(BlueprintCallable, Category="Combat") void StartFire();
+    /** Input release retains a queued blind-fire tap until the raised pose is safe. */
+    UFUNCTION(BlueprintCallable, Category="Combat") void ReleaseFire();
+    /** Hard cancellation for interruption, ADS, detach and ownership changes. */
     UFUNCTION(BlueprintCallable, Category="Combat") void StopFire();
     UFUNCTION(BlueprintCallable, Category="Combat") void StartAim();
     UFUNCTION(BlueprintCallable, Category="Combat") void StopAim();
@@ -48,6 +52,11 @@ public:
     UFUNCTION(BlueprintCallable, Category="Combat") void StopAllActions();
 
     UFUNCTION(BlueprintPure, Category="Combat") bool IsAiming() const { return bAiming; }
+    UFUNCTION(BlueprintPure, Category="Combat") bool IsBlindFiring() const { return bBlindFiring; }
+    UFUNCTION(BlueprintPure, Category="Combat") bool IsBlindFirePending() const { return bBlindFirePending; }
+    UFUNCTION(BlueprintPure, Category="Combat") float GetBlindFireRaiseStartTime() const { return BlindFireRaiseStartTime; }
+    UFUNCTION(BlueprintPure, Category="Combat") FName GetBlindFireWaitReason() const { return BlindFireWaitReason; }
+    UFUNCTION(BlueprintPure, Category="Combat") bool DidBlindFireTimeOut() const { return bBlindFireTimedOut; }
     UFUNCTION(BlueprintPure, Category="Combat") bool IsReloading() const { return ActionState == EGunnerCombatAction::Reloading; }
     UFUNCTION(BlueprintPure, Category="Combat") bool IsMeleeing() const { return ActionState == EGunnerCombatAction::Melee; }
     UFUNCTION(BlueprintPure, Category="Combat") bool IsCombatBlocked() const { return bCombatBlocked; }
@@ -66,6 +75,7 @@ public:
 
 private:
     UPROPERTY(Transient) TObjectPtr<ACharacter> Character;
+    UPROPERTY(Transient) TObjectPtr<UGunnerCoverComponent> Cover;
     UPROPERTY(Transient) TObjectPtr<UGunnerWeaponData> ActiveData;
     UPROPERTY(Transient) TObjectPtr<UStaticMeshComponent> WeaponVisual;
     UPROPERTY(Transient) TObjectPtr<UAnimMontage> ActionMontage;
@@ -77,8 +87,14 @@ private:
     int32 ShotsFired = 0;
     float LastFireTime = -100.f;
     float LastHitTime = -100.f;
+    float BlindFireRaiseStartTime = -100.f;
+    float BlindFireWaitSince = -1.f;
+    FName BlindFireWaitReason = NAME_None;
     bool bAiming = false;
     bool bFireHeld = false;
+    bool bBlindFiring = false;
+    bool bBlindFirePending = false;
+    bool bBlindFireTimedOut = false;
     bool bCombatBlocked = false;
     bool bFireBlocked = false;
     bool bLastShotObstructed = false;
@@ -91,6 +107,8 @@ private:
     bool HasCombatAuthority() const;
     UAnimInstance* GetAnimInstance() const;
     void FireOnce();
+    bool IsBlindFirePoseReady(float CoverTop);
+    void WaitForBlindFirePose(FName Reason);
     void EquipSlot(int32 Slot);
     void UpdateWeaponVisual();
     bool BeginAction(EGunnerCombatAction NewAction, UAnimMontage* Montage);

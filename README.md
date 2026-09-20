@@ -25,6 +25,7 @@ For a separate editor-hosted game window:
 |---|---|---|
 | Move / look | WASD / mouse | Left / right stick |
 | Shoulder ADS / fire | Hold RMB / LMB | Left / right trigger |
+| Blind fire over low cover | LMB while attached, without RMB | Right trigger without left trigger |
 | Reload while standing | R | Left face button |
 | Rifle / pistol while standing | 1 / 2 | D-pad up / down |
 | Melee jab | F | Right-stick click |
@@ -45,12 +46,12 @@ ADS tightens the over-the-shoulder camera and aiming pose. The rifle fires autom
 
 - **Crouch uses real imported motion.** The free source provides idle and forward movement, so crouched travel turns the body toward movement. Outside ADS, the armed upper-body layer fades out to preserve the source's low protective torso pose. Crouched ADS restores the armed pose and is stationary until proper directional crouch clips are available.
 - **Reload and weapon switching require standing.** They are blocked while crouched, requesting crouch, or attached to low cover, including its standing ADS position, because only upright handling clips are available. Detach from low cover and stand first. Crouch input is blocked during reload/equip; standing high-cover reload remains available.
-- **Cover supports attachment and movement along a static wall.** Low cover crouches while protected and requests standing when aiming. At a valid high-cover edge, holding ADS physically steps the standing character out; releasing ADS returns to cover. Q chooses the shoulder. High-cover firing requires ADS at that open edge, and shots still check obstruction between body, muzzle and aim target.
+- **Cover supports attachment and movement along a static wall.** Low cover crouches while protected. LMB without ADS raises the weapon above the measured barricade top for blind fire while the head stays down; RMB requests standing for aimed fire. At a valid high-cover edge, holding ADS physically steps the standing character out; releasing ADS returns to cover. Q chooses the shoulder. High-cover firing requires ADS at that open edge, and shots still check obstruction between body, muzzle and aim target.
 - **Roll uses a real retargeted animation** and travels up to 350 cm along movement, or camera facing when stationary. It requires standing, grounded clearance and supported floor; crouch, cover, reload, equip and melee block it.
 - Dedicated wall-lean poses, corner turns, cover entry/exit montages, vaults and knife handling are not implemented. High-cover peeking uses the existing directional armed gait; melee uses a standing jab.
 - Sprint and roll lower combat readiness; airborne combat and crouched melee are disabled. There is no local duo, LAN, waves, revival, pulse defense, menu or packaged release in this sandbox.
 
-All motion comes from installed Epic template clips and licensed **Quaternius CC0 animations retargeted to Manny**. No custom character art or manually keyed replacement motions were created. [Asset research](docs/ASSET_RESEARCH.md) records free coverage and optional paid sources; no pack purchase was made.
+Motion combines installed Epic template clips and licensed **Quaternius CC0 animations retargeted to Manny**. Low-cover blind fire uses native arm IK and the existing fire clips over the genuine crouch animation; no replacement motion tracks are manually keyed. No custom character art was created. [Animation backlog](docs/ANIMATION_BACKLOG.md) lists useful clips present but not yet connected, including jump transitions, dry fire and melee variants. [Asset research](docs/ASSET_RESEARCH.md) records free coverage and optional paid sources; no pack purchase was made.
 
 ## Development and validation
 
@@ -58,7 +59,7 @@ Read [AGENTS.md](AGENTS.md), [technical design](docs/TECHNICAL_DESIGN.md), [mile
 
 `Source/Gunner` owns runtime behavior. `Source/GunnerEditor` contains editor-only asset authoring helpers. Project assets live under `Content/Gunner`; installed Epic package paths remain under `Content/Characters` and `Content/Weapons`. Editable animation source and licenses are retained under `ArtSource`. Binary assets are stored directly for this prototype; adopt Git LFS before substantially expanding production art history.
 
-The maps and assets are already authored. **Do not rerun `create_foundation.py`, `import_motion_source.py`, `retarget_motion.py` or `create_motion_sandbox.py` for ordinary setup.** The one-time `install_dodge.py` and `repair_motion_montage_slots.py` migrations are already applied. Their creation guards preserve existing assets; they are reproduction/authoring tools, not launch requirements.
+The maps and assets are already authored. **Do not rerun `create_foundation.py`, `import_motion_source.py`, `retarget_motion.py` or `create_motion_sandbox.py` for ordinary setup.** The one-time `install_dodge.py`, `install_blind_fire.py` and `repair_motion_montage_slots.py` migrations are already applied. Their creation guards preserve existing assets; they are reproduction/authoring tools, not launch requirements.
 
 The opt-in live range probe is:
 
