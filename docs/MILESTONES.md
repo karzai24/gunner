@@ -7,15 +7,17 @@ Every milestone requires a successful build, a real launch, exercised gameplay, 
 The user explicitly authorized movement/weapon work beyond M0, before the full horde game. This bounded pass exercises reusable M1/M2/M3 mechanics in `L_MotionRange`; it does not certify completion of those broader milestones. Implementation and asset composition exist; live acceptance is recorded in `TEST_MATRIX.md`.
 
 - Build the Editor and Game targets; launch the real range, possess BP_WardenMotion, and inspect movement from both camera shoulders.
-- Exercise standing directional rifle/pistol movement, real retargeted crouch idle/forward motion, sprint, airborne transitions and camera collision. Verify standing-clearance rejection. Crouched travel faces its direction; crouched ADS stays stationary until directional coverage exists.
+- Exercise standing directional rifle/pistol movement, real retargeted crouch idle/forward motion, sprint, airborne transitions and camera collision. Verify standing-clearance rejection. Verify both portable forward-only crouch and local genuine four-way free/high-cover crouched ADS; low cover must retain its protective base.
 - Verify weapon-specific takeoff/landing without animation-root displacement, dry-fire feedback without ammo/damage, and protective crouched equip including held-ADS return.
 - Verify ADS framing and aim offsets, weapon hand alignment, automatic rifle, semiautomatic pistol, per-weapon magazines/reserves, guarded equip and interrupted/completed reload. Ammo transfers only on validated completion.
 - Verify camera-to-target, body-to-muzzle and muzzle-to-target obstruction checks against target and cover geometry. Damage and ammunition are authority-owned in this standalone sandbox; no networking acceptance is implied.
 - Exercise alternating genuine standing jab/cross attacks, one guarded damage window per attack, interruption cleanup, movement lock and rejection while crouched/airborne.
-- Exercise the real retargeted dodge roll on E/controller left shoulder, bounded native movement up to 350 cm, route/landing clearance and floor support, action guards and cleanup after interruption or loss of grounded movement.
-- Verify 135 cm cover search, 52 cm attachment offset, 115/180 cm low/high fixtures, safe wall movement, edge limits and detach. Low cover requests standing for ADS; high cover uses a checked 70 cm standing step out at the selected edge and returns on ADS release. Fire remains gated by ADS, edge validity and muzzle obstruction. Dedicated wall-lean/corner poses remain missing.
+- Exercise the real retargeted dodge roll on E/controller left shoulder and contextual short tap, bounded native movement up to 350 cm, standing clearance from crouch/cover, route/landing support, toward-wall rejection, held-ADS return and cleanup after interruption or loss of grounded movement.
+- Verify 135 cm cover search, 52 cm capsule anchor and 115/180 cm fixtures. Approach must sweep smoothly, reject gaps/obstructions, cancel at its actual position and preserve unrelated movement sources. Wall travel must stop before unsupported or changed-height edges. Low cover requests standing for ADS; high cover uses a checked 70 cm step out/return, with crouched steps gated by directional coverage. Local rifle wall poses and their 25 cm visual inset must retain head clearance and grip. Fire remains gated by ADS, edge validity and obstruction.
 - Exercise repeated possession/play and action cancellation without stale input contexts, timers, ammunition grants or attachment constraints.
-- Keep the original foundation map recoverable. Record animation source, retarget setup, actual gameplay evidence and remaining gaps. Do not claim dedicated cover entry/exit/lean/corner motion, a vault/knife animation, AI/waves, local duo or LAN.
+- Verify optional stationary free/high-cover crouch entry/exit against actual native stance, rapid reversal and blocked standing. Movement/aim/actions must interrupt presentation, arm-only weapon carry must preserve the authored torso/legs through free/high-cover crouch, and protected low cover must bypass every tall transition frame and its carry weight.
+- Verify contextual tap/hold decisions, automatic sprint approach, fast wall travel, away detach, bounded sprint heading with free look and same-frame combat admission. Check rifle/pistol gait selection and grip through aim/reload/roll transitions.
+- Keep the original foundation map recoverable and the committed Blueprint free of ignored local dependencies. Verify the local profile asset gate after a normal-editor restart with default folder watching, unchanged source/target poses and no target auto-reimport; commandlet-only checks are insufficient. Verify portable fallback. Record sources, retarget setup, actual gameplay evidence and remaining gaps. Do not claim a completed knee slide, entry/exit action, corner/transfer/vault/knife system, AI/waves, local duo or LAN.
 
 ## M0 — Foundation baseline
 
@@ -51,7 +53,7 @@ The user explicitly authorized movement/weapon work beyond M0, before the full h
 
 - Bounded cover detection at 135 cm, attach at 52 cm, lateral movement and safe detach; high/low classification matches 180/115 cm fixtures.
 - Standing/crouched cover locomotion, valid aiming/firing and guarded stance transitions; state and camera remain coherent.
-- Context traversal prioritizes cover/exit/vault then grounded jump; blocked vault destination rejects cleanly; montage interruption cannot strand state.
+- Context traversal resolves cover, roll and sprint intent deterministically; jump is separate in that profile. Future corners/transfers/vaults require distinct valid contexts, complete checked routes and safe interruption; a blocked vault must reject cleanly without stranding state.
 - Test corners, low ceilings, flanks, muzzle obstruction and collision during vault; inspect real poses at gameplay camera distance.
 
 ## M4 — Local cooperative slice

@@ -10,3 +10,5 @@ Saved/
 *.sln
 .DS_Store
 __pycache__/
+# Locally installed engine-plugin animation derivatives; reproduce with Tools.
+Content/Gunner/LicensedLocal/

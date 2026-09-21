@@ -41,12 +41,13 @@ bool UGunnerDodgeComponent::FindSafeDestination(const FVector& Direction, FVecto
 {
     UCharacterMovementComponent* Movement = Character->GetCharacterMovement();
     const UCapsuleComponent* Capsule = Character->GetCapsuleComponent();
-    const FVector Start = Character->GetActorLocation();
-    const float HalfHeight = Capsule->GetScaledCapsuleHalfHeight();
+    const float HalfHeight = Character->GetClass()->GetDefaultObject<ACharacter>()->GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight() * Capsule->GetShapeScale();
+    const FVector Start = Character->GetActorLocation() + FVector(0.f, 0.f, HalfHeight - Capsule->GetScaledCapsuleHalfHeight());
     const FCollisionShape Shape = FCollisionShape::MakeCapsule(Capsule->GetScaledCapsuleRadius(), HalfHeight);
     FCollisionQueryParams Query(SCENE_QUERY_STAT(GunnerDodgeClearance), false, Character);
     const FCollisionResponseParams Responses(Capsule->GetCollisionResponseToChannels());
     const ECollisionChannel Channel = Capsule->GetCollisionObjectType();
+    if (GetWorld()->OverlapBlockingTestByChannel(Start, FQuat::Identity, Channel, Shape, Query, Responses)) return false;
     float Distance = FMath::Clamp(DodgeDistance, 100.f, 350.f);
     FHitResult Obstacle;
     if (GetWorld()->SweepSingleByChannel(Obstacle, Start, Start + Direction * Distance,
@@ -65,15 +66,16 @@ bool UGunnerDodgeComponent::FindSafeDestination(const FVector& Direction, FVecto
     for (int32 Step = 1; Step <= Steps; ++Step)
     {
         const FVector Point = FMath::Lerp(Start, Destination, static_cast<float>(Step) / Steps);
-        FFindFloorResult Floor;
-        Movement->FindFloor(Point + FVector(0.f, 0.f, 35.f), Floor, false);
-        if (!Floor.IsWalkableFloor() || !Floor.HitResult.Component.IsValid()
-            || Floor.HitResult.Component->Mobility != EComponentMobility::Static
-            || FMath::Abs(Floor.HitResult.ImpactPoint.Z - StartFloorZ) > 35.f)
+        FHitResult Floor;
+        const FVector Feet(Point.X, Point.Y, StartFloorZ);
+        if (!GetWorld()->LineTraceSingleByChannel(Floor, Feet + FVector(0.f, 0.f, 35.f),
+            Feet - FVector(0.f, 0.f, 35.f), ECC_WorldStatic, Query)
+            || !Movement->IsWalkable(Floor) || !Floor.Component.IsValid()
+            || Floor.Component->Mobility != EComponentMobility::Static)
         {
             return false;
         }
-        if (Step == Steps) Destination.Z = Floor.HitResult.ImpactPoint.Z + HalfHeight + 2.f;
+        if (Step == Steps) Destination.Z = Floor.ImpactPoint.Z + HalfHeight + 2.f;
     }
 
     // A raised destination must also have full standing clearance. Retaining the actual
@@ -82,12 +84,12 @@ bool UGunnerDodgeComponent::FindSafeDestination(const FVector& Direction, FVecto
         Channel, Shape, Query, Responses);
 }
 
-bool UGunnerDodgeComponent::TryDodge()
+bool UGunnerDodgeComponent::TryDodge(FVector DesiredDirection)
 {
     if (!Character || !Character->HasAuthority() || !Character->GetController() || bDodging
-        || !RollMontage || Character->bIsCrouched || (Cover && Cover->IsAttached())) return false;
+        || !RollMontage || (Cover && (Cover->IsTransitioning() || Cover->IsPeeking()))) return false;
     UCharacterMovementComponent* Movement = Character->GetCharacterMovement();
-    if (!Movement->IsMovingOnGround() || Movement->bWantsToCrouch) return false;
+    if (!Movement->IsMovingOnGround() || Movement->HasRootMotionSources()) return false;
     if (Combat && (Combat->IsReloading() || Combat->IsMeleeing()
         || Combat->GetActionState() == EGunnerCombatAction::Equipping)) return false;
     UAnimInstance* Anim = Character->GetMesh()->GetAnimInstance();
@@ -96,14 +98,26 @@ bool UGunnerDodgeComponent::TryDodge()
     if (!FMath::IsFinite(Duration) || Duration < 0.1f || Duration > 5.f) return false;
 
     const FVector Velocity = Character->GetVelocity();
-    const FVector Direction = Velocity.SizeSquared2D() > FMath::Square(30.f)
-        ? Velocity.GetSafeNormal2D()
-        : FRotator(0.f, Character->GetController()->GetControlRotation().Yaw, 0.f).Vector();
+    const FVector Direction = !DesiredDirection.IsNearlyZero() ? DesiredDirection.GetSafeNormal2D() :
+        ((Cover && Cover->IsAttached()) ? Cover->GetNormal() :
+        (Velocity.SizeSquared2D() > FMath::Square(30.f) ? Velocity.GetSafeNormal2D()
+        : FRotator(0.f, Character->GetController()->GetControlRotation().Yaw, 0.f).Vector()));
+    if (Cover && Cover->IsAttached() && FVector::DotProduct(Direction, Cover->GetNormal()) < -0.1f) return false;
     FVector Destination;
     if (!FindSafeDestination(Direction, Destination)) return false;
 
     if (Combat) Combat->StopAllActions();
     if (Anim->Montage_Play(RollMontage, 1.f, EMontagePlayReturnType::Duration) <= 0.f) return false;
+    // Clearance was checked with the full standing capsule before touching stance or cover.
+    Character->UnCrouch();
+    Movement->UnCrouch(false);
+    if (Character->bIsCrouched)
+    {
+        Character->Crouch();
+        Anim->Montage_Stop(0.05f, RollMontage);
+        return false;
+    }
+    if (Cover && Cover->IsAttached()) Cover->Detach();
     bDodging = true;
     ActiveMontage = RollMontage;
     ++ActionSerial;

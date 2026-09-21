@@ -1,8 +1,11 @@
 #include "GunnerCoverComponent.h"
+#include "GunnerAnimInstance.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
+#include "GameFramework/RootMotionSource.h"
 #include "Engine/World.h"
 
 UGunnerCoverComponent::UGunnerCoverComponent()
@@ -25,16 +28,60 @@ void UGunnerCoverComponent::BeginPlay()
 }
 bool UGunnerCoverComponent::WallAt(const FVector& Center, FHitResult& Hit, float Height) const
 {
+    return WallAtNormal(Center, WallNormal, bAttached ? AttachedOffset + 28.f : QueryReach, Hit, Height);
+}
+bool UGunnerCoverComponent::WallAtNormal(const FVector& Center, const FVector& Normal, float Reach,
+    FHitResult& Hit, float Height) const
+{
     if (!Character) return false;
     const float Half = Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
     const FVector Start = Center + FVector(0, 0, Height - Half);
     FCollisionQueryParams Params(SCENE_QUERY_STAT(GunnerCoverWall), false, Character);
-    return GetWorld()->LineTraceSingleByChannel(Hit, Start, Start - WallNormal * (bAttached ? AttachedOffset + 28.f : QueryReach), ECC_WorldStatic, Params)
-        && FMath::Abs(Hit.ImpactNormal.Z) < 0.2f && FVector::DotProduct(Hit.ImpactNormal, WallNormal) > 0.95f;
+    return GetWorld()->LineTraceSingleByChannel(Hit, Start, Start - Normal * Reach, ECC_WorldStatic, Params)
+        && FMath::Abs(Hit.ImpactNormal.Z) < 0.2f && FVector::DotProduct(Hit.ImpactNormal, Normal) > 0.95f;
 }
-bool UGunnerCoverComponent::TryAttach(const FVector& SearchDirection)
+bool UGunnerCoverComponent::HasSupportedFloor(const FVector& Center, float ReferenceFeetZ, float* OutFloorZ) const
 {
-    if (!Character || !Character->HasAuthority() || bAttached || !Character->GetCharacterMovement()->IsMovingOnGround()) return false;
+    if (!Character) return false;
+    FFindFloorResult Floor;
+    Character->GetCharacterMovement()->FindFloor(Center + FVector(0.f, 0.f, 35.f), Floor, false);
+    if (!Floor.IsWalkableFloor() || !Floor.HitResult.Component.IsValid()
+        || Floor.HitResult.Component->Mobility != EComponentMobility::Static
+        || FMath::Abs(Floor.HitResult.ImpactPoint.Z - ReferenceFeetZ) > 35.f) return false;
+    if (OutFloorZ) *OutFloorZ = Floor.HitResult.ImpactPoint.Z;
+    return true;
+}
+bool UGunnerCoverComponent::ValidateApproach(const FVector& Start, FVector& Destination) const
+{
+    const UCapsuleComponent* Capsule = Character->GetCapsuleComponent();
+    const float HalfHeight = Capsule->GetScaledCapsuleHalfHeight();
+    const float FeetZ = Start.Z - HalfHeight;
+    const FCollisionShape Shape = FCollisionShape::MakeCapsule(Capsule->GetScaledCapsuleRadius(), HalfHeight);
+    const FCollisionResponseParams Responses(Capsule->GetCollisionResponseToChannels());
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(GunnerCoverApproach), false, Character);
+    FHitResult Obstacle;
+    if (GetWorld()->SweepSingleByChannel(Obstacle, Start, Destination, FQuat::Identity,
+        Capsule->GetCollisionObjectType(), Shape, Query, Responses)) return false;
+    const int32 Steps = FMath::Max(1, FMath::CeilToInt(FVector::Dist2D(Start, Destination) / 70.f));
+    for (int32 Step = 0; Step <= Steps; ++Step)
+    {
+        const FVector Point = FMath::Lerp(Start, Destination, static_cast<float>(Step) / Steps);
+        float FloorZ = 0.f;
+        if (!HasSupportedFloor(Point, FeetZ, &FloorZ)) return false;
+        if (Step == Steps) Destination.Z = FloorZ + HalfHeight + 2.f;
+    }
+    // Recheck the route after adapting the destination to its actual supporting floor.
+    return !GetWorld()->SweepSingleByChannel(Obstacle, Start, Destination, FQuat::Identity,
+        Capsule->GetCollisionObjectType(), Shape, Query, Responses)
+        && !GetWorld()->OverlapBlockingTestByChannel(Destination, FQuat::Identity,
+            Capsule->GetCollisionObjectType(), Shape, Query, Responses);
+}
+bool UGunnerCoverComponent::TryAttach(const FVector& SearchDirection, bool bFastApproach)
+{
+    if (!Character || !Character->HasAuthority() || !Character->GetController() || bAttached || bEntering
+        || !Character->GetCharacterMovement()->IsMovingOnGround()
+        || Character->GetCharacterMovement()->HasRootMotionSources()
+        || Character->GetCharacterMovement()->bWantsToCrouch != Character->bIsCrouched) return false;
     const FVector Direction = SearchDirection.GetSafeNormal2D();
     if (Direction.IsNearlyZero()) return false;
     const FVector Center = Character->GetActorLocation();
@@ -45,35 +92,131 @@ bool UGunnerCoverComponent::TryAttach(const FVector& SearchDirection)
     if (!GetWorld()->LineTraceSingleByChannel(Hit, Start, Start + Direction * QueryReach, ECC_WorldStatic, Params)
         || FMath::Abs(Hit.ImpactNormal.Z) > 0.2f || !Hit.Component.IsValid()
         || Hit.Component->Mobility != EComponentMobility::Static) return false;
-    WallNormal = Hit.ImpactNormal.GetSafeNormal2D();
+    const FVector CandidateNormal = Hit.ImpactNormal.GetSafeNormal2D();
     // Reject short obstacles rather than treating ankle-high geometry as protection.
     FHitResult BodyHit;
-    if (!WallAt(Center, BodyHit, 90.f) || BodyHit.Component != Hit.Component) return false;
+    if (!WallAtNormal(Center, CandidateNormal, QueryReach, BodyHit, 90.f) || BodyHit.Component != Hit.Component) return false;
     FHitResult HighHit;
-    bLow = !WallAt(Center, HighHit, 145.f) || HighHit.Component != Hit.Component;
-    FVector Desired = Hit.ImpactPoint + WallNormal * AttachedOffset;
+    const bool bCandidateLow = !WallAtNormal(Center, CandidateNormal, QueryReach, HighHit, 145.f)
+        || HighHit.Component != Hit.Component;
+    FVector Desired = Hit.ImpactPoint + CandidateNormal * AttachedOffset;
     Desired.Z = Center.Z;
-    FHitResult Sweep;
-    Character->SetActorLocation(Desired, true, &Sweep);
-    if (FVector::Dist2D(Character->GetActorLocation(), Desired) > 3.f)
+    if (!ValidateApproach(Center, Desired)) return false;
+    if (!WallAtNormal(Desired, CandidateNormal, AttachedOffset + 28.f, BodyHit, 90.f)
+        || BodyHit.Component != Hit.Component) return false;
+    const bool bDestinationLow = !WallAtNormal(Desired, CandidateNormal, AttachedOffset + 28.f, HighHit, 145.f)
+        || HighHit.Component != Hit.Component;
+    if (bDestinationLow != bCandidateLow) return false;
+
+    // All admission queries above are pure: rejection does not move the pawn or replace
+    // an existing anchor. The current armed gait honestly presents this approach.
+    auto* Movement = Character->GetCharacterMovement();
+    const float Speed = FMath::Clamp(bFastApproach ? FastApproachSpeed : ApproachSpeed, 100.f, 650.f);
+    const float Duration = FMath::Clamp(FVector::Dist2D(Center, Desired) / Speed, 0.12f, 0.8f);
+    TSharedPtr<FRootMotionSource_MoveToForce> Motion = MakeShared<FRootMotionSource_MoveToForce>();
+    Motion->InstanceName = TEXT("GunnerCoverApproach");
+    Motion->Priority = 480;
+    Motion->AccumulateMode = ERootMotionAccumulateMode::Override;
+    Motion->StartLocation = Center;
+    Motion->TargetLocation = Desired;
+    Motion->Duration = Duration;
+    Motion->bRestrictSpeedToExpected = true;
+    Motion->FinishVelocityParams.Mode = ERootMotionFinishVelocityMode::SetVelocity;
+    Motion->FinishVelocityParams.SetVelocity = FVector::ZeroVector;
+    const uint16 SourceId = Movement->ApplyRootMotionSource(Motion);
+    if (SourceId == static_cast<uint16>(ERootMotionSourceID::Invalid)) return false;
+
+    PendingWall = Hit.Component;
+    PendingNormal = CandidateNormal;
+    PendingDestination = Desired;
+    bPendingLow = bCandidateLow;
+    EntryHalfHeight = Half;
+    EntryFeetZ = Center.Z - Half;
+    EntryElapsed = 0.f;
+    EntryDuration = Duration;
+    EntryMotionSourceId = SourceId;
+    bEntering = true;
+    Character->ConsumeMovementInputVector();
+    Character->StopJumping();
+    Movement->StopMovementImmediately();
+    SetComponentTickInterval(0.f);
+    SetComponentTickEnabled(true);
+    return true;
+}
+void UGunnerCoverComponent::CancelTransition()
+{
+    if (!bEntering && EntryMotionSourceId == 0) return;
+    bEntering = false;
+    bPendingLow = false;
+    if (Character)
     {
-        // A blocked snap keeps its safe swept position; never teleport through the obstruction.
-        return false;
+        auto* Movement = Character->GetCharacterMovement();
+        if (EntryMotionSourceId != 0) Movement->RemoveRootMotionSourceByID(EntryMotionSourceId);
+        Character->ConsumeMovementInputVector();
+        Movement->StopMovementImmediately();
     }
-    Wall = Hit.Component;
+    EntryMotionSourceId = 0;
+    EntryElapsed = EntryDuration = 0.f;
+    PendingWall.Reset();
+    PendingNormal = PendingDestination = FVector::ZeroVector;
+    SetComponentTickInterval(0.04f);
+    SetComponentTickEnabled(bAttached);
+}
+void UGunnerCoverComponent::CompleteApproach()
+{
+    // Keep the final swept location. Never finish by snapping through a new obstacle.
+    const TWeakObjectPtr<UPrimitiveComponent> NewWall = PendingWall;
+    const FVector NewNormal = PendingNormal;
+    const bool bNewLow = bPendingLow;
+    CancelTransition();
+    Wall = NewWall;
+    WallNormal = NewNormal;
+    bLow = bNewLow;
     bAttached = true;
     PeekState = EPeekState::None;
     bPeekRequestBlocked = false;
     auto* Movement = Character->GetCharacterMovement();
-    Movement->StopMovementImmediately();
     Movement->SetPlaneConstraintNormal(WallNormal);
-    Movement->SetPlaneConstraintOrigin(Desired);
+    Movement->SetPlaneConstraintOrigin(Character->GetActorLocation());
     Movement->SetPlaneConstraintEnabled(true);
     SetComponentTickEnabled(true);
-    return true;
+}
+void UGunnerCoverComponent::TickApproach(float DeltaTime)
+{
+    if (!Character || !Character->HasAuthority() || !Character->GetController() || !PendingWall.IsValid()
+        || PendingWall->Mobility != EComponentMobility::Static
+        || !Character->GetCharacterMovement()->IsMovingOnGround()
+        || !FMath::IsNearlyEqual(Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight(), EntryHalfHeight, 1.f))
+    {
+        CancelTransition();
+        return;
+    }
+    EntryElapsed += DeltaTime;
+    FHitResult WallHit;
+    FHitResult HighHit;
+    const bool bLowNow = !WallAtNormal(PendingDestination, PendingNormal, AttachedOffset + 28.f, HighHit, 145.f)
+        || HighHit.Component != PendingWall;
+    FVector RevalidatedDestination = PendingDestination;
+    if (EntryElapsed > EntryDuration + 0.4f
+        || !WallAtNormal(PendingDestination, PendingNormal, AttachedOffset + 28.f, WallHit, 90.f)
+        || WallHit.Component != PendingWall || bLowNow != bPendingLow
+        || !HasSupportedFloor(Character->GetActorLocation(), EntryFeetZ)
+        || !HasSupportedFloor(PendingDestination, EntryFeetZ)
+        || !ValidateApproach(Character->GetActorLocation(), RevalidatedDestination)
+        || FVector::DistSquared(RevalidatedDestination, PendingDestination) > FMath::Square(2.f))
+    {
+        // Validate before CharacterMovement runs so a newly introduced blocker
+        // cannot deflect the approach sideways through SlideAlongSurface.
+        CancelTransition();
+        return;
+    }
+    if (FVector::Dist2D(Character->GetActorLocation(), PendingDestination) <= 2.f
+        && FMath::Abs(Character->GetActorLocation().Z - PendingDestination.Z) <= 5.f)
+        CompleteApproach();
 }
 void UGunnerCoverComponent::Detach()
 {
+    CancelTransition();
     if (Character && bAttached)
     {
         Character->GetCharacterMovement()->SetPlaneConstraintEnabled(false);
@@ -100,11 +243,25 @@ void UGunnerCoverComponent::EndPlay(const EEndPlayReason::Type Reason)
 void UGunnerCoverComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* TickFunction)
 {
     Super::TickComponent(DeltaTime, TickType, TickFunction);
+    if (bEntering)
+    {
+        TickApproach(DeltaTime);
+        return;
+    }
     FHitResult Hit;
     const FVector ValidationPoint = IsPeeking() ? PeekAnchor : (Character ? Character->GetActorLocation() : FVector::ZeroVector);
     if (!Character || !Wall.IsValid() || !Character->GetCharacterMovement()->IsMovingOnGround()
-        || !WallAt(ValidationPoint, Hit) || Hit.Component != Wall)
+        || !WallAt(ValidationPoint, Hit, 90.f) || Hit.Component != Wall)
     {
+        Detach();
+        return;
+    }
+    FHitResult HeightHit;
+    const bool bLowNow = !WallAt(ValidationPoint, HeightHit, 145.f) || HeightHit.Component != Wall;
+    if (bLowNow != bLow)
+    {
+        // Height changes need an authored stance transition; do not silently carry
+        // a cached protection state onto a different-height part of one mesh.
         Detach();
         return;
     }
@@ -132,18 +289,37 @@ void UGunnerCoverComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 }
 FVector UGunnerCoverComponent::ConstrainMovement(const FVector& DesiredDirection) const
 {
+    if (bEntering) return FVector::ZeroVector;
     if (!bAttached || !Character) return DesiredDirection;
     if (IsPeeking()) return FVector::ZeroVector;
     const FVector Tangent = FVector::CrossProduct(FVector::UpVector, WallNormal);
     const float Along = FVector::DotProduct(DesiredDirection, Tangent);
-    FHitResult Ahead;
-    // Keep the entire capsule beside the same wall. Corners require explicit detach/re-attach.
-    const FVector Test = Character->GetActorLocation() + Tangent * FMath::Sign(Along) * 44.f;
-    if (FMath::Abs(Along) < 0.05f || !WallAt(Test, Ahead) || Ahead.Component != Wall) return FVector::ZeroVector;
+    if (FMath::Abs(Along) < 0.05f) return FVector::ZeroVector;
+    const auto* Movement = Character->GetCharacterMovement();
+    const UCapsuleComponent* Capsule = Character->GetCapsuleComponent();
+    const float Speed = FMath::Max(Character->GetVelocity().Size2D(), Movement->GetMaxSpeed());
+    // Include the braking distance so raising cover speed cannot overrun the fixed
+    // capsule-sized lookahead that sufficed for the original slow shuffle.
+    const float LookAhead = FMath::Max(44.f, Capsule->GetScaledCapsuleRadius()
+        + FMath::Square(Speed) / (2.f * FMath::Max(100.f, Movement->BrakingDecelerationWalking)));
+    const FVector Start = Character->GetActorLocation();
+    const float FeetZ = Start.Z - Capsule->GetScaledCapsuleHalfHeight();
+    const int32 Steps = FMath::Max(1, FMath::CeilToInt(LookAhead / 70.f));
+    for (int32 Step = 1; Step <= Steps; ++Step)
+    {
+        const FVector Test = Start + Tangent * FMath::Sign(Along) * LookAhead * (static_cast<float>(Step) / Steps);
+        FHitResult Ahead;
+        FHitResult HighHit;
+        if (!WallAt(Test, Ahead, 90.f) || Ahead.Component != Wall || !HasSupportedFloor(Test, FeetZ))
+            return FVector::ZeroVector;
+        const bool bLowAhead = !WallAt(Test, HighHit, 145.f) || HighHit.Component != Wall;
+        if (bLowAhead != bLow) return FVector::ZeroVector;
+    }
     return Tangent * Along;
 }
 bool UGunnerCoverComponent::CanPeek(float Side) const
 {
+    if (bEntering) return false;
     if (!bAttached || !Character) return true;
     if (bLow) return true;
     if (bPeekRequestBlocked || PeekState == EPeekState::Returning) return false;
@@ -187,8 +363,15 @@ bool UGunnerCoverComponent::FindOpenEdge(const FVector& Anchor, float Side, FVec
 bool UGunnerCoverComponent::FindPeekDestination(const FVector& Anchor, float Side,
     FVector& OutDestination, FVector& OutDirection) const
 {
-    // A forward-only crouch gait cannot represent a lateral step while facing the gun.
-    if (!Character || Character->bIsCrouched || Character->GetCharacterMovement()->bWantsToCrouch) return false;
+    if (!Character) return false;
+    // Lateral crouched exposure needs actual directional source coverage in the
+    // assigned graph. Never start while a pending stance would change anchor Z.
+    if (Character->bIsCrouched || Character->GetCharacterMovement()->bWantsToCrouch)
+    {
+        const auto* Anim = Cast<UGunnerAnimInstance>(Character->GetMesh()->GetAnimInstance());
+        if (!Anim || !Anim->bDirectionalCrouchPoseReady
+            || Character->GetCharacterMovement()->bWantsToCrouch != Character->bIsCrouched) return false;
+    }
     if (!FindOpenEdge(Anchor, Side, OutDirection)) return false;
     const UCapsuleComponent* Capsule = Character->GetCapsuleComponent();
     const float HalfHeight = Capsule->GetScaledCapsuleHalfHeight();

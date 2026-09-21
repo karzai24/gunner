@@ -1,0 +1,2 @@
+[2026.09.21-00.22.07:350][  0]LogPython: GUNNER_MIXAMO_PERSISTENCE_PASS clips=11 pose_samples=2013 metadata_empty=true source_fbx_external=true
+[2026.09.21-00.22.07:352][  0]LogInit: Display: Success - 0 error(s), 0 warning(s)

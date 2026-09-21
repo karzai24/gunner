@@ -2,6 +2,8 @@
 
 Inspected 2026-09-19 for the requested movement/combat sandbox. Asset presence and creator previews are evidence of available source material, not proof of successful import, retargeting, or gameplay integration. Character appearance is outside this pass.
 
+The later [movement acquisition audit](research/MOVEMENT_ASSET_COVERAGE.md) supersedes acquisition-status conclusions below: installed Mover directional crouch and eleven official Mixamo candidates have since been prepared locally, with selected crouch/sprint/high-wall motions integrated. Those sources are distinct from the template and CC0 inventories documented here. See [LOCAL_MOVEMENT_SETUP](LOCAL_MOVEMENT_SETUP.md) for the ignored local profile.
+
 ## Available locally
 
 | Need | Exact source | Finding |

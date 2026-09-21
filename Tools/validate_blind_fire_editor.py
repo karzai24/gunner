@@ -26,10 +26,15 @@ def tick(delta):
     elapsed = time.monotonic() - state['at']
     if state['phase'] == 'start' and elapsed > 3:
         levels.editor_request_begin_play()
-        state.update(phase='play', at=time.monotonic())
+        state.update(phase='play', at=time.monotonic(), saw_world=False)
     elif state['phase'] == 'play':
+        if state.get('saw_world') and not levels.is_in_play_in_editor():
+            u.log_error('GUNNER_BLIND_PIE_ABORTED: play stopped before the probe completed')
+            finish()
+            return
         world = editor.get_game_world()
         if world:
+            state['saw_world'] = True
             probes = u.GameplayStatics.get_all_actors_of_class(world, u.GunnerBlindFireProbe)
             if len(probes) == 1 and not probes[0].is_actor_tick_enabled():
                 state['cycles'] += 1
@@ -41,12 +46,16 @@ def tick(delta):
             u.log_error('GUNNER_BLIND_PIE_TIMEOUT')
             levels.editor_request_end_play()
             finish()
-    elif state['phase'] == 'stopping' and elapsed > 1 and not levels.is_in_play_in_editor():
-        if state['cycles'] == 2:
-            u.log('GUNNER_BLIND_PIE_COMPLETE cycles=2')
+    elif state['phase'] == 'stopping':
+        if elapsed > 10:
+            u.log_error('GUNNER_BLIND_PIE_STOP_TIMEOUT')
             finish()
-        else:
-            state.update(phase='start', at=time.monotonic())
+        elif elapsed > 1 and not levels.is_in_play_in_editor():
+            if state['cycles'] == 2:
+                u.log('GUNNER_BLIND_PIE_COMPLETE cycles=2')
+                finish()
+            else:
+                state.update(phase='start', at=time.monotonic())
 
 
 handle = u.register_slate_post_tick_callback(tick)

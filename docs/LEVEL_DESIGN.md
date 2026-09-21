@@ -14,7 +14,11 @@
 
 The current sandbox is `Content/Gunner/Motion/Maps/L_MotionRange`, a separate copy of the 44 × 32 m foundation room. It contains 1.15 m and 1.8 m cover fixtures, open movement lanes and three resetting weapon targets. The final arena below remains a design target. The foundation map is preserved.
 
-High-cover edge exposure adds a checked 0.70 m lateral step from the protected anchor; the 0.52 m wall offset remains unchanged. Roll travel is at most 3.50 m and retains the standing capsule, so it does not grant passage under low openings. These are action distances, not changes to the room, player or cover dimensions.
+High-cover edge exposure adds a checked 0.70 m lateral step from the protected anchor; the 0.52 m capsule offset remains unchanged. The optional rifle wall pose moves the rendered skeletal root 0.25 m toward the wall to fit its authored lean; it does not move the collision anchor. Roll travel is at most 3.50 m and retains the standing capsule, so a crouched start cannot pass under low openings.
+
+Cover approaches use swept movement at 3.00 m/s normally or 4.50 m/s from a fast approach, with floor samples at intervals no greater than 0.70 m. Attached travel also checks braking distance before a wall or floor ends. The local movement profile uses 3.00 m/s normal travel, 5.00 m/s sprint and 1.40 m/s crouch; standing wall travel is 1.50 m/s or 2.20 m/s while the context button is held. These are original tuning choices for the available motion, not measured franchise values. Room, capsule, cover and lane dimensions are unchanged.
+
+The inspected installed vault travels approximately 3.90 m and does not fit a full launch from the existing 0.52 m cover anchor. It remains disabled; do not change the fixtures or teleport the player to conceal that mismatch.
 
 ## Arena grammar
 

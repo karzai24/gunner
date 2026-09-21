@@ -1,0 +1,204 @@
+{
+  "status": "persisted_asset_gate_passed",
+  "graph_status": "<BlueprintStatus.BS_UP_TO_DATE: 3>",
+  "copies": {
+    "MM_Unarmed_Crouch_Idle": {
+      "editable_bone_data": {
+        "sha256": "1c5fcfab4e04b730539c6e1d8f0b70d03128f6d90686c07ed432616aabc0aa00",
+        "tracks": 89,
+        "frames": 283,
+        "keys": 284,
+        "frame_rate": [
+          30,
+          1
+        ],
+        "representation": "editable_bone_transforms_at_every_source_frame"
+      },
+      "duration": 9.433333396911621,
+      "rate_scale": 1.0,
+      "root_policy": {
+        "enable_root_motion": "False",
+        "force_root_lock": "True",
+        "root_motion_root_lock": "<RootMotionRootLock.REF_POSE: 0>"
+      }
+    },
+    "MM_Unarmed_Crouch_Entry": {
+      "editable_bone_data": {
+        "sha256": "e1266ca68d76254d517cf6abfec750c47aad2c4e205732ef8430b9e6e1158745",
+        "tracks": 89,
+        "frames": 22,
+        "keys": 23,
+        "frame_rate": [
+          30,
+          1
+        ],
+        "representation": "editable_bone_transforms_at_every_source_frame"
+      },
+      "duration": 0.7333333492279053,
+      "rate_scale": 1.0,
+      "root_policy": {
+        "enable_root_motion": "False",
+        "force_root_lock": "True",
+        "root_motion_root_lock": "<RootMotionRootLock.REF_POSE: 0>"
+      }
+    },
+    "MM_Unarmed_Crouch_Exit": {
+      "editable_bone_data": {
+        "sha256": "82a03c2f0a3b881d40332ee5d25ee373aac6d5df71e31d2eb9695fa5fb026e9a",
+        "tracks": 89,
+        "frames": 26,
+        "keys": 27,
+        "frame_rate": [
+          30,
+          1
+        ],
+        "representation": "editable_bone_transforms_at_every_source_frame"
+      },
+      "duration": 0.8666666746139526,
+      "rate_scale": 1.0,
+      "root_policy": {
+        "enable_root_motion": "False",
+        "force_root_lock": "True",
+        "root_motion_root_lock": "<RootMotionRootLock.REF_POSE: 0>"
+      }
+    },
+    "MM_Unarmed_Crouch_Walk_Fwd": {
+      "editable_bone_data": {
+        "sha256": "223c41f07e8b69d1c937f0aae99e40234abd56445d139ea0151948025133ebf6",
+        "tracks": 89,
+        "frames": 54,
+        "keys": 55,
+        "frame_rate": [
+          30,
+          1
+        ],
+        "representation": "editable_bone_transforms_at_every_source_frame"
+      },
+      "duration": 1.7999999523162842,
+      "rate_scale": 0.46666666865348816,
+      "root_policy": {
+        "enable_root_motion": "False",
+        "force_root_lock": "True",
+        "root_motion_root_lock": "<RootMotionRootLock.REF_POSE: 0>"
+      }
+    },
+    "MM_Unarmed_Crouch_Walk_Bwd": {
+      "editable_bone_data": {
+        "sha256": "115182d31b2371a22f2a6c0b243f3149b5f46ee33c024d5772ed7cfec7110b29",
+        "tracks": 89,
+        "frames": 52,
+        "keys": 53,
+        "frame_rate": [
+          30,
+          1
+        ],
+        "representation": "editable_bone_transforms_at_every_source_frame"
+      },
+      "duration": 1.7333333492279053,
+      "rate_scale": 0.46666666865348816,
+      "root_policy": {
+        "enable_root_motion": "False",
+        "force_root_lock": "True",
+        "root_motion_root_lock": "<RootMotionRootLock.REF_POSE: 0>"
+      }
+    },
+    "MM_Unarmed_Crouch_Walk_Left": {
+      "editable_bone_data": {
+        "sha256": "0fcbf9b829efc0d7a8731ebc0fff81afa29db45528d2e96b3fecec5408c9e61e",
+        "tracks": 89,
+        "frames": 52,
+        "keys": 53,
+        "frame_rate": [
+          30,
+          1
+        ],
+        "representation": "editable_bone_transforms_at_every_source_frame"
+      },
+      "duration": 1.7333333492279053,
+      "rate_scale": 0.46666666865348816,
+      "root_policy": {
+        "enable_root_motion": "False",
+        "force_root_lock": "True",
+        "root_motion_root_lock": "<RootMotionRootLock.REF_POSE: 0>"
+      }
+    },
+    "MM_Unarmed_Crouch_Walk_Right": {
+      "editable_bone_data": {
+        "sha256": "96367ef8eb13fb50fac4fbdbd0600901d479e96dfe76714ef243f737b285897d",
+        "tracks": 89,
+        "frames": 40,
+        "keys": 41,
+        "frame_rate": [
+          30,
+          1
+        ],
+        "representation": "editable_bone_transforms_at_every_source_frame"
+      },
+      "duration": 1.3333333730697632,
+      "rate_scale": 0.46666666865348816,
+      "root_policy": {
+        "enable_root_motion": "False",
+        "force_root_lock": "True",
+        "root_motion_root_lock": "<RootMotionRootLock.REF_POSE: 0>"
+      }
+    },
+    "VaultOver": {
+      "editable_bone_data": {
+        "sha256": "f4d0c8badeff32989b250b5493fa3cf3d692b6585fbe0117403a59b39a2924ab",
+        "tracks": 87,
+        "frames": 61,
+        "keys": 62,
+        "frame_rate": [
+          30,
+          1
+        ],
+        "representation": "editable_bone_transforms_at_every_source_frame"
+      },
+      "duration": 2.0333333015441895,
+      "rate_scale": 1.0,
+      "root_policy": {
+        "enable_root_motion": "True",
+        "force_root_lock": "False",
+        "root_motion_root_lock": "<RootMotionRootLock.REF_POSE: 0>"
+      }
+    }
+  },
+  "original_package_git_blobs": {
+    "Content/Gunner/Motion/Animation/BS_Crouch.uasset": "c0480c4e17cb73fa50597e12b5cd5c1ed90a5dde",
+    "Content/Gunner/Animation/Retargeted/Manny/A_UAL_Crouch_Idle_Loop.uasset": "a2ebda603773e72b69255e71b05c44f1d0e9c4fc",
+    "Content/Gunner/Animation/Retargeted/Manny/A_UAL_Crouch_Fwd_Loop.uasset": "467c12b8ddbc51805bf87a59541c4881108930bf",
+    "Content/Gunner/Motion/Movement/DA_MotionSettings.uasset": "637f7c080e007c08a60fddeb190759948b6fe394"
+  },
+  "limitations": [
+    "Static asset gate only; native rendered probes must validate gait, grip and cover protection."
+  ],
+  "blend_samples": {
+    "A_CrouchIdle": [
+      0.0,
+      0.0
+    ],
+    "A_CrouchFwd": [
+      140.0,
+      0.0
+    ],
+    "A_CrouchBwd": [
+      -140.0,
+      0.0
+    ],
+    "A_CrouchLeft": [
+      0.0,
+      -140.0
+    ],
+    "A_CrouchRight": [
+      0.0,
+      140.0
+    ]
+  },
+  "graph_blend_spaces": [
+    "/Game/Gunner/Motion/Animation/BS_Rifle.BS_Rifle",
+    "/Game/Gunner/Motion/Animation/BS_Pistol.BS_Pistol",
+    "/Game/Gunner/LicensedLocal/MoverTraversal/BS_DirectionalCrouch.BS_DirectionalCrouch",
+    "/Game/Gunner/Motion/Animation/BS_Crouch.BS_Crouch"
+  ],
+  "graph_input_validation": "native traversal probe required"
+}

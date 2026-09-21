@@ -4,6 +4,16 @@
 #include "Animation/AnimInstance.h"
 #include "GunnerAnimInstance.generated.h"
 
+class ACharacter;
+
+UENUM(BlueprintType)
+enum class EGunnerCrouchTransitionPhase : uint8
+{
+    None,
+    Entering,
+    Exiting
+};
+
 /** Presentation snapshot for the editable Warden animation graph. Gameplay remains authoritative. */
 UCLASS(Transient, Blueprintable)
 class GUNNER_API UGunnerAnimInstance : public UAnimInstance
@@ -11,6 +21,7 @@ class GUNNER_API UGunnerAnimInstance : public UAnimInstance
     GENERATED_BODY()
 
 public:
+    virtual void NativeInitializeAnimation() override;
     virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 
     /** Supplied by the owning character; these flags never initiate gameplay actions. */
@@ -37,6 +48,52 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Locomotion")
     bool bInCover = false;
+
+    /** Enabled only by a graph using authored directional crouch poses on both velocity axes. */
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Locomotion")
+    bool bDirectionalCrouchPoseReady = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Locomotion")
+    bool bProtectiveLowCover = false;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Locomotion")
+    float CrouchReferenceSpeed = 140.f;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Locomotion")
+    float CrouchPlayRate = 1.f;
+
+    /** Cosmetic stationary stance changes; capsule and movement remain gameplay-owned. */
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Crouch Transition")
+    bool bCrouchTransitionPoseReady = false;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Crouch Transition")
+    float CrouchEntryLength = 0.f;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Crouch Transition")
+    float CrouchExitLength = 0.f;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Crouch Transition", meta=(ClampMin="1", ClampMax="5"))
+    float CrouchTransitionPlayRate = 2.5f;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Crouch Transition")
+    EGunnerCrouchTransitionPhase CrouchTransitionPhase = EGunnerCrouchTransitionPhase::None;
+    /** Source seconds, held at the last sampled time during blend-out. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Crouch Transition")
+    float CrouchTransitionTime = 0.f;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Crouch Transition")
+    float CrouchTransitionAlpha = 0.f;
+    /** Arm-only carry through free/high crouch and its authored stance transitions. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Crouch Transition")
+    float CrouchWeaponCarryAlpha = 0.f;
+    /** Retains the chosen evaluator until its blend-out has completed. */
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Crouch Transition")
+    bool bCrouchTransitionEntering = false;
+
+    /** Local graph gates: armed wall poses and support-hand correction are authored together. */
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Cover") bool bHighCoverPoseReady = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Cover") bool bHighCoverPose = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Cover") FVector HighCoverRootOffset = FVector::ZeroVector;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon") bool bRifleSupportGripPoseReady = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Weapon") bool bRifleSupportGrip = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Weapon") FVector RifleSupportGripLocation = FVector::ZeroVector;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Weapon") FRotator RifleSupportGripRotation = FRotator::ZeroRotator;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Locomotion") float RifleSprintReferenceSpeed = 250.f;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Locomotion") float HighCoverReferenceSpeed = 110.f;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Locomotion") float RifleSprintPlayRate = 1.f;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Locomotion") float HighCoverPlayRate = 1.f;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Weapon")
     bool bAiming = false;
@@ -93,4 +150,10 @@ public:
     FRotator BlindRightHandRotation = FRotator::ZeroRotator;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Blind Fire")
     FRotator BlindLeftHandRotation = FRotator::ZeroRotator;
+
+private:
+    void ResetCrouchTransition();
+    void UpdateCrouchTransition(ACharacter* Character, bool bCanPresent, float DeltaSeconds);
+    TWeakObjectPtr<ACharacter> CrouchTransitionOwner;
+    bool bPreviousCrouched = false;
 };

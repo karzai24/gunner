@@ -1,0 +1,291 @@
+[2026.09.21-00.14.25:437][  0]LogConsoleManager: Warning: Console variable 'r.MotionVectorSimulation' used in the render thread. Rendering artifacts could happen. Use ECVF_RenderThreadSafe or don't use in render thread.
+[2026.09.21-00.14.31:563][224]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Motion pawn possessed
+[2026.09.21-00.14.31:563][224]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Authored protective crouch-reload graph is active
+[2026.09.21-00.14.31:564][224]LogTemp: Display: GUNNER_CROUCH_RELOAD_SCENARIO 0 weapon=rifle context=free_crouch
+[2026.09.21-00.14.32:332][260]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Expected weapon equipped through input
+[2026.09.21-00.14.32:686][276]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Input shot creates reloadable magazine deficit
+[2026.09.21-00.14.33:045][292]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Input shot creates reloadable magazine deficit
+[2026.09.21-00.14.33:665][321]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Requested protected crouch context is established
+[2026.09.21-00.14.33:985][336]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Graph without crouch-reload readiness rejects the action without ammo transfer
+[2026.09.21-00.14.33:985][336]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Selected weapon has an authored reload montage
+[2026.09.21-00.14.33:985][336]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.14.34:882][377]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Crouched reload activates its visible arm layer
+[2026.09.21-00.14.34:883][377]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Reload clears blind-fire arm IK instead of pinning the handling pose
+[2026.09.21-00.14.34:883][377]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Incomplete reload has not moved ammunition
+[2026.09.21-00.14.34:883][377]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Crouch input cannot stand during reload
+[2026.09.21-00.14.34:994][382]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=0 phase=8 interrupted=1 montage=AM_Rifle_Reload
+[2026.09.21-00.14.34:994][382]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=6.449 scenario=0 phase=8 elapsed=0.091 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=28/240 shots=2 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.14.37:703][507]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Interrupted reload and stale completion/timeout never transfer ammunition
+[2026.09.21-00.14.37:703][507]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Interrupted reload releases the protective arm layer
+[2026.09.21-00.14.37:703][507]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Selected weapon has an authored reload montage
+[2026.09.21-00.14.37:703][507]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.14.40:126][584]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=0 phase=10 interrupted=0 montage=AM_Rifle_Reload
+[2026.09.21-00.14.40:126][584]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=11.391 scenario=0 phase=10 elapsed=2.198 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=30/238 shots=2 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.14.40:126][584]LogTemp: Display: GUNNER_CROUCH_RELOAD_AMMO scenario=0 phase=10 elapsed=2.233 before=28/240 after=30/238 reloading=0
+[2026.09.21-00.14.40:126][584]LogTemp: Display: GUNNER_CROUCH_RELOAD_POSE scenario=0 head_max=92.28 cover_top=115.00 left_travel=48.60 right_travel=11.12 montage_progress=2.039 ammo_changes=1
+[2026.09.21-00.14.40:126][584]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Actual selected reload montage advances through the active UpperBody slot
+[2026.09.21-00.14.40:126][584]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Evaluated reload hand moves through the handling animation, not a frozen grip
+[2026.09.21-00.14.40:127][584]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Reload preserves crouch capsule and blocks stance toggling until completion
+[2026.09.21-00.14.40:127][584]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Uninterrupted montage completion commits exactly one conserved ammo transfer
+[2026.09.21-00.14.40:895][620]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Completed reload does not commit a second transfer
+[2026.09.21-00.14.40:896][620]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Completed reload releases its arm layer
+[2026.09.21-00.14.41:200][634]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Full magazine reload input is a no-op
+[2026.09.21-00.14.42:091][675]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Crouch toggle can stand again after reload
+[2026.09.21-00.14.42:499][693]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Crouch toggle can crouch again after reload
+[2026.09.21-00.14.42:856][709]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Crouched travel resumes after reload
+[2026.09.21-00.14.43:457][736]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Aim input works after reload in its intended free/cover stance
+[2026.09.21-00.14.43:457][736]LogTemp: Display: GUNNER_CROUCH_RELOAD_SCENARIO 1 weapon=rifle context=low_cover
+[2026.09.21-00.14.44:240][772]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Expected weapon equipped through input
+[2026.09.21-00.14.44:598][788]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Input shot creates reloadable magazine deficit
+[2026.09.21-00.14.44:957][804]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Input shot creates reloadable magazine deficit
+[2026.09.21-00.14.45:560][832]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Requested protected crouch context is established
+[2026.09.21-00.14.45:560][832]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Fixture exposes its actual 115 cm cover top
+[2026.09.21-00.14.45:862][846]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Graph without crouch-reload readiness rejects the action without ammo transfer
+[2026.09.21-00.14.46:574][878]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Low-cover blind fire is active before reload handoff
+[2026.09.21-00.14.46:574][878]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Selected weapon has an authored reload montage
+[2026.09.21-00.14.46:574][878]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.14.47:457][918]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Crouched reload activates its visible arm layer
+[2026.09.21-00.14.47:457][918]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Reload clears blind-fire arm IK instead of pinning the handling pose
+[2026.09.21-00.14.47:457][918]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Incomplete reload has not moved ammunition
+[2026.09.21-00.14.47:457][918]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Crouch input cannot stand during reload
+[2026.09.21-00.14.47:565][923]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=1 phase=8 interrupted=1 montage=AM_Rifle_Reload
+[2026.09.21-00.14.47:566][923]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=18.830 scenario=1 phase=8 elapsed=0.087 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=24/238 shots=8 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.14.50:279][ 46]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Interrupted reload and stale completion/timeout never transfer ammunition
+[2026.09.21-00.14.50:279][ 46]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Interrupted reload releases the protective arm layer
+[2026.09.21-00.14.50:894][ 74]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Held ADS exposes low-cover pawn before reload
+[2026.09.21-00.14.50:895][ 74]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Selected weapon has an authored reload montage
+[2026.09.21-00.14.50:895][ 74]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.14.53:095][156]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=1 phase=10 interrupted=0 montage=AM_Rifle_Reload
+[2026.09.21-00.14.53:095][156]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=24.359 scenario=1 phase=10 elapsed=2.177 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=30/232 shots=8 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.14.53:095][156]LogTemp: Display: GUNNER_CROUCH_RELOAD_AMMO scenario=1 phase=10 elapsed=2.200 before=24/238 after=30/232 reloading=0
+[2026.09.21-00.14.53:095][156]LogTemp: Display: GUNNER_CROUCH_RELOAD_POSE scenario=1 head_max=88.58 cover_top=115.00 left_travel=78.72 right_travel=7.43 montage_progress=2.045 ammo_changes=1
+[2026.09.21-00.14.53:095][156]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Actual selected reload montage advances through the active UpperBody slot
+[2026.09.21-00.14.53:095][156]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Evaluated reload hand moves through the handling animation, not a frozen grip
+[2026.09.21-00.14.53:095][156]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Reload preserves crouch capsule and blocks stance toggling until completion
+[2026.09.21-00.14.53:095][156]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Reload head remains below the real low-cover top throughout sampled crouch
+[2026.09.21-00.14.53:095][156]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Uninterrupted montage completion commits exactly one conserved ammo transfer
+[2026.09.21-00.14.53:861][191]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Completed reload does not commit a second transfer
+[2026.09.21-00.14.53:861][191]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Completed reload releases its arm layer
+[2026.09.21-00.14.53:861][191]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Held ADS resumes standing cover aim only after reload completion
+[2026.09.21-00.14.54:166][205]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Full magazine reload input is a no-op
+[2026.09.21-00.14.54:992][243]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Crouched travel resumes after reload
+[2026.09.21-00.14.55:602][270]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Aim input works after reload in its intended free/cover stance
+[2026.09.21-00.14.55:602][270]LogTemp: Display: GUNNER_CROUCH_RELOAD_SCENARIO 2 weapon=pistol context=free_crouch
+[2026.09.21-00.14.57:419][351]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Expected weapon equipped through input
+[2026.09.21-00.14.57:773][367]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Input shot creates reloadable magazine deficit
+[2026.09.21-00.14.58:137][383]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Input shot creates reloadable magazine deficit
+[2026.09.21-00.14.58:757][411]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Requested protected crouch context is established
+[2026.09.21-00.14.59:061][425]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Graph without crouch-reload readiness rejects the action without ammo transfer
+[2026.09.21-00.14.59:061][425]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Selected weapon has an authored reload montage
+[2026.09.21-00.14.59:061][425]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.14.59:883][462]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Crouched reload activates its visible arm layer
+[2026.09.21-00.14.59:883][462]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Reload clears blind-fire arm IK instead of pinning the handling pose
+[2026.09.21-00.14.59:883][462]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Incomplete reload has not moved ammunition
+[2026.09.21-00.14.59:883][462]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Crouch input cannot stand during reload
+[2026.09.21-00.14.59:990][467]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=2 phase=8 interrupted=1 montage=AM_Pistol_Reload
+[2026.09.21-00.14.59:990][467]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=31.255 scenario=2 phase=8 elapsed=0.083 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=10/120 shots=10 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.15.02:485][581]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Interrupted reload and stale completion/timeout never transfer ammunition
+[2026.09.21-00.15.02:485][581]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Interrupted reload releases the protective arm layer
+[2026.09.21-00.15.02:485][581]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Selected weapon has an authored reload montage
+[2026.09.21-00.15.02:485][581]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.15.04:495][654]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=2 phase=10 interrupted=0 montage=AM_Pistol_Reload
+[2026.09.21-00.15.04:495][654]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=35.759 scenario=2 phase=10 elapsed=1.985 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=12/118 shots=10 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.15.04:495][654]LogTemp: Display: GUNNER_CROUCH_RELOAD_AMMO scenario=2 phase=10 elapsed=2.010 before=10/120 after=12/118 reloading=0
+[2026.09.21-00.15.04:495][654]LogTemp: Display: GUNNER_CROUCH_RELOAD_POSE scenario=2 head_max=93.15 cover_top=115.00 left_travel=28.73 right_travel=23.74 montage_progress=1.854 ammo_changes=1
+[2026.09.21-00.15.04:495][654]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Actual selected reload montage advances through the active UpperBody slot
+[2026.09.21-00.15.04:495][654]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Evaluated reload hand moves through the handling animation, not a frozen grip
+[2026.09.21-00.15.04:495][654]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Reload preserves crouch capsule and blocks stance toggling until completion
+[2026.09.21-00.15.04:495][654]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Uninterrupted montage completion commits exactly one conserved ammo transfer
+[2026.09.21-00.15.05:261][688]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Completed reload does not commit a second transfer
+[2026.09.21-00.15.05:261][688]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Completed reload releases its arm layer
+[2026.09.21-00.15.05:582][702]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Full magazine reload input is a no-op
+[2026.09.21-00.15.06:471][743]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Crouch toggle can stand again after reload
+[2026.09.21-00.15.06:879][761]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Crouch toggle can crouch again after reload
+[2026.09.21-00.15.07:240][777]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Crouched travel resumes after reload
+[2026.09.21-00.15.07:843][803]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Aim input works after reload in its intended free/cover stance
+[2026.09.21-00.15.07:843][803]LogTemp: Display: GUNNER_CROUCH_RELOAD_SCENARIO 3 weapon=pistol context=low_cover
+[2026.09.21-00.15.08:600][835]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Expected weapon equipped through input
+[2026.09.21-00.15.08:968][850]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Input shot creates reloadable magazine deficit
+[2026.09.21-00.15.09:326][864]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Input shot creates reloadable magazine deficit
+[2026.09.21-00.15.09:941][890]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Requested protected crouch context is established
+[2026.09.21-00.15.09:941][890]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Fixture exposes its actual 115 cm cover top
+[2026.09.21-00.15.10:259][904]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Graph without crouch-reload readiness rejects the action without ammo transfer
+[2026.09.21-00.15.10:980][936]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Low-cover blind fire is active before reload handoff
+[2026.09.21-00.15.10:980][936]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Selected weapon has an authored reload montage
+[2026.09.21-00.15.10:980][936]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.15.11:804][973]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Crouched reload activates its visible arm layer
+[2026.09.21-00.15.11:804][973]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Reload clears blind-fire arm IK instead of pinning the handling pose
+[2026.09.21-00.15.11:804][973]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Incomplete reload has not moved ammunition
+[2026.09.21-00.15.11:804][973]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Crouch input cannot stand during reload
+[2026.09.21-00.15.11:915][978]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=3 phase=8 interrupted=1 montage=AM_Pistol_Reload
+[2026.09.21-00.15.11:915][978]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=43.179 scenario=3 phase=8 elapsed=0.088 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=9/118 shots=13 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.15.14:419][ 90]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Interrupted reload and stale completion/timeout never transfer ammunition
+[2026.09.21-00.15.14:419][ 90]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Interrupted reload releases the protective arm layer
+[2026.09.21-00.15.15:029][117]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Held ADS exposes low-cover pawn before reload
+[2026.09.21-00.15.15:029][117]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Selected weapon has an authored reload montage
+[2026.09.21-00.15.15:029][117]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.15.17:048][188]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=3 phase=10 interrupted=0 montage=AM_Pistol_Reload
+[2026.09.21-00.15.17:048][188]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=48.313 scenario=3 phase=10 elapsed=1.997 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=12/115 shots=13 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.15.17:048][188]LogTemp: Display: GUNNER_CROUCH_RELOAD_AMMO scenario=3 phase=10 elapsed=2.020 before=9/118 after=12/115 reloading=0
+[2026.09.21-00.15.17:048][188]LogTemp: Display: GUNNER_CROUCH_RELOAD_POSE scenario=3 head_max=88.80 cover_top=115.00 left_travel=26.92 right_travel=23.41 montage_progress=1.840 ammo_changes=1
+[2026.09.21-00.15.17:048][188]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Actual selected reload montage advances through the active UpperBody slot
+[2026.09.21-00.15.17:048][188]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Evaluated reload hand moves through the handling animation, not a frozen grip
+[2026.09.21-00.15.17:048][188]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Reload preserves crouch capsule and blocks stance toggling until completion
+[2026.09.21-00.15.17:048][188]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Reload head remains below the real low-cover top throughout sampled crouch
+[2026.09.21-00.15.17:048][188]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Uninterrupted montage completion commits exactly one conserved ammo transfer
+[2026.09.21-00.15.17:812][221]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Completed reload does not commit a second transfer
+[2026.09.21-00.15.17:812][221]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Completed reload releases its arm layer
+[2026.09.21-00.15.17:812][221]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Held ADS resumes standing cover aim only after reload completion
+[2026.09.21-00.15.18:134][235]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Full magazine reload input is a no-op
+[2026.09.21-00.15.18:955][271]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Crouched travel resumes after reload
+[2026.09.21-00.15.19:563][298]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Aim input works after reload in its intended free/cover stance
+[2026.09.21-00.15.19:563][298]LogTemp: Display: GUNNER_CROUCH_RELOAD_COMPLETE failures=0 scenarios=4
+[2026.09.21-00.15.19:570][298]LogPython: GUNNER_CROUCH_RELOAD_PIE_CYCLE_FINISHED 1 failures=0
+[2026.09.21-00.15.19:631][299]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2026.09.21-00.15.19:759][300]LogPlayLevel: Display: Destroying online subsystem :Context_1
+[2026.09.21-00.15.26:616][591]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Motion pawn possessed
+[2026.09.21-00.15.26:616][591]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Authored protective crouch-reload graph is active
+[2026.09.21-00.15.26:616][591]LogTemp: Display: GUNNER_CROUCH_RELOAD_SCENARIO 0 weapon=rifle context=free_crouch
+[2026.09.21-00.15.27:386][626]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Expected weapon equipped through input
+[2026.09.21-00.15.27:757][642]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Input shot creates reloadable magazine deficit
+[2026.09.21-00.15.28:109][657]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Input shot creates reloadable magazine deficit
+[2026.09.21-00.15.28:716][684]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Requested protected crouch context is established
+[2026.09.21-00.15.29:036][699]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Graph without crouch-reload readiness rejects the action without ammo transfer
+[2026.09.21-00.15.29:036][699]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Selected weapon has an authored reload montage
+[2026.09.21-00.15.29:036][699]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.15.29:923][739]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Crouched reload activates its visible arm layer
+[2026.09.21-00.15.29:923][739]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Reload clears blind-fire arm IK instead of pinning the handling pose
+[2026.09.21-00.15.29:923][739]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Incomplete reload has not moved ammunition
+[2026.09.21-00.15.29:923][739]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Crouch input cannot stand during reload
+[2026.09.21-00.15.30:039][744]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=0 phase=8 interrupted=1 montage=AM_Rifle_Reload
+[2026.09.21-00.15.30:039][744]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=6.432 scenario=0 phase=8 elapsed=0.091 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=28/240 shots=2 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.15.32:724][858]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Interrupted reload and stale completion/timeout never transfer ammunition
+[2026.09.21-00.15.32:725][858]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Interrupted reload releases the protective arm layer
+[2026.09.21-00.15.32:725][858]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Selected weapon has an authored reload montage
+[2026.09.21-00.15.32:725][858]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.15.34:940][935]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=0 phase=10 interrupted=0 montage=AM_Rifle_Reload
+[2026.09.21-00.15.34:940][935]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=11.332 scenario=0 phase=10 elapsed=2.190 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=30/238 shots=2 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.15.34:940][935]LogTemp: Display: GUNNER_CROUCH_RELOAD_AMMO scenario=0 phase=10 elapsed=2.215 before=28/240 after=30/238 reloading=0
+[2026.09.21-00.15.34:940][935]LogTemp: Display: GUNNER_CROUCH_RELOAD_POSE scenario=0 head_max=92.28 cover_top=115.00 left_travel=75.59 right_travel=10.97 montage_progress=2.050 ammo_changes=1
+[2026.09.21-00.15.34:940][935]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Actual selected reload montage advances through the active UpperBody slot
+[2026.09.21-00.15.34:940][935]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Evaluated reload hand moves through the handling animation, not a frozen grip
+[2026.09.21-00.15.34:940][935]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Reload preserves crouch capsule and blocks stance toggling until completion
+[2026.09.21-00.15.34:940][935]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Uninterrupted montage completion commits exactly one conserved ammo transfer
+[2026.09.21-00.15.35:701][963]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Completed reload does not commit a second transfer
+[2026.09.21-00.15.35:702][963]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Completed reload releases its arm layer
+[2026.09.21-00.15.36:004][976]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Full magazine reload input is a no-op
+[2026.09.21-00.15.36:877][ 12]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Crouch toggle can stand again after reload
+[2026.09.21-00.15.37:283][ 29]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Crouch toggle can crouch again after reload
+[2026.09.21-00.15.37:641][ 44]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Crouched travel resumes after reload
+[2026.09.21-00.15.38:245][ 71]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=0 Aim input works after reload in its intended free/cover stance
+[2026.09.21-00.15.38:245][ 71]LogTemp: Display: GUNNER_CROUCH_RELOAD_SCENARIO 1 weapon=rifle context=low_cover
+[2026.09.21-00.15.39:013][105]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Expected weapon equipped through input
+[2026.09.21-00.15.39:366][120]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Input shot creates reloadable magazine deficit
+[2026.09.21-00.15.39:741][136]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Input shot creates reloadable magazine deficit
+[2026.09.21-00.15.40:359][163]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Requested protected crouch context is established
+[2026.09.21-00.15.40:359][163]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Fixture exposes its actual 115 cm cover top
+[2026.09.21-00.15.40:675][176]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Graph without crouch-reload readiness rejects the action without ammo transfer
+[2026.09.21-00.15.41:388][206]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Low-cover blind fire is active before reload handoff
+[2026.09.21-00.15.41:388][206]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Selected weapon has an authored reload montage
+[2026.09.21-00.15.41:388][206]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.15.42:277][245]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Crouched reload activates its visible arm layer
+[2026.09.21-00.15.42:277][245]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Reload clears blind-fire arm IK instead of pinning the handling pose
+[2026.09.21-00.15.42:278][245]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Incomplete reload has not moved ammunition
+[2026.09.21-00.15.42:278][245]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Crouch input cannot stand during reload
+[2026.09.21-00.15.42:396][250]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=1 phase=8 interrupted=1 montage=AM_Rifle_Reload
+[2026.09.21-00.15.42:396][250]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=18.788 scenario=1 phase=8 elapsed=0.094 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=24/238 shots=8 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.15.45:098][370]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Interrupted reload and stale completion/timeout never transfer ammunition
+[2026.09.21-00.15.45:098][370]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Interrupted reload releases the protective arm layer
+[2026.09.21-00.15.45:707][397]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Held ADS exposes low-cover pawn before reload
+[2026.09.21-00.15.45:707][397]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Selected weapon has an authored reload montage
+[2026.09.21-00.15.45:707][397]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.15.47:910][476]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=1 phase=10 interrupted=0 montage=AM_Rifle_Reload
+[2026.09.21-00.15.47:910][476]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=24.302 scenario=1 phase=10 elapsed=2.179 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=30/232 shots=8 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.15.47:910][476]LogTemp: Display: GUNNER_CROUCH_RELOAD_AMMO scenario=1 phase=10 elapsed=2.203 before=24/238 after=30/232 reloading=0
+[2026.09.21-00.15.47:910][476]LogTemp: Display: GUNNER_CROUCH_RELOAD_POSE scenario=1 head_max=88.58 cover_top=115.00 left_travel=75.21 right_travel=7.07 montage_progress=2.046 ammo_changes=1
+[2026.09.21-00.15.47:910][476]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Actual selected reload montage advances through the active UpperBody slot
+[2026.09.21-00.15.47:910][476]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Evaluated reload hand moves through the handling animation, not a frozen grip
+[2026.09.21-00.15.47:910][476]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Reload preserves crouch capsule and blocks stance toggling until completion
+[2026.09.21-00.15.47:910][476]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Reload head remains below the real low-cover top throughout sampled crouch
+[2026.09.21-00.15.47:910][476]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Uninterrupted montage completion commits exactly one conserved ammo transfer
+[2026.09.21-00.15.48:663][510]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Completed reload does not commit a second transfer
+[2026.09.21-00.15.48:663][510]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Completed reload releases its arm layer
+[2026.09.21-00.15.48:663][510]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Held ADS resumes standing cover aim only after reload completion
+[2026.09.21-00.15.48:967][523]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Full magazine reload input is a no-op
+[2026.09.21-00.15.49:806][561]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Crouched travel resumes after reload
+[2026.09.21-00.15.50:423][588]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=1 Aim input works after reload in its intended free/cover stance
+[2026.09.21-00.15.50:423][588]LogTemp: Display: GUNNER_CROUCH_RELOAD_SCENARIO 2 weapon=pistol context=free_crouch
+[2026.09.21-00.15.52:229][669]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Expected weapon equipped through input
+[2026.09.21-00.15.52:587][685]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Input shot creates reloadable magazine deficit
+[2026.09.21-00.15.52:952][701]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Input shot creates reloadable magazine deficit
+[2026.09.21-00.15.53:556][728]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Requested protected crouch context is established
+[2026.09.21-00.15.53:874][742]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Graph without crouch-reload readiness rejects the action without ammo transfer
+[2026.09.21-00.15.53:874][742]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Selected weapon has an authored reload montage
+[2026.09.21-00.15.53:874][742]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.15.54:679][779]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Crouched reload activates its visible arm layer
+[2026.09.21-00.15.54:679][779]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Reload clears blind-fire arm IK instead of pinning the handling pose
+[2026.09.21-00.15.54:679][779]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Incomplete reload has not moved ammunition
+[2026.09.21-00.15.54:679][779]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Crouch input cannot stand during reload
+[2026.09.21-00.15.54:795][784]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=2 phase=8 interrupted=1 montage=AM_Pistol_Reload
+[2026.09.21-00.15.54:795][784]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=31.187 scenario=2 phase=8 elapsed=0.091 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=10/120 shots=10 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.15.57:305][894]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Interrupted reload and stale completion/timeout never transfer ammunition
+[2026.09.21-00.15.57:305][894]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Interrupted reload releases the protective arm layer
+[2026.09.21-00.15.57:305][894]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Selected weapon has an authored reload montage
+[2026.09.21-00.15.57:305][894]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.15.59:300][965]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=2 phase=10 interrupted=0 montage=AM_Pistol_Reload
+[2026.09.21-00.15.59:300][965]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=35.692 scenario=2 phase=10 elapsed=1.980 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=12/118 shots=10 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.15.59:300][965]LogTemp: Display: GUNNER_CROUCH_RELOAD_AMMO scenario=2 phase=10 elapsed=2.004 before=10/120 after=12/118 reloading=0
+[2026.09.21-00.15.59:300][965]LogTemp: Display: GUNNER_CROUCH_RELOAD_POSE scenario=2 head_max=93.10 cover_top=115.00 left_travel=26.92 right_travel=24.68 montage_progress=1.842 ammo_changes=1
+[2026.09.21-00.15.59:300][965]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Actual selected reload montage advances through the active UpperBody slot
+[2026.09.21-00.15.59:300][965]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Evaluated reload hand moves through the handling animation, not a frozen grip
+[2026.09.21-00.15.59:300][965]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Reload preserves crouch capsule and blocks stance toggling until completion
+[2026.09.21-00.15.59:300][965]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Uninterrupted montage completion commits exactly one conserved ammo transfer
+[2026.09.21-00.16.00:053][998]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Completed reload does not commit a second transfer
+[2026.09.21-00.16.00:053][998]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Completed reload releases its arm layer
+[2026.09.21-00.16.00:374][ 12]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Full magazine reload input is a no-op
+[2026.09.21-00.16.01:241][ 49]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Crouch toggle can stand again after reload
+[2026.09.21-00.16.01:660][ 68]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Crouch toggle can crouch again after reload
+[2026.09.21-00.16.02:025][ 84]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Crouched travel resumes after reload
+[2026.09.21-00.16.02:636][111]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=2 Aim input works after reload in its intended free/cover stance
+[2026.09.21-00.16.02:636][111]LogTemp: Display: GUNNER_CROUCH_RELOAD_SCENARIO 3 weapon=pistol context=low_cover
+[2026.09.21-00.16.03:394][145]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Expected weapon equipped through input
+[2026.09.21-00.16.03:749][161]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Input shot creates reloadable magazine deficit
+[2026.09.21-00.16.04:119][177]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Input shot creates reloadable magazine deficit
+[2026.09.21-00.16.04:725][204]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Requested protected crouch context is established
+[2026.09.21-00.16.04:725][204]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Fixture exposes its actual 115 cm cover top
+[2026.09.21-00.16.05:049][218]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Graph without crouch-reload readiness rejects the action without ammo transfer
+[2026.09.21-00.16.05:767][250]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Low-cover blind fire is active before reload handoff
+[2026.09.21-00.16.05:767][250]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Selected weapon has an authored reload montage
+[2026.09.21-00.16.05:768][250]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.16.06:570][286]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Crouched reload activates its visible arm layer
+[2026.09.21-00.16.06:570][286]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Reload clears blind-fire arm IK instead of pinning the handling pose
+[2026.09.21-00.16.06:570][286]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Incomplete reload has not moved ammunition
+[2026.09.21-00.16.06:570][286]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Crouch input cannot stand during reload
+[2026.09.21-00.16.06:691][291]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=3 phase=8 interrupted=1 montage=AM_Pistol_Reload
+[2026.09.21-00.16.06:691][291]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=43.083 scenario=3 phase=8 elapsed=0.096 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=9/118 shots=13 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.16.09:191][400]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Interrupted reload and stale completion/timeout never transfer ammunition
+[2026.09.21-00.16.09:191][400]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Interrupted reload releases the protective arm layer
+[2026.09.21-00.16.09:791][426]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Held ADS exposes low-cover pawn before reload
+[2026.09.21-00.16.09:791][426]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Selected weapon has an authored reload montage
+[2026.09.21-00.16.09:791][426]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Reload is authored on the graph's UpperBody slot
+[2026.09.21-00.16.11:812][498]LogTemp: Display: GUNNER_CROUCH_RELOAD_MONTAGE_END scenario=3 phase=10 interrupted=0 montage=AM_Pistol_Reload
+[2026.09.21-00.16.11:812][498]LogTemp: Display: GUNNER_CROUCH_RELOAD_STATE reason=montage_ended probe=/Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange.L_MotionRange:PersistentLevel.GunnerCrouchReloadProbe_0 time=48.203 scenario=3 phase=10 elapsed=2.000 action=0 crouch=1 wants_crouch=1 aim=0 blind=0 blocked=0 movement=1 ammo=12/115 shots=13 montage=None selected_position=0.000 reload_alpha=1.000
+[2026.09.21-00.16.11:812][498]LogTemp: Display: GUNNER_CROUCH_RELOAD_AMMO scenario=3 phase=10 elapsed=2.021 before=9/118 after=12/115 reloading=0
+[2026.09.21-00.16.11:812][498]LogTemp: Display: GUNNER_CROUCH_RELOAD_POSE scenario=3 head_max=88.90 cover_top=115.00 left_travel=28.19 right_travel=22.14 montage_progress=1.842 ammo_changes=1
+[2026.09.21-00.16.11:812][498]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Actual selected reload montage advances through the active UpperBody slot
+[2026.09.21-00.16.11:812][498]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Evaluated reload hand moves through the handling animation, not a frozen grip
+[2026.09.21-00.16.11:812][498]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Reload preserves crouch capsule and blocks stance toggling until completion
+[2026.09.21-00.16.11:813][498]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Reload head remains below the real low-cover top throughout sampled crouch
+[2026.09.21-00.16.11:813][498]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Uninterrupted montage completion commits exactly one conserved ammo transfer
+[2026.09.21-00.16.12:566][531]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Completed reload does not commit a second transfer
+[2026.09.21-00.16.12:566][531]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Completed reload releases its arm layer
+[2026.09.21-00.16.12:566][531]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Held ADS resumes standing cover aim only after reload completion
+[2026.09.21-00.16.12:885][545]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Full magazine reload input is a no-op
+[2026.09.21-00.16.13:704][581]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Crouched travel resumes after reload
+[2026.09.21-00.16.14:317][608]LogTemp: Display: GUNNER_CROUCH_RELOAD_CHECK PASS scenario=3 Aim input works after reload in its intended free/cover stance
+[2026.09.21-00.16.14:318][608]LogTemp: Display: GUNNER_CROUCH_RELOAD_COMPLETE failures=0 scenarios=4
+[2026.09.21-00.16.14:325][608]LogPython: GUNNER_CROUCH_RELOAD_PIE_CYCLE_FINISHED 2 failures=0
+[2026.09.21-00.16.14:413][609]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2026.09.21-00.16.14:577][610]LogPlayLevel: Display: Destroying online subsystem :Context_2
+[2026.09.21-00.16.15:336][640]LogPython: GUNNER_CROUCH_RELOAD_PIE_COMPLETE cycles=2 failures=0
+[2026.09.21-00.16.18:134][641]LogHttp: Warning: [FHttpManager::Shutdown] Unbinding delegates for 1 outstanding Http Requests:

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "file": "X_Bot.fbx",
+    "sha256": "c31c389ceba265b3c4a2869ca6df0c547f0b4ac10a6928eff09afa7917d942c7"
+  },
+  "animations": [
+    {
+      "file": "CrouchedRun.fbx",
+      "sha256": "7b398c7edf2bfc795deed5803b1c1694248a5de07d763d3067bca8fe4ca7a3ec",
+      "id": "CrouchedRun",
+      "mixamo_title": "Crouched Run",
+      "in_place": true,
+      "frames_per_second": 30,
+      "skin": false,
+      "keyframe_reduction": "none"
+    },
+    {
+      "id": "CoverIdleRifle",
+      "file": "CoverIdleRifle.fbx",
+      "sha256": "88c95f0dc09bb2016658e6155d218b8b8831295c11244b9b794d859b28aad233",
+      "mixamo_title": "Taking Cover Idle",
+      "in_place": null,
+      "frames_per_second": 30,
+      "skin": false,
+      "keyframe_reduction": "none"
+    },
+    {
+      "id": "CoverRightRifle",
+      "file": "CoverRightRifle.fbx",
+      "sha256": "75b1f3b53c10377ad93d4e9319cceaaf3491bc4dfeb9d4a722361e30df22102b",
+      "mixamo_title": "Right Cover Sneak W/ Rifle",
+      "in_place": true,
+      "frames_per_second": 30,
+      "skin": false,
+      "keyframe_reduction": "none"
+    },
+    {
+      "id": "CoverLeftRifle",
+      "file": "CoverLeftRifle.fbx",
+      "sha256": "ef5c45d3179b571f40b13b05df7f05577cded71856c503c6be9efa854316b449",
+      "mixamo_title": "Left Cover Sneak W/ Rifle",
+      "in_place": true,
+      "frames_per_second": 30,
+      "skin": false,
+      "keyframe_reduction": "none"
+    },
+    {
+      "id": "CoverEntryRifle",
+      "file": "CoverEntryRifle.fbx",
+      "sha256": "c63f866b6257e359a12c4d25308ec090fd3bb2279f274aa2cce66b221cbb6c74",
+      "mixamo_title": "Taking Cover",
+      "in_place": null,
+      "frames_per_second": 30,
+      "skin": false,
+      "keyframe_reduction": "none"
+    },
+    {
+      "id": "CoverTurn",
+      "file": "CoverTurn.fbx",
+      "sha256": "31c0e52dad630dbf316e711a418634fcaf162e3068cb4de5dbcdb0fbb8678caa",
+      "mixamo_title": "Standing Cover Turn",
+      "in_place": null,
+      "frames_per_second": 30,
+      "skin": false,
+      "keyframe_reduction": "none"
+    },
+    {
+      "id": "CoverTransferCrouch",
+      "file": "CoverTransferCrouch.fbx",
+      "sha256": "ce955e18fa9c810cb0252d2047ed679c22df8eca70f5335a8dfcb837a069c721",
+      "mixamo_title": "Crouch Cover To Cover",
+      "in_place": null,
+      "frames_per_second": 30,
+      "skin": false,
+      "keyframe_reduction": "none"
+    },
+    {
+      "id": "VaultBox",
+      "file": "VaultBox.fbx",
+      "sha256": "9ac8d84d2c0bb5fbd79dd498dd1c34ab50ba15fe58fd687d1e2fcbd790d73f78",
+      "mixamo_title": "Vault Over Box",
+      "in_place": null,
+      "frames_per_second": 30,
+      "skin": false,
+      "keyframe_reduction": "none"
+    },
+    {
+      "id": "CoverLook",
+      "file": "CoverLook.fbx",
+      "sha256": "00110d96f35a0283c53de8b8869dfbe2abe1eb0c5eeea585618fce8e307e4270",
+      "mixamo_title": "Stand Cover To Look",
+      "in_place": null,
+      "frames_per_second": 30,
+      "skin": false,
+      "keyframe_reduction": "none"
+    },
+    {
+      "id": "CoverExitLeft",
+      "file": "CoverExitLeft.fbx",
+      "sha256": "35c7c600c83b901cddc055e546f0b6bdb9f4ed02a56085b0a6df60ddbfb66c8f",
+      "mixamo_title": "Emerge From Cover",
+      "in_place": null,
+      "frames_per_second": 30,
+      "skin": false,
+      "keyframe_reduction": "none"
+    },
+    {
+      "id": "CoverExitRightRifle",
+      "file": "CoverExitRightRifle.fbx",
+      "sha256": "94e1c6f752ec7c1a9707400f4cf195db91849df072ec2af7a4b11bd090a9b077",
+      "mixamo_title": "Emerging",
+      "in_place": null,
+      "frames_per_second": 30,
+      "skin": false,
+      "keyframe_reduction": "none"
+    }
+  ],
+  "acquired_on": "2026-09-20",
+  "provider": "https://www.mixamo.com/",
+  "license_reference": "https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html",
+  "export_format": "FBX Binary",
+  "notes": [
+    "Metadata only. Obtain source files through your licensed Adobe account; no source motion is included.",
+    "In Place null means the option was not exposed for that clip; source travel was preserved."
+  ]
+}

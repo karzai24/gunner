@@ -1,0 +1,677 @@
+# Filtered/sanitized excerpts from Saved/cover-movement-30-full.log
+# Retains every GUNNER line, PIE teardown and warning/error/fatal-level lines.
+# Omitted 1 analytics request-detail line(s) containing URL/identity IDs.
+[2026.09.21-00.02.47:183][  0]LogConsoleManager: Warning: Console variable 'r.MotionVectorSimulation' used in the render thread. Rendering artifacts could happen. Use ECVF_RenderThreadSafe or don't use in render thread.
+[2026.09.21-00.02.53:281][190]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=0 Possessed motion pawn exists
+[2026.09.21-00.02.53:281][190]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=0 Transient geometry source exists
+[2026.09.21-00.02.53:587][202]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.02.53:591][202]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 One real setup shot makes the pending reload rejection meaningful
+[2026.09.21-00.02.53:592][202]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.02.53:592][202]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.02.53:592][202]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.02.53:592][202]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.02.53:592][202]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.02.53:592][202]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Accepted pending entry immediately rejects aim, fire and otherwise-valid reload before Character Tick
+[2026.09.21-00.02.53:880][213]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.02.53:880][213]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.02.53:880][213]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.02.53:880][213]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.02.53:880][213]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.02.53:880][213]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=2 First completed-entry reload ignores a stale interruption latch and uses live movement state
+[2026.09.21-00.02.53:880][213]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=0 duration=0.292 feet_drift=2.000
+[2026.09.21-00.02.54:397][233]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.02.55:130][240]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.02.55:130][240]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.02.55:130][240]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.02.55:437][252]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.02.55:437][252]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.02.55:437][252]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.02.55:437][252]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.02.55:437][252]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.02.55:437][252]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.02.55:644][260]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.02.55:644][260]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.02.55:644][260]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.02.55:644][260]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.02.55:644][260]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.02.55:644][260]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=2 Fast approach arrives sooner over the same checked route
+[2026.09.21-00.02.55:644][260]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=1 duration=0.207 feet_drift=2.000
+[2026.09.21-00.02.56:163][279]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.02.56:664][290]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.02.56:664][290]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.02.56:664][290]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.02.56:970][302]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.02.56:970][302]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.02.56:970][302]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.02.56:970][302]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.02.56:970][302]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.02.56:970][302]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.02.57:303][305]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.02.57:303][305]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.02.57:303][305]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.02.57:303][305]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.02.57:303][305]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.02.57:303][305]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=2 duration=0.333 feet_drift=2.000
+[2026.09.21-00.02.57:827][327]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.02.57:827][327]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=3 Low-cover arrival settles into a genuine protected crouch without changing feet height
+[2026.09.21-00.02.57:827][327]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=3 Immediate post-detach crouched hip fire is rejected before the cached cover blocker updates
+[2026.09.21-00.02.58:335][339]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.02.58:335][339]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.02.58:335][339]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.02.58:655][351]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=3 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.02.58:655][351]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=3 phase=1 Obstructed route or unsupported destination rejects without a state change
+[2026.09.21-00.02.58:655][351]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=3 phase=1 Rejected admission makes no position change or movement source
+[2026.09.21-00.02.58:911][361]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=3 phase=5 Rejected request remains stationary without delayed side effects
+[2026.09.21-00.02.59:214][373]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=4 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.02.59:214][373]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=4 phase=1 Obstructed route or unsupported destination rejects without a state change
+[2026.09.21-00.02.59:214][373]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=4 phase=1 Rejected admission makes no position change or movement source
+[2026.09.21-00.02.59:478][383]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=4 phase=5 Rejected request remains stationary without delayed side effects
+[2026.09.21-00.02.59:790][395]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.02.59:790][395]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.02.59:790][395]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.02.59:790][395]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.02.59:790][395]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.02.59:790][395]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.02.59:819][396]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=2 Moving obstruction is introduced during the accepted approach
+[2026.09.21-00.02.59:844][397]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.02.59:844][397]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=2 Mid-route obstruction or wall destruction cannot commit attachment
+[2026.09.21-00.02.59:844][397]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=2 Blocked transition does not snap to its destination
+[2026.09.21-00.03.00:346][416]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.03.00:346][416]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.03.00:346][416]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.03.00:669][428]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.03.00:669][428]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.03.00:669][428]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.03.00:669][428]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.03.00:669][428]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.03.00:669][428]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.03.00:695][429]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=2 Explicit cancellation releases the pending state immediately
+[2026.09.21-00.03.00:695][429]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=2 First fire after cancel succeeds immediately despite the prior movement-block latch
+[2026.09.21-00.03.00:695][429]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=2 First reload after cancel is admitted without waiting for Character Tick
+[2026.09.21-00.03.01:196][448]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.03.01:196][448]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.03.01:196][448]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.03.01:499][460]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.03.01:499][460]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.03.01:499][460]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.03.01:499][460]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.03.01:499][460]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.03.01:499][460]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.03.01:499][460]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Repeated approach requests cannot replace the active route
+[2026.09.21-00.03.01:499][460]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Repeated admission attempts preserve the current position
+[2026.09.21-00.03.01:788][471]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.03.01:788][471]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.03.01:788][471]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.03.01:788][471]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.03.01:788][471]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.03.01:788][471]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=7 duration=0.290 feet_drift=2.000
+[2026.09.21-00.03.02:309][490]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.03.02:831][502]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.03.02:831][502]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.03.02:832][502]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.03.03:156][514]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=8 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.03.03:663][534]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=8 phase=6 A held context press performs one cover entry without repeated toggles
+[2026.09.21-00.03.04:269][557]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=8 phase=10 A new context press exits once and release does not queue a jump
+[2026.09.21-00.03.04:269][557]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=8 phase=10 Repeated context entry/exit releases source and constraint ownership
+[2026.09.21-00.03.04:579][569]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.03.04:579][569]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.03.04:579][569]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.03.04:579][569]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.03.04:579][569]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.03.04:579][569]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.03.04:634][571]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.03.04:635][571]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=2 Mid-route obstruction or wall destruction cannot commit attachment
+[2026.09.21-00.03.04:635][571]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=2 Blocked transition does not snap to its destination
+[2026.09.21-00.03.05:139][590]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.03.05:139][590]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.03.05:139][590]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.03.05:756][613]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.03.05:756][613]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.03.05:756][613]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.03.05:756][613]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.03.05:756][613]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.03.05:756][613]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.03.06:094][616]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.03.06:094][616]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.03.06:094][616]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.03.06:094][616]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.03.06:094][616]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.03.06:094][616]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=10 duration=0.338 feet_drift=2.000
+[2026.09.21-00.03.06:614][638]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.03.06:614][638]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=3 Low-cover arrival settles into a genuine protected crouch without changing feet height
+[2026.09.21-00.03.07:139][650]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.03.07:139][650]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.03.07:139][650]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.03.07:440][661]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.03.07:440][661]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.03.07:440][661]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.03.07:440][661]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.03.07:440][661]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.03.07:440][661]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.03.07:738][672]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.03.07:738][672]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.03.07:738][672]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.03.07:739][672]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.03.07:739][672]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.03.07:739][672]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=11 duration=0.298 feet_drift=2.001
+[2026.09.21-00.03.08:253][692]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.03.08:544][693]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=7 A changed height class cannot retain the previous high-cover protection state
+[2026.09.21-00.03.08:844][707]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.03.08:845][707]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.03.08:845][707]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.03.08:845][707]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.03.08:845][707]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.03.08:845][707]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.03.08:870][708]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=2 Explicit cancellation releases the pending state immediately
+[2026.09.21-00.03.09:371][727]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=4 Cancel removes only the cover source and preserves an unrelated native source
+[2026.09.21-00.03.09:890][745]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.03.09:890][745]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.03.09:890][745]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.03.10:213][757]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.03.10:213][757]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.03.10:213][757]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.03.10:213][757]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.03.10:213][757]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.03.10:213][757]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.03.10:514][769]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.03.10:514][769]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.03.10:514][769]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.03.10:514][769]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.03.10:514][769]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.03.10:514][769]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=13 duration=0.301 feet_drift=2.000
+[2026.09.21-00.03.11:014][788]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.03.11:014][788]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=3 Roll toward the wall rejects without losing cover or changing stance
+[2026.09.21-00.03.11:017][788]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=3 Validated roll away from high or low cover detaches with full standing clearance
+[2026.09.21-00.03.11:921][806]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=11 Cover escape evaluates roll montage and completes bounded travel
+[2026.09.21-00.03.11:949][807]LogTemp: Display: GUNNER_TRAVERSAL_ROLL_CLEANUP scenario=13 settled=0.0279 feet=2.000 mode=1 sources=0 plane=0
+[2026.09.21-00.03.11:949][807]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=13 Cover escape cleanup settles within 0.1 seconds with ground support and no stale source or plane
+[2026.09.21-00.03.12:252][818]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.03.12:252][818]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.03.12:252][818]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.03.12:252][818]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.03.12:252][818]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.03.12:252][818]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.03.12:536][828]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.03.12:536][828]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.03.12:536][828]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.03.12:536][828]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.03.12:536][828]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.03.12:536][828]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=14 duration=0.283 feet_drift=2.000
+[2026.09.21-00.03.13:044][847]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.03.13:044][847]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=3 Low-cover arrival settles into a genuine protected crouch without changing feet height
+[2026.09.21-00.03.13:044][847]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=3 Roll toward the wall rejects without losing cover or changing stance
+[2026.09.21-00.03.13:044][847]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=3 Validated roll away from high or low cover detaches with full standing clearance
+[2026.09.21-00.03.13:946][864]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=11 Cover escape evaluates roll montage and completes bounded travel
+[2026.09.21-00.03.13:973][865]LogTemp: Display: GUNNER_TRAVERSAL_ROLL_CLEANUP scenario=14 settled=0.0279 feet=2.001 mode=1 sources=0 plane=0
+[2026.09.21-00.03.13:973][865]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=13 Cover escape cleanup settles within 0.1 seconds with ground support and no stale source or plane
+[2026.09.21-00.03.14:287][876]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.03.14:287][876]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.03.14:287][876]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.03.14:287][876]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.03.14:287][876]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.03.14:287][876]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.03.14:589][887]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.03.14:589][887]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.03.14:589][887]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.03.14:589][887]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.03.14:589][887]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.03.14:589][887]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=15 duration=0.302 feet_drift=2.000
+[2026.09.21-00.03.15:096][906]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.03.15:096][906]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=3 Low-cover arrival settles into a genuine protected crouch without changing feet height
+[2026.09.21-00.03.15:099][906]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=3 Low ceiling rejects crouched roll before altering stance or cover
+[2026.09.21-00.03.15:402][907]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=12 Rejected low-ceiling roll remains protected without deferred standing or displacement
+[2026.09.21-00.03.16:036][933]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=20 Directional crouch fixture selects its requested weapon
+[2026.09.21-00.03.16:445][948]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=21 Free crouched ADS has its actual stance and directional graph active
+[2026.09.21-00.03.16:908][964]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.03.16:908][964]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.03.17:206][965]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=23 Released directional crouch input stops
+[2026.09.21-00.03.17:664][985]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.03.17:664][985]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.03.17:955][986]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=23 Released directional crouch input stops
+[2026.09.21-00.03.18:425][  6]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.03.18:425][  6]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.03.18:719][  7]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=23 Released directional crouch input stops
+[2026.09.21-00.03.19:170][ 26]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.03.19:170][ 26]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.03.19:466][ 27]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=23 Released directional crouch input stops
+[2026.09.21-00.03.21:198][ 94]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=20 Directional crouch fixture selects its requested weapon
+[2026.09.21-00.03.21:612][109]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=21 Free crouched ADS has its actual stance and directional graph active
+[2026.09.21-00.03.22:064][126]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.03.22:064][126]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.03.22:357][127]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=23 Released directional crouch input stops
+[2026.09.21-00.03.22:832][147]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.03.22:832][147]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.03.23:133][148]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=23 Released directional crouch input stops
+[2026.09.21-00.03.23:611][168]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.03.23:611][168]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.03.23:909][169]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=23 Released directional crouch input stops
+[2026.09.21-00.03.24:370][189]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.03.24:370][189]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.03.24:663][190]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=23 Released directional crouch input stops
+[2026.09.21-00.03.24:971][204]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=18 phase=1 Installed-pose fixture accepts cover approach
+[2026.09.21-00.03.25:378][219]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=18 phase=30 High-cover edge fixture is attached before crouching
+[2026.09.21-00.03.25:794][234]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=18 phase=31 Installed directional pose admits the actual crouched edge route
+[2026.09.21-00.03.26:696][267]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=18 phase=32 Crouched ADS physically reaches exposure around the high-cover edge
+[2026.09.21-00.03.26:696][267]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=18 phase=32 Crouched edge exposure retains low capsule and head below its standing baseline
+[2026.09.21-00.03.27:882][302]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=18 phase=33 Crouched edge return restores the anchor without a standing head pop or movement lock
+[2026.09.21-00.03.28:187][312]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=19 phase=1 Installed-pose fixture accepts cover approach
+[2026.09.21-00.03.28:690][330]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=19 phase=35 Low cover selects its original protective graph branch despite installed directional capability
+[2026.09.21-00.03.29:215][350]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=19 phase=36 Both directions of low-cover movement keep the evaluated original crouch head protected
+[2026.09.21-00.03.29:730][369]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=19 phase=36 Both directions of low-cover movement keep the evaluated original crouch head protected
+[2026.09.21-00.03.30:032][370]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=19 phase=37 Protected low-cover movement releases cleanly
+[2026.09.21-00.03.31:723][435]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=41 An open-ground context tap selects an animated roll without jumping
+[2026.09.21-00.03.34:047][522]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=42 Held context with forward input enters genuine sprint locomotion
+[2026.09.21-00.03.34:047][522]LogTemp: Display: GUNNER_TRAVERSAL_SPRINT_GRIP error=0.000 angle=0.000 head=128.240
+[2026.09.21-00.03.34:047][522]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=42 Hunched rifle sprint keeps the support hand on its actual weapon grip
+[2026.09.21-00.03.34:047][522]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=42 Rifle sprint evaluates the authored lowered head and torso
+[2026.09.21-00.03.34:316][532]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=43 Synthetic mouse yaw and pitch stay free and the rendered sprint camera follows
+[2026.09.21-00.03.34:316][532]LogTemp: Display: GUNNER_TRAVERSAL_MOUSE yaw_delta=4.200 pitch_delta=0.350
+[2026.09.21-00.03.34:473][538]LogTemp: Display: GUNNER_TRAVERSAL_SPRINT_TURN bounded=1 gap=84.732 speed=500.000
+[2026.09.21-00.03.34:473][538]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=46 Sprint travel turns at a bounded rate instead of snapping to the new camera heading
+[2026.09.21-00.03.34:775][539]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=44 Releasing contextual sprint admits the first fire press without a second click
+[2026.09.21-00.03.35:081][553]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=45 Held context release leaves no extra roll, sprint, aim or movement lock
+[2026.09.21-00.03.35:648][574]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=21 phase=50 Held-aim interruption fixture starts in evaluated standing ADS
+[2026.09.21-00.03.36:970][623]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=21 phase=51 Dodge interrupts held ADS for the genuine roll and completes bounded travel
+[2026.09.21-00.03.37:078][627]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=21 phase=52 Continuously held RMB resumes evaluated ADS after dodge without a second aim or fire press
+[2026.09.21-00.03.37:371][628]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=21 phase=53 Releasing resumed RMB clears gameplay and evaluated aim state
+[2026.09.21-00.03.37:894][650]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=60 Armed wall-pose fixture admits cover entry
+[2026.09.21-00.03.38:697][679]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=61 Standing rifle cover evaluates its full authored wall pose and weapon grip
+[2026.09.21-00.03.38:697][679]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=61 Authored wall pose is close to the surface with head clearance and unchanged physical anchor
+[2026.09.21-00.03.39:105][686]LogTemp: Display: GUNNER_TRAVERSAL_WALL_GRIP phase=62 error=0.000 angle=0.000 right_speed=150.000
+[2026.09.21-00.03.39:105][686]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=62 Armed wall gait follows the correct lateral direction at the preserved offset
+[2026.09.21-00.03.39:105][686]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=62 Lateral cover motion keeps the support hand aligned to its weapon grip
+[2026.09.21-00.03.39:519][694]LogTemp: Display: GUNNER_TRAVERSAL_WALL_GRIP phase=63 error=0.000 angle=0.000 right_speed=-150.000
+[2026.09.21-00.03.39:519][694]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=63 Armed wall gait follows the correct lateral direction at the preserved offset
+[2026.09.21-00.03.39:519][694]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=63 Lateral cover motion keeps the support hand aligned to its weapon grip
+[2026.09.21-00.03.39:833][695]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=64 Reload releases authored wall arms and support-hand lock for the real weapon montage
+[2026.09.21-00.03.40:244][712]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=65 Finishing weapon action restores the armed wall pose
+[2026.09.21-00.03.40:785][732]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=23 phase=60 Armed wall-pose fixture admits cover entry
+[2026.09.21-00.03.41:597][762]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=23 phase=61 Standing rifle cover evaluates its full authored wall pose and weapon grip
+[2026.09.21-00.03.41:597][762]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=23 phase=61 Authored wall pose is close to the surface with head clearance and unchanged physical anchor
+[2026.09.21-00.03.42:516][788]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=23 phase=66 High-cover ADS releases the wall pose and physically steps out with the aiming graph
+[2026.09.21-00.03.43:693][824]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=23 phase=67 Releasing high-cover ADS returns to the anchor and authored wall pose
+[2026.09.21-00.03.49:753][ 39]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=60 Armed wall-pose fixture admits cover entry
+[2026.09.21-00.03.50:554][ 69]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=61 Standing rifle cover evaluates its full authored wall pose and weapon grip
+[2026.09.21-00.03.50:554][ 69]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=61 Authored wall pose is close to the surface with head clearance and unchanged physical anchor
+[2026.09.21-00.03.50:554][ 69]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=61 Wall dry-fire fixture uses a rifle emptied by real shots
+[2026.09.21-00.03.51:248][ 76]LogTemp: Display: GUNNER_TRAVERSAL_WALL_DRY_FIRE observed=1 hand_travel=43.444 safe=1
+[2026.09.21-00.03.51:248][ 76]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=72 Standing wall dry fire releases its wall pose and grip lock and reaches the evaluated weapon arm
+[2026.09.21-00.03.51:248][ 76]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=72 Held empty trigger retains cover and produces one presentation without shot, ammo or action-lock side effects
+[2026.09.21-00.03.51:669][ 92]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=73 Completed wall dry fire restores its authored wall pose and support-hand grip
+[2026.09.21-00.03.52:655][129]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=25 phase=80 Contextual sprint reaches the wall without entering cover while its authored readiness is disabled
+[2026.09.21-00.03.53:471][159]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=25 phase=81 Re-enabling cover readiness admits the held sprint through its normal swept approach and final anchor
+[2026.09.21-00.03.55:035][210]LogTemp: Display: GUNNER_STANCE_POSE scenario=26 phase=91 observed=1 head_range=48.654 endpoint=90.116
+[2026.09.21-00.03.55:035][210]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=91 Stationary stance change evaluates a moving authored pose and finishes without looping
+[2026.09.21-00.03.55:035][210]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=91 Cosmetic stance transition preserves native capsule, supported feet and anchor
+[2026.09.21-00.03.55:035][210]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=91 Crouch entry reaches the genuine lowered head endpoint
+[2026.09.21-00.03.55:035][210]LogTemp: Display: GUNNER_STANCE_CARRY scenario=26 grip_error=0.000 alpha=1.000
+[2026.09.21-00.03.55:035][210]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=91 Crouch completion retains an armed carry pose with the support hand near its actual grip
+[2026.09.21-00.03.55:953][229]LogTemp: Display: GUNNER_STANCE_POSE scenario=26 phase=92 observed=1 head_range=42.355 endpoint=157.061
+[2026.09.21-00.03.55:953][229]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=92 Stationary stance change evaluates a moving authored pose and finishes without looping
+[2026.09.21-00.03.55:953][229]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=92 Cosmetic stance transition preserves native capsule, supported feet and anchor
+[2026.09.21-00.03.55:953][229]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=92 Crouch exit recovers the prior standing pose
+[2026.09.21-00.03.57:680][294]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=90 Stance fixture accepts its actual cover approach
+[2026.09.21-00.03.58:199][313]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=94 Stance fixture reaches its cover anchor
+[2026.09.21-00.03.59:037][336]LogTemp: Display: GUNNER_STANCE_POSE scenario=27 phase=91 observed=1 head_range=49.152 endpoint=89.663
+[2026.09.21-00.03.59:037][336]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=91 Stationary stance change evaluates a moving authored pose and finishes without looping
+[2026.09.21-00.03.59:037][336]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=91 Cosmetic stance transition preserves native capsule, supported feet and anchor
+[2026.09.21-00.03.59:037][336]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=91 Crouch entry reaches the genuine lowered head endpoint
+[2026.09.21-00.03.59:037][336]LogTemp: Display: GUNNER_STANCE_CARRY scenario=27 grip_error=2.821 alpha=1.000
+[2026.09.21-00.03.59:037][336]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=91 Crouch completion retains an armed carry pose with the support hand near its actual grip
+[2026.09.21-00.03.59:961][354]LogTemp: Display: GUNNER_STANCE_POSE scenario=27 phase=92 observed=1 head_range=42.195 endpoint=158.386
+[2026.09.21-00.03.59:961][354]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=92 Stationary stance change evaluates a moving authored pose and finishes without looping
+[2026.09.21-00.03.59:961][354]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=92 Cosmetic stance transition preserves native capsule, supported feet and anchor
+[2026.09.21-00.03.59:961][354]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=92 Crouch exit recovers the prior standing pose
+[2026.09.21-00.04.02:268][437]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=28 phase=96 Interruption fixture starts inside a real crouch-entry animation
+[2026.09.21-00.04.02:545][447]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=28 phase=97 Movement and ADS promptly cancel stance presentation without delaying control
+[2026.09.21-00.04.03:150][469]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=28 phase=99 Settled unchanged crouch does not restart a cancelled or bypassed transition
+[2026.09.21-00.04.03:882][497]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=29 phase=90 Stance fixture accepts its actual cover approach
+[2026.09.21-00.04.04:388][516]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=29 phase=94 Stance fixture reaches its cover anchor
+[2026.09.21-00.04.04:388][516]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=29 phase=94 Low-cover arrival bypasses the tall crouch-entry clip and stays protected
+[2026.09.21-00.04.04:905][535]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=29 phase=98 Low-cover ADS bypasses stationary exit presentation
+[2026.09.21-00.04.05:532][558]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=29 phase=99 Settled unchanged crouch does not restart a cancelled or bypassed transition
+[2026.09.21-00.04.05:532][558]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=29 phase=99 Low-cover ADS release returns to the protected source pose
+[2026.09.21-00.04.05:532][558]LogTemp: Display: GUNNER_TRAVERSAL_COMPLETE failures=0 scenarios=30 skipped=0
+[2026.09.21-00.04.05:538][558]LogPython: GUNNER_TRAVERSAL_PIE_CYCLE_FINISHED 1 failures=0
+[2026.09.21-00.04.05:569][559]LogWorld: BeginTearingDown for /Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange
+[2026.09.21-00.04.05:578][559]LogWorld: UWorld::CleanupWorld for L_MotionRange, bSessionEnded=true, bCleanupResources=true
+[2026.09.21-00.04.05:608][559]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2026.09.21-00.04.05:746][560]LogPlayLevel: Display: Destroying online subsystem :Context_1
+[2026.09.21-00.04.12:578][803]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=0 Possessed motion pawn exists
+[2026.09.21-00.04.12:579][803]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=0 Transient geometry source exists
+[2026.09.21-00.04.12:890][814]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.12:890][814]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 One real setup shot makes the pending reload rejection meaningful
+[2026.09.21-00.04.12:890][814]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.04.12:891][814]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.04.12:891][814]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.04.12:891][814]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.04.12:891][814]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.04.12:891][814]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=1 Accepted pending entry immediately rejects aim, fire and otherwise-valid reload before Character Tick
+[2026.09.21-00.04.13:170][824]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.04.13:170][824]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.04.13:170][824]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.04.13:170][824]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.04.13:170][824]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.04.13:170][824]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=2 First completed-entry reload ignores a stale interruption latch and uses live movement state
+[2026.09.21-00.04.13:170][824]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=0 duration=0.280 feet_drift=2.000
+[2026.09.21-00.04.13:684][843]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.04.14:194][854]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.04.14:194][854]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.04.14:194][854]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=0 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.04.14:494][865]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.14:494][865]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.04.14:494][865]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.04.14:494][865]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.04.14:495][865]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.04.14:495][865]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.04.14:703][873]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.04.14:703][873]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.04.14:703][873]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.04.14:703][873]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.04.14:703][873]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.04.14:703][873]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=2 Fast approach arrives sooner over the same checked route
+[2026.09.21-00.04.14:703][873]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=1 duration=0.208 feet_drift=2.000
+[2026.09.21-00.04.15:228][893]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.04.15:730][904]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.04.15:730][904]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.04.15:730][904]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=1 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.04.16:055][916]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.16:055][916]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.04.16:055][916]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.04.16:055][916]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.04.16:055][916]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.04.16:055][916]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.04.16:397][919]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.04.16:397][919]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.04.16:397][919]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.04.16:397][919]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.04.16:397][919]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.04.16:397][919]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=2 duration=0.342 feet_drift=2.000
+[2026.09.21-00.04.16:906][940]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.04.16:906][940]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=3 Low-cover arrival settles into a genuine protected crouch without changing feet height
+[2026.09.21-00.04.16:906][940]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=3 Immediate post-detach crouched hip fire is rejected before the cached cover blocker updates
+[2026.09.21-00.04.17:418][952]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.04.17:418][952]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.04.17:418][952]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=2 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.04.17:740][964]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=3 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.17:740][964]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=3 phase=1 Obstructed route or unsupported destination rejects without a state change
+[2026.09.21-00.04.17:740][964]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=3 phase=1 Rejected admission makes no position change or movement source
+[2026.09.21-00.04.18:004][974]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=3 phase=5 Rejected request remains stationary without delayed side effects
+[2026.09.21-00.04.18:321][986]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=4 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.18:321][986]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=4 phase=1 Obstructed route or unsupported destination rejects without a state change
+[2026.09.21-00.04.18:321][986]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=4 phase=1 Rejected admission makes no position change or movement source
+[2026.09.21-00.04.18:593][996]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=4 phase=5 Rejected request remains stationary without delayed side effects
+[2026.09.21-00.04.18:894][  7]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.18:894][  7]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.04.18:894][  7]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.04.18:894][  7]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.04.18:894][  7]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.04.18:894][  7]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.04.18:921][  8]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=2 Moving obstruction is introduced during the accepted approach
+[2026.09.21-00.04.18:946][  9]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.04.18:946][  9]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=2 Mid-route obstruction or wall destruction cannot commit attachment
+[2026.09.21-00.04.18:946][  9]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=2 Blocked transition does not snap to its destination
+[2026.09.21-00.04.19:446][ 28]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.04.19:447][ 28]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.04.19:447][ 28]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=5 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.04.19:755][ 40]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.19:755][ 40]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.04.19:755][ 40]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.04.19:755][ 40]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.04.19:755][ 40]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.04.19:755][ 40]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.04.19:785][ 41]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=2 Explicit cancellation releases the pending state immediately
+[2026.09.21-00.04.19:785][ 41]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=2 First fire after cancel succeeds immediately despite the prior movement-block latch
+[2026.09.21-00.04.19:785][ 41]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=2 First reload after cancel is admitted without waiting for Character Tick
+[2026.09.21-00.04.20:295][ 60]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.04.20:295][ 60]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.04.20:295][ 60]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=6 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.04.20:613][ 72]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.20:613][ 72]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.04.20:613][ 72]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.04.20:613][ 72]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.04.20:613][ 72]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.04.20:613][ 72]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.04.20:613][ 72]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Repeated approach requests cannot replace the active route
+[2026.09.21-00.04.20:613][ 72]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=1 Repeated admission attempts preserve the current position
+[2026.09.21-00.04.20:910][ 83]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.04.20:910][ 83]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.04.20:910][ 83]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.04.20:910][ 83]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.04.20:910][ 83]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.04.20:910][ 83]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=7 duration=0.297 feet_drift=2.000
+[2026.09.21-00.04.21:422][102]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.04.21:944][113]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.04.21:944][113]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.04.21:944][113]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=7 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.04.22:264][125]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=8 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.22:777][144]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=8 phase=6 A held context press performs one cover entry without repeated toggles
+[2026.09.21-00.04.23:398][167]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=8 phase=10 A new context press exits once and release does not queue a jump
+[2026.09.21-00.04.23:398][167]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=8 phase=10 Repeated context entry/exit releases source and constraint ownership
+[2026.09.21-00.04.23:720][179]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.23:720][179]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.04.23:720][179]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.04.23:720][179]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.04.23:720][179]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.04.23:720][179]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.04.23:772][181]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.04.23:772][181]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=2 Mid-route obstruction or wall destruction cannot commit attachment
+[2026.09.21-00.04.23:772][181]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=2 Blocked transition does not snap to its destination
+[2026.09.21-00.04.24:279][201]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.04.24:279][201]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.04.24:279][201]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=9 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.04.24:910][225]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.24:910][225]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.04.24:910][225]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.04.24:910][225]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.04.24:910][225]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.04.24:910][225]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.04.25:258][228]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.04.25:258][228]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.04.25:258][228]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.04.25:258][228]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.04.25:258][228]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.04.25:258][228]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=10 duration=0.348 feet_drift=2.000
+[2026.09.21-00.04.25:761][249]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.04.25:761][249]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=3 Low-cover arrival settles into a genuine protected crouch without changing feet height
+[2026.09.21-00.04.26:278][261]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.04.26:278][261]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.04.26:278][261]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=10 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.04.26:586][273]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.26:586][273]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.04.26:586][273]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.04.26:586][273]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.04.26:586][273]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.04.26:586][273]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.04.26:877][284]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.04.26:877][284]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.04.26:878][284]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.04.26:878][284]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.04.26:878][284]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.04.26:878][284]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=11 duration=0.291 feet_drift=2.001
+[2026.09.21-00.04.27:403][304]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.04.27:708][305]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=11 phase=7 A changed height class cannot retain the previous high-cover protection state
+[2026.09.21-00.04.28:015][319]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.28:015][319]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.04.28:015][319]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.04.28:015][319]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.04.28:015][319]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.04.28:015][319]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.04.28:046][320]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=2 Explicit cancellation releases the pending state immediately
+[2026.09.21-00.04.28:555][339]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=4 Cancel removes only the cover source and preserves an unrelated native source
+[2026.09.21-00.04.29:055][358]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=4 Cancel/detach/invalidation leaves no transition or movement source
+[2026.09.21-00.04.29:055][358]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=4 Transition cleanup does not resume stale displacement
+[2026.09.21-00.04.29:055][358]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=12 phase=4 Canceled or detached approach leaves no wall-plane lock
+[2026.09.21-00.04.29:377][370]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.29:377][370]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.04.29:377][370]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.04.29:377][370]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.04.29:377][370]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.04.29:377][370]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.04.29:670][381]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.04.29:670][381]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.04.29:670][381]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.04.29:670][381]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.04.29:670][381]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.04.29:670][381]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=13 duration=0.293 feet_drift=2.000
+[2026.09.21-00.04.30:185][400]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.04.30:185][400]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=3 Roll toward the wall rejects without losing cover or changing stance
+[2026.09.21-00.04.30:185][400]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=3 Validated roll away from high or low cover detaches with full standing clearance
+[2026.09.21-00.04.31:079][418]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=11 Cover escape evaluates roll montage and completes bounded travel
+[2026.09.21-00.04.31:110][419]LogTemp: Display: GUNNER_TRAVERSAL_ROLL_CLEANUP scenario=13 settled=0.0316 feet=2.000 mode=1 sources=0 plane=0
+[2026.09.21-00.04.31:110][419]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=13 phase=13 Cover escape cleanup settles within 0.1 seconds with ground support and no stale source or plane
+[2026.09.21-00.04.31:428][430]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.31:428][430]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.04.31:428][430]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.04.31:428][430]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.04.31:428][430]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.04.31:428][430]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.04.31:735][441]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.04.31:735][441]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.04.31:735][441]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.04.31:735][441]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.04.31:735][441]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.04.31:735][441]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=14 duration=0.307 feet_drift=2.000
+[2026.09.21-00.04.32:245][460]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.04.32:245][460]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=3 Low-cover arrival settles into a genuine protected crouch without changing feet height
+[2026.09.21-00.04.32:245][460]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=3 Roll toward the wall rejects without losing cover or changing stance
+[2026.09.21-00.04.32:245][460]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=3 Validated roll away from high or low cover detaches with full standing clearance
+[2026.09.21-00.04.33:143][479]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=11 Cover escape evaluates roll montage and completes bounded travel
+[2026.09.21-00.04.33:168][480]LogTemp: Display: GUNNER_TRAVERSAL_ROLL_CLEANUP scenario=14 settled=0.0248 feet=2.001 mode=1 sources=0 plane=0
+[2026.09.21-00.04.33:168][480]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=14 phase=13 Cover escape cleanup settles within 0.1 seconds with ground support and no stale source or plane
+[2026.09.21-00.04.33:486][492]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=1 Fixture starts grounded at the expected floor height
+[2026.09.21-00.04.33:486][492]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=1 Accepted approach is pending rather than an instant attachment
+[2026.09.21-00.04.33:486][492]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=1 Approach admission itself does not snap the character
+[2026.09.21-00.04.33:486][492]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=1 Pending approach blocks normal cover movement and peek
+[2026.09.21-00.04.33:486][492]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=1 Pending cover classification matches the actual fixture
+[2026.09.21-00.04.33:486][492]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=1 Pending wall normal is exposed for character facing
+[2026.09.21-00.04.33:795][503]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=2 Swept approach stays on its bounded route throughout movement
+[2026.09.21-00.04.33:795][503]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=2 Approach commits only after reaching the checked 52 cm wall offset
+[2026.09.21-00.04.33:796][503]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=2 Rendered approach includes real intermediate movement and an evaluated gait
+[2026.09.21-00.04.33:796][503]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=2 Approach preserves grounded feet without a stance-center lift
+[2026.09.21-00.04.33:796][503]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=2 Completed approach removes its owned movement source
+[2026.09.21-00.04.33:796][503]LogTemp: Display: GUNNER_TRAVERSAL_APPROACH scenario=15 duration=0.311 feet_drift=2.000
+[2026.09.21-00.04.34:303][522]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=3 Completed anchor remains stable after transition cleanup
+[2026.09.21-00.04.34:303][522]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=3 Low-cover arrival settles into a genuine protected crouch without changing feet height
+[2026.09.21-00.04.34:306][522]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=3 Low ceiling rejects crouched roll before altering stance or cover
+[2026.09.21-00.04.34:630][523]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=15 phase=12 Rejected low-ceiling roll remains protected without deferred standing or displacement
+[2026.09.21-00.04.35:242][548]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=20 Directional crouch fixture selects its requested weapon
+[2026.09.21-00.04.35:660][564]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=21 Free crouched ADS has its actual stance and directional graph active
+[2026.09.21-00.04.36:124][581]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.04.36:124][581]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.04.36:430][582]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=23 Released directional crouch input stops
+[2026.09.21-00.04.36:905][602]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.04.36:905][602]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.04.37:199][603]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=23 Released directional crouch input stops
+[2026.09.21-00.04.37:670][623]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.04.37:670][623]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.04.37:958][624]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=23 Released directional crouch input stops
+[2026.09.21-00.04.38:420][644]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.04.38:420][644]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.04.38:712][645]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=16 phase=23 Released directional crouch input stops
+[2026.09.21-00.04.40:436][713]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=20 Directional crouch fixture selects its requested weapon
+[2026.09.21-00.04.40:852][728]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=21 Free crouched ADS has its actual stance and directional graph active
+[2026.09.21-00.04.41:312][745]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.04.41:312][745]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.04.41:608][746]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=23 Released directional crouch input stops
+[2026.09.21-00.04.42:062][765]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.04.42:062][765]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.04.42:359][766]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=23 Released directional crouch input stops
+[2026.09.21-00.04.42:829][786]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.04.42:829][786]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.04.43:136][787]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=23 Released directional crouch input stops
+[2026.09.21-00.04.43:588][806]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Crouched ADS moves in the requested local direction and evaluates the matching graph axis
+[2026.09.21-00.04.43:588][806]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=22 Directional crouch preserves aim facing and the actual crouched capsule
+[2026.09.21-00.04.43:899][807]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=17 phase=23 Released directional crouch input stops
+[2026.09.21-00.04.44:211][821]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=18 phase=1 Installed-pose fixture accepts cover approach
+[2026.09.21-00.04.44:637][837]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=18 phase=30 High-cover edge fixture is attached before crouching
+[2026.09.21-00.04.45:050][853]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=18 phase=31 Installed directional pose admits the actual crouched edge route
+[2026.09.21-00.04.45:952][886]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=18 phase=32 Crouched ADS physically reaches exposure around the high-cover edge
+[2026.09.21-00.04.45:952][886]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=18 phase=32 Crouched edge exposure retains low capsule and head below its standing baseline
+[2026.09.21-00.04.47:118][922]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=18 phase=33 Crouched edge return restores the anchor without a standing head pop or movement lock
+[2026.09.21-00.04.47:435][934]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=19 phase=1 Installed-pose fixture accepts cover approach
+[2026.09.21-00.04.47:937][953]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=19 phase=35 Low cover selects its original protective graph branch despite installed directional capability
+[2026.09.21-00.04.48:445][972]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=19 phase=36 Both directions of low-cover movement keep the evaluated original crouch head protected
+[2026.09.21-00.04.48:961][991]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=19 phase=36 Both directions of low-cover movement keep the evaluated original crouch head protected
+[2026.09.21-00.04.49:250][992]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=19 phase=37 Protected low-cover movement releases cleanly
+[2026.09.21-00.04.50:936][ 58]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=41 An open-ground context tap selects an animated roll without jumping
+[2026.09.21-00.04.53:270][146]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=42 Held context with forward input enters genuine sprint locomotion
+[2026.09.21-00.04.53:270][146]LogTemp: Display: GUNNER_TRAVERSAL_SPRINT_GRIP error=0.000 angle=0.000 head=130.137
+[2026.09.21-00.04.53:270][146]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=42 Hunched rifle sprint keeps the support hand on its actual weapon grip
+[2026.09.21-00.04.53:270][146]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=42 Rifle sprint evaluates the authored lowered head and torso
+[2026.09.21-00.04.53:521][155]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=43 Synthetic mouse yaw and pitch stay free and the rendered sprint camera follows
+[2026.09.21-00.04.53:521][155]LogTemp: Display: GUNNER_TRAVERSAL_MOUSE yaw_delta=4.200 pitch_delta=0.350
+[2026.09.21-00.04.53:688][161]LogTemp: Display: GUNNER_TRAVERSAL_SPRINT_TURN bounded=1 gap=83.308 speed=500.000
+[2026.09.21-00.04.53:688][161]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=46 Sprint travel turns at a bounded rate instead of snapping to the new camera heading
+[2026.09.21-00.04.53:987][162]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=44 Releasing contextual sprint admits the first fire press without a second click
+[2026.09.21-00.04.54:313][177]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=20 phase=45 Held context release leaves no extra roll, sprint, aim or movement lock
+[2026.09.21-00.04.54:903][199]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=21 phase=50 Held-aim interruption fixture starts in evaluated standing ADS
+[2026.09.21-00.04.56:211][247]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=21 phase=51 Dodge interrupts held ADS for the genuine roll and completes bounded travel
+[2026.09.21-00.04.56:312][251]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=21 phase=52 Continuously held RMB resumes evaluated ADS after dodge without a second aim or fire press
+[2026.09.21-00.04.56:653][252]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=21 phase=53 Releasing resumed RMB clears gameplay and evaluated aim state
+[2026.09.21-00.04.57:136][273]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=60 Armed wall-pose fixture admits cover entry
+[2026.09.21-00.04.57:953][304]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=61 Standing rifle cover evaluates its full authored wall pose and weapon grip
+[2026.09.21-00.04.57:953][304]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=61 Authored wall pose is close to the surface with head clearance and unchanged physical anchor
+[2026.09.21-00.04.58:364][311]LogTemp: Display: GUNNER_TRAVERSAL_WALL_GRIP phase=62 error=0.000 angle=0.000 right_speed=150.000
+[2026.09.21-00.04.58:364][311]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=62 Armed wall gait follows the correct lateral direction at the preserved offset
+[2026.09.21-00.04.58:364][311]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=62 Lateral cover motion keeps the support hand aligned to its weapon grip
+[2026.09.21-00.04.58:798][319]LogTemp: Display: GUNNER_TRAVERSAL_WALL_GRIP phase=63 error=0.000 angle=0.000 right_speed=-150.000
+[2026.09.21-00.04.58:798][319]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=63 Armed wall gait follows the correct lateral direction at the preserved offset
+[2026.09.21-00.04.58:798][319]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=63 Lateral cover motion keeps the support hand aligned to its weapon grip
+[2026.09.21-00.04.59:126][322]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=64 Reload releases authored wall arms and support-hand lock for the real weapon montage
+[2026.09.21-00.04.59:528][339]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=22 phase=65 Finishing weapon action restores the armed wall pose
+[2026.09.21-00.05.00:048][358]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=23 phase=60 Armed wall-pose fixture admits cover entry
+[2026.09.21-00.05.00:869][388]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=23 phase=61 Standing rifle cover evaluates its full authored wall pose and weapon grip
+[2026.09.21-00.05.00:869][388]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=23 phase=61 Authored wall pose is close to the surface with head clearance and unchanged physical anchor
+[2026.09.21-00.05.01:774][414]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=23 phase=66 High-cover ADS releases the wall pose and physically steps out with the aiming graph
+[2026.09.21-00.05.02:945][449]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=23 phase=67 Releasing high-cover ADS returns to the anchor and authored wall pose
+[2026.09.21-00.05.08:894][658]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=60 Armed wall-pose fixture admits cover entry
+[2026.09.21-00.05.09:712][688]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=61 Standing rifle cover evaluates its full authored wall pose and weapon grip
+[2026.09.21-00.05.09:712][688]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=61 Authored wall pose is close to the surface with head clearance and unchanged physical anchor
+[2026.09.21-00.05.09:712][688]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=61 Wall dry-fire fixture uses a rifle emptied by real shots
+[2026.09.21-00.05.10:404][699]LogTemp: Display: GUNNER_TRAVERSAL_WALL_DRY_FIRE observed=1 hand_travel=43.294 safe=1
+[2026.09.21-00.05.10:404][699]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=72 Standing wall dry fire releases its wall pose and grip lock and reaches the evaluated weapon arm
+[2026.09.21-00.05.10:404][699]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=72 Held empty trigger retains cover and produces one presentation without shot, ammo or action-lock side effects
+[2026.09.21-00.05.10:805][714]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=24 phase=73 Completed wall dry fire restores its authored wall pose and support-hand grip
+[2026.09.21-00.05.11:781][750]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=25 phase=80 Contextual sprint reaches the wall without entering cover while its authored readiness is disabled
+[2026.09.21-00.05.12:605][781]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=25 phase=81 Re-enabling cover readiness admits the held sprint through its normal swept approach and final anchor
+[2026.09.21-00.05.14:155][831]LogTemp: Display: GUNNER_STANCE_POSE scenario=26 phase=91 observed=1 head_range=50.068 endpoint=90.097
+[2026.09.21-00.05.14:155][831]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=91 Stationary stance change evaluates a moving authored pose and finishes without looping
+[2026.09.21-00.05.14:155][831]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=91 Cosmetic stance transition preserves native capsule, supported feet and anchor
+[2026.09.21-00.05.14:155][831]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=91 Crouch entry reaches the genuine lowered head endpoint
+[2026.09.21-00.05.14:155][831]LogTemp: Display: GUNNER_STANCE_CARRY scenario=26 grip_error=0.000 alpha=1.000
+[2026.09.21-00.05.14:156][831]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=91 Crouch completion retains an armed carry pose with the support hand near its actual grip
+[2026.09.21-00.05.15:070][851]LogTemp: Display: GUNNER_STANCE_POSE scenario=26 phase=92 observed=1 head_range=42.357 endpoint=157.056
+[2026.09.21-00.05.15:070][851]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=92 Stationary stance change evaluates a moving authored pose and finishes without looping
+[2026.09.21-00.05.15:070][851]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=92 Cosmetic stance transition preserves native capsule, supported feet and anchor
+[2026.09.21-00.05.15:070][851]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=26 phase=92 Crouch exit recovers the prior standing pose
+[2026.09.21-00.05.16:796][915]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=90 Stance fixture accepts its actual cover approach
+[2026.09.21-00.05.17:312][935]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=94 Stance fixture reaches its cover anchor
+[2026.09.21-00.05.18:145][958]LogTemp: Display: GUNNER_STANCE_POSE scenario=27 phase=91 observed=1 head_range=49.333 endpoint=89.669
+[2026.09.21-00.05.18:146][958]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=91 Stationary stance change evaluates a moving authored pose and finishes without looping
+[2026.09.21-00.05.18:146][958]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=91 Cosmetic stance transition preserves native capsule, supported feet and anchor
+[2026.09.21-00.05.18:146][958]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=91 Crouch entry reaches the genuine lowered head endpoint
+[2026.09.21-00.05.18:146][958]LogTemp: Display: GUNNER_STANCE_CARRY scenario=27 grip_error=2.811 alpha=1.000
+[2026.09.21-00.05.18:146][958]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=91 Crouch completion retains an armed carry pose with the support hand near its actual grip
+[2026.09.21-00.05.19:064][977]LogTemp: Display: GUNNER_STANCE_POSE scenario=27 phase=92 observed=1 head_range=42.172 endpoint=158.391
+[2026.09.21-00.05.19:064][977]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=92 Stationary stance change evaluates a moving authored pose and finishes without looping
+[2026.09.21-00.05.19:064][977]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=92 Cosmetic stance transition preserves native capsule, supported feet and anchor
+[2026.09.21-00.05.19:064][977]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=27 phase=92 Crouch exit recovers the prior standing pose
+[2026.09.21-00.05.21:361][ 62]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=28 phase=96 Interruption fixture starts inside a real crouch-entry animation
+[2026.09.21-00.05.21:611][ 72]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=28 phase=97 Movement and ADS promptly cancel stance presentation without delaying control
+[2026.09.21-00.05.22:226][ 95]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=28 phase=99 Settled unchanged crouch does not restart a cancelled or bypassed transition
+[2026.09.21-00.05.22:969][123]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=29 phase=90 Stance fixture accepts its actual cover approach
+[2026.09.21-00.05.23:480][142]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=29 phase=94 Stance fixture reaches its cover anchor
+[2026.09.21-00.05.23:480][142]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=29 phase=94 Low-cover arrival bypasses the tall crouch-entry clip and stays protected
+[2026.09.21-00.05.23:998][162]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=29 phase=98 Low-cover ADS bypasses stationary exit presentation
+[2026.09.21-00.05.24:609][185]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=29 phase=99 Settled unchanged crouch does not restart a cancelled or bypassed transition
+[2026.09.21-00.05.24:609][185]LogTemp: Display: GUNNER_TRAVERSAL_CHECK PASS scenario=29 phase=99 Low-cover ADS release returns to the protected source pose
+[2026.09.21-00.05.24:609][185]LogTemp: Display: GUNNER_TRAVERSAL_COMPLETE failures=0 scenarios=30 skipped=0
+[2026.09.21-00.05.24:612][185]LogPython: GUNNER_TRAVERSAL_PIE_CYCLE_FINISHED 2 failures=0
+[2026.09.21-00.05.24:659][186]LogWorld: BeginTearingDown for /Game/Gunner/Motion/Maps/UEDPIE_0_L_MotionRange
+[2026.09.21-00.05.24:670][186]LogWorld: UWorld::CleanupWorld for L_MotionRange, bSessionEnded=true, bCleanupResources=true
+[2026.09.21-00.05.24:698][186]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2026.09.21-00.05.24:853][187]LogPlayLevel: Display: Destroying online subsystem :Context_2
+[2026.09.21-00.05.25:621][216]LogPython: GUNNER_TRAVERSAL_PIE_COMPLETE cycles=2 failures=0
+[2026.09.21-00.05.25:713][217]LogWorld: UWorld::CleanupWorld for L_MotionRange, bSessionEnded=true, bCleanupResources=true
+[2026.09.21-00.05.28:688][217]LogHttp: Warning: [FHttpManager::Shutdown] Unbinding delegates for 1 outstanding Http Requests:

@@ -25,10 +25,15 @@ def tick(delta):
     elapsed = time.monotonic() - state['at']
     if state['phase'] == 'start' and elapsed > 3:
         levels.editor_request_begin_play()
-        state.update(phase='play', at=time.monotonic())
+        state.update(phase='play', at=time.monotonic(), saw_world=False)
     elif state['phase'] == 'play':
+        if state.get('saw_world') and not levels.is_in_play_in_editor():
+            u.log_error('GUNNER_CROUCH_RELOAD_PIE_ABORTED: play stopped before the probe completed')
+            finish()
+            return
         world = editor.get_game_world()
         if world:
+            state['saw_world'] = True
             probes = u.GameplayStatics.get_all_actors_of_class(world, u.GunnerCrouchReloadProbe)
             if len(probes) == 1 and not probes[0].is_actor_tick_enabled():
                 failures = probes[0].get_failure_count()

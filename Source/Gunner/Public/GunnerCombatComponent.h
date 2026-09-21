@@ -60,7 +60,8 @@ public:
     UFUNCTION(BlueprintPure, Category="Combat") bool IsReloading() const { return ActionState == EGunnerCombatAction::Reloading; }
     UFUNCTION(BlueprintPure, Category="Combat") bool IsMeleeing() const { return ActionState == EGunnerCombatAction::Melee; }
     UFUNCTION(BlueprintPure, Category="Combat") bool IsCombatBlocked() const { return bCombatBlocked; }
-    UFUNCTION(BlueprintPure, Category="Combat") bool IsFireBlocked() const { return bFireBlocked; }
+    /** Live stance/cover admission; the cached value only drives interruption edges. */
+    UFUNCTION(BlueprintPure, Category="Combat") bool IsFireBlocked() const;
     UFUNCTION(BlueprintPure, Category="Combat") EGunnerCombatAction GetActionState() const { return ActionState; }
     UFUNCTION(BlueprintPure, Category="Combat") EGunnerWeaponKind GetWeaponKind() const;
     UFUNCTION(BlueprintPure, Category="Combat") UGunnerWeaponData* GetWeaponData() const { return ActiveData; }

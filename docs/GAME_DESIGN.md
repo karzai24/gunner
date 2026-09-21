@@ -17,7 +17,7 @@ Select one or two Wardens, enter the crater bastion, survive three Veyra waves, 
 
 - Solo or two-player local cooperative play.
 - Crouch is a deliberate toggle with reduced speed, lower camera framing, a compact collision profile, and a standing-clearance check. It remains available while attached to cover, including lateral cover movement and firing.
-- The traversal button prioritizes cover attach/exit/vault when context is valid and otherwise performs a grounded jump.
+- In the local movement profile, the traversal button enters nearby cover, rolls on a short open-space tap, and sprints on hold; attached hold enables faster wall travel and away input detaches. Jump has a separate action. Corners, transfers and a cover vault remain intended movement coverage, gated until their animation and collision routes are proven. The portable baseline retains cover/detach/jump fallback.
 - Three waves with rising enemy count, resilience, speed, and pressure.
 - An enemy counts as remaining from reservation through death, so the HUD never understates the threat.
 - A Warden at zero health becomes incapacitated before death. A living teammate can revive nearby; a solo incapacitation expires into defeat.

@@ -1,0 +1,206 @@
+[2026.09.21-00.11.20:761][  0]LogConsoleManager: Warning: Console variable 'r.MotionVectorSimulation' used in the render thread. Rendering artifacts could happen. Use ECVF_RenderThreadSafe or don't use in render thread.
+[2026.09.21-00.11.20:858][  0]LogPython: GUNNER_MOTION_MAC_NEW_MOUSE_BACKEND value=0
+[2026.09.21-00.11.28:874][304]LogTemp: Display: GUNNER_MOTION_CHECK PASS Motion pawn and components ready
+[2026.09.21-00.11.28:874][304]LogTemp: Display: GUNNER_MOTION_CHECK PASS Both authored weapon and action data assets present
+[2026.09.21-00.11.28:875][304]LogTemp: Display: GUNNER_MOTION_CHECK PASS Transient test fixture mesh loads
+[2026.09.21-00.11.29:893][350]LogTemp: Display: GUNNER_MOTION_CHECK PASS Native motion animation instance active
+[2026.09.21-00.11.29:893][350]LogTemp: Display: GUNNER_MOTION_CHECK PASS Standing capsule grounded at 90 cm
+[2026.09.21-00.11.29:893][350]LogTemp: Display: GUNNER_MOTION_CHECK PASS Rifle equipped at spawn
+[2026.09.21-00.11.31:109][381]LogTemp: Display: GUNNER_MOTION_CHECK PASS W drives armed movement and live animation speed
+[2026.09.21-00.11.31:765][402]LogTemp: Display: GUNNER_MOTION_CHECK PASS Shift drives faster authored sprint state
+[2026.09.21-00.11.32:279][416]LogTemp: Display: GUNNER_MOTION_CHECK PASS Released movement stops
+[2026.09.21-00.11.32:899][444]LogTemp: Display: GUNNER_MOTION_CHECK PASS RMB enables aim pose and focused camera
+[2026.09.21-00.11.33:620][465]LogTemp: Display: GUNNER_MOTION_CHECK PASS Held rifle fires repeatedly
+[2026.09.21-00.11.33:621][465]LogTemp: Display: GUNNER_MOTION_CHECK PASS Two-stage rifle trace damages visible target
+[2026.09.21-00.11.34:483][495]LogTemp: Display: GUNNER_MOTION_CHECK PASS Reload plays before ammunition commits
+[2026.09.21-00.11.34:483][495]LogTemp: Display: GUNNER_ANIM_PROBE reload_slot=1.0000 hand_delta=33.8978 montage_time=0.8635
+[2026.09.21-00.11.34:484][495]LogTemp: Display: GUNNER_MOTION_CHECK PASS Reload slot evaluates and visibly moves the authored left-hand pose
+[2026.09.21-00.11.36:902][596]LogTemp: Display: GUNNER_MOTION_CHECK PASS Upright reload rejects crouching into an unsupported action pose
+[2026.09.21-00.11.36:902][596]LogTemp: Display: GUNNER_MOTION_CHECK PASS Completed reload transfers conserved reserve rounds
+[2026.09.21-00.11.37:111][605]LogTemp: Display: GUNNER_MOTION_CHECK PASS 2 equips pistol
+[2026.09.21-00.11.38:719][674]LogTemp: Display: GUNNER_MOTION_CHECK PASS Pistol equip completes into pistol animation
+[2026.09.21-00.11.39:740][719]LogTemp: Display: GUNNER_MOTION_CHECK PASS Held semi-automatic pistol fires exactly once
+[2026.09.21-00.11.40:266][732]LogTemp: Display: GUNNER_MOTION_CHECK PASS Second pistol press fires one additional shot
+[2026.09.21-00.11.40:485][742]LogTemp: Display: GUNNER_MOTION_CHECK PASS Partial pistol magazine can reload
+[2026.09.21-00.11.40:790][755]LogTemp: Display: GUNNER_MOTION_CHECK PASS Interrupted reload commits no ammunition and unlocks state
+[2026.09.21-00.11.41:306][779]LogTemp: Display: GUNNER_MOTION_CHECK PASS Sprint cancels reload without transferring ammunition
+[2026.09.21-00.11.42:202][819]LogTemp: Display: GUNNER_MOTION_CHECK PASS C enables real crouch state and 62 cm capsule
+[2026.09.21-00.11.42:811][837]LogTemp: Display: GUNNER_MOTION_CHECK PASS Crouched movement uses reduced speed
+[2026.09.21-00.11.42:812][837]LogTemp: Display: GUNNER_MOTION_CHECK PASS Clearance fixture spawned
+[2026.09.21-00.11.43:370][862]LogTemp: Display: GUNNER_MOTION_CHECK PASS Low ceiling rejects standing without capsule overlap
+[2026.09.21-00.11.43:949][889]LogTemp: Display: GUNNER_MOTION_CHECK PASS Standing succeeds after clearance returns
+[2026.09.21-00.11.43:949][889]LogTemp: Display: GUNNER_MOTION_CHECK PASS Out-of-reach wall rejects cover admission
+[2026.09.21-00.11.44:158][899]LogTemp: Display: GUNNER_MOTION_CHECK PASS Selected jump binding jumps without an invalid cover attachment
+[2026.09.21-00.11.45:893][979]LogTemp: Display: GUNNER_MOTION_CHECK PASS Space attaches low cover at 52 cm and crouches
+[2026.09.21-00.11.45:893][979]LogTemp: Display: GUNNER_MOTION_CHECK PASS Protected low-cover animation keeps the head bone below the 115 cm fixture
+[2026.09.21-00.11.45:893][979]LogTemp: Display: GUNNER_MOTION_CHECK PASS Protected crouch preserves the acquired torso pose without standing weapon overlay
+[2026.09.21-00.11.47:261][ 32]LogTemp: Display: GUNNER_MOTION_CHECK PASS Cover shuffle keeps offset and stops before wall endpoint
+[2026.09.21-00.11.47:766][ 55]LogTemp: Display: GUNNER_MOTION_CHECK PASS Low-cover aim exposes the standing firing pose
+[2026.09.21-00.11.48:052][ 56]LogTemp: Display: GUNNER_MOTION_CHECK PASS Second Space safely detaches cover
+[2026.09.21-00.11.48:577][ 83]LogTemp: Display: GUNNER_MOTION_CHECK PASS 180 cm fixture classified as high cover
+[2026.09.21-00.11.48:881][ 85]LogTemp: Display: GUNNER_MOTION_CHECK PASS High-cover center rejects blocked aim and fire
+[2026.09.21-00.11.49:081][ 97]LogTemp: Display: GUNNER_MOTION_CHECK PASS Protected high cover permits a safe reload
+[2026.09.21-00.11.49:336][109]LogTemp: Display: GUNNER_MOTION_CHECK PASS Protected reload interruption remains ammo-safe
+[2026.09.21-00.11.49:958][137]LogTemp: Display: GUNNER_MOTION_CHECK PASS Muzzle obstruction fixture spawned
+[2026.09.21-00.11.50:224][149]LogTemp: Display: GUNNER_MOTION_CHECK PASS Barrel obstruction consumes shot but cannot damage target through cover
+[2026.09.21-00.11.50:577][155]LogTemp: Display: GUNNER_ANIM_PROBE melee_slot=1.0000 montage_time=0.3531
+[2026.09.21-00.11.50:577][155]LogTemp: Display: GUNNER_MOTION_CHECK PASS F starts authored melee action
+[2026.09.21-00.11.50:577][155]LogTemp: Display: GUNNER_MOTION_CHECK PASS Melee full-body montage contributes to the evaluated pose
+[2026.09.21-00.11.51:666][197]LogTemp: Display: GUNNER_MOTION_CHECK PASS Melee commits one finite nearby hit then releases state
+[2026.09.21-00.11.52:937][255]LogTemp: Display: GUNNER_MOTION_CHECK PASS Melee cannot pass through intervening wall
+[2026.09.21-00.11.53:158][265]LogTemp: Display: GUNNER_MOTION_CHECK PASS 1 re-equips rifle
+[2026.09.21-00.11.53:478][280]LogTemp: Display: GUNNER_MOTION_CHECK PASS Interrupted equip cannot leave combat locked
+[2026.09.21-00.11.53:797][294]LogTemp: Display: GUNNER_MOTION_CHECK PASS Fire remains usable after interrupted equip
+[2026.09.21-00.11.53:798][294]LogTemp: Display: GUNNER_MOTION_CHECK PASS Unpossess clears held combat actions
+[2026.09.21-00.11.53:798][294]LogTemp: Display: GUNNER_MOTION_CHECK PASS Unpossess removes owned motion input context
+[2026.09.21-00.11.54:834][340]LogTemp: Display: GUNNER_MOTION_CHECK PASS Repossess restores movement input
+[2026.09.21-00.11.54:834][340]LogTemp: Display: GUNNER_MOTION_CHECK PASS Repossess does not resume stale held fire
+[2026.09.21-00.11.55:827][374]LogTemp: Display: GUNNER_MOTION_CHECK PASS Q switches selected shoulder
+[2026.09.21-00.11.55:827][374]LogTemp: Display: GUNNER_MOTION_CHECK PASS Shoulder switch moves the live camera to the selected side
+[2026.09.21-00.11.56:410][391]LogTemp: Display: GUNNER_MOTION_CHECK PASS Action guard fixture enters authored crouch state
+[2026.09.21-00.11.56:726][405]LogTemp: Display: GUNNER_MOTION_CHECK PASS Rejected crouched hip fire and melee leave the selected weapon idle
+[2026.09.21-00.11.56:726][405]LogTemp: Display: GUNNER_MOTION_CHECK PASS Crouched hip fire is rejected without an authored firing pose
+[2026.09.21-00.11.56:726][405]LogTemp: Display: GUNNER_MOTION_CHECK PASS Crouched melee is rejected without an authored attack pose
+[2026.09.21-00.11.57:241][428]LogTemp: Display: GUNNER_MOTION_CHECK PASS Stationary crouched ADS preserves crouch and aiming animation state
+[2026.09.21-00.11.57:604][444]LogTemp: Display: GUNNER_MOTION_CHECK PASS Stationary crouched ADS permits fire
+[2026.09.21-00.11.57:604][444]LogTemp: Display: GUNNER_MOTION_CHECK PASS Authored directional crouch permits reduced-speed ADS movement
+[2026.09.21-00.11.58:243][464]LogTemp: Display: GUNNER_MOTION_CHECK PASS Action guard fixture returns to standing
+[2026.09.21-00.11.58:329][468]LogTemp: Display: GUNNER_MOTION_CHECK PASS Standing melee enters guarded attack state
+[2026.09.21-00.11.58:462][474]LogTemp: Display: GUNNER_MOTION_CHECK PASS Active standing melee rejects crouch toggle
+[2026.09.21-00.11.58:462][474]LogTemp: Display: GUNNER_MOTION_CHECK PASS Active melee rejects movement input and stops translation
+[2026.09.21-00.11.59:446][518]LogTemp: Display: GUNNER_MOTION_CHECK PASS Guarded melee releases action lock on completion
+[2026.09.21-00.11.59:446][518]LogTemp: Display: GUNNER_MOTION_CHECK PASS Dodge component and authored roll montage ready
+[2026.09.21-00.12.00:058][546]LogTemp: Display: GUNNER_MOTION_CHECK PASS E starts the authored roll with a native root-motion source
+[2026.09.21-00.12.00:058][546]LogTemp: Display: GUNNER_MOTION_CHECK PASS Active roll advances through the clear lane
+[2026.09.21-00.12.01:259][590]LogTemp: Display: GUNNER_MOTION_CHECK PASS Completed roll travels a bounded distance and releases native motion
+[2026.09.21-00.12.01:259][590]LogTemp: Display: GUNNER_MOTION_CHECK PASS Completed roll leaves no residual slide
+[2026.09.21-00.12.01:260][590]LogTemp: Display: GUNNER_MOTION_CHECK PASS Close-wall roll clearance fixture spawned
+[2026.09.21-00.12.01:840][616]LogTemp: Display: GUNNER_MOTION_CHECK PASS Standing capsule sweep rejects a roll into a close wall
+[2026.09.21-00.12.02:291][637]LogTemp: Display: GUNNER_MOTION_CHECK PASS Roll stance fixture enters authored crouch
+[2026.09.21-00.12.02:551][649]LogTemp: Display: GUNNER_MOTION_CHECK PASS Crouched roll obtains standing clearance and enters the authored roll
+[2026.09.21-00.12.04:044][717]LogTemp: Display: GUNNER_MOTION_CHECK PASS Roll interruption fixture returns to standing
+[2026.09.21-00.12.04:252][727]LogTemp: Display: GUNNER_MOTION_CHECK PASS Second roll enters native motion before interruption
+[2026.09.21-00.12.04:511][739]LogTemp: Display: GUNNER_MOTION_CHECK PASS Interrupted roll removes native motion and releases action lock
+[2026.09.21-00.12.04:770][751]LogTemp: Display: GUNNER_MOTION_CHECK PASS Interrupted roll remains stopped after cleanup
+[2026.09.21-00.12.05:094][766]LogTemp: Display: GUNNER_MOTION_CHECK PASS High-cover edge fixture selects its open shoulder
+[2026.09.21-00.12.05:366][779]LogTemp: Display: GUNNER_MOTION_CHECK PASS High-cover edge attaches to the protected anchor
+[2026.09.21-00.12.06:368][825]LogTemp: Display: GUNNER_MOTION_CHECK PASS High-cover ADS physically steps beyond the edge while retaining wall offset
+[2026.09.21-00.12.06:791][844]LogTemp: Display: GUNNER_MOTION_CHECK PASS Completed high-cover step-out evaluates standing aim state
+[2026.09.21-00.12.07:207][862]LogTemp: Display: GUNNER_MOTION_CHECK PASS High-cover step-out clears the actual muzzle trace and damages the exposed target
+[2026.09.21-00.12.08:215][900]LogTemp: Display: GUNNER_COVER_RETURN elapsed=1.008 attached=1 peeking=1 aiming=0 blind=0 x=346.670 y=598.030 speed=20.000
+[2026.09.21-00.12.08:323][905]LogTemp: Display: GUNNER_COVER_RETURN elapsed=1.116 attached=1 peeking=0 aiming=0 blind=0 x=348.413 y=598.030 speed=0.000
+[2026.09.21-00.12.08:323][905]LogTemp: Display: GUNNER_MOTION_CHECK PASS Releasing high-cover ADS returns to the original protected anchor
+[2026.09.21-00.12.08:832][929]LogTemp: Display: GUNNER_MOTION_CHECK PASS Low-cover melee guard fixture attaches and crouches
+[2026.09.21-00.12.09:291][950]LogTemp: Display: GUNNER_MOTION_CHECK PASS Low-cover melee guard fixture pops up into standing ADS
+[2026.09.21-00.12.09:503][960]LogTemp: Display: GUNNER_MOTION_CHECK PASS Rejected low-cover melee leaves the selected weapon idle
+[2026.09.21-00.12.09:503][960]LogTemp: Display: GUNNER_MOTION_CHECK PASS Low-cover pop-up rejects standing melee without triggering automatic crouch
+[2026.09.21-00.12.10:009][983]LogTemp: Display: GUNNER_MOTION_CHECK PASS Simultaneous action fixture starts standing
+[2026.09.21-00.12.10:182][991]LogTemp: Display: GUNNER_MOTION_CHECK PASS Same-frame crouch and melee inputs cannot combine incompatible stance and attack
+[2026.09.21-00.12.11:214][ 38]LogTemp: Display: GUNNER_MOTION_CHECK PASS Simultaneous action handling leaves no lingering melee lock
+[2026.09.21-00.12.11:215][ 38]LogTemp: Display: GUNNER_MOTION_COMPLETE failures=0
+[2026.09.21-00.12.11:222][ 38]LogPython: GUNNER_MOTION_PIE_CYCLE_FINISHED 1
+[2026.09.21-00.12.11:292][ 39]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2026.09.21-00.12.11:477][ 40]LogPlayLevel: Display: Destroying online subsystem :Context_1
+[2026.09.21-00.12.20:252][429]LogTemp: Display: GUNNER_MOTION_CHECK PASS Motion pawn and components ready
+[2026.09.21-00.12.20:252][429]LogTemp: Display: GUNNER_MOTION_CHECK PASS Both authored weapon and action data assets present
+[2026.09.21-00.12.20:252][429]LogTemp: Display: GUNNER_MOTION_CHECK PASS Transient test fixture mesh loads
+[2026.09.21-00.12.21:262][476]LogTemp: Display: GUNNER_MOTION_CHECK PASS Native motion animation instance active
+[2026.09.21-00.12.21:263][476]LogTemp: Display: GUNNER_MOTION_CHECK PASS Standing capsule grounded at 90 cm
+[2026.09.21-00.12.21:263][476]LogTemp: Display: GUNNER_MOTION_CHECK PASS Rifle equipped at spawn
+[2026.09.21-00.12.22:278][514]LogTemp: Display: GUNNER_MOTION_CHECK PASS W drives armed movement and live animation speed
+[2026.09.21-00.12.22:932][535]LogTemp: Display: GUNNER_MOTION_CHECK PASS Shift drives faster authored sprint state
+[2026.09.21-00.12.23:441][549]LogTemp: Display: GUNNER_MOTION_CHECK PASS Released movement stops
+[2026.09.21-00.12.24:043][576]LogTemp: Display: GUNNER_MOTION_CHECK PASS RMB enables aim pose and focused camera
+[2026.09.21-00.12.24:753][598]LogTemp: Display: GUNNER_MOTION_CHECK PASS Held rifle fires repeatedly
+[2026.09.21-00.12.24:753][598]LogTemp: Display: GUNNER_MOTION_CHECK PASS Two-stage rifle trace damages visible target
+[2026.09.21-00.12.25:608][627]LogTemp: Display: GUNNER_MOTION_CHECK PASS Reload plays before ammunition commits
+[2026.09.21-00.12.25:608][627]LogTemp: Display: GUNNER_ANIM_PROBE reload_slot=1.0000 hand_delta=35.9945 montage_time=0.8553
+[2026.09.21-00.12.25:608][627]LogTemp: Display: GUNNER_MOTION_CHECK PASS Reload slot evaluates and visibly moves the authored left-hand pose
+[2026.09.21-00.12.28:019][725]LogTemp: Display: GUNNER_MOTION_CHECK PASS Upright reload rejects crouching into an unsupported action pose
+[2026.09.21-00.12.28:019][725]LogTemp: Display: GUNNER_MOTION_CHECK PASS Completed reload transfers conserved reserve rounds
+[2026.09.21-00.12.28:239][735]LogTemp: Display: GUNNER_MOTION_CHECK PASS 2 equips pistol
+[2026.09.21-00.12.29:843][807]LogTemp: Display: GUNNER_MOTION_CHECK PASS Pistol equip completes into pistol animation
+[2026.09.21-00.12.30:851][851]LogTemp: Display: GUNNER_MOTION_CHECK PASS Held semi-automatic pistol fires exactly once
+[2026.09.21-00.12.31:350][863]LogTemp: Display: GUNNER_MOTION_CHECK PASS Second pistol press fires one additional shot
+[2026.09.21-00.12.31:573][873]LogTemp: Display: GUNNER_MOTION_CHECK PASS Partial pistol magazine can reload
+[2026.09.21-00.12.31:878][887]LogTemp: Display: GUNNER_MOTION_CHECK PASS Interrupted reload commits no ammunition and unlocks state
+[2026.09.21-00.12.32:394][910]LogTemp: Display: GUNNER_MOTION_CHECK PASS Sprint cancels reload without transferring ammunition
+[2026.09.21-00.12.33:273][949]LogTemp: Display: GUNNER_MOTION_CHECK PASS C enables real crouch state and 62 cm capsule
+[2026.09.21-00.12.33:873][967]LogTemp: Display: GUNNER_MOTION_CHECK PASS Crouched movement uses reduced speed
+[2026.09.21-00.12.33:874][967]LogTemp: Display: GUNNER_MOTION_CHECK PASS Clearance fixture spawned
+[2026.09.21-00.12.34:448][993]LogTemp: Display: GUNNER_MOTION_CHECK PASS Low ceiling rejects standing without capsule overlap
+[2026.09.21-00.12.35:008][ 18]LogTemp: Display: GUNNER_MOTION_CHECK PASS Standing succeeds after clearance returns
+[2026.09.21-00.12.35:008][ 18]LogTemp: Display: GUNNER_MOTION_CHECK PASS Out-of-reach wall rejects cover admission
+[2026.09.21-00.12.35:209][ 27]LogTemp: Display: GUNNER_MOTION_CHECK PASS Selected jump binding jumps without an invalid cover attachment
+[2026.09.21-00.12.36:949][106]LogTemp: Display: GUNNER_MOTION_CHECK PASS Space attaches low cover at 52 cm and crouches
+[2026.09.21-00.12.36:950][106]LogTemp: Display: GUNNER_MOTION_CHECK PASS Protected low-cover animation keeps the head bone below the 115 cm fixture
+[2026.09.21-00.12.36:950][106]LogTemp: Display: GUNNER_MOTION_CHECK PASS Protected crouch preserves the acquired torso pose without standing weapon overlay
+[2026.09.21-00.12.38:318][157]LogTemp: Display: GUNNER_MOTION_CHECK PASS Cover shuffle keeps offset and stops before wall endpoint
+[2026.09.21-00.12.38:836][181]LogTemp: Display: GUNNER_MOTION_CHECK PASS Low-cover aim exposes the standing firing pose
+[2026.09.21-00.12.39:133][182]LogTemp: Display: GUNNER_MOTION_CHECK PASS Second Space safely detaches cover
+[2026.09.21-00.12.39:669][209]LogTemp: Display: GUNNER_MOTION_CHECK PASS 180 cm fixture classified as high cover
+[2026.09.21-00.12.39:980][211]LogTemp: Display: GUNNER_MOTION_CHECK PASS High-cover center rejects blocked aim and fire
+[2026.09.21-00.12.40:195][223]LogTemp: Display: GUNNER_MOTION_CHECK PASS Protected high cover permits a safe reload
+[2026.09.21-00.12.40:458][235]LogTemp: Display: GUNNER_MOTION_CHECK PASS Protected reload interruption remains ammo-safe
+[2026.09.21-00.12.41:083][263]LogTemp: Display: GUNNER_MOTION_CHECK PASS Muzzle obstruction fixture spawned
+[2026.09.21-00.12.41:336][274]LogTemp: Display: GUNNER_MOTION_CHECK PASS Barrel obstruction consumes shot but cannot damage target through cover
+[2026.09.21-00.12.41:699][280]LogTemp: Display: GUNNER_ANIM_PROBE melee_slot=1.0000 montage_time=0.3636
+[2026.09.21-00.12.41:699][280]LogTemp: Display: GUNNER_MOTION_CHECK PASS F starts authored melee action
+[2026.09.21-00.12.41:699][280]LogTemp: Display: GUNNER_MOTION_CHECK PASS Melee full-body montage contributes to the evaluated pose
+[2026.09.21-00.12.42:787][321]LogTemp: Display: GUNNER_MOTION_CHECK PASS Melee commits one finite nearby hit then releases state
+[2026.09.21-00.12.44:058][379]LogTemp: Display: GUNNER_MOTION_CHECK PASS Melee cannot pass through intervening wall
+[2026.09.21-00.12.44:262][388]LogTemp: Display: GUNNER_MOTION_CHECK PASS 1 re-equips rifle
+[2026.09.21-00.12.44:570][402]LogTemp: Display: GUNNER_MOTION_CHECK PASS Interrupted equip cannot leave combat locked
+[2026.09.21-00.12.44:875][415]LogTemp: Display: GUNNER_MOTION_CHECK PASS Fire remains usable after interrupted equip
+[2026.09.21-00.12.44:875][415]LogTemp: Display: GUNNER_MOTION_CHECK PASS Unpossess clears held combat actions
+[2026.09.21-00.12.44:875][415]LogTemp: Display: GUNNER_MOTION_CHECK PASS Unpossess removes owned motion input context
+[2026.09.21-00.12.45:915][461]LogTemp: Display: GUNNER_MOTION_CHECK PASS Repossess restores movement input
+[2026.09.21-00.12.45:915][461]LogTemp: Display: GUNNER_MOTION_CHECK PASS Repossess does not resume stale held fire
+[2026.09.21-00.12.46:900][496]LogTemp: Display: GUNNER_MOTION_CHECK PASS Q switches selected shoulder
+[2026.09.21-00.12.46:900][496]LogTemp: Display: GUNNER_MOTION_CHECK PASS Shoulder switch moves the live camera to the selected side
+[2026.09.21-00.12.47:514][510]LogTemp: Display: GUNNER_MOTION_CHECK PASS Action guard fixture enters authored crouch state
+[2026.09.21-00.12.47:820][524]LogTemp: Display: GUNNER_MOTION_CHECK PASS Rejected crouched hip fire and melee leave the selected weapon idle
+[2026.09.21-00.12.47:820][524]LogTemp: Display: GUNNER_MOTION_CHECK PASS Crouched hip fire is rejected without an authored firing pose
+[2026.09.21-00.12.47:820][524]LogTemp: Display: GUNNER_MOTION_CHECK PASS Crouched melee is rejected without an authored attack pose
+[2026.09.21-00.12.48:334][547]LogTemp: Display: GUNNER_MOTION_CHECK PASS Stationary crouched ADS preserves crouch and aiming animation state
+[2026.09.21-00.12.48:700][562]LogTemp: Display: GUNNER_MOTION_CHECK PASS Stationary crouched ADS permits fire
+[2026.09.21-00.12.48:700][562]LogTemp: Display: GUNNER_MOTION_CHECK PASS Authored directional crouch permits reduced-speed ADS movement
+[2026.09.21-00.12.49:362][582]LogTemp: Display: GUNNER_MOTION_CHECK PASS Action guard fixture returns to standing
+[2026.09.21-00.12.49:453][586]LogTemp: Display: GUNNER_MOTION_CHECK PASS Standing melee enters guarded attack state
+[2026.09.21-00.12.49:594][592]LogTemp: Display: GUNNER_MOTION_CHECK PASS Active standing melee rejects crouch toggle
+[2026.09.21-00.12.49:594][592]LogTemp: Display: GUNNER_MOTION_CHECK PASS Active melee rejects movement input and stops translation
+[2026.09.21-00.12.50:586][636]LogTemp: Display: GUNNER_MOTION_CHECK PASS Guarded melee releases action lock on completion
+[2026.09.21-00.12.50:586][636]LogTemp: Display: GUNNER_MOTION_CHECK PASS Dodge component and authored roll montage ready
+[2026.09.21-00.12.51:209][665]LogTemp: Display: GUNNER_MOTION_CHECK PASS E starts the authored roll with a native root-motion source
+[2026.09.21-00.12.51:209][665]LogTemp: Display: GUNNER_MOTION_CHECK PASS Active roll advances through the clear lane
+[2026.09.21-00.12.52:417][709]LogTemp: Display: GUNNER_MOTION_CHECK PASS Completed roll travels a bounded distance and releases native motion
+[2026.09.21-00.12.52:418][709]LogTemp: Display: GUNNER_MOTION_CHECK PASS Completed roll leaves no residual slide
+[2026.09.21-00.12.52:418][709]LogTemp: Display: GUNNER_MOTION_CHECK PASS Close-wall roll clearance fixture spawned
+[2026.09.21-00.12.52:993][735]LogTemp: Display: GUNNER_MOTION_CHECK PASS Standing capsule sweep rejects a roll into a close wall
+[2026.09.21-00.12.53:473][756]LogTemp: Display: GUNNER_MOTION_CHECK PASS Roll stance fixture enters authored crouch
+[2026.09.21-00.12.53:727][767]LogTemp: Display: GUNNER_MOTION_CHECK PASS Crouched roll obtains standing clearance and enters the authored roll
+[2026.09.21-00.12.55:229][834]LogTemp: Display: GUNNER_MOTION_CHECK PASS Roll interruption fixture returns to standing
+[2026.09.21-00.12.55:448][844]LogTemp: Display: GUNNER_MOTION_CHECK PASS Second roll enters native motion before interruption
+[2026.09.21-00.12.55:699][855]LogTemp: Display: GUNNER_MOTION_CHECK PASS Interrupted roll removes native motion and releases action lock
+[2026.09.21-00.12.55:965][867]LogTemp: Display: GUNNER_MOTION_CHECK PASS Interrupted roll remains stopped after cleanup
+[2026.09.21-00.12.56:278][881]LogTemp: Display: GUNNER_MOTION_CHECK PASS High-cover edge fixture selects its open shoulder
+[2026.09.21-00.12.56:541][893]LogTemp: Display: GUNNER_MOTION_CHECK PASS High-cover edge attaches to the protected anchor
+[2026.09.21-00.12.57:560][938]LogTemp: Display: GUNNER_MOTION_CHECK PASS High-cover ADS physically steps beyond the edge while retaining wall offset
+[2026.09.21-00.12.57:971][956]LogTemp: Display: GUNNER_MOTION_CHECK PASS Completed high-cover step-out evaluates standing aim state
+[2026.09.21-00.12.58:391][974]LogTemp: Display: GUNNER_MOTION_CHECK PASS High-cover step-out clears the actual muzzle trace and damages the exposed target
+[2026.09.21-00.12.59:399][ 11]LogTemp: Display: GUNNER_COVER_RETURN elapsed=1.008 attached=1 peeking=1 aiming=0 blind=0 x=346.706 y=597.042 speed=20.000
+[2026.09.21-00.12.59:489][ 15]LogTemp: Display: GUNNER_COVER_RETURN elapsed=1.098 attached=1 peeking=0 aiming=0 blind=0 x=348.031 y=597.042 speed=0.000
+[2026.09.21-00.12.59:490][ 15]LogTemp: Display: GUNNER_MOTION_CHECK PASS Releasing high-cover ADS returns to the original protected anchor
+[2026.09.21-00.13.00:012][ 38]LogTemp: Display: GUNNER_MOTION_CHECK PASS Low-cover melee guard fixture attaches and crouches
+[2026.09.21-00.13.00:469][ 58]LogTemp: Display: GUNNER_MOTION_CHECK PASS Low-cover melee guard fixture pops up into standing ADS
+[2026.09.21-00.13.00:682][ 67]LogTemp: Display: GUNNER_MOTION_CHECK PASS Rejected low-cover melee leaves the selected weapon idle
+[2026.09.21-00.13.00:682][ 67]LogTemp: Display: GUNNER_MOTION_CHECK PASS Low-cover pop-up rejects standing melee without triggering automatic crouch
+[2026.09.21-00.13.01:223][ 91]LogTemp: Display: GUNNER_MOTION_CHECK PASS Simultaneous action fixture starts standing
+[2026.09.21-00.13.01:382][ 98]LogTemp: Display: GUNNER_MOTION_CHECK PASS Same-frame crouch and melee inputs cannot combine incompatible stance and attack
+[2026.09.21-00.13.02:402][144]LogTemp: Display: GUNNER_MOTION_CHECK PASS Simultaneous action handling leaves no lingering melee lock
+[2026.09.21-00.13.02:403][144]LogTemp: Display: GUNNER_MOTION_COMPLETE failures=0
+[2026.09.21-00.13.02:405][144]LogPython: GUNNER_MOTION_PIE_CYCLE_FINISHED 2
+[2026.09.21-00.13.02:474][145]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2026.09.21-00.13.02:559][146]LogPlayLevel: Display: Destroying online subsystem :Context_2
+[2026.09.21-00.13.03:405][183]LogPython: GUNNER_MOTION_PIE_COMPLETE cycles=2
+[2026.09.21-00.13.05:693][184]LogHttp: Warning: [FHttpManager::Shutdown] Unbinding delegates for 1 outstanding Http Requests:

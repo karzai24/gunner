@@ -7,12 +7,34 @@
 #include "GunnerDodgeComponent.h"
 #include "GunnerAnimInstance.h"
 #include "Animation/AnimMontage.h"
+#include "Animation/AnimBlueprintGeneratedClass.h"
+#include "Engine/SkeletalMesh.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputComponent.h"
+#include "EnhancedPlayerInput.h"
+#include "GameFramework/PlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "InputActionValue.h"
+#include "Misc/ConfigCacheIni.h"
+#include "Misc/PackageName.h"
+#include "Misc/CommandLine.h"
+#include "Misc/Parse.h"
+
+namespace
+{
+    const UEnhancedPlayerInput* CurrentInput(const ACharacter* Character)
+    {
+        const auto* Player = Cast<APlayerController>(Character->GetController());
+        return Player ? Cast<UEnhancedPlayerInput>(Player->PlayerInput) : nullptr;
+    }
+    bool HeldInput(const ACharacter* Character, const UInputAction* Action, bool Fallback)
+    {
+        const auto* Input = CurrentInput(Character);
+        return Input && Action ? Input->GetActionValue(Action).Get<bool>() : Fallback;
+    }
+}
 
 AGunnerCharacter::AGunnerCharacter()
 {
@@ -54,6 +76,28 @@ AGunnerCharacter::AGunnerCharacter()
 
 void AGunnerCharacter::BeginPlay()
 {
+    // A local licensed profile is optional and read once at spawn. Fresh clones
+    // retain the Blueprint's portable assets; the foundation has no motion profile.
+    FString LocalProfile;
+    if (MotionSettings && GConfig && !FParse::Param(FCommandLine::Get(), TEXT("GunnerIgnoreLocalMotion"))
+        && GConfig->GetString(TEXT("Gunner.LocalMotion"), TEXT("Profile"), LocalProfile, GGameIni)
+        && !LocalProfile.IsEmpty())
+    {
+        if (LocalProfile.StartsWith(TEXT("/Game/Gunner/LicensedLocal/"))
+            && FPackageName::DoesPackageExist(FPackageName::ObjectPathToPackageName(LocalProfile)))
+        {
+            auto* Profile = LoadObject<UGunnerMotionSettings>(nullptr, *LocalProfile);
+            auto* Class = Profile ? Cast<UAnimBlueprintGeneratedClass>(Profile->AnimationClass.Get()) : nullptr;
+            if (Class && Class->IsChildOf(UGunnerAnimInstance::StaticClass()) && GetMesh()->GetSkeletalMeshAsset()
+                && Class->GetTargetSkeleton() == GetMesh()->GetSkeletalMeshAsset()->GetSkeleton())
+            {
+                MotionSettings = Profile;
+                GetMesh()->SetAnimInstanceClass(Class);
+            }
+            else UE_LOG(LogTemp, Warning, TEXT("Gunner local movement profile is incompatible; using the portable character defaults"));
+        }
+        else UE_LOG(LogTemp, Warning, TEXT("Gunner local movement profile is unavailable; using the portable character defaults"));
+    }
     Super::BeginPlay();
     GetMesh()->AddTickPrerequisiteActor(this);
     if (MotionSettings)
@@ -62,41 +106,103 @@ void AGunnerCharacter::BeginPlay()
         Movement->GetNavAgentPropertiesRef().bCanCrouch = MotionSettings->bCrouchReady;
         Movement->MaxWalkSpeedCrouched = MotionSettings->CrouchSpeed;
         Movement->bOrientRotationToMovement = false;
+        Movement->MaxAcceleration = MotionSettings->Acceleration;
+        Movement->BrakingDecelerationWalking = MotionSettings->Braking;
     }
 }
 
 bool AGunnerCharacter::IsInCover() const { return Cover && Cover->IsAttached(); }
+bool AGunnerCharacter::UsesContextualTraversal() const { return MotionSettings && MotionSettings->bContextualTraversal; }
+bool AGunnerCharacter::IsAimHeld() const
+{
+    return HeldInput(this, InputConfig ? InputConfig->Aim : nullptr, bAimHeld);
+}
+
+bool AGunnerCharacter::HasDirectionalCrouch() const
+{
+    const auto* Anim = Cast<UGunnerAnimInstance>(GetMesh()->GetAnimInstance());
+    // The installed moving crouch source rises above the 115 cm low-cover top.
+    // Preserve the proven protective forward gait there until a lower directional set is authored.
+    return MotionSettings && MotionSettings->bDirectionalCrouchReady && Anim && Anim->bDirectionalCrouchPoseReady
+        && !Cover->IsLowCover();
+}
+
+bool AGunnerCharacter::WantsSprint() const
+{
+    // Enhanced Input evaluates values before callbacks, but Started callbacks run
+    // before Completed. Query values so release+fire in one frame is not lost.
+    const bool SprintHeld = HeldInput(this, InputConfig ? InputConfig->Sprint : nullptr, bSprintHeld);
+    const bool TraverseHeld = HeldInput(this, InputConfig ? InputConfig->Traverse : nullptr, bTraverseHeld);
+    const auto* Input = CurrentInput(this);
+    const FVector2D Axis = Input && InputConfig && InputConfig->Move
+        ? Input->GetActionValue(InputConfig->Move).Get<FVector2D>() : MoveAxis;
+    const bool Held = SprintHeld || (TraverseHeld && MotionSettings && MotionSettings->bContextualTraversal
+        && TraverseHeldTime >= MotionSettings->TraverseHoldTime);
+    return Held && MotionSettings && MotionSettings->bSprintReady && Axis.Y > 0.4f && !IsAimHeld()
+        && !bIsCrouched && !GetCharacterMovement()->bWantsToCrouch && !IsInCover()
+        && !Cover->IsTransitioning() && !Dodge->IsDodging() && GetCharacterMovement()->IsMovingOnGround();
+}
+
+bool AGunnerCharacter::IsCombatMovementBlocked() const
+{
+    return !Controller || GetCharacterMovement()->IsFalling() || Cover->IsTransitioning()
+        || Dodge->IsDodging() || WantsSprint();
+}
+
+FVector AGunnerCharacter::GetMoveDirection() const
+{
+    if (!Controller) return FVector::ZeroVector;
+    const auto* Input = CurrentInput(this);
+    const FVector2D Axis = Input && InputConfig && InputConfig->Move
+        ? Input->GetActionValue(InputConfig->Move).Get<FVector2D>() : MoveAxis;
+    const FRotationMatrix Yaw(FRotator(0.f, Controller->GetControlRotation().Yaw, 0.f));
+    return (Yaw.GetUnitAxis(EAxis::X) * Axis.Y + Yaw.GetUnitAxis(EAxis::Y) * Axis.X).GetClampedToMaxSize(1.f);
+}
 
 void AGunnerCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     if (!MotionSettings) return;
     auto* Movement = GetCharacterMovement();
+    const bool AimHeld = IsAimHeld();
+    const bool SprintHeld = HeldInput(this, InputConfig ? InputConfig->Sprint : nullptr, bSprintHeld);
+    const bool TraverseHeld = HeldInput(this, InputConfig ? InputConfig->Traverse : nullptr, bTraverseHeld);
+    if (TraverseHeld) TraverseHeldTime += DeltaSeconds;
+    if (MotionSettings->bContextualTraversal && TraverseHeld && TraverseHeldTime >= MotionSettings->TraverseHoldTime)
+    {
+        bTraverseConsumed = true;
+        if (!IsInCover() && !Cover->IsTransitioning() && !Dodge->IsDodging() && bIsCrouched) UnCrouch();
+    }
     const bool InCover = IsInCover();
     const bool Dodging = Dodge->IsDodging();
-    if (InCover) Cover->SetPeekDesired(bAimHeld && !Combat->IsMeleeing() && !Combat->IsReloading() && Combat->GetActionState() != EGunnerCombatAction::Equipping, ShoulderSide);
-    bSprinting = bSprintHeld && MotionSettings->bSprintReady && MoveAxis.Y > 0.4f && !bAimHeld
-        && !bIsCrouched && !InCover && !Dodging && Movement->IsMovingOnGround();
-    if (JumpPresentation && (InCover || bIsCrouched || Dodging || bSprinting)) StopJumpPresentation();
-    Combat->SetCombatBlocked(bSprinting || Dodging || !Controller || Movement->IsFalling());
-    const bool LowCoverBlind = InCover && Cover->IsLowCover() && bIsCrouched && !bAimHeld;
-    Combat->SetFireBlocked((InCover && !LowCoverBlind && (!bAimHeld || !Cover->CanPeek(ShoulderSide))) ||
-        (bIsCrouched && !bAimHeld && !LowCoverBlind));
-    if (bAimHeld && !bSprinting && (!InCover || Cover->CanPeek(ShoulderSide))) Combat->StartAim();
+    const bool EnteringCover = Cover->IsTransitioning();
+    if (InCover) Cover->SetPeekDesired(AimHeld && !Combat->IsMeleeing() && !Combat->IsReloading() && Combat->GetActionState() != EGunnerCombatAction::Equipping, ShoulderSide);
+    const bool WasSprinting = bSprinting;
+    bSprinting = WantsSprint();
+    if (bSprinting && !WasSprinting) SprintHeading = GetActorRotation().Yaw;
+    if (JumpPresentation && (InCover || EnteringCover || bIsCrouched || Dodging || bSprinting)) StopJumpPresentation();
+    Combat->SetCombatBlocked(IsCombatMovementBlocked());
+    const bool LowCoverBlind = InCover && Cover->IsLowCover() && bIsCrouched && !AimHeld;
+    Combat->SetFireBlocked((InCover && !LowCoverBlind && (!AimHeld || !Cover->CanPeek(ShoulderSide))) ||
+        (bIsCrouched && !AimHeld && !LowCoverBlind));
+    if (AimHeld && !IsCombatMovementBlocked() && (!InCover || Cover->CanPeek(ShoulderSide))) Combat->StartAim();
     const bool Aiming = Combat->IsAiming();
     const bool BlindFiring = Combat->IsBlindFiring();
     if (InCover && Cover->IsLowCover())
     {
         if (Aiming) UnCrouch(); else Crouch();
     }
+    const bool FastCover = InCover && HasDirectionalCrouch() && (SprintHeld || TraverseHeld) && !AimHeld;
+    const float CoverSpeed = FastCover ? MotionSettings->FastCoverSpeed : Cover->MoveSpeed;
     Movement->MaxWalkSpeed = bSprinting ? MotionSettings->SprintSpeed :
-        (InCover ? Cover->MoveSpeed : (Aiming ? MotionSettings->AimSpeed : MotionSettings->WalkSpeed));
+        (InCover ? CoverSpeed : (Aiming ? MotionSettings->AimSpeed : MotionSettings->WalkSpeed));
+    Movement->MaxWalkSpeedCrouched = FastCover ? MotionSettings->FastCoverSpeed : MotionSettings->CrouchSpeed;
     if (BlindFiring)
     {
         ConsumeMovementInputVector();
         Movement->StopMovementImmediately();
     }
-    Movement->bOrientRotationToMovement = bSprinting || (bIsCrouched && !Aiming && !BlindFiring && !MotionSettings->bDirectionalCrouchReady);
+    Movement->bOrientRotationToMovement = bSprinting || EnteringCover || (bIsCrouched && !Aiming && !BlindFiring && !HasDirectionalCrouch());
     if (Controller && !Dodging && !Movement->bOrientRotationToMovement)
     {
         const FRotator Desired = InCover && !Aiming && !BlindFiring ? Cover->GetNormal().Rotation() : FRotator(0, Controller->GetControlRotation().Yaw, 0);
@@ -106,16 +212,26 @@ void AGunnerCharacter::Tick(float DeltaSeconds)
         Aiming ? MotionSettings->AimArmLength : ((bSprinting || Dodging) ? 350.f : 320.f), DeltaSeconds, 10.f);
     CameraBoom->SocketOffset.Y = FMath::FInterpTo(CameraBoom->SocketOffset.Y, 50.f * ShoulderSide, DeltaSeconds, 10.f);
     CameraBoom->TargetOffset.Z = FMath::FInterpTo(CameraBoom->TargetOffset.Z,
-        Dodging ? 5.f : (BlindFiring ? 90.f : (bIsCrouched ? 45.f : 65.f)), DeltaSeconds, 10.f);
+        Dodging ? 5.f : (BlindFiring ? 90.f : (bIsCrouched ? 45.f : (bSprinting && MotionSettings->bContextualTraversal ? 35.f : 65.f))), DeltaSeconds, 10.f);
     FollowCamera->FieldOfView = FMath::FInterpTo(FollowCamera->FieldOfView,
         Aiming ? MotionSettings->AimFOV : (bSprinting ? 82.f : 75.f), DeltaSeconds, 10.f);
     if (auto* Anim = Cast<UGunnerAnimInstance>(GetMesh()->GetAnimInstance()))
         Anim->SetGameplayState(Aiming, bSprinting, InCover, Combat->GetWeaponKind() == EGunnerWeaponKind::Pistol);
+    if (MotionSettings->bContextualTraversal && MotionSettings->bCoverReady && bSprinting
+        && GetWorld()->GetTimeSeconds() >= NextAutoCoverTime)
+    {
+        NextAutoCoverTime = GetWorld()->GetTimeSeconds() + 0.08f;
+        if (Cover->TryAttach(FRotator(0.f, SprintHeading, 0.f).Vector(), true))
+        {
+            Combat->StopAllActions();
+            bTraverseConsumed = true;
+        }
+    }
 }
 
 void AGunnerCharacter::UnPossessed()
 {
-    bSprintHeld = bSprinting = bAimHeld = false;
+    bSprintHeld = bSprinting = bAimHeld = bTraverseHeld = false;
     MoveAxis = FVector2D::ZeroVector;
     Combat->StopAllActions();
     StopJumpPresentation();
@@ -168,8 +284,8 @@ void AGunnerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
     Input->BindAction(InputConfig->MouseLook, ETriggerEvent::Triggered, this, &AGunnerCharacter::MouseLook);
     Input->BindAction(InputConfig->StickLook, ETriggerEvent::Triggered, this, &AGunnerCharacter::StickLook);
     Input->BindAction(InputConfig->Traverse, ETriggerEvent::Started, this, &AGunnerCharacter::Traverse);
-    Input->BindAction(InputConfig->Traverse, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
-    Input->BindAction(InputConfig->Traverse, ETriggerEvent::Canceled, this, &ACharacter::StopJumping);
+    Input->BindAction(InputConfig->Traverse, ETriggerEvent::Completed, this, &AGunnerCharacter::EndTraverse);
+    Input->BindAction(InputConfig->Traverse, ETriggerEvent::Canceled, this, &AGunnerCharacter::CancelTraverse);
     if (InputConfig->Aim)
     {
         Input->BindAction(InputConfig->Aim, ETriggerEvent::Started, this, &AGunnerCharacter::StartAim);
@@ -208,11 +324,28 @@ void AGunnerCharacter::Move(const FInputActionValue& Value)
     if (!Controller) return;
     const FVector2D Axis = Value.Get<FVector2D>();
     MoveAxis = Axis;
-    if (Combat->IsMeleeing() || Combat->IsBlindFiring() || Dodge->IsDodging() || Cover->IsPeeking()) return;
+    if (Combat->IsMeleeing() || Combat->IsBlindFiring() || Dodge->IsDodging() || Cover->IsPeeking() || Cover->IsTransitioning()) return;
     const FRotationMatrix Yaw(FRotator(0.f, Controller->GetControlRotation().Yaw, 0.f));
     FVector Direction = Yaw.GetUnitAxis(EAxis::X) * Axis.Y + Yaw.GetUnitAxis(EAxis::Y) * Axis.X;
-    if (MotionSettings && bIsCrouched && Combat->IsAiming() && !MotionSettings->bDirectionalCrouchReady) return;
-    if (IsInCover()) Direction = Cover->ConstrainMovement(Direction);
+    if (MotionSettings && bIsCrouched && Combat->IsAiming() && !HasDirectionalCrouch()) return;
+    if (IsInCover())
+    {
+        if (MotionSettings && MotionSettings->bContextualTraversal && !IsAimHeld()
+            && FVector::DotProduct(Direction.GetSafeNormal2D(), Cover->GetNormal()) > 0.65f)
+        {
+            Cover->Detach();
+            Combat->StopAllActions();
+            NextAutoCoverTime = GetWorld()->GetTimeSeconds() + 0.3f;
+        }
+        else Direction = Cover->ConstrainMovement(Direction);
+    }
+    if (MotionSettings && MotionSettings->bContextualTraversal && WantsSprint())
+    {
+        if (!bSprinting) SprintHeading = GetActorRotation().Yaw;
+        SprintHeading = FMath::FixedTurn(SprintHeading, Direction.Rotation().Yaw,
+            MotionSettings->SprintTurnRate * GetWorld()->GetDeltaSeconds());
+        Direction = FRotator(0.f, SprintHeading, 0.f).Vector() * FMath::Min(Axis.Size(), 1.f);
+    }
     AddMovementInput(Direction.GetSafeNormal(), FMath::Min(Direction.Size(), 1.f));
 }
 void AGunnerCharacter::StopMove() { MoveAxis = FVector2D::ZeroVector; }
@@ -223,13 +356,17 @@ void AGunnerCharacter::StartAim()
     bSprintHeld = false;
 }
 void AGunnerCharacter::StopAim() { bAimHeld = false; Combat->StopAim(); }
-void AGunnerCharacter::StartSprint() { bSprintHeld = true; }
+void AGunnerCharacter::StartSprint()
+{
+    bSprintHeld = true;
+    if (MotionSettings && MotionSettings->bContextualTraversal && !IsInCover() && !Cover->IsTransitioning() && !Dodge->IsDodging()) UnCrouch();
+}
 void AGunnerCharacter::StopSprint() { bSprintHeld = false; }
 void AGunnerCharacter::SwapShoulder() { ShoulderSide *= -1.f; }
 void AGunnerCharacter::TryDodge()
 {
-    if (IsInCover() || Combat->IsMeleeing()) return;
-    if (Dodge->TryDodge())
+    if (Cover->IsTransitioning() || Combat->IsMeleeing()) return;
+    if (Dodge->TryDodge(GetMoveDirection()))
     {
         bAimHeld = bSprintHeld = false;
         Combat->SetCombatBlocked(true);
@@ -237,7 +374,7 @@ void AGunnerCharacter::TryDodge()
 }
 void AGunnerCharacter::ToggleCrouch()
 {
-    if (!MotionSettings || !MotionSettings->bCrouchReady || Dodge->IsDodging() || Combat->IsMeleeing() || Cover->IsPeeking() || (IsInCover() && Cover->IsLowCover())) return;
+    if (!MotionSettings || !MotionSettings->bCrouchReady || Dodge->IsDodging() || Cover->IsTransitioning() || Combat->IsMeleeing() || Cover->IsPeeking() || (IsInCover() && Cover->IsLowCover())) return;
     if (Combat->IsReloading() || Combat->GetActionState() == EGunnerCombatAction::Equipping) return;
     bSprintHeld = false;
     if (bIsCrouched || GetCharacterMovement()->bWantsToCrouch) UnCrouch(); else Crouch();
@@ -259,16 +396,50 @@ void AGunnerCharacter::StickLook(const FInputActionValue& Value)
 
 void AGunnerCharacter::Traverse()
 {
-    if (Dodge->IsDodging() || Combat->IsMeleeing()) return;
-    if (IsInCover()) { Combat->StopFire(); Cover->Detach(); StopAim(); return; }
+    bTraverseHeld = true;
+    TraverseHeldTime = 0.f;
+    bTraverseConsumed = false;
+    if (Cover->IsTransitioning())
+    {
+        Cover->CancelTransition();
+        bTraverseConsumed = true;
+        NextAutoCoverTime = GetWorld()->GetTimeSeconds() + 0.3f;
+        return;
+    }
+    if (Dodge->IsDodging() || Combat->IsMeleeing()) { bTraverseConsumed = true; return; }
+    if (IsInCover())
+    {
+        bTraverseConsumed = true;
+        const FVector Direction = GetMoveDirection();
+        // Holding traversal while travelling along a wall accelerates the authored
+        // cover gait. Away input still detaches and E always requests a guarded roll.
+        if (MotionSettings && MotionSettings->bContextualTraversal && Direction.SizeSquared() > 0.1f
+            && FVector::DotProduct(Direction.GetSafeNormal2D(), Cover->GetNormal()) < 0.65f) return;
+        Combat->StopFire(); Cover->Detach(); StopAim();
+        NextAutoCoverTime = GetWorld()->GetTimeSeconds() + 0.3f;
+        return;
+    }
     if (MotionSettings && MotionSettings->bCoverReady && Controller)
     {
         const FVector Direction = FRotationMatrix(FRotator(0, Controller->GetControlRotation().Yaw, 0)).GetUnitAxis(EAxis::X);
-        if (Cover->TryAttach(Direction)) { bSprintHeld = false; Combat->StopAllActions(); return; }
+        if (Cover->TryAttach(Direction, WantsSprint())) { bSprintHeld = false; bTraverseConsumed = true; Combat->StopAllActions(); return; }
     }
-    GroundedJump();
+    if (!MotionSettings || !MotionSettings->bContextualTraversal) { bTraverseConsumed = true; GroundedJump(); }
+}
+void AGunnerCharacter::EndTraverse()
+{
+    const bool Roll = MotionSettings && MotionSettings->bContextualTraversal && bTraverseHeld
+        && !bTraverseConsumed && TraverseHeldTime < MotionSettings->TraverseHoldTime;
+    CancelTraverse();
+    if (Roll) TryDodge();
+}
+void AGunnerCharacter::CancelTraverse()
+{
+    bTraverseHeld = false;
+    TraverseHeldTime = 0.f;
+    StopJumping();
 }
 void AGunnerCharacter::GroundedJump()
 {
-    if (GetCharacterMovement()->IsMovingOnGround() && !IsInCover() && !bIsCrouched && !Dodge->IsDodging() && !Combat->IsMeleeing()) Jump();
+    if (GetCharacterMovement()->IsMovingOnGround() && !IsInCover() && !Cover->IsTransitioning() && !bIsCrouched && !Dodge->IsDodging() && !Combat->IsMeleeing()) Jump();
 }

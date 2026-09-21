@@ -3,6 +3,7 @@
 #include "GunnerAnimInstance.h"
 #include "Animation/AnimBlueprint.h"
 #include "Animation/AnimSequence.h"
+#include "Animation/AnimData/IAnimationDataModel.h"
 #include "Animation/BlendSpace.h"
 #include "Animation/Skeleton.h"
 #include "AnimationGraph.h"
@@ -17,12 +18,16 @@
 #include "AnimGraphNode_RotationOffsetBlendSpace.h"
 #include "AnimGraphNode_SaveCachedPose.h"
 #include "AnimGraphNode_SequencePlayer.h"
+#include "AnimGraphNode_SequenceEvaluator.h"
 #include "AnimGraphNode_Slot.h"
 #include "AnimGraphNode_TwoBoneIK.h"
+#include "AnimGraphNode_TwoWayBlend.h"
 #include "AnimGraphNode_UseCachedPose.h"
 #include "AssetRegistry/AssetRegistryModule.h"
+#include "ControlRigObjectBinding.h"
 #include "EdGraph/EdGraph.h"
 #include "Engine/SkeletalMesh.h"
+#include "EditorFramework/AssetImportData.h"
 #include "Factories/AnimBlueprintFactory.h"
 #include "HAL/FileManager.h"
 #include "K2Node_VariableGet.h"
@@ -31,8 +36,10 @@
 #include "KismetCompiler.h"
 #include "Misc/PackageName.h"
 #include "Misc/Paths.h"
+#include "Rigs/FKControlRig.h"
 #include "UObject/Package.h"
 #include "UObject/SavePackage.h"
+#include "UObject/UObjectHash.h"
 #include "UObject/UnrealType.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogGunnerAnimationBuilder, Log, All);
@@ -144,6 +151,24 @@ namespace GunnerAnimationBuilder
                     N->Node.SetSequence(Asset);
                     N->Node.SetLoopAnimation(true);
                 });
+        }
+
+        UAnimGraphNode_SequenceEvaluator* Evaluate(UAnimSequence* Asset, FName TimeProperty, int32 X, int32 Y)
+        {
+            auto* Evaluator = Node<UAnimGraphNode_SequenceEvaluator>(Graph, X, Y,
+                [Asset](UAnimGraphNode_SequenceEvaluator* N)
+                {
+                    N->Node.SetSequence(Asset);
+                    N->Node.SetShouldLoop(false);
+                    N->Node.SetGroupName(NAME_None);
+                    N->Node.SetGroupMethod(EAnimSyncMethod::DoNotSync);
+                    N->Node.SetShouldUseExplicitFrame(false);
+                    N->Node.SetExplicitTime(0.f);
+                    // The evaluator defaults to teleport-to-time: no animation
+                    // notifies, root extraction or independent time accumulation.
+                });
+            Read(TimeProperty, Evaluator, TEXT("ExplicitTime"));
+            return Evaluator;
         }
 
         UAnimGraphNode_BlendListByBool* Choose(FName Property, UEdGraphNode* TruePose,
@@ -284,6 +309,187 @@ namespace GunnerAnimationBuilder
     };
 }
 
+bool UGunnerAnimationBuilder::ClearDerivedAnimationReimportSource(UAnimSequence* Sequence)
+{
+    if (!Sequence || !Sequence->GetPathName().StartsWith(TEXT("/Game/Gunner/LicensedLocal/Mixamo/Retargeted/")))
+        return false;
+    // The batch retargeter duplicates FBX import metadata. Reimporting that FBX
+    // would replace canonical Manny keys with the source skeleton's tracks.
+    Sequence->Modify();
+    Sequence->AssetImportData = NewObject<UAssetImportData>(Sequence);
+    Sequence->MarkPackageDirty();
+    return Sequence->AssetImportData && Sequence->AssetImportData->ExtractFilenames().IsEmpty();
+}
+
+TArray<FTransform> UGunnerAnimationBuilder::GetEditableBoneTrackTransforms(UAnimSequence* Sequence, FName Bone)
+{
+    TArray<FTransform> Result;
+    if (Sequence && Sequence->GetDataModel() && Sequence->GetDataModel()->IsValidBoneTrackName(Bone))
+        Sequence->GetDataModel()->GetBoneTrackTransforms(Bone, Result);
+    return Result;
+}
+
+UAnimSequence* UGunnerAnimationBuilder::DuplicateCompatibleSequence(const FString& PackagePath,
+    UAnimSequence* Source, USkeleton* Skeleton, USkeletalMesh* PreviewMesh, bool bRootLock)
+{
+    using namespace GunnerAnimationBuilder;
+    // Finish loading owned import data, notifies and sequencer objects before
+    // duplication can start compression. Loading does not edit or save the source.
+    if (Source)
+    {
+        Source->ConditionalPreload();
+        Source->ConditionalPostLoad();
+        TArray<UObject*> SourceSubobjects;
+        GetObjectsWithOuter(Source, SourceSubobjects, EGetObjectsFlags::IncludeNestedObjects);
+        for (UObject* Subobject : SourceSubobjects)
+        {
+            Subobject->ConditionalPreload();
+            Subobject->ConditionalPostLoad();
+        }
+        Source->WaitOnExistingCompression();
+    }
+    if (!PackagePath.StartsWith(TEXT("/Game/Gunner/LicensedLocal/")) || !Source || !Skeleton
+        || !PreviewMesh || PreviewMesh->GetSkeleton() != Skeleton || !Source->GetSkeleton()
+        || Source->AdditiveAnimType != AAT_None || Source->RefPoseSeq
+        || !Source->GetDataModel() || Source->GetDataModel()->GetNumBoneTracks() <= 0)
+    {
+        UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Invalid compatible-sequence arguments: %s"),
+            *PackagePath);
+        return nullptr;
+    }
+
+    // Equal names alone do not establish safe rebinding: compare every parent and
+    // local reference transform, including virtual bones, before making a package.
+    USkeleton* SourceSkeleton = Source->GetSkeleton();
+    const FReferenceSkeleton& SourceRef = SourceSkeleton->GetReferenceSkeleton();
+    const FReferenceSkeleton& TargetRef = Skeleton->GetReferenceSkeleton();
+    if (SourceRef.GetNum() != TargetRef.GetNum())
+    {
+        UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Reference bone counts differ: %s"),
+            *Source->GetPathName());
+        return nullptr;
+    }
+    for (int32 Index = 0; Index < SourceRef.GetNum(); ++Index)
+    {
+        const FTransform& A = SourceRef.GetRefBonePose()[Index];
+        const FTransform& B = TargetRef.GetRefBonePose()[Index];
+        const double RotationAgreement = FMath::Abs(A.GetRotation() | B.GetRotation());
+        if (SourceRef.GetBoneName(Index) != TargetRef.GetBoneName(Index)
+            || SourceRef.GetParentIndex(Index) != TargetRef.GetParentIndex(Index)
+            || A.ContainsNaN() || B.ContainsNaN()
+            || !A.GetTranslation().Equals(B.GetTranslation(), 0.01)
+            || !A.GetScale3D().Equals(B.GetScale3D(), 0.00001)
+            || RotationAgreement < 0.999999)
+        {
+            UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Reference skeleton differs at bone %d: %s"),
+                Index, *SourceRef.GetBoneName(Index).ToString());
+            return nullptr;
+        }
+    }
+
+    const FGuid SourceDataGuid = Source->GetDataModel()->GenerateGuid();
+    const double SourceDuration = Source->GetPlayLength();
+    TArray<UObject*> SourceModelSubobjects;
+    GetObjectsWithOuter(Source->GetDataModelInterface().GetObject(), SourceModelSubobjects,
+        EGetObjectsFlags::IncludeNestedObjects);
+    TArray<UFKControlRig*> SourceRigs;
+    for (UObject* Subobject : SourceModelSubobjects)
+    {
+        if (UFKControlRig* Rig = Cast<UFKControlRig>(Subobject))
+        {
+            if (!Rig->GetObjectBinding().IsValid()
+                || Rig->GetObjectBinding()->GetBoundObject() != SourceSkeleton)
+            {
+                UE_LOG(LogGunnerAnimationBuilder, Error,
+                    TEXT("Source animation FK rig is not bound to its skeleton: %s"),
+                    *Source->GetPathName());
+                return nullptr;
+            }
+            SourceRigs.Add(Rig);
+        }
+    }
+    UPackage* Package = MakeNewPackage(PackagePath);
+    if (!Package) return nullptr;
+    UAnimSequence* Copy = DuplicateObject<UAnimSequence>(Source, Package,
+        *FPackageName::GetLongPackageAssetName(PackagePath));
+    if (!Copy || !Copy->GetDataModel() || Copy->GetDataModel() == Source->GetDataModel())
+    {
+        UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Sequence did not produce independent editable data"));
+        return nullptr;
+    }
+    Copy->SetFlags(RF_Public | RF_Standalone);
+    // SetSkeleton updates the skeleton GUID and waits for pending compression.
+    // Unlike ReplaceSkeleton it does not traverse and alter referenced animations.
+    // Exact reference equivalence above makes track-space conversion unnecessary.
+    Copy->SetSkeleton(Skeleton);
+    // AnimationSequencerDataModel owns an FK rig whose non-serialized object
+    // binding survives duplication pointing at the source skeleton. Its controller
+    // rejects that binding when PostEditChange validates tracks. Rebind only rigs
+    // owned by our independent model, using a new binding object so the source
+    // cannot be changed through a shared pointer. Identical reference transforms
+    // preserve the existing rig hierarchy and every keyed channel without baking.
+    TArray<UObject*> CopyModelSubobjects;
+    GetObjectsWithOuter(Copy->GetDataModelInterface().GetObject(), CopyModelSubobjects,
+        EGetObjectsFlags::IncludeNestedObjects);
+    int32 NumReboundRigs = 0;
+    for (UObject* Subobject : CopyModelSubobjects)
+    {
+        if (UFKControlRig* Rig = Cast<UFKControlRig>(Subobject))
+        {
+            if (SourceRigs.Contains(Rig))
+            {
+                UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Duplicated sequence shares its source FK rig"));
+                return nullptr;
+            }
+            TSharedPtr<FControlRigObjectBinding> Binding = MakeShared<FControlRigObjectBinding>();
+            Rig->SetObjectBinding(Binding);
+            Binding->BindToObject(Skeleton);
+            if (Binding->GetBoundObject() != Skeleton)
+            {
+                UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Could not bind duplicated FK rig to target skeleton"));
+                return nullptr;
+            }
+            ++NumReboundRigs;
+        }
+    }
+    if (NumReboundRigs != SourceRigs.Num())
+    {
+        UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Duplicated sequence has a different FK rig count"));
+        return nullptr;
+    }
+    Copy->SetSkeletonVirtualBoneGuid(Skeleton->GetVirtualBoneGuid());
+    Copy->ClearRetargetSourceAsset();
+    Copy->RetargetSource = NAME_None;
+    Copy->SetPreviewMesh(PreviewMesh, false);
+    if (bRootLock)
+    {
+        Copy->bEnableRootMotion = false;
+        Copy->bForceRootLock = true;
+        Copy->RootMotionRootLock = ERootMotionRootLock::RefPose;
+    }
+    Copy->PostEditChange();
+    for (const UFKControlRig* Rig : SourceRigs)
+    {
+        if (!Rig->GetObjectBinding().IsValid()
+            || Rig->GetObjectBinding()->GetBoundObject() != SourceSkeleton)
+        {
+            UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Sequence rebind changed its source FK rig binding"));
+            return nullptr;
+        }
+    }
+    if (Copy->GetSkeleton() != Skeleton
+        || Copy->GetDataModel()->GenerateGuid() != SourceDataGuid
+        || !FMath::IsNearlyEqual(static_cast<double>(Copy->GetPlayLength()), SourceDuration, 0.000001)
+        || Source->GetSkeleton() != SourceSkeleton
+        || Source->GetDataModel()->GenerateGuid() != SourceDataGuid)
+    {
+        UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Sequence rebind changed raw data or duration: %s"),
+            *PackagePath);
+        return nullptr;
+    }
+    return SaveNewAsset(Copy) ? Copy : nullptr;
+}
+
 UBlendSpace* UGunnerAnimationBuilder::CreateDirectionalBlendSpace(const FString& PackagePath,
     USkeleton* Skeleton, USkeletalMesh* PreviewMesh, const TArray<UAnimSequence*>& Clips,
     const TArray<FVector>& SamplePositions, float MaxAxisSpeed)
@@ -344,14 +550,40 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
     UAnimSequence* RifleFall, UAnimSequence* PistolFall,
     UBlendSpace* CrouchLocomotion, UAnimSequence* Sprint,
     UBlendSpace* RifleAimOffset, UBlendSpace* PistolAimOffset, bool bIncludeBlindFire,
-    bool bIncludeCrouchReload, bool bIncludeCrouchHandling)
+    bool bIncludeCrouchReload, bool bIncludeCrouchHandling, bool bDirectionalCrouch,
+    UBlendSpace* ProtectiveCoverLocomotion, UBlendSpace* HighCoverLocomotion,
+    UAnimSequence* PistolSprint, bool bIncludeRifleSupportGrip,
+    UAnimSequence* CrouchEntry, UAnimSequence* CrouchExit)
 {
     using namespace GunnerAnimationBuilder;
-    const bool bIncludeProtectiveArms = bIncludeBlindFire || bIncludeCrouchReload || bIncludeCrouchHandling;
+    const bool bIncludeProtectiveArms = bIncludeBlindFire || bIncludeCrouchReload || bIncludeCrouchHandling
+        || (CrouchEntry && CrouchExit);
     if (bIncludeProtectiveArms && !CrouchLocomotion)
     {
         UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Protective weapon actions require authored crouch locomotion"));
         return nullptr;
+    }
+    if (bDirectionalCrouch && !CrouchLocomotion)
+    {
+        UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Directional crouch requires authored crouch locomotion"));
+        return nullptr;
+    }
+    const bool bIncludeCrouchTransitions = CrouchEntry && CrouchExit;
+    if ((CrouchEntry != nullptr) != (CrouchExit != nullptr)
+        || (bIncludeCrouchTransitions && !CrouchLocomotion))
+    {
+        UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Crouch transitions require both clips and genuine crouch locomotion"));
+        return nullptr;
+    }
+    for (const UAnimSequence* Transition : {CrouchEntry, CrouchExit})
+    {
+        if (Transition && (Transition->AdditiveAnimType != AAT_None || Transition->bEnableRootMotion
+            || !Transition->bForceRootLock || !FMath::IsFinite(Transition->GetPlayLength())
+            || Transition->GetPlayLength() < .05f || Transition->GetPlayLength() > 5.f))
+        {
+            UE_LOG(LogGunnerAnimationBuilder, Error, TEXT("Crouch transition must be a bounded non-additive root-locked sequence"));
+            return nullptr;
+        }
     }
     if (!Skeleton || !PreviewMesh || !RifleLocomotion || !PistolLocomotion || !RifleFall || !PistolFall
         || PreviewMesh->GetSkeleton() != Skeleton)
@@ -360,7 +592,8 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
         return nullptr;
     }
     const UAnimationAsset* Assets[] = {RifleLocomotion, PistolLocomotion, RifleFall, PistolFall,
-        CrouchLocomotion, Sprint, RifleAimOffset, PistolAimOffset};
+        CrouchLocomotion, Sprint, RifleAimOffset, PistolAimOffset, ProtectiveCoverLocomotion,
+        HighCoverLocomotion, PistolSprint, CrouchEntry, CrouchExit};
     for (const UAnimationAsset* Asset : Assets)
     {
         if (Asset && Asset->GetSkeleton() != Skeleton)
@@ -413,14 +646,72 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
     UEdGraphNode* Ground = B.Use(ArmedCache, -1100, 400);
     if (CrouchLocomotion)
     {
-        // Current source pack has a genuine forward crouch gait only. The character
-        // faces travel; speed magnitude keeps feet moving through its turn interpolation.
-        auto* Crouch = B.Locomotion(CrouchLocomotion, -1400, 850, false);
+        // Forward-only graphs retain travel-facing speed magnitude. Verified directional
+        // sets instead consume signed local velocity so strafing and backpedaling use their clips.
+        auto* CrouchPlayer = B.Locomotion(CrouchLocomotion, -1600, 850, bDirectionalCrouch);
+        if (bDirectionalCrouch)
+        {
+            for (int32 Index = 0; Index < CrouchPlayer->ShowPinForProperties.Num(); ++Index)
+                if (CrouchPlayer->ShowPinForProperties[Index].PropertyName == TEXT("PlayRate"))
+                { CrouchPlayer->SetPinVisibility(true, Index); break; }
+            B.Read(TEXT("CrouchPlayRate"), CrouchPlayer, TEXT("PlayRate"));
+        }
+        UEdGraphNode* Crouch = CrouchPlayer;
+        if (ProtectiveCoverLocomotion)
+        {
+            auto* Protective = B.Locomotion(ProtectiveCoverLocomotion, -1600, 1200, false);
+            Crouch = B.Choose(TEXT("bProtectiveLowCover"), Protective, Crouch, -1100, 850, 0.18f);
+        }
         Ground = B.Choose(TEXT("bCrouched"), Crouch, Ground, -700, 550, 0.2f);
+    }
+    if (HighCoverLocomotion)
+    {
+        auto* WallPlayer = B.Locomotion(HighCoverLocomotion, -1100, 1950);
+        for (int32 Index = 0; Index < WallPlayer->ShowPinForProperties.Num(); ++Index)
+            if (WallPlayer->ShowPinForProperties[Index].PropertyName == TEXT("PlayRate"))
+            { WallPlayer->SetPinVisibility(true, Index); break; }
+        B.Read(TEXT("HighCoverPlayRate"), WallPlayer, TEXT("PlayRate"));
+        auto* WallComponent = Node<UAnimGraphNode_LocalToComponentSpace>(Graph, -600, 2500);
+        B.Pose(WallPlayer, WallComponent, TEXT("LocalPose"));
+        auto* WallInset = Node<UAnimGraphNode_ModifyBone>(Graph, -150, 2500,
+            [](UAnimGraphNode_ModifyBone* N)
+            {
+                N->Node.BoneToModify.BoneName = TEXT("root");
+                N->Node.TranslationMode = BMM_Additive;
+                N->Node.TranslationSpace = BCS_ComponentSpace;
+                N->Node.Alpha = 1.f;
+            });
+        B.Connect(WallComponent, TEXT("ComponentPose"), WallInset, TEXT("ComponentPose"));
+        B.Read(TEXT("HighCoverRootOffset"), WallInset, TEXT("Translation"));
+        auto* WallLocal = Node<UAnimGraphNode_ComponentToLocalSpace>(Graph, 300, 2500);
+        B.Pose(WallInset, WallLocal, TEXT("ComponentPose"));
+        Ground = B.Choose(TEXT("bHighCoverPose"), WallLocal, Ground, 700, 1850, 0.2f);
+    }
+    if (bIncludeCrouchTransitions)
+    {
+        auto* Entry = B.Evaluate(CrouchEntry, TEXT("CrouchTransitionTime"), 900, 2850);
+        auto* Exit = B.Evaluate(CrouchExit, TEXT("CrouchTransitionTime"), 900, 3150);
+        auto* Transition = B.Choose(TEXT("bCrouchTransitionEntering"), Entry, Exit, 1400, 2900, 0.f);
+        auto* StanceBlend = Node<UAnimGraphNode_TwoWayBlend>(Graph, 1900, 2150);
+        B.Pose(Ground, StanceBlend, TEXT("A"));
+        B.Pose(Transition, StanceBlend, TEXT("B"));
+        B.Read(TEXT("CrouchTransitionAlpha"), StanceBlend, TEXT("Alpha"));
+        Ground = StanceBlend;
     }
     if (Sprint)
     {
-        auto* SprintPlayer = B.Sequence(Sprint, -700, 1000);
+        auto* RifleSprintPlayer = B.Sequence(Sprint, -700, 1000);
+        if (bIncludeRifleSupportGrip)
+        {
+            for (int32 Index = 0; Index < RifleSprintPlayer->ShowPinForProperties.Num(); ++Index)
+                if (RifleSprintPlayer->ShowPinForProperties[Index].PropertyName == TEXT("PlayRate"))
+                { RifleSprintPlayer->SetPinVisibility(true, Index); break; }
+            B.Read(TEXT("RifleSprintPlayRate"), RifleSprintPlayer, TEXT("PlayRate"));
+        }
+        UEdGraphNode* SprintPlayer = RifleSprintPlayer;
+        if (PistolSprint)
+            SprintPlayer = B.Choose(TEXT("bPistol"), B.Sequence(PistolSprint, -1100, 2250),
+                SprintPlayer, -500, 2150, 0.2f);
         Ground = B.Choose(TEXT("bSprinting"), SprintPlayer, Ground, -250, 600, 0.22f);
     }
     auto* RifleAir = B.Sequence(RifleFall, -750, 1400);
@@ -473,10 +764,46 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
     {
         UpperBlend->NodePosX = 6700;
         FinalBody = B.Arms(UpperBlend, B.Use(SlotCache, 6800, 600), 7200, 0,
-            (bIncludeCrouchReload || bIncludeCrouchHandling) ? FName(TEXT("ProtectiveArmsWeight")) : FName(TEXT("BlindFireAlpha")));
+            (bIncludeCrouchReload || bIncludeCrouchHandling || bIncludeCrouchTransitions) ? FName(TEXT("ProtectiveArmsWeight")) : FName(TEXT("BlindFireAlpha")));
         Root->NodePosX = 8100;
     }
-    auto* FullBody = B.Slot(TEXT("FullBody"), FinalBody, bIncludeProtectiveArms ? 7700 : 1900, 0);
+    if (bIncludeRifleSupportGrip)
+    {
+        auto* Base = B.Cache(TEXT("Pre support grip"), FinalBody, 7650, 0);
+        auto* Component = Node<UAnimGraphNode_LocalToComponentSpace>(Graph, 8200, 500);
+        B.Pose(B.Use(Base, 7900, 500), Component, TEXT("LocalPose"));
+        auto* IK = Node<UAnimGraphNode_TwoBoneIK>(Graph, 8550, 500,
+            [](UAnimGraphNode_TwoBoneIK* N)
+            {
+                N->Node.IKBone.BoneName = TEXT("hand_l");
+                N->Node.EffectorLocationSpace = BCS_BoneSpace;
+                N->Node.EffectorTarget.BoneReference.BoneName = TEXT("hand_r");
+                N->Node.JointTargetLocationSpace = BCS_BoneSpace;
+                N->Node.JointTarget.BoneReference.BoneName = TEXT("lowerarm_l");
+                N->Node.JointTargetLocation = FVector::ZeroVector;
+                N->Node.bAllowStretching = false;
+                N->Node.bMaintainEffectorRelRot = false;
+                N->Node.bTakeRotationFromEffectorSpace = true;
+                N->Node.Alpha = 1.f;
+            });
+        B.Connect(Component, TEXT("ComponentPose"), IK, TEXT("ComponentPose"));
+        B.Read(TEXT("RifleSupportGripLocation"), IK, TEXT("EffectorLocation"));
+        auto* Hand = Node<UAnimGraphNode_ModifyBone>(Graph, 9000, 500,
+            [](UAnimGraphNode_ModifyBone* N)
+            {
+                N->Node.BoneToModify.BoneName = TEXT("hand_l");
+                N->Node.RotationMode = BMM_Additive;
+                N->Node.RotationSpace = BCS_BoneSpace;
+                N->Node.Alpha = 1.f;
+            });
+        B.Pose(IK, Hand, TEXT("ComponentPose"));
+        B.Read(TEXT("RifleSupportGripRotation"), Hand, TEXT("Rotation"));
+        auto* Local = Node<UAnimGraphNode_ComponentToLocalSpace>(Graph, 9450, 500);
+        B.Pose(Hand, Local, TEXT("ComponentPose"));
+        FinalBody = B.Choose(TEXT("bRifleSupportGrip"), Local, B.Use(Base, 9250, -100), 9850, 0, 0.12f);
+        Root->NodePosX = 10600;
+    }
+    auto* FullBody = B.Slot(TEXT("FullBody"), FinalBody, bIncludeRifleSupportGrip ? 10200 : (bIncludeProtectiveArms ? 7700 : 1900), 0);
     B.Pose(FullBody, Root, TEXT("Result"));
     if (!B.bValid) return nullptr;
 
@@ -503,6 +830,14 @@ UAnimBlueprint* UGunnerAnimationBuilder::CreateLocomotionBlueprint(const FString
     Defaults->bCrouchReloadPoseReady = bIncludeCrouchReload;
     Defaults->bCrouchEquipPoseReady = bIncludeCrouchHandling;
     Defaults->bCrouchDryFirePoseReady = bIncludeCrouchHandling;
+    Defaults->bDirectionalCrouchPoseReady = bDirectionalCrouch;
+    Defaults->bHighCoverPoseReady = HighCoverLocomotion != nullptr;
+    Defaults->bRifleSupportGripPoseReady = bIncludeRifleSupportGrip;
+    Defaults->bCrouchTransitionPoseReady = bIncludeCrouchTransitions;
+    Defaults->CrouchEntryLength = CrouchEntry ? CrouchEntry->GetPlayLength() : 0.f;
+    Defaults->CrouchExitLength = CrouchExit ? CrouchExit->GetPlayLength() : 0.f;
+    if (bDirectionalCrouch && CrouchLocomotion)
+        Defaults->CrouchReferenceSpeed = FMath::Max(1.f, CrouchLocomotion->GetBlendParameter(0).Max);
     Blueprint->Modify();
     return SaveNewAsset(Blueprint) ? Blueprint : nullptr;
 }

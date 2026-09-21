@@ -28,10 +28,14 @@ public:
     const UGunnerInputConfig* GetInputConfig() const { return InputConfig; }
     UFUNCTION(BlueprintPure) bool IsSprinting() const { return bSprinting; }
     UFUNCTION(BlueprintPure) bool IsInCover() const;
+    /** Live input/action admission, also checked before combat commits between actor ticks. */
+    bool IsCombatMovementBlocked() const;
+    bool UsesContextualTraversal() const;
     UFUNCTION(BlueprintPure) UGunnerCombatComponent* GetCombat() const { return Combat; }
     UFUNCTION(BlueprintPure) UGunnerCoverComponent* GetCover() const { return Cover; }
     UFUNCTION(BlueprintPure) UGunnerDodgeComponent* GetDodge() const { return Dodge; }
     UFUNCTION(BlueprintPure) float GetShoulderSide() const { return ShoulderSide; }
+    bool IsAimHeld() const;
 protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat") TObjectPtr<UGunnerCombatComponent> Combat;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Cover") TObjectPtr<UGunnerCoverComponent> Cover;
@@ -52,6 +56,11 @@ private:
     void MouseLook(const FInputActionValue& Value);
     void StickLook(const FInputActionValue& Value);
     void Traverse();
+    void EndTraverse();
+    void CancelTraverse();
+    bool WantsSprint() const;
+    FVector GetMoveDirection() const;
+    bool HasDirectionalCrouch() const;
     void GroundedJump();
     void StopMove();
     void StartAim();
@@ -65,5 +74,10 @@ private:
     bool bSprintHeld = false;
     bool bSprinting = false;
     bool bAimHeld = false;
+    bool bTraverseHeld = false;
+    bool bTraverseConsumed = false;
+    float TraverseHeldTime = 0.f;
+    float SprintHeading = 0.f;
+    float NextAutoCoverTime = 0.f;
     float ShoulderSide = 1.f;
 };

@@ -8,7 +8,7 @@ public class GunnerEditor : ModuleRules
         PublicDependencyModuleNames.AddRange(new[] { "Core", "CoreUObject", "Engine" });
         PrivateDependencyModuleNames.AddRange(new[] {
             "Gunner", "UnrealEd", "AnimGraph", "AnimGraphRuntime", "BlueprintGraph",
-            "KismetCompiler", "AssetRegistry"
+            "KismetCompiler", "AssetRegistry", "ControlRig"
         });
     }
 }

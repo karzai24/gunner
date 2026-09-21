@@ -27,7 +27,7 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Dodge", meta=(ClampMin="100", ClampMax="350"))
     float DodgeDistance = 350.f;
 
-    UFUNCTION(BlueprintCallable, Category="Dodge") bool TryDodge();
+    UFUNCTION(BlueprintCallable, Category="Dodge") bool TryDodge(FVector DesiredDirection = FVector::ZeroVector);
     UFUNCTION(BlueprintCallable, Category="Dodge") void CancelDodge();
     UFUNCTION(BlueprintPure, Category="Dodge") bool IsDodging() const { return bDodging; }
 

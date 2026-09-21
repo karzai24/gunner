@@ -1,0 +1,537 @@
+{
+  "schema": 1,
+  "status": "persisted_pose_gate_passed",
+  "clips": {
+    "CoverEntryRifle": {
+      "source": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_raw": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_in_place": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "source_model": {
+        "bone_tracks": 65,
+        "keys": 205,
+        "frames": 204
+      },
+      "target_model": {
+        "bone_tracks": 89,
+        "keys": 205,
+        "frames": 204
+      },
+      "root_validation": {
+        "root_drift_cm": 0.0,
+        "max_pelvis_height_change_when_locking_cm": 0.0
+      },
+      "target_import_data": {
+        "class": "AssetImportData",
+        "filenames": []
+      }
+    },
+    "CoverExitLeft": {
+      "source": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_raw": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_in_place": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "source_model": {
+        "bone_tracks": 65,
+        "keys": 59,
+        "frames": 58
+      },
+      "target_model": {
+        "bone_tracks": 89,
+        "keys": 59,
+        "frames": 58
+      },
+      "root_validation": {
+        "root_drift_cm": 0.0,
+        "max_pelvis_height_change_when_locking_cm": 0.0
+      },
+      "target_import_data": {
+        "class": "AssetImportData",
+        "filenames": []
+      }
+    },
+    "CoverExitRightRifle": {
+      "source": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_raw": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_in_place": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "source_model": {
+        "bone_tracks": 65,
+        "keys": 4417,
+        "frames": 4416
+      },
+      "target_model": {
+        "bone_tracks": 89,
+        "keys": 4417,
+        "frames": 4416
+      },
+      "root_validation": {
+        "root_drift_cm": 0.0,
+        "max_pelvis_height_change_when_locking_cm": 0.0
+      },
+      "target_import_data": {
+        "class": "AssetImportData",
+        "filenames": []
+      }
+    },
+    "CoverIdleRifle": {
+      "source": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_raw": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_in_place": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "source_model": {
+        "bone_tracks": 65,
+        "keys": 69,
+        "frames": 68
+      },
+      "target_model": {
+        "bone_tracks": 89,
+        "keys": 69,
+        "frames": 68
+      },
+      "root_validation": {
+        "root_drift_cm": 0.0,
+        "max_pelvis_height_change_when_locking_cm": 0.0
+      },
+      "target_import_data": {
+        "class": "AssetImportData",
+        "filenames": []
+      }
+    },
+    "CoverLeftRifle": {
+      "source": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_raw": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_in_place": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "source_model": {
+        "bone_tracks": 65,
+        "keys": 35,
+        "frames": 34
+      },
+      "target_model": {
+        "bone_tracks": 89,
+        "keys": 35,
+        "frames": 34
+      },
+      "root_validation": {
+        "root_drift_cm": 0.0,
+        "max_pelvis_height_change_when_locking_cm": 0.0
+      },
+      "target_import_data": {
+        "class": "AssetImportData",
+        "filenames": []
+      }
+    },
+    "CoverLook": {
+      "source": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_raw": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_in_place": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "source_model": {
+        "bone_tracks": 65,
+        "keys": 83,
+        "frames": 82
+      },
+      "target_model": {
+        "bone_tracks": 89,
+        "keys": 83,
+        "frames": 82
+      },
+      "root_validation": {
+        "root_drift_cm": 0.0,
+        "max_pelvis_height_change_when_locking_cm": 0.0
+      },
+      "target_import_data": {
+        "class": "AssetImportData",
+        "filenames": []
+      }
+    },
+    "CoverRightRifle": {
+      "source": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_raw": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_in_place": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "source_model": {
+        "bone_tracks": 65,
+        "keys": 35,
+        "frames": 34
+      },
+      "target_model": {
+        "bone_tracks": 89,
+        "keys": 35,
+        "frames": 34
+      },
+      "root_validation": {
+        "root_drift_cm": 0.0,
+        "max_pelvis_height_change_when_locking_cm": 0.0
+      },
+      "target_import_data": {
+        "class": "AssetImportData",
+        "filenames": []
+      }
+    },
+    "CoverTransferCrouch": {
+      "source": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_raw": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_in_place": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "source_model": {
+        "bone_tracks": 65,
+        "keys": 48,
+        "frames": 47
+      },
+      "target_model": {
+        "bone_tracks": 89,
+        "keys": 48,
+        "frames": 47
+      },
+      "root_validation": {
+        "root_drift_cm": 0.0,
+        "max_pelvis_height_change_when_locking_cm": 0.0
+      },
+      "target_import_data": {
+        "class": "AssetImportData",
+        "filenames": []
+      }
+    },
+    "CoverTurn": {
+      "source": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_raw": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_in_place": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "source_model": {
+        "bone_tracks": 65,
+        "keys": 31,
+        "frames": 30
+      },
+      "target_model": {
+        "bone_tracks": 89,
+        "keys": 31,
+        "frames": 30
+      },
+      "root_validation": {
+        "root_drift_cm": 0.0,
+        "max_pelvis_height_change_when_locking_cm": 0.0
+      },
+      "target_import_data": {
+        "class": "AssetImportData",
+        "filenames": []
+      }
+    },
+    "CrouchedRun": {
+      "source": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_raw": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_in_place": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "source_model": {
+        "bone_tracks": 65,
+        "keys": 24,
+        "frames": 23
+      },
+      "target_model": {
+        "bone_tracks": 89,
+        "keys": 24,
+        "frames": 23
+      },
+      "root_validation": {
+        "root_drift_cm": 0.0,
+        "max_pelvis_height_change_when_locking_cm": 0.0
+      },
+      "target_import_data": {
+        "class": "AssetImportData",
+        "filenames": []
+      }
+    },
+    "VaultBox": {
+      "source": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_raw": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "target_in_place": {
+        "position_error_cm": 0.0,
+        "scale_error": 0.0,
+        "rotation_error_degrees": 0.0,
+        "samples": 61,
+        "bone_transforms": 488
+      },
+      "source_model": {
+        "bone_tracks": 65,
+        "keys": 1167,
+        "frames": 1166
+      },
+      "target_model": {
+        "bone_tracks": 89,
+        "keys": 1167,
+        "frames": 1166
+      },
+      "root_validation": {
+        "root_drift_cm": 0.0,
+        "max_pelvis_height_change_when_locking_cm": 0.0
+      },
+      "target_import_data": {
+        "class": "AssetImportData",
+        "filenames": []
+      }
+    }
+  },
+  "source_fbx": {
+    "XBot": {
+      "sha256": "c31c389ceba265b3c4a2869ca6df0c547f0b4ac10a6928eff09afa7917d942c7",
+      "original": "<PROJECT>/Saved/AssetResearch/Mixamo/X_Bot.fbx",
+      "preserved": "<PROJECT>/Saved/LicensedSources/Mixamo/XBot.fbx"
+    },
+    "CrouchedRun": {
+      "sha256": "7b398c7edf2bfc795deed5803b1c1694248a5de07d763d3067bca8fe4ca7a3ec",
+      "original": "<PROJECT>/Saved/AssetResearch/Mixamo/CrouchedRun.fbx",
+      "preserved": "<PROJECT>/Saved/LicensedSources/Mixamo/CrouchedRun.fbx"
+    },
+    "CoverIdleRifle": {
+      "sha256": "88c95f0dc09bb2016658e6155d218b8b8831295c11244b9b794d859b28aad233",
+      "original": "<PROJECT>/Saved/AssetResearch/Mixamo/CoverIdleRifle.fbx",
+      "preserved": "<PROJECT>/Saved/LicensedSources/Mixamo/CoverIdleRifle.fbx"
+    },
+    "CoverRightRifle": {
+      "sha256": "75b1f3b53c10377ad93d4e9319cceaaf3491bc4dfeb9d4a722361e30df22102b",
+      "original": "<PROJECT>/Saved/AssetResearch/Mixamo/CoverRightRifle.fbx",
+      "preserved": "<PROJECT>/Saved/LicensedSources/Mixamo/CoverRightRifle.fbx"
+    },
+    "CoverLeftRifle": {
+      "sha256": "ef5c45d3179b571f40b13b05df7f05577cded71856c503c6be9efa854316b449",
+      "original": "<PROJECT>/Saved/AssetResearch/Mixamo/CoverLeftRifle.fbx",
+      "preserved": "<PROJECT>/Saved/LicensedSources/Mixamo/CoverLeftRifle.fbx"
+    },
+    "CoverEntryRifle": {
+      "sha256": "c63f866b6257e359a12c4d25308ec090fd3bb2279f274aa2cce66b221cbb6c74",
+      "original": "<PROJECT>/Saved/AssetResearch/Mixamo/CoverEntryRifle.fbx",
+      "preserved": "<PROJECT>/Saved/LicensedSources/Mixamo/CoverEntryRifle.fbx"
+    },
+    "CoverTurn": {
+      "sha256": "31c0e52dad630dbf316e711a418634fcaf162e3068cb4de5dbcdb0fbb8678caa",
+      "original": "<PROJECT>/Saved/AssetResearch/Mixamo/CoverTurn.fbx",
+      "preserved": "<PROJECT>/Saved/LicensedSources/Mixamo/CoverTurn.fbx"
+    },
+    "CoverTransferCrouch": {
+      "sha256": "ce955e18fa9c810cb0252d2047ed679c22df8eca70f5335a8dfcb837a069c721",
+      "original": "<PROJECT>/Saved/AssetResearch/Mixamo/CoverTransferCrouch.fbx",
+      "preserved": "<PROJECT>/Saved/LicensedSources/Mixamo/CoverTransferCrouch.fbx"
+    },
+    "VaultBox": {
+      "sha256": "9ac8d84d2c0bb5fbd79dd498dd1c34ab50ba15fe58fd687d1e2fcbd790d73f78",
+      "original": "<PROJECT>/Saved/AssetResearch/Mixamo/VaultBox.fbx",
+      "preserved": "<PROJECT>/Saved/LicensedSources/Mixamo/VaultBox.fbx"
+    },
+    "CoverLook": {
+      "sha256": "00110d96f35a0283c53de8b8869dfbe2abe1eb0c5eeea585618fce8e307e4270",
+      "original": "<PROJECT>/Saved/AssetResearch/Mixamo/CoverLook.fbx",
+      "preserved": "<PROJECT>/Saved/LicensedSources/Mixamo/CoverLook.fbx"
+    },
+    "CoverExitLeft": {
+      "sha256": "35c7c600c83b901cddc055e546f0b6bdb9f4ed02a56085b0a6df60ddbfb66c8f",
+      "original": "<PROJECT>/Saved/AssetResearch/Mixamo/CoverExitLeft.fbx",
+      "preserved": "<PROJECT>/Saved/LicensedSources/Mixamo/CoverExitLeft.fbx"
+    },
+    "CoverExitRightRifle": {
+      "sha256": "94e1c6f752ec7c1a9707400f4cf195db91849df072ec2af7a4b11bd090a9b077",
+      "original": "<PROJECT>/Saved/AssetResearch/Mixamo/CoverExitRightRifle.fbx",
+      "preserved": "<PROJECT>/Saved/LicensedSources/Mixamo/CoverExitRightRifle.fbx"
+    }
+  },
+  "tolerances": {
+    "position_cm": 0.001,
+    "scale": 1e-05,
+    "rotation_degrees": 0.01
+  },
+  "evaluation": "Raw editable pose, all 61 report times, source and target raw/root-locked.",
+  "limitations": [
+    "Run in a separate process after authoring exits.",
+    "Does not certify compressed runtime poses or rendered gameplay."
+  ],
+  "baseline_report_sha256": {
+    "Saved/AssetResearch/Mixamo/manifest.json": "47f83cab36f134c94d9792301f27ff01d94b0e2d783a5a1d8395feb38f775d3c",
+    "Saved/mixamo_import_inventory.json": "e7c1d85285a3df51c81b87e6c63935d7ad301a6ca234dc6b73440d4162ccf1c8",
+    "Saved/mixamo_retarget_report.json": "3e4d095f7501c9e462a3b339d35b9d5be90802ccf671c47459ce49f26a7e0f99"
+  },
+  "verified_package_count": 14,
+  "clip_count": 11,
+  "pose_samples_compared": 2013
+}

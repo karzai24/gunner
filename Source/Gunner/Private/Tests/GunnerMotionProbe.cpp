@@ -282,9 +282,13 @@ void AGunnerMotionProbe::Tick(float DeltaSeconds)
     case 26:
         Check(!Character->bIsCrouched && FMath::IsNearlyEqual(Character->GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight(), 90.f),
             TEXT("Standing succeeds after clearance returns"));
-        Teleport(FVector(0.f, -950.f, 92.f), 90.f); Key(EKeys::SpaceBar, true); Advance(); break;
+        Teleport(FVector(0.f, -950.f, 92.f), 90.f);
+        if (Character->UsesContextualTraversal())
+            Check(!Cover->TryAttach(FVector::YAxisVector), TEXT("Out-of-reach wall rejects cover admission"));
+        Key(Character->UsesContextualTraversal() ? EKeys::J : EKeys::SpaceBar, true); Advance(); break;
     case 27:
-        Key(EKeys::SpaceBar, false); Check(!Cover->IsAttached() && Movement->IsFalling(), TEXT("Out-of-reach cover rejects attach and falls back to jump"));
+        Key(Character->UsesContextualTraversal() ? EKeys::J : EKeys::SpaceBar, false);
+        Check(!Cover->IsAttached() && Movement->IsFalling(), TEXT("Selected jump binding jumps without an invalid cover attachment"));
         Advance(0.9f); break;
     case 28: Teleport(FVector(0.f, -850.f, 92.f), 90.f); Advance(0.3f); break;
     case 29: Key(EKeys::SpaceBar, true); Advance(0.5f); break;
@@ -411,8 +415,12 @@ void AGunnerMotionProbe::Tick(float DeltaSeconds)
     case 59:
         Key(EKeys::LeftMouseButton, false); Key(EKeys::W, false);
         Check(Combat->GetShotsFired() > ShotsBefore, TEXT("Stationary crouched ADS permits fire"));
-        Check(FVector::Dist2D(Character->GetActorLocation(), Start) < 2.f && Character->GetVelocity().Size2D() < 1.f,
-            TEXT("Crouched ADS rejects translation until directional aim locomotion exists"));
+        if (Anim && Anim->bDirectionalCrouchPoseReady)
+            Check(FVector::Dist2D(Character->GetActorLocation(), Start) > 10.f && Character->bIsCrouched,
+                TEXT("Authored directional crouch permits reduced-speed ADS movement"));
+        else
+            Check(FVector::Dist2D(Character->GetActorLocation(), Start) < 2.f && Character->GetVelocity().Size2D() < 1.f,
+                TEXT("Crouched ADS rejects translation until directional aim locomotion exists"));
         Capture(TEXT("motion_crouch_ads.png"));
         Key(EKeys::RightMouseButton, false); Key(EKeys::C, true); Advance(0.15f); break;
     case 60: Key(EKeys::C, false); Advance(0.35f); break;
@@ -472,11 +480,11 @@ void AGunnerMotionProbe::Tick(float DeltaSeconds)
         Start = Character->GetActorLocation(); Key(EKeys::E, true); Advance(0.25f); break;
     case 72:
         Key(EKeys::E, false);
-        Check(Character->bIsCrouched && !Character->GetDodge()->IsDodging() && !Movement->HasRootMotionSources() &&
-            FVector::Dist2D(Character->GetActorLocation(), Start) < 2.f,
-            TEXT("Crouched roll is rejected without a compatible transition"));
-        Key(EKeys::C, true); Advance(0.15f); break;
-    case 73: Key(EKeys::C, false); Advance(0.3f); break;
+        Check(!Character->bIsCrouched && Character->GetDodge()->IsDodging() && Movement->HasRootMotionSources() &&
+            FVector::Dist2D(Character->GetActorLocation(), Start) > 20.f,
+            TEXT("Crouched roll obtains standing clearance and enters the authored roll"));
+        Advance(MontageDuration(Character->GetDodge()->RollMontage) + 0.3f); break;
+    case 73: Advance(0.3f); break;
     case 74:
         Check(!Character->bIsCrouched, TEXT("Roll interruption fixture returns to standing"));
         Key(EKeys::E, true); Advance(0.2f); break;

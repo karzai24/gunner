@@ -1,0 +1,37 @@
+{
+  "status": "local_profile_asset_gate_passed",
+  "public_character_git_blob": "5c5576c9f453383df4c3cde2a306e01e6d5dc7de",
+  "graph": "/Game/Gunner/LicensedLocal/Mixamo/Runtime/ABP_WardenCoverMovement",
+  "profile": "/Game/Gunner/LicensedLocal/Mixamo/Runtime/DA_CoverMovement",
+  "capabilities": [
+    "directional_crouch_pose_ready",
+    "blind_fire_pose_ready",
+    "crouch_reload_pose_ready",
+    "crouch_equip_pose_ready",
+    "crouch_dry_fire_pose_ready",
+    "high_cover_pose_ready",
+    "rifle_support_grip_pose_ready",
+    "crouch_transition_pose_ready"
+  ],
+  "sequence_players": [
+    "/Game/Gunner/LicensedLocal/Mixamo/Retargeted/Manny/A_Mixamo_CrouchedRun.A_Mixamo_CrouchedRun",
+    "/Game/Gunner/Animation/Retargeted/Manny/A_UAL_Sprint_Loop.A_UAL_Sprint_Loop",
+    "/Game/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Loop.MM_Rifle_Jump_Fall_Loop",
+    "/Game/Characters/Mannequins/Anims/Pistol/Jump/MM_Pistol_Jump_Fall_Loop.MM_Pistol_Jump_Fall_Loop"
+  ],
+  "blend_spaces": [
+    "/Game/Gunner/Motion/Animation/BS_Rifle.BS_Rifle",
+    "/Game/Gunner/Motion/Animation/BS_Pistol.BS_Pistol",
+    "/Game/Gunner/LicensedLocal/MoverTraversal/BS_DirectionalCrouch.BS_DirectionalCrouch",
+    "/Game/Gunner/Motion/Animation/BS_Crouch.BS_Crouch",
+    "/Game/Gunner/LicensedLocal/Mixamo/Runtime/BS_RifleWallMovement.BS_RifleWallMovement"
+  ],
+  "stance_evaluators": [
+    "/Game/Gunner/LicensedLocal/MoverTraversal/A_CrouchEntry.A_CrouchEntry",
+    "/Game/Gunner/LicensedLocal/MoverTraversal/A_CrouchExit.A_CrouchExit"
+  ],
+  "retargeted_packages_checked": 14,
+  "limitations": [
+    "Static composition and source-preservation gate; rendered native probes certify behavior separately."
+  ]
+}

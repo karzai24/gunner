@@ -94,6 +94,9 @@ void AGunnerHUD::DrawHUD()
     DrawText(TEXT("GUNNER  /  MOVEMENT RANGE"), Ink, Margin, Margin, Font, Scale);
     DrawText(TEXT("WASD Move   Mouse Aim   RMB Focus   LMB Fire   R Reload   1/2 Weapon   F Melee"), Muted,
         Margin, H - Margin - 28.f * Scale, Font, 0.82f * Scale);
-    DrawText(TEXT("Shift Sprint   C Crouch   Space Cover/Jump   E Roll   Q Shoulder"), Muted,
+    const auto* ControlPawn = Cast<AGunnerCharacter>(Pawn);
+    DrawText(ControlPawn && ControlPawn->UsesContextualTraversal()
+        ? TEXT("Shift / Hold Space Run   Tap Space Cover/Roll   C Crouch   E Roll   Q Shoulder   J Jump")
+        : TEXT("Shift Sprint   C Crouch   Space Cover/Jump   E Roll   Q Shoulder"), Muted,
         Margin, H - Margin - 10.f * Scale, Font, 0.82f * Scale);
 }

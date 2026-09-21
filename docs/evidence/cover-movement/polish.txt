@@ -1,0 +1,269 @@
+[2026.09.21-00.16.32:570][  0]LogConsoleManager: Warning: Console variable 'r.MotionVectorSimulation' used in the render thread. Rendering artifacts could happen. Use ECVF_RenderThreadSafe or don't use in render thread.
+[2026.09.21-00.16.39:165][214]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=0 Possessed animated pawn exists
+[2026.09.21-00.16.39:165][214]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=0 Both protective handling capabilities are authored
+[2026.09.21-00.16.39:165][214]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=0 Transient damage fixture exists
+[2026.09.21-00.16.39:978][250]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=2 Scenario weapon equipped
+[2026.09.21-00.16.39:978][250]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=2 Weapon has all four new authored actions
+[2026.09.21-00.16.41:131][276]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=3 Jump input evaluates the selected takeoff montage
+[2026.09.21-00.16.41:131][276]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=3 CharacterMovement owns jump displacement without horizontal root drift
+[2026.09.21-00.16.41:131][276]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=3 Ground contact starts the selected landing montage
+[2026.09.21-00.16.42:336][322]LogTemp: Display: GUNNER_POLISH_JUMP scenario=0 apex=190.20 pelvis_min=61.00 pelvis_idle=95.17 root_drift=0.00
+[2026.09.21-00.16.42:339][322]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=4 Landing visibly compresses pelvis and recovers without moving root or sinking below floor
+[2026.09.21-00.16.42:339][322]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=4 Landing finishes without movement lock
+[2026.09.21-00.16.43:244][364]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=8 Repeated jump reaches animated landing
+[2026.09.21-00.16.43:452][373]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=9 Fire interrupts landing recovery immediately and produces one normal shot
+[2026.09.21-00.16.43:541][377]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Accepted melee has no damage before impact
+[2026.09.21-00.16.43:541][377]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Successive accepted melee presses alternate jab and cross
+[2026.09.21-00.16.43:541][377]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Selected melee variant plays on FullBody
+[2026.09.21-00.16.44:942][431]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=7 Completed attack deals one hit; interrupted attack deals none
+[2026.09.21-00.16.44:942][431]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=7 Melee completion or interruption releases action lock
+[2026.09.21-00.16.45:033][435]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Accepted melee has no damage before impact
+[2026.09.21-00.16.45:033][435]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Successive accepted melee presses alternate jab and cross
+[2026.09.21-00.16.45:033][435]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Selected melee variant plays on FullBody
+[2026.09.21-00.16.46:454][490]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=7 Completed attack deals one hit; interrupted attack deals none
+[2026.09.21-00.16.46:454][490]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=7 Melee completion or interruption releases action lock
+[2026.09.21-00.16.46:540][494]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Accepted melee has no damage before impact
+[2026.09.21-00.16.46:540][494]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Successive accepted melee presses alternate jab and cross
+[2026.09.21-00.16.46:540][494]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Selected melee variant plays on FullBody
+[2026.09.21-00.16.47:941][558]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=7 Completed attack deals one hit; interrupted attack deals none
+[2026.09.21-00.16.47:941][558]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=7 Melee completion or interruption releases action lock
+[2026.09.21-00.16.53:143][777]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=10 Input drains exactly the current magazine
+[2026.09.21-00.16.54:753][846]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=12 Dry-fire fixture is in requested genuine crouch context
+[2026.09.21-00.16.55:066][860]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=13 Missing crouched dry-fire graph capability rejects presentation
+[2026.09.21-00.16.55:340][872]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=14 Empty trigger plays selected dry-fire through protective arm layer
+[2026.09.21-00.16.55:340][872]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=14 Dry fire stays crouched below low cover without raising blind-fire IK
+[2026.09.21-00.16.56:341][908]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=15 Held empty trigger causes one presentation and no shot, damage or ammo change
+[2026.09.21-00.16.56:649][922]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=17 A fresh empty trigger press can replay feedback
+[2026.09.21-00.16.56:857][931]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=18 Reload interrupts dry fire immediately without action lock
+[2026.09.21-00.16.58:859][ 21]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=19 Reload after dry fire transfers ammunition successfully
+[2026.09.21-00.16.59:161][ 35]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=20 Missing protective equip capability rejects crouched switch
+[2026.09.21-00.17.00:583][ 87]LogTemp: Display: GUNNER_POLISH_EQUIP scenario=0 phase=21 head_max=92.42 hand_travel=28.28
+[2026.09.21-00.17.00:583][ 87]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=21 Evaluated equip moves arms while genuine crouch and cover head clearance persist
+[2026.09.21-00.17.00:583][ 87]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=21 Crouched switch selects the other weapon
+[2026.09.21-00.17.00:894][101]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=22 Reverse crouched switch starts
+[2026.09.21-00.17.01:399][124]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=25 Interrupted equip clears action/layer and preserves selected weapon ammunition
+[2026.09.21-00.17.02:014][152]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=24 Free crouch survives switch and handling layer clears
+[2026.09.21-00.17.02:826][187]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=2 Scenario weapon equipped
+[2026.09.21-00.17.02:826][187]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=2 Weapon has all four new authored actions
+[2026.09.21-00.17.08:384][424]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=10 Input drains exactly the current magazine
+[2026.09.21-00.17.09:996][496]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=12 Dry-fire fixture is in requested genuine crouch context
+[2026.09.21-00.17.10:307][510]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=13 Missing crouched dry-fire graph capability rejects presentation
+[2026.09.21-00.17.10:567][522]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=14 Empty trigger plays selected dry-fire through protective arm layer
+[2026.09.21-00.17.10:567][522]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=14 Dry fire stays crouched below low cover without raising blind-fire IK
+[2026.09.21-00.17.11:568][557]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=15 Held empty trigger causes one presentation and no shot, damage or ammo change
+[2026.09.21-00.17.11:904][571]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=17 A fresh empty trigger press can replay feedback
+[2026.09.21-00.17.12:110][580]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=18 Reload interrupts dry fire immediately without action lock
+[2026.09.21-00.17.14:108][670]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=19 Reload after dry fire transfers ammunition successfully
+[2026.09.21-00.17.14:409][683]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=20 Missing protective equip capability rejects crouched switch
+[2026.09.21-00.17.15:812][738]LogTemp: Display: GUNNER_POLISH_EQUIP scenario=1 phase=21 head_max=87.86 hand_travel=74.46
+[2026.09.21-00.17.15:812][738]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=21 Evaluated equip moves arms while genuine crouch and cover head clearance persist
+[2026.09.21-00.17.15:812][738]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=21 Crouched switch selects the other weapon
+[2026.09.21-00.17.16:125][752]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=22 Reverse crouched switch starts
+[2026.09.21-00.17.16:634][774]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=25 Interrupted equip clears action/layer and preserves selected weapon ammunition
+[2026.09.21-00.17.17:251][802]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=26 Held low-cover ADS established before switching
+[2026.09.21-00.17.18:666][856]LogTemp: Display: GUNNER_POLISH_EQUIP scenario=1 phase=23 head_max=88.78 hand_travel=81.84
+[2026.09.21-00.17.18:666][856]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=23 Evaluated equip moves arms while genuine crouch and cover head clearance persist
+[2026.09.21-00.17.18:666][856]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=23 Crouched switch selects the other weapon
+[2026.09.21-00.17.19:277][883]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=24 Held ADS resumes after protected weapon switch completes
+[2026.09.21-00.17.20:083][916]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=2 Scenario weapon equipped
+[2026.09.21-00.17.20:083][916]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=2 Weapon has all four new authored actions
+[2026.09.21-00.17.21:008][945]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=3 Jump input evaluates the selected takeoff montage
+[2026.09.21-00.17.21:008][945]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=3 CharacterMovement owns jump displacement without horizontal root drift
+[2026.09.21-00.17.21:008][945]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=3 Ground contact starts the selected landing montage
+[2026.09.21-00.17.22:227][989]LogTemp: Display: GUNNER_POLISH_JUMP scenario=2 apex=190.74 pelvis_min=57.62 pelvis_idle=94.74 root_drift=0.00
+[2026.09.21-00.17.22:227][989]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=4 Landing visibly compresses pelvis and recovers without moving root or sinking below floor
+[2026.09.21-00.17.22:227][989]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=4 Landing finishes without movement lock
+[2026.09.21-00.17.23:140][ 29]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=8 Repeated jump reaches animated landing
+[2026.09.21-00.17.23:357][ 38]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=9 Fire interrupts landing recovery immediately and produces one normal shot
+[2026.09.21-00.17.23:445][ 42]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Accepted melee has no damage before impact
+[2026.09.21-00.17.23:445][ 42]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Successive accepted melee presses alternate jab and cross
+[2026.09.21-00.17.23:446][ 42]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Selected melee variant plays on FullBody
+[2026.09.21-00.17.24:858][ 95]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=7 Completed attack deals one hit; interrupted attack deals none
+[2026.09.21-00.17.24:858][ 95]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=7 Melee completion or interruption releases action lock
+[2026.09.21-00.17.24:946][ 99]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Accepted melee has no damage before impact
+[2026.09.21-00.17.24:946][ 99]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Successive accepted melee presses alternate jab and cross
+[2026.09.21-00.17.24:946][ 99]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Selected melee variant plays on FullBody
+[2026.09.21-00.17.26:366][154]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=7 Completed attack deals one hit; interrupted attack deals none
+[2026.09.21-00.17.26:366][154]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=7 Melee completion or interruption releases action lock
+[2026.09.21-00.17.26:455][158]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Accepted melee has no damage before impact
+[2026.09.21-00.17.26:455][158]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Successive accepted melee presses alternate jab and cross
+[2026.09.21-00.17.26:455][158]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Selected melee variant plays on FullBody
+[2026.09.21-00.17.27:875][221]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=7 Completed attack deals one hit; interrupted attack deals none
+[2026.09.21-00.17.27:876][221]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=7 Melee completion or interruption releases action lock
+[2026.09.21-00.17.30:998][356]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=10 Input drains exactly the current magazine
+[2026.09.21-00.17.32:617][428]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=12 Dry-fire fixture is in requested genuine crouch context
+[2026.09.21-00.17.32:920][441]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=13 Missing crouched dry-fire graph capability rejects presentation
+[2026.09.21-00.17.33:185][453]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=14 Empty trigger plays selected dry-fire through protective arm layer
+[2026.09.21-00.17.33:185][453]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=14 Dry fire stays crouched below low cover without raising blind-fire IK
+[2026.09.21-00.17.34:185][489]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=15 Held empty trigger causes one presentation and no shot, damage or ammo change
+[2026.09.21-00.17.34:500][503]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=17 A fresh empty trigger press can replay feedback
+[2026.09.21-00.17.34:702][512]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=18 Reload interrupts dry fire immediately without action lock
+[2026.09.21-00.17.36:503][593]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=19 Reload after dry fire transfers ammunition successfully
+[2026.09.21-00.17.36:820][607]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=20 Missing protective equip capability rejects crouched switch
+[2026.09.21-00.17.38:504][672]LogTemp: Display: GUNNER_POLISH_EQUIP scenario=2 phase=21 head_max=92.35 hand_travel=46.86
+[2026.09.21-00.17.38:504][672]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=21 Evaluated equip moves arms while genuine crouch and cover head clearance persist
+[2026.09.21-00.17.38:504][672]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=21 Crouched switch selects the other weapon
+[2026.09.21-00.17.38:818][686]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=22 Reverse crouched switch starts
+[2026.09.21-00.17.39:335][708]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=25 Interrupted equip clears action/layer and preserves selected weapon ammunition
+[2026.09.21-00.17.39:939][734]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=24 Free crouch survives switch and handling layer clears
+[2026.09.21-00.17.40:768][770]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=2 Scenario weapon equipped
+[2026.09.21-00.17.40:768][770]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=2 Weapon has all four new authored actions
+[2026.09.21-00.17.44:220][912]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=10 Input drains exactly the current magazine
+[2026.09.21-00.17.45:833][983]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=12 Dry-fire fixture is in requested genuine crouch context
+[2026.09.21-00.17.46:148][997]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=13 Missing crouched dry-fire graph capability rejects presentation
+[2026.09.21-00.17.46:411][  8]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=14 Empty trigger plays selected dry-fire through protective arm layer
+[2026.09.21-00.17.46:411][  8]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=14 Dry fire stays crouched below low cover without raising blind-fire IK
+[2026.09.21-00.17.47:428][ 44]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=15 Held empty trigger causes one presentation and no shot, damage or ammo change
+[2026.09.21-00.17.47:746][ 58]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=17 A fresh empty trigger press can replay feedback
+[2026.09.21-00.17.47:950][ 67]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=18 Reload interrupts dry fire immediately without action lock
+[2026.09.21-00.17.49:750][146]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=19 Reload after dry fire transfers ammunition successfully
+[2026.09.21-00.17.50:074][160]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=20 Missing protective equip capability rejects crouched switch
+[2026.09.21-00.17.51:749][226]LogTemp: Display: GUNNER_POLISH_EQUIP scenario=3 phase=21 head_max=88.55 hand_travel=61.05
+[2026.09.21-00.17.51:749][226]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=21 Evaluated equip moves arms while genuine crouch and cover head clearance persist
+[2026.09.21-00.17.51:749][226]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=21 Crouched switch selects the other weapon
+[2026.09.21-00.17.52:065][240]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=22 Reverse crouched switch starts
+[2026.09.21-00.17.52:567][262]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=25 Interrupted equip clears action/layer and preserves selected weapon ammunition
+[2026.09.21-00.17.53:183][288]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=26 Held low-cover ADS established before switching
+[2026.09.21-00.17.54:869][353]LogTemp: Display: GUNNER_POLISH_EQUIP scenario=3 phase=23 head_max=88.58 hand_travel=98.09
+[2026.09.21-00.17.54:869][353]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=23 Evaluated equip moves arms while genuine crouch and cover head clearance persist
+[2026.09.21-00.17.54:869][353]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=23 Crouched switch selects the other weapon
+[2026.09.21-00.17.55:497][380]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=24 Held ADS resumes after protected weapon switch completes
+[2026.09.21-00.17.55:501][380]LogTemp: Display: GUNNER_POLISH_COMPLETE failures=0 scenarios=4
+[2026.09.21-00.17.55:503][380]LogPython: GUNNER_POLISH_PIE_CYCLE_FINISHED 1 failures=0
+[2026.09.21-00.17.55:573][381]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2026.09.21-00.17.55:696][382]LogPlayLevel: Display: Destroying online subsystem :Context_1
+[2026.09.21-00.18.02:533][667]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=0 Possessed animated pawn exists
+[2026.09.21-00.18.02:533][667]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=0 Both protective handling capabilities are authored
+[2026.09.21-00.18.02:534][667]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=0 Transient damage fixture exists
+[2026.09.21-00.18.03:357][704]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=2 Scenario weapon equipped
+[2026.09.21-00.18.03:357][704]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=2 Weapon has all four new authored actions
+[2026.09.21-00.18.04:266][735]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=3 Jump input evaluates the selected takeoff montage
+[2026.09.21-00.18.04:266][735]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=3 CharacterMovement owns jump displacement without horizontal root drift
+[2026.09.21-00.18.04:266][735]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=3 Ground contact starts the selected landing montage
+[2026.09.21-00.18.05:482][780]LogTemp: Display: GUNNER_POLISH_JUMP scenario=0 apex=190.78 pelvis_min=60.97 pelvis_idle=95.17 root_drift=0.00
+[2026.09.21-00.18.05:482][780]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=4 Landing visibly compresses pelvis and recovers without moving root or sinking below floor
+[2026.09.21-00.18.05:482][780]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=4 Landing finishes without movement lock
+[2026.09.21-00.18.06:403][821]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=8 Repeated jump reaches animated landing
+[2026.09.21-00.18.06:619][830]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=9 Fire interrupts landing recovery immediately and produces one normal shot
+[2026.09.21-00.18.06:715][834]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Accepted melee has no damage before impact
+[2026.09.21-00.18.06:715][834]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Successive accepted melee presses alternate jab and cross
+[2026.09.21-00.18.06:715][834]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Selected melee variant plays on FullBody
+[2026.09.21-00.18.08:120][887]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=7 Completed attack deals one hit; interrupted attack deals none
+[2026.09.21-00.18.08:120][887]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=7 Melee completion or interruption releases action lock
+[2026.09.21-00.18.08:207][891]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Accepted melee has no damage before impact
+[2026.09.21-00.18.08:207][891]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Successive accepted melee presses alternate jab and cross
+[2026.09.21-00.18.08:207][891]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Selected melee variant plays on FullBody
+[2026.09.21-00.18.09:626][944]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=7 Completed attack deals one hit; interrupted attack deals none
+[2026.09.21-00.18.09:626][944]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=7 Melee completion or interruption releases action lock
+[2026.09.21-00.18.09:720][948]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Accepted melee has no damage before impact
+[2026.09.21-00.18.09:720][948]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Successive accepted melee presses alternate jab and cross
+[2026.09.21-00.18.09:720][948]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=6 Selected melee variant plays on FullBody
+[2026.09.21-00.18.11:136][ 11]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=7 Completed attack deals one hit; interrupted attack deals none
+[2026.09.21-00.18.11:136][ 11]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=7 Melee completion or interruption releases action lock
+[2026.09.21-00.18.16:451][229]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=10 Input drains exactly the current magazine
+[2026.09.21-00.18.18:074][300]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=12 Dry-fire fixture is in requested genuine crouch context
+[2026.09.21-00.18.18:374][313]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=13 Missing crouched dry-fire graph capability rejects presentation
+[2026.09.21-00.18.18:632][324]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=14 Empty trigger plays selected dry-fire through protective arm layer
+[2026.09.21-00.18.18:632][324]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=14 Dry fire stays crouched below low cover without raising blind-fire IK
+[2026.09.21-00.18.19:640][359]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=15 Held empty trigger causes one presentation and no shot, damage or ammo change
+[2026.09.21-00.18.19:974][373]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=17 A fresh empty trigger press can replay feedback
+[2026.09.21-00.18.20:183][382]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=18 Reload interrupts dry fire immediately without action lock
+[2026.09.21-00.18.22:186][470]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=19 Reload after dry fire transfers ammunition successfully
+[2026.09.21-00.18.22:501][484]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=20 Missing protective equip capability rejects crouched switch
+[2026.09.21-00.18.23:904][534]LogTemp: Display: GUNNER_POLISH_EQUIP scenario=0 phase=21 head_max=92.42 hand_travel=28.36
+[2026.09.21-00.18.23:904][534]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=21 Evaluated equip moves arms while genuine crouch and cover head clearance persist
+[2026.09.21-00.18.23:904][534]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=21 Crouched switch selects the other weapon
+[2026.09.21-00.18.24:209][547]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=22 Reverse crouched switch starts
+[2026.09.21-00.18.24:728][569]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=25 Interrupted equip clears action/layer and preserves selected weapon ammunition
+[2026.09.21-00.18.25:336][595]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=0 phase=24 Free crouch survives switch and handling layer clears
+[2026.09.21-00.18.26:158][631]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=2 Scenario weapon equipped
+[2026.09.21-00.18.26:158][631]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=2 Weapon has all four new authored actions
+[2026.09.21-00.18.31:105][838]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=10 Input drains exactly the current magazine
+[2026.09.21-00.18.32:711][908]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=12 Dry-fire fixture is in requested genuine crouch context
+[2026.09.21-00.18.33:021][921]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=13 Missing crouched dry-fire graph capability rejects presentation
+[2026.09.21-00.18.33:297][933]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=14 Empty trigger plays selected dry-fire through protective arm layer
+[2026.09.21-00.18.33:297][933]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=14 Dry fire stays crouched below low cover without raising blind-fire IK
+[2026.09.21-00.18.34:312][968]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=15 Held empty trigger causes one presentation and no shot, damage or ammo change
+[2026.09.21-00.18.34:627][982]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=17 A fresh empty trigger press can replay feedback
+[2026.09.21-00.18.34:836][991]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=18 Reload interrupts dry fire immediately without action lock
+[2026.09.21-00.18.36:849][ 80]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=19 Reload after dry fire transfers ammunition successfully
+[2026.09.21-00.18.37:163][ 94]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=20 Missing protective equip capability rejects crouched switch
+[2026.09.21-00.18.38:576][148]LogTemp: Display: GUNNER_POLISH_EQUIP scenario=1 phase=21 head_max=87.98 hand_travel=74.45
+[2026.09.21-00.18.38:576][148]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=21 Evaluated equip moves arms while genuine crouch and cover head clearance persist
+[2026.09.21-00.18.38:576][148]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=21 Crouched switch selects the other weapon
+[2026.09.21-00.18.38:894][162]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=22 Reverse crouched switch starts
+[2026.09.21-00.18.39:394][184]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=25 Interrupted equip clears action/layer and preserves selected weapon ammunition
+[2026.09.21-00.18.39:999][211]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=26 Held low-cover ADS established before switching
+[2026.09.21-00.18.41:411][265]LogTemp: Display: GUNNER_POLISH_EQUIP scenario=1 phase=23 head_max=88.89 hand_travel=79.69
+[2026.09.21-00.18.41:411][265]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=23 Evaluated equip moves arms while genuine crouch and cover head clearance persist
+[2026.09.21-00.18.41:411][265]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=23 Crouched switch selects the other weapon
+[2026.09.21-00.18.42:021][292]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=1 phase=24 Held ADS resumes after protected weapon switch completes
+[2026.09.21-00.18.42:843][327]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=2 Scenario weapon equipped
+[2026.09.21-00.18.42:843][327]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=2 Weapon has all four new authored actions
+[2026.09.21-00.18.43:749][357]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=3 Jump input evaluates the selected takeoff montage
+[2026.09.21-00.18.43:749][357]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=3 CharacterMovement owns jump displacement without horizontal root drift
+[2026.09.21-00.18.43:749][357]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=3 Ground contact starts the selected landing montage
+[2026.09.21-00.18.44:955][399]LogTemp: Display: GUNNER_POLISH_JUMP scenario=2 apex=190.78 pelvis_min=57.60 pelvis_idle=94.74 root_drift=0.00
+[2026.09.21-00.18.44:955][399]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=4 Landing visibly compresses pelvis and recovers without moving root or sinking below floor
+[2026.09.21-00.18.44:955][399]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=4 Landing finishes without movement lock
+[2026.09.21-00.18.45:861][435]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=8 Repeated jump reaches animated landing
+[2026.09.21-00.18.46:071][444]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=9 Fire interrupts landing recovery immediately and produces one normal shot
+[2026.09.21-00.18.46:166][448]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Accepted melee has no damage before impact
+[2026.09.21-00.18.46:167][448]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Successive accepted melee presses alternate jab and cross
+[2026.09.21-00.18.46:167][448]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Selected melee variant plays on FullBody
+[2026.09.21-00.18.47:591][498]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=7 Completed attack deals one hit; interrupted attack deals none
+[2026.09.21-00.18.47:591][498]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=7 Melee completion or interruption releases action lock
+[2026.09.21-00.18.47:684][502]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Accepted melee has no damage before impact
+[2026.09.21-00.18.47:684][502]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Successive accepted melee presses alternate jab and cross
+[2026.09.21-00.18.47:684][502]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Selected melee variant plays on FullBody
+[2026.09.21-00.18.49:101][554]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=7 Completed attack deals one hit; interrupted attack deals none
+[2026.09.21-00.18.49:101][554]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=7 Melee completion or interruption releases action lock
+[2026.09.21-00.18.49:196][558]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Accepted melee has no damage before impact
+[2026.09.21-00.18.49:196][558]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Successive accepted melee presses alternate jab and cross
+[2026.09.21-00.18.49:196][558]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=6 Selected melee variant plays on FullBody
+[2026.09.21-00.18.50:602][618]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=7 Completed attack deals one hit; interrupted attack deals none
+[2026.09.21-00.18.50:602][618]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=7 Melee completion or interruption releases action lock
+[2026.09.21-00.18.53:710][749]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=10 Input drains exactly the current magazine
+[2026.09.21-00.18.55:341][818]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=12 Dry-fire fixture is in requested genuine crouch context
+[2026.09.21-00.18.55:651][831]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=13 Missing crouched dry-fire graph capability rejects presentation
+[2026.09.21-00.18.55:902][842]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=14 Empty trigger plays selected dry-fire through protective arm layer
+[2026.09.21-00.18.55:902][842]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=14 Dry fire stays crouched below low cover without raising blind-fire IK
+[2026.09.21-00.18.56:918][877]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=15 Held empty trigger causes one presentation and no shot, damage or ammo change
+[2026.09.21-00.18.57:245][891]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=17 A fresh empty trigger press can replay feedback
+[2026.09.21-00.18.57:457][900]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=18 Reload interrupts dry fire immediately without action lock
+[2026.09.21-00.18.59:269][979]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=19 Reload after dry fire transfers ammunition successfully
+[2026.09.21-00.18.59:590][993]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=20 Missing protective equip capability rejects crouched switch
+[2026.09.21-00.19.01:266][ 56]LogTemp: Display: GUNNER_POLISH_EQUIP scenario=2 phase=21 head_max=92.35 hand_travel=45.35
+[2026.09.21-00.19.01:266][ 56]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=21 Evaluated equip moves arms while genuine crouch and cover head clearance persist
+[2026.09.21-00.19.01:266][ 56]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=21 Crouched switch selects the other weapon
+[2026.09.21-00.19.01:574][ 69]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=22 Reverse crouched switch starts
+[2026.09.21-00.19.02:080][ 91]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=25 Interrupted equip clears action/layer and preserves selected weapon ammunition
+[2026.09.21-00.19.02:695][118]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=2 phase=24 Free crouch survives switch and handling layer clears
+[2026.09.21-00.19.03:527][154]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=2 Scenario weapon equipped
+[2026.09.21-00.19.03:527][154]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=2 Weapon has all four new authored actions
+[2026.09.21-00.19.06:933][298]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=10 Input drains exactly the current magazine
+[2026.09.21-00.19.08:554][368]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=12 Dry-fire fixture is in requested genuine crouch context
+[2026.09.21-00.19.08:861][381]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=13 Missing crouched dry-fire graph capability rejects presentation
+[2026.09.21-00.19.09:124][392]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=14 Empty trigger plays selected dry-fire through protective arm layer
+[2026.09.21-00.19.09:124][392]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=14 Dry fire stays crouched below low cover without raising blind-fire IK
+[2026.09.21-00.19.10:144][427]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=15 Held empty trigger causes one presentation and no shot, damage or ammo change
+[2026.09.21-00.19.10:466][441]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=17 A fresh empty trigger press can replay feedback
+[2026.09.21-00.19.10:674][450]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=18 Reload interrupts dry fire immediately without action lock
+[2026.09.21-00.19.12:475][528]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=19 Reload after dry fire transfers ammunition successfully
+[2026.09.21-00.19.12:777][541]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=20 Missing protective equip capability rejects crouched switch
+[2026.09.21-00.19.14:455][605]LogTemp: Display: GUNNER_POLISH_EQUIP scenario=3 phase=21 head_max=88.57 hand_travel=61.29
+[2026.09.21-00.19.14:455][605]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=21 Evaluated equip moves arms while genuine crouch and cover head clearance persist
+[2026.09.21-00.19.14:455][605]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=21 Crouched switch selects the other weapon
+[2026.09.21-00.19.14:759][618]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=22 Reverse crouched switch starts
+[2026.09.21-00.19.15:260][640]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=25 Interrupted equip clears action/layer and preserves selected weapon ammunition
+[2026.09.21-00.19.15:870][666]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=26 Held low-cover ADS established before switching
+[2026.09.21-00.19.17:558][729]LogTemp: Display: GUNNER_POLISH_EQUIP scenario=3 phase=23 head_max=88.58 hand_travel=99.00
+[2026.09.21-00.19.17:558][729]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=23 Evaluated equip moves arms while genuine crouch and cover head clearance persist
+[2026.09.21-00.19.17:558][729]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=23 Crouched switch selects the other weapon
+[2026.09.21-00.19.18:169][755]LogTemp: Display: GUNNER_POLISH_CHECK PASS scenario=3 phase=24 Held ADS resumes after protected weapon switch completes
+[2026.09.21-00.19.18:173][755]LogTemp: Display: GUNNER_POLISH_COMPLETE failures=0 scenarios=4
+[2026.09.21-00.19.18:174][755]LogPython: GUNNER_POLISH_PIE_CYCLE_FINISHED 2 failures=0
+[2026.09.21-00.19.18:242][756]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2026.09.21-00.19.18:326][757]LogPlayLevel: Display: Destroying online subsystem :Context_2
+[2026.09.21-00.19.19:204][794]LogPython: GUNNER_POLISH_PIE_COMPLETE cycles=2 failures=0
+[2026.09.21-00.19.22:127][795]LogHttp: Warning: [FHttpManager::Shutdown] Unbinding delegates for 1 outstanding Http Requests:

@@ -48,7 +48,7 @@ The current user request selects Unreal and supersedes all Godot implementation 
 
 The user requested a focused expansion beyond the M0 foundation: cover-shooter movement, aiming, rifle/pistol combat and reused animations, while deferring character appearance. The new `L_MotionRange` composes selected M1 animation work and bounded weapon/cover prototypes from later milestones. This authorization does not accept the complete M1/M2/M3 milestone gates or extend to horde AI, waves, multiplayer, revival or defenses.
 
-Epic template armed clips and weapon meshes are combined with Quaternius CC0 motion retargeted through Unreal IK rigs. Missing dedicated cover transitions, corner/vault and knife clips remain explicit content gaps. The original foundation map remains available. See `TEST_MATRIX.md` for measured current acceptance and `ASSET_RESEARCH.md` for sources and coverage.
+Epic template armed clips and weapon meshes are combined with Quaternius CC0 motion retargeted through Unreal IK rigs. The 2026-09-20 local movement extension adds checked smooth entry, contextual tap/hold traversal, bounded sprint steering, installed directional crouch and Mixamo rifle sprint/high-wall poses. Its licensed sources and derivatives stay ignored; the committed Blueprint retains a portable fallback. Dedicated knee slides, complete cover transitions/corners/transfers, attached vaults and knife handling remain explicit gaps, even where candidate clips have been acquired. The original foundation map remains available. See `TEST_MATRIX.md` for measured current acceptance and `ASSET_RESEARCH.md` for sources and coverage.
 
 ## Delivery gates
 

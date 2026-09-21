@@ -61,9 +61,24 @@ bool UGunnerCombatComponent::HasCombatAuthority() const
 
 bool UGunnerCombatComponent::CanStartAction() const
 {
-    return HasCombatAuthority() && ActiveData && !bCombatBlocked && Character->GetController() &&
+    const auto* Warden = Cast<AGunnerCharacter>(Character);
+    return HasCombatAuthority() && ActiveData && Character->GetController() &&
+        (Warden ? !Warden->IsCombatMovementBlocked() : !bCombatBlocked) &&
         Character->GetCharacterMovement()->IsMovingOnGround() &&
         (ActionState == EGunnerCombatAction::Idle || ActionState == EGunnerCombatAction::Firing);
+}
+
+bool UGunnerCombatComponent::IsFireBlocked() const
+{
+    const auto* Warden = Cast<AGunnerCharacter>(Character);
+    if (!Warden) return bFireBlocked;
+    if (Cover && Cover->IsTransitioning()) return true;
+    const bool bAimRequested = Warden->IsAimHeld();
+    const bool bInCover = Cover && Cover->IsAttached();
+    const bool bProtectedBlind = bInCover && Cover->IsLowCover() && Character->bIsCrouched && !bAimRequested;
+    if (bInCover && !bProtectedBlind && (!bAimRequested || !Cover->CanPeek(Warden->GetShoulderSide()))) return true;
+    return (Character->bIsCrouched || Character->GetCharacterMovement()->bWantsToCrouch)
+        && !bAimRequested && !bProtectedBlind;
 }
 
 UAnimInstance* UGunnerCombatComponent::GetAnimInstance() const
@@ -82,7 +97,8 @@ int32 UGunnerCombatComponent::GetReserve() const { return Reserves[ActiveSlot]; 
 void UGunnerCombatComponent::StartAim()
 {
     if (bBlindFiring) StopFire();
-    if (CanStartAction() && !bFireBlocked && ActiveData->GunMesh) bAiming = true;
+    const auto* Warden = Cast<AGunnerCharacter>(Character);
+    if (CanStartAction() && (!Warden || Warden->IsAimHeld()) && !IsFireBlocked() && ActiveData->GunMesh) bAiming = true;
 }
 
 void UGunnerCombatComponent::StopAim() { bAiming = false; }
@@ -109,7 +125,7 @@ void UGunnerCombatComponent::StartFire()
 {
     if (!CanStartAction() || !ActiveData->FireMontage || !ActiveData->GunMesh || bFireHeld) return;
     if (GetMagazine() <= 0) { PlayDryFire(); return; }
-    if (bFireBlocked) return;
+    if (IsFireBlocked()) return;
     if (bBlindFirePending)
     {
         // A second press during the same raise keeps automatic fire held, without
@@ -117,7 +133,10 @@ void UGunnerCombatComponent::StartFire()
         bFireHeld = true;
         return;
     }
-    if (Cover && Cover->IsLowCover() && !bAiming)
+    const auto* Warden = Cast<AGunnerCharacter>(Character);
+    const bool bAimRequested = Warden ? Warden->IsAimHeld() : bAiming;
+    if (bAimRequested && !bAiming) StartAim();
+    if (Cover && Cover->IsLowCover() && Character->bIsCrouched && !bAimRequested && !bAiming)
     {
         const auto* Anim = Cast<UGunnerAnimInstance>(GetAnimInstance());
         float CoverTop = 0.f;
@@ -241,19 +260,22 @@ bool UGunnerCombatComponent::IsBlindFirePoseReady(float CoverTop)
 
 void UGunnerCombatComponent::FireOnce()
 {
-    if (!CanStartAction() || bFireBlocked || (!bFireHeld && !bBlindFirePending) || !ActiveData->FireMontage)
+    if (!CanStartAction() || (!bFireHeld && !bBlindFirePending) || !ActiveData->FireMontage)
     {
         StopFire();
         return;
     }
     if (GetMagazine() <= 0) { PlayDryFire(); StopFire(); return; }
+    if (IsFireBlocked()) { StopFire(); return; }
     const float Now = GetWorld()->GetTimeSeconds();
     const bool bBlindShot = bBlindFiring;
     if (bBlindShot)
     {
         const auto* BlindAnim = Cast<UGunnerAnimInstance>(GetAnimInstance());
         float CoverTop = 0.f;
-        if (!Cover || !Cover->IsLowCover() || bAiming || !BlindAnim || !BlindAnim->bBlindFirePoseReady ||
+        const auto* Warden = Cast<AGunnerCharacter>(Character);
+        if (!Cover || !Cover->IsLowCover() || bAiming || (Warden && Warden->IsAimHeld())
+            || !BlindAnim || !BlindAnim->bBlindFirePoseReady ||
             !Cover->GetLowCoverTop(CoverTop))
         {
             BlindFireWaitReason = TEXT("CoverOrPoseLost");
@@ -441,7 +463,9 @@ void UGunnerCombatComponent::HandleActionTimeout()
 
 void UGunnerCombatComponent::FinishAction(bool bCompleted)
 {
-    if (bCompleted && HasCombatAuthority() && Character->GetController() && !bCombatBlocked && IsReloading() && ActiveData)
+    const auto* Warden = Cast<AGunnerCharacter>(Character);
+    if (bCompleted && HasCombatAuthority() && Character->GetController()
+        && (Warden ? !Warden->IsCombatMovementBlocked() : !bCombatBlocked) && IsReloading() && ActiveData)
     {
         const int32 Needed = FMath::Max(0, FMath::Clamp(ActiveData->MagazineCapacity, 1, 200) - GetMagazine());
         const int32 Transfer = FMath::Min(Needed, GetReserve());
@@ -499,8 +523,9 @@ void UGunnerCombatComponent::Melee()
 void UGunnerCombatComponent::CommitMelee()
 {
     UAnimInstance* Anim = GetAnimInstance();
-    if (!HasCombatAuthority() || !Character->GetController() || bCombatBlocked || !IsMeleeing() || bMeleeCommitted || !ActiveData ||
-        !Anim || !Anim->Montage_IsPlaying(ActionMontage)) return;
+    const auto* Warden = Cast<AGunnerCharacter>(Character);
+    if (!HasCombatAuthority() || !Character->GetController() || (Warden ? Warden->IsCombatMovementBlocked() : bCombatBlocked)
+        || !IsMeleeing() || bMeleeCommitted || !ActiveData || !Anim || !Anim->Montage_IsPlaying(ActionMontage)) return;
     bMeleeCommitted = true;
     const FVector Direction = Character->GetActorForwardVector();
     const FVector Start = Character->GetActorLocation() + FVector(0.f, 0.f, 15.f);
