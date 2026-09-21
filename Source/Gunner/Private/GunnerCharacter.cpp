@@ -394,7 +394,7 @@ void AGunnerCharacter::StickLook(const FInputActionValue& Value)
         ? FMath::Clamp(InputConfig->StickAimSensitivityScale, .1f, 1.f) : 1.f;
     const FVector2D Axis = Value.Get<FVector2D>() * StickLookDegreesPerSecond * AimScale * GetWorld()->GetDeltaSeconds();
     AddControllerYawInput(Axis.X);
-    AddControllerPitchInput(Axis.Y);
+    AddControllerPitchInput(-Axis.Y);
 }
 
 void AGunnerCharacter::Traverse()

@@ -11,7 +11,7 @@ Open `Gunner.uproject`, press **Play** in `L_MotionRange`, and click inside the 
 | Control | Action |
 |---|---|
 | Left stick | Move; partial tilt walks more slowly |
-| Right stick | Look; up looks up |
+| Right stick | Look; push up to look down, pull back to look up |
 | LT / RT | Hold aim / fire; RT alone blind-fires while attached to low cover |
 | A | Tap near cover to attach; tap in open space to roll; hold while moving forward to sprint |
 | X | Reload, including supported crouch/cover reload |

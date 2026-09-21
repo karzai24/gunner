@@ -234,8 +234,8 @@ void AGunnerControllerProbe::Tick(float DeltaSeconds)
         const float Yaw = FMath::FindDeltaAngleDegrees(BeforeLook.Yaw, After.Yaw);
         FreeLookRate = Yaw / FMath::Max(.01f, InjectedTime);
         Check(Yaw > 5.f, TEXT("Right stick right turns view right"));
-        Check(FMath::FindDeltaAngleDegrees(BeforeLook.Pitch, After.Pitch) > 2.f &&
-            After.Vector().Z > BeforeLook.Vector().Z, TEXT("Right stick up raises view without inversion"));
+        Check(FMath::FindDeltaAngleDegrees(BeforeLook.Pitch, After.Pitch) < -2.f &&
+            After.Vector().Z < BeforeLook.Vector().Z, TEXT("Right stick up lowers view with inverted pitch"));
         Check(Player->PlayerCameraManager && Player->PlayerCameraManager->GetCameraRotation().Equals(After, .5f),
             TEXT("Rendered camera follows controller rotation"));
         LookStick = FVector2D::ZeroVector;

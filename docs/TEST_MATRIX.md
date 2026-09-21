@@ -1,3 +1,13 @@
+# Inverted controller pitch — 2026-09-20
+
+Requested controller vertical look reversal: pushing the right stick up now looks down; pulling back looks up, including during ADS. Only the stick pitch sign changes; mouse deltas, horizontal look and sensitivity remain unchanged.
+
+Editor and Game targets build successfully: [Editor evidence](evidence/controller-invert/build-editor.txt), [Game evidence](evidence/controller-invert/build-game.txt). The existing controller probe's pitch-direction assertion now checks the requested inversion. Rendered verification uses the same `-GunnerControllerSmoke` / `Tools/validate_controller_editor.py` command documented below. The [actual gameplay view](evidence/controller-invert/inverted-look.png) after positive stick Y was visually inspected and points downward.
+
+**94 live checks passed across two completed rendered PIE sessions, zero failures**, including the inverted vertical direction and live camera-follow checks. [Rendered log](evidence/controller-invert/controller.txt). Engine render-thread/analytics shutdown warnings and the installed MetalShaderConverter build warning remain separate from project diagnostics. Physical-controller feel still requires user confirmation; these events are synthetic. Historical checks below retain their original direction/configuration.
+
+---
+
 # Xbox controller acceptance — 2026-09-20
 
 The movement range now has a separate Xbox input composition: fifteen gamepad mappings, eighteen-percent radial stick dead zones, a finer right-stick curve, reduced stick sensitivity while aiming, guarded rifle/pistol cycling and prompts that follow the last meaningful input device. All nineteen existing keyboard/mouse mappings and the original input assets are preserved. Only `BP_WardenMotion.InputConfig` changes in the character asset; its portable animation class and motion settings remain unchanged.
