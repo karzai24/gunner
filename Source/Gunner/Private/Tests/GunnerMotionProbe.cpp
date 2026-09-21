@@ -205,6 +205,12 @@ void AGunnerMotionProbe::Tick(float DeltaSeconds)
         ShotsBefore = Combat->GetShotsFired(); HitsBefore = Target->GetTotalHitCount();
         Key(EKeys::LeftMouseButton, true); Advance(0.7f); break;
     case 6:
+        // Screenshot readback can stall the first held-fire frame. Timer catch-up
+        // deliberately cannot emit several rounds at one world time; allow a
+        // bounded interval for distinct updates without weakening the shot gate.
+        if (Combat->GetShotsFired() < ShotsBefore + 3 && Elapsed < 1.5f) return;
+        UE_LOG(LogTemp, Display, TEXT("GUNNER_MOTION_HELD_FIRE elapsed=%.3f shots=%d"),
+            Elapsed, Combat->GetShotsFired() - ShotsBefore);
         Check(Combat->GetShotsFired() >= ShotsBefore + 3, TEXT("Held rifle fires repeatedly"));
         Check(Target->GetTotalHitCount() > HitsBefore, TEXT("Two-stage rifle trace damages visible target"));
         Capture(TEXT("motion_rifle_fire.png")); Key(EKeys::LeftMouseButton, false); Key(EKeys::RightMouseButton, false);
@@ -552,7 +558,13 @@ void AGunnerMotionProbe::Tick(float DeltaSeconds)
     }
     case 84: Key(EKeys::SpaceBar, true); Advance(0.2f); break;
     case 85:
-        Key(EKeys::SpaceBar, false);
+        if (HeldKeys.Contains(EKeys::SpaceBar)) Key(EKeys::SpaceBar, false);
+        // Cover admission starts a swept approach; crouch is committed on arrival.
+        // Include the native maximum approach plus its cancellation grace period.
+        if (!(Cover->IsLowCover() && Character->bIsCrouched)
+            && (Cover->IsTransitioning() || Cover->IsAttached()) && Elapsed < 1.3f) return;
+        UE_LOG(LogTemp, Display, TEXT("GUNNER_MOTION_LOW_ENTRY elapsed=%.3f entering=%d attached=%d low=%d crouched=%d"),
+            Elapsed, Cover->IsTransitioning(), Cover->IsAttached(), Cover->IsLowCover(), Character->bIsCrouched);
         Check(Cover->IsLowCover() && Character->bIsCrouched, TEXT("Low-cover melee guard fixture attaches and crouches"));
         Key(EKeys::RightMouseButton, true); Advance(0.45f); break;
     case 86:

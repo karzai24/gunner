@@ -46,6 +46,7 @@ public:
     UFUNCTION(BlueprintCallable, Category="Combat") void Reload();
     UFUNCTION(BlueprintCallable, Category="Combat") void EquipRifle();
     UFUNCTION(BlueprintCallable, Category="Combat") void EquipPistol();
+    UFUNCTION(BlueprintCallable, Category="Combat") void CycleWeapon();
     UFUNCTION(BlueprintCallable, Category="Combat") void Melee();
     UFUNCTION(BlueprintCallable, Category="Combat") void SetCombatBlocked(bool bBlocked);
     UFUNCTION(BlueprintCallable, Category="Combat") void SetFireBlocked(bool bBlocked);

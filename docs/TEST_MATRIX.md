@@ -1,3 +1,39 @@
+# Xbox controller acceptance — 2026-09-20
+
+The movement range now has a separate Xbox input composition: fifteen gamepad mappings, eighteen-percent radial stick dead zones, a finer right-stick curve, reduced stick sensitivity while aiming, guarded rifle/pistol cycling and prompts that follow the last meaningful input device. All nineteen existing keyboard/mouse mappings and the original input assets are preserved. Only `BP_WardenMotion.InputConfig` changes in the character asset; its portable animation class and motion settings remain unchanged.
+
+**276 passing checks across four completed rendered PIE sessions, zero failures in accepted runs:** 90 controller checks and 186 keyboard/mouse regression checks. Synthetic input exercises Unreal's gamepad-key path, **not physical controller pairing or OS delivery**. [CONTROLLER_TESTING](CONTROLLER_TESTING.md) contains the layout and Mac setup steps. Sanitized evidence is under `evidence/controller`.
+
+| Gate | Actual result / evidence |
+|---|---|
+| Editor and Game builds | **Both final targets succeeded.** [Editor](evidence/controller/build-editor.txt), [Game](evidence/controller/build-game.txt); [initial Editor](evidence/controller/build-editor-initial.txt) and [initial Game](evidence/controller/build-game-initial.txt) retain controller-source compilation. No project compiler diagnostics. Game retains the installed MetalShaderConverter include-directory warning and staged-build notice. |
+| Input authoring | Completed with zero errors/warnings; new `DA_XboxInput`, `IMC_Xbox`, `IA_CycleWeapon`, recoverable character backup and unchanged original input hashes. [Authoring log](evidence/controller/authoring.txt), [report](evidence/controller/authoring.json). The report records the authoring-time status; acceptance comes from the subsequent gates. |
+| Fresh input asset gate | **Passed: fifteen gamepad mappings, sixteen configured actions, nineteen preserved keyboard/mouse mappings; zero errors/warnings.** Verifies action types, modifier properties, ADS scale, preserved input hashes and unchanged animation/settings assignments. [Log](evidence/controller/assets.txt), [report](evidence/controller/assets.json). |
+| Rendered controller path | **45 checks per session / 90 passes / zero failures**, two native completions and `GUNNER_CONTROLLER_PIE_COMPLETE cycles=2 failures=0`. [Controller log](evidence/controller/controller.txt). |
+| Keyboard/mouse regression | **93 checks per session / 186 passes / zero failures**, two native completions and `GUNNER_MOTION_PIE_COMPLETE cycles=2 failures=0`. Final entry samples were 0.217/0.228 seconds; three shots were observed at 0.728/0.769 seconds. [Regression log](evidence/controller/keyboard-regression.txt). |
+| Visual inspection | Real gameplay [ADS](evidence/controller/controller_ads_hud.png), [crouch](evidence/controller/controller_crouch_hud.png), [protected cover](evidence/controller/controller_cover_idle_hud.png) and [blind fire](evidence/controller/controller_cover_blind_fire_hud.png) captures inspected. Xbox hints and cover status are readable without overlapping ammunition. Captures are untouched and represent the second controller session. |
+
+The controller probe injects the four individual stick axes and digital gamepad keys through `PlayerController::InputKey`, then checks Enhanced Input and actual pawn/camera state. It exercises dead-zone rejection, partial/full forward speed and lateral movement, yaw/pitch, live camera rotation, held LT/RT and release, aim sensitivity, reload/ammo conservation, weapon selection/cycling, melee, crouch, both sprint inputs, contextual A roll/cover, explicit roll, shoulder swap, jump, low-cover blind fire and HUD input-device state. It records approximately 117 cm/s at partial tilt and 300 cm/s at full tilt; sampled ADS/free turn-rate ratios are 0.572–0.573 against the authored 0.55 scale, within the declared sampling tolerance.
+
+The first keyboard regression produced **three failures across two completed sessions**, retained in [initial failed log](evidence/controller/keyboard-initial-failed.txt). Two checks sampled low-cover crouch after only 0.2 seconds: the 0.16-second approach still needed subsequent movement/stance updates. One repeat-fire check followed a screenshot stall and sampled too few distinct timer updates. The probe now retains the same assertions with bounded waits (1.3 seconds for entry, 1.5 seconds for three shots), logs elapsed state/counts, and exposes native failure counts to the Python driver's final summary. No gameplay timing or collision guard was changed for these failures. Initial runs are not counted as acceptance.
+
+Reproduction (one Unreal process at a time; do not rerun the asset installer):
+
+```bash
+./Tools/build_macos.sh GunnerEditor
+./Tools/build_macos.sh Gunner
+./Tools/open_editor_macos.sh -run=pythonscript \
+  "-script=$PWD/Tools/validate_controller_assets.py" -NullRHI -unattended -nosound -nop4 -FullStdOutLogOutput -stdout
+./Tools/open_editor_macos.sh -GunnerControllerSmoke -nosound \
+  "-ExecCmds=py $PWD/Tools/validate_controller_editor.py" "-LogCmds=LogPython Log" -FullStdOutLogOutput -stdout
+./Tools/open_editor_macos.sh -GunnerMotionSmoke -nosound \
+  "-ExecCmds=py $PWD/Tools/validate_motion_editor.py" "-LogCmds=LogPython Log" -FullStdOutLogOutput -stdout
+```
+
+The controller run retains engine editor-layout migration, `r.MotionVectorSimulation` render-thread and analytics HTTP shutdown warnings; no project runtime errors occurred. The Game build retains the installed MetalShaderConverter missing-include-directory warning and normal staged-build notice. Physical controller firmware/pairing, disconnect/reconnect, in-hand feel, rumble, aim assist, remapping UI, cooked builds and multiplayer device assignment are unverified or outside this pass. No new animation asset or paid pack was acquired. Earlier movement acceptance remains a historical record of its prior composition.
+
+---
+
 # Cover movement profile acceptance — 2026-09-20
 
 This pass adds a swept, supported cover approach; contextual tap-roll/hold-sprint and fast wall travel; bounded sprint steering with independent look; rolls from clear crouch/cover; directional free/high-cover crouched ADS; hunched rifle sprint and high-wall poses; stationary crouch entry/exit; and arm-only weapon carry that preserves the authored crouch torso/legs. Low cover retains its protected animation branch. The optional licensed profile is selected through ignored local config; the committed character Blueprint remains portable and the foundation is preserved.

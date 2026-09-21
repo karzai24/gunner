@@ -1,0 +1,33 @@
+# Sanitized build command, compilation, diagnostics and result from Saved/controller-build-game.log
+Running dotnet Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.dll Gunner Mac Development <PROJECT>/Gunner.uproject -WaitMutex -NoHotReloadFromIDE
+<UE_ROOT>/Engine/Source/ThirdParty/Apple/MetalShaderConverter/MetalShaderConverter.build.cs: warning: Referenced directory '<UE_ROOT>/Engine/Source/ThirdParty/Apple/MetalShaderConverter/include/metal_irconverter_ext' does not exist.
+Compiling with Mac SDK 26.5, minimum Target OS version 14.00
+UHT compiled-in object format Default
+Building Gunner...
+Using Clang compiler 21.1.6 (<XCODE>/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
+  Apple clang version 21.0.0 (clang-2100.1.1.101) Target: arm64-apple-darwin25.6.0 Thread model: posix InstalledDir: <XCODE>/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+Using Clang archiver (<XCODE>/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
+  Apple clang version 21.0.0 (clang-2100.1.1.101) Target: arm64-apple-darwin25.6.0 Thread model: posix InstalledDir: <XCODE>/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+[Adaptive Build] Excluded from Gunner unity file: GunnerCombatComponent.cpp, GunnerPlayerController.cpp, GunnerCharacter.cpp, GunnerGameMode.cpp, GunnerHUD.cpp, GunnerControllerProbe.cpp
+Using Unreal Build Accelerator local executor to run 12 action(s)
+  CPU 10 physical cores, 10 logical cores
+  Memory 16 GB physical, 14.43 GB/16 GB committed
+[1/12] Compile [Apple] SharedPCH.Engine.Project.ValApi.ValExpApi.Cpp20.h
+[2/12] Compile [Apple] GunnerGameMode.cpp
+[3/12] Compile [Apple] GunnerHUD.cpp
+[4/12] Compile [Apple] GunnerControllerProbe.cpp
+[5/12] Compile [Apple] GunnerPlayerController.cpp
+[6/12] Compile [Apple] GunnerCombatComponent.cpp
+[7/12] Compile [Apple] GunnerCharacter.cpp
+[8/12] Compile [Apple] Module.Gunner.cpp
+[9/12] Link [Apple] Gunner
+[10/12] Updating version file: <PROJECT>/Intermediate/Build/Versions.xcconfig [NoUba]
+[11/12] ApplePostBuildSync Executing PostBuildSync [<PROJECT>/Binaries/Mac/Gunner] [NoUba]
+<UE_ROOT>/Engine/Source/ThirdParty/Apple/MetalShaderConverter/MetalShaderConverter.build.cs: warning: Referenced directory '<UE_ROOT>/Engine/Source/ThirdParty/Apple/MetalShaderConverter/include/metal_irconverter_ext' does not exist.
+Compiling with Mac SDK 26.5, minimum Target OS version 14.00
+WARNING: To run, you must have a valid staged build directory. The Staged location is:
+** BUILD SUCCEEDED **
+[12/12] WriteMetadata Gunner.target [NoUba]
+Total time in Unreal Build Accelerator local executor: 37.32 seconds
+Result: Succeeded
+Total execution time: 41.50 seconds

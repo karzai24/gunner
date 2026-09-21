@@ -1,0 +1,1 @@
+[2026.09.21-00.42.13:099][  0]LogPython: GUNNER_CONTROLLER_INPUT_ASSETS_PASS mappings=15 actions=16 keyboard=19

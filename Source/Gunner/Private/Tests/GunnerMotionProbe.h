@@ -20,6 +20,7 @@ public:
     AGunnerMotionProbe();
     virtual void Tick(float DeltaSeconds) override;
     virtual void EndPlay(const EEndPlayReason::Type Reason) override;
+    UFUNCTION(BlueprintPure) int32 GetFailureCount() const { return Failures; }
 private:
     FGunnerProbeInputGuard InputGuard;
     UPROPERTY() TObjectPtr<AGunnerCharacter> Character;

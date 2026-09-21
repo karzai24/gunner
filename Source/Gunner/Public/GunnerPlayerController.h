@@ -8,6 +8,9 @@ UCLASS()
 class GUNNER_API AGunnerPlayerController : public APlayerController
 {
     GENERATED_BODY()
+public:
+    virtual bool InputKey(const FInputKeyEventArgs& Params) override;
+    bool IsUsingGamepad() const { return bUsingGamepad; }
 protected:
     virtual void BeginPlay() override;
     virtual void SetupInputComponent() override;
@@ -20,4 +23,5 @@ private:
     void RemoveInputContext();
     UPROPERTY(Transient)
     TObjectPtr<UInputMappingContext> ActiveContext;
+    bool bUsingGamepad = false;
 };

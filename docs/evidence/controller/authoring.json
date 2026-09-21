@@ -1,0 +1,33 @@
+{
+  "status": "authored_pending_rendered_validation",
+  "config": "/Game/Gunner/Motion/Input/DA_XboxInput",
+  "context": "/Game/Gunner/Motion/Input/IMC_Xbox",
+  "cycle_action": "/Game/Gunner/Motion/Input/IA_CycleWeapon",
+  "buttons": {
+    "traverse": "Gamepad_FaceButton_Bottom",
+    "reload": "Gamepad_FaceButton_Left",
+    "cycle_weapon": "Gamepad_FaceButton_Top",
+    "melee": "Gamepad_FaceButton_Right",
+    "crouch_toggle": "Gamepad_RightThumbstick",
+    "sprint": "Gamepad_LeftThumbstick",
+    "dodge": "Gamepad_LeftShoulder",
+    "shoulder_swap": "Gamepad_RightShoulder",
+    "rifle": "Gamepad_DPad_Up",
+    "pistol": "Gamepad_DPad_Down",
+    "jump": "Gamepad_DPad_Right",
+    "aim": "Gamepad_LeftTrigger",
+    "fire": "Gamepad_RightTrigger"
+  },
+  "backup": "<PROJECT>/Saved/AuthoringDrafts/before-controller-20260920-174143",
+  "keyboard_mapping_count": 19,
+  "gamepad_mapping_count": 15,
+  "radial_deadzone": 0.18,
+  "look_exponent": 1.5,
+  "ads_scale": 0.55,
+  "unchanged_input_sources": {
+    "Content/Gunner/Motion/Input/DA_MotionInput.uasset": "7400c4c1058b70388a70f21762f20add10ae02384d4d41174da0381b090a37b1",
+    "Content/Gunner/Motion/Input/IMC_Motion.uasset": "fc9ca1b0a5c01b9bedba280bd38e4a29f4161ac3abab6304f5b444332b2f563d"
+  },
+  "portable_animation_class": "/Game/Gunner/Motion/Animation/ABP_WardenMotionPolish.ABP_WardenMotionPolish_C",
+  "motion_settings": "/Game/Gunner/Motion/Movement/DA_MotionSettings.DA_MotionSettings"
+}

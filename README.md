@@ -4,6 +4,8 @@ An original cooperative third-person shooter being rebuilt in **Unreal Engine 5.
 
 **Current scope: movement and weapon sandbox.** The range includes a shoulder camera, armed movement, crouch, sprint, dodge roll, rifle/pistol aiming and shooting, protective reload/equip, standing jab/cross melee, jump transitions, empty-trigger feedback and bounded cover combat. The local movement profile adds smooth cover approaches, contextual tap/hold traversal, a hunched rifle sprint, directional crouched ADS and rifle wall-cover poses. The committed Blueprint remains portable; the additional licensed animation files stay local. See [TEST_MATRIX](docs/TEST_MATRIX.md) for actual checks and limitations. The complete movement system and three-wave horde game remain unfinished; character art is still an Epic mannequin placeholder.
 
+Xbox-style controls, Mac pairing and the full button layout: [Controller testing](docs/CONTROLLER_TESTING.md).
+
 ## Open and play on macOS
 
 Requires UE 5.8 with C++ support, Xcode and its Metal toolchain. The development machine has UE at `/Users/Shared/Epic Games/UE_5.8`; set `UE_ROOT` if yours differs.
@@ -26,15 +28,15 @@ For a separate editor-hosted game window:
 | Move / look | WASD / mouse | Left / right stick |
 | Shoulder ADS / fire | Hold RMB / LMB | Left / right trigger |
 | Blind fire over low cover | LMB while attached, without RMB | Right trigger without left trigger |
-| Reload standing or crouched, including cover | R | Left face button |
-| Rifle / pistol standing or crouched | 1 / 2 | D-pad up / down |
-| Melee jab / cross (alternating presses) | F | Right-stick click |
-| Toggle crouch | C or Left Ctrl | Right face button |
+| Reload standing or crouched, including cover | R | X |
+| Rifle / pistol standing or crouched | 1 / 2 | Y swaps; D-pad up / down selects |
+| Melee jab / cross (alternating presses) | F | B |
+| Toggle crouch | C or Left Ctrl | R3 (right-stick click) |
 | Sprint | Hold Left Shift while moving forward | Hold left-stick click |
-| Dodge roll | E | Left shoulder button |
-| Context traversal with local profile | Tap Space for cover or open-space roll; hold for sprint / fast wall travel | Bottom face button |
-| Jump without seeking cover | J | No separate mapping |
-| Swap camera shoulder | Q | Right shoulder button |
+| Dodge roll | E | LB |
+| Context traversal with local profile | Tap Space for cover or open-space roll; hold for sprint / fast wall travel | Tap / hold A |
+| Jump without seeking cover | J | D-pad right |
+| Swap camera shoulder | Q | RB |
 
 With the optional local profile enabled, Space seeks nearby cover on press, rolls on a short open-space tap, and runs after a 0.18-second hold. While attached, hold it with wall-tangent input for faster travel; moving away releases cover. A second press cancels an unfinished approach. The portable baseline keeps Space cover/detach/jump behavior. J always requests a separate jump. [Local movement setup](docs/LOCAL_MOVEMENT_SETUP.md) explains the profile and fallback.
 

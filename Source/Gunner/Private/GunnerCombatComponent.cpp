@@ -396,6 +396,7 @@ void UGunnerCombatComponent::Reload()
 
 void UGunnerCombatComponent::EquipRifle() { EquipSlot(0); }
 void UGunnerCombatComponent::EquipPistol() { EquipSlot(1); }
+void UGunnerCombatComponent::CycleWeapon() { EquipSlot(ActiveSlot == 0 ? 1 : 0); }
 
 void UGunnerCombatComponent::EquipSlot(int32 Slot)
 {

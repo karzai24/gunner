@@ -307,6 +307,7 @@ void AGunnerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
     if (InputConfig->Reload) Input->BindAction(InputConfig->Reload, ETriggerEvent::Started, Combat.Get(), &UGunnerCombatComponent::Reload);
     if (InputConfig->Rifle) Input->BindAction(InputConfig->Rifle, ETriggerEvent::Started, Combat.Get(), &UGunnerCombatComponent::EquipRifle);
     if (InputConfig->Pistol) Input->BindAction(InputConfig->Pistol, ETriggerEvent::Started, Combat.Get(), &UGunnerCombatComponent::EquipPistol);
+    if (InputConfig->CycleWeapon) Input->BindAction(InputConfig->CycleWeapon, ETriggerEvent::Started, Combat.Get(), &UGunnerCombatComponent::CycleWeapon);
     if (InputConfig->Melee) Input->BindAction(InputConfig->Melee, ETriggerEvent::Started, Combat.Get(), &UGunnerCombatComponent::Melee);
     if (InputConfig->CrouchToggle) Input->BindAction(InputConfig->CrouchToggle, ETriggerEvent::Started, this, &AGunnerCharacter::ToggleCrouch);
     if (InputConfig->ShoulderSwap) Input->BindAction(InputConfig->ShoulderSwap, ETriggerEvent::Started, this, &AGunnerCharacter::SwapShoulder);
@@ -389,7 +390,9 @@ void AGunnerCharacter::MouseLook(const FInputActionValue& Value)
 
 void AGunnerCharacter::StickLook(const FInputActionValue& Value)
 {
-    const FVector2D Axis = Value.Get<FVector2D>() * StickLookDegreesPerSecond * GetWorld()->GetDeltaSeconds();
+    const float AimScale = IsAimHeld() && InputConfig
+        ? FMath::Clamp(InputConfig->StickAimSensitivityScale, .1f, 1.f) : 1.f;
+    const FVector2D Axis = Value.Get<FVector2D>() * StickLookDegreesPerSecond * AimScale * GetWorld()->GetDeltaSeconds();
     AddControllerYawInput(Axis.X);
     AddControllerPitchInput(Axis.Y);
 }

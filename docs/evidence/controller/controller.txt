@@ -1,0 +1,106 @@
+[2026.09.21-00.42.48:410][  0]LogLayoutService: Warning: While key "UnrealEd_Layout_v1.5" was not found, and older version exists (key "UnrealEd_Layout_v1.6"). This means section "EditorLayouts" was created with a previous version of UE and is no longer compatible. The old key has been removed and updated with the new one.
+[2026.09.21-00.42.49:966][ 14]LogConsoleManager: Warning: Console variable 'r.MotionVectorSimulation' used in the render thread. Rendering artifacts could happen. Use ECVF_RenderThreadSafe or don't use in render thread.
+[2026.09.21-00.42.52:478][ 70]PIE: Play in editor total start time 0.414 seconds.
+[2026.09.21-00.42.55:176][148]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=0 Motion pawn, controller, input, weapons and animation ready
+[2026.09.21-00.42.55:176][148]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=0 Installed movement profile enables contextual A tap/hold
+[2026.09.21-00.42.55:177][148]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=0 Transient supported test floor spawned
+[2026.09.21-00.42.55:177][148]LogTemp: Display: GUNNER_CONTROLLER_BEGIN physical gamepad key/axis mappings; OS delivery and hardware pairing unverified
+[2026.09.21-00.42.55:577][161]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=1 Keyboard activity selects keyboard HUD hints
+[2026.09.21-00.42.56:089][175]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=2 Small stick drift stays inside movement dead zone
+[2026.09.21-00.42.56:089][175]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=2 Small stick drift does not rotate camera
+[2026.09.21-00.42.56:089][175]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=2 Small stick drift does not flicker HUD into controller hints
+[2026.09.21-00.42.56:902][204]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=3 Partial left-stick forward produces real forward motion
+[2026.09.21-00.42.56:902][204]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=3 Intentional stick activity selects controller HUD hints
+[2026.09.21-00.42.57:710][231]LogTemp: Display: GUNNER_CONTROLLER_ANALOG partial_speed=117.073 full_speed=300.000
+[2026.09.21-00.42.57:710][231]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=4 Full stick is faster than partial stick; analog magnitude is retained
+[2026.09.21-00.42.58:038][241]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=5 Releasing left stick stops movement
+[2026.09.21-00.42.58:490][255]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=6 Right stick right turns view right
+[2026.09.21-00.42.58:490][255]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=6 Right stick up raises view without inversion
+[2026.09.21-00.42.58:490][255]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=6 Rendered camera follows controller rotation
+[2026.09.21-00.42.58:858][268]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=7 Held LT enters shoulder ADS
+[2026.09.21-00.43.00:188][287]LogTemp: Display: GUNNER_CONTROLLER_LOOK free_rate=60.059 ads_rate=34.388 ratio=0.573 configured_scale=0.550
+[2026.09.21-00.43.00:188][287]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=9 ADS stick look uses configured lower sensitivity
+[2026.09.21-00.43.00:797][306]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=10 Held RT fires rifle repeatedly while LT aims
+[2026.09.21-00.43.01:128][316]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=11 Releasing RT stops automatic fire
+[2026.09.21-00.43.01:404][325]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=12 Releasing LT exits ADS
+[2026.09.21-00.43.01:869][340]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=13 Free camera look returns after releasing ADS
+[2026.09.21-00.43.02:088][347]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=14 X begins animated reload before ammo commits
+[2026.09.21-00.43.04:504][424]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=15 Controller reload completes and transfers ammunition
+[2026.09.21-00.43.04:731][431]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=16 Y starts animated weapon cycle
+[2026.09.21-00.43.06:344][484]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=17 Y cycles rifle to pistol
+[2026.09.21-00.43.08:340][551]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=19 D-pad up selects rifle
+[2026.09.21-00.43.10:078][609]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=21 D-pad down selects pistol
+[2026.09.21-00.43.12:086][675]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=23 Y cycles pistol back to rifle
+[2026.09.21-00.43.12:242][680]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=24 B starts the authored melee action
+[2026.09.21-00.43.13:421][720]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=25 Controller melee ends without an action lock
+[2026.09.21-00.43.13:834][733]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=26 R3 toggles genuine crouch animation and capsule
+[2026.09.21-00.43.14:618][751]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=28 Second R3 restores standing stance
+[2026.09.21-00.43.15:050][765]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=30 LB starts an animated dodge roll
+[2026.09.21-00.43.16:259][805]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=31 LB roll moves through CharacterMovement and settles
+[2026.09.21-00.43.16:796][822]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=34 Short A tap rolls in open space
+[2026.09.21-00.43.19:009][894]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=37 Holding A with left stick sprints instead of rolling
+[2026.09.21-00.43.19:330][905]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=38 Releasing a held A stops sprint without a release roll
+[2026.09.21-00.43.20:142][931]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=40 Held L3 also supports sprint
+[2026.09.21-00.43.20:672][949]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=42 RB changes the camera shoulder
+[2026.09.21-00.43.20:958][959]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=44 D-pad right starts separate weapon-specific jump
+[2026.09.21-00.43.22:072][995]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=45 Controller jump returns to a supported floor
+[2026.09.21-00.43.22:073][995]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=45 Transient 115 cm low-cover fixture spawned
+[2026.09.21-00.43.23:193][ 31]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=48 A near a barricade attaches to crouched low cover
+[2026.09.21-00.43.23:998][ 57]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=49 RT fires over low cover while the character stays crouched
+[2026.09.21-00.43.24:528][ 66]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=50 RT release restores protected cover state
+[2026.09.21-00.43.24:528][ 66]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=50 Controller HUD remains active through combat and traversal
+[2026.09.21-00.43.24:870][ 67]LogTemp: Display: GUNNER_CONTROLLER_COMPLETE failures=0 input=synthetic physical_controller_verified=false
+[2026.09.21-00.43.24:874][ 67]LogPython: GUNNER_CONTROLLER_PIE_CYCLE_FINISHED 1 failures=0
+[2026.09.21-00.43.29:004][192]PIE: Play in editor total start time 0.049 seconds.
+[2026.09.21-00.43.31:942][285]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=0 Motion pawn, controller, input, weapons and animation ready
+[2026.09.21-00.43.31:942][285]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=0 Installed movement profile enables contextual A tap/hold
+[2026.09.21-00.43.31:943][285]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=0 Transient supported test floor spawned
+[2026.09.21-00.43.31:943][285]LogTemp: Display: GUNNER_CONTROLLER_BEGIN physical gamepad key/axis mappings; OS delivery and hardware pairing unverified
+[2026.09.21-00.43.32:344][298]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=1 Keyboard activity selects keyboard HUD hints
+[2026.09.21-00.43.32:749][311]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=2 Small stick drift stays inside movement dead zone
+[2026.09.21-00.43.32:749][311]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=2 Small stick drift does not rotate camera
+[2026.09.21-00.43.32:749][311]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=2 Small stick drift does not flicker HUD into controller hints
+[2026.09.21-00.43.33:571][339]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=3 Partial left-stick forward produces real forward motion
+[2026.09.21-00.43.33:571][339]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=3 Intentional stick activity selects controller HUD hints
+[2026.09.21-00.43.34:372][364]LogTemp: Display: GUNNER_CONTROLLER_ANALOG partial_speed=117.073 full_speed=300.000
+[2026.09.21-00.43.34:372][364]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=4 Full stick is faster than partial stick; analog magnitude is retained
+[2026.09.21-00.43.34:689][374]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=5 Releasing left stick stops movement
+[2026.09.21-00.43.35:144][389]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=6 Right stick right turns view right
+[2026.09.21-00.43.35:145][389]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=6 Right stick up raises view without inversion
+[2026.09.21-00.43.35:145][389]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=6 Rendered camera follows controller rotation
+[2026.09.21-00.43.35:519][401]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=7 Held LT enters shoulder ADS
+[2026.09.21-00.43.36:361][421]LogTemp: Display: GUNNER_CONTROLLER_LOOK free_rate=60.136 ads_rate=34.382 ratio=0.572 configured_scale=0.550
+[2026.09.21-00.43.36:361][421]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=9 ADS stick look uses configured lower sensitivity
+[2026.09.21-00.43.36:979][441]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=10 Held RT fires rifle repeatedly while LT aims
+[2026.09.21-00.43.37:301][451]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=11 Releasing RT stops automatic fire
+[2026.09.21-00.43.37:579][460]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=12 Releasing LT exits ADS
+[2026.09.21-00.43.38:054][476]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=13 Free camera look returns after releasing ADS
+[2026.09.21-00.43.38:267][483]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=14 X begins animated reload before ammo commits
+[2026.09.21-00.43.40:679][560]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=15 Controller reload completes and transfers ammunition
+[2026.09.21-00.43.40:886][567]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=16 Y starts animated weapon cycle
+[2026.09.21-00.43.42:493][620]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=17 Y cycles rifle to pistol
+[2026.09.21-00.43.44:500][687]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=19 D-pad up selects rifle
+[2026.09.21-00.43.46:241][745]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=21 D-pad down selects pistol
+[2026.09.21-00.43.48:250][811]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=23 Y cycles pistol back to rifle
+[2026.09.21-00.43.48:402][816]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=24 B starts the authored melee action
+[2026.09.21-00.43.49:570][856]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=25 Controller melee ends without an action lock
+[2026.09.21-00.43.49:972][869]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=26 R3 toggles genuine crouch animation and capsule
+[2026.09.21-00.43.50:742][887]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=28 Second R3 restores standing stance
+[2026.09.21-00.43.51:176][901]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=30 LB starts an animated dodge roll
+[2026.09.21-00.43.52:378][941]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=31 LB roll moves through CharacterMovement and settles
+[2026.09.21-00.43.52:919][958]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=34 Short A tap rolls in open space
+[2026.09.21-00.43.55:104][ 30]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=37 Holding A with left stick sprints instead of rolling
+[2026.09.21-00.43.55:426][ 41]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=38 Releasing a held A stops sprint without a release roll
+[2026.09.21-00.43.56:244][ 67]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=40 Held L3 also supports sprint
+[2026.09.21-00.43.56:797][ 86]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=42 RB changes the camera shoulder
+[2026.09.21-00.43.57:087][ 96]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=44 D-pad right starts separate weapon-specific jump
+[2026.09.21-00.43.58:218][133]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=45 Controller jump returns to a supported floor
+[2026.09.21-00.43.58:219][133]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=45 Transient 115 cm low-cover fixture spawned
+[2026.09.21-00.43.59:352][170]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=48 A near a barricade attaches to crouched low cover
+[2026.09.21-00.44.00:180][197]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=49 RT fires over low cover while the character stays crouched
+[2026.09.21-00.44.00:693][205]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=50 RT release restores protected cover state
+[2026.09.21-00.44.00:693][205]LogTemp: Display: GUNNER_CONTROLLER_CHECK PASS stage=50 Controller HUD remains active through combat and traversal
+[2026.09.21-00.44.01:041][206]LogTemp: Display: GUNNER_CONTROLLER_COMPLETE failures=0 input=synthetic physical_controller_verified=false
+[2026.09.21-00.44.01:044][206]LogPython: GUNNER_CONTROLLER_PIE_CYCLE_FINISHED 2 failures=0
+[2026.09.21-00.44.02:070][240]LogPython: GUNNER_CONTROLLER_PIE_COMPLETE cycles=2 failures=0
+[2026.09.21-00.44.05:176][241]LogHttp: Warning: [FHttpManager::Shutdown] Unbinding delegates for 1 outstanding Http Requests:

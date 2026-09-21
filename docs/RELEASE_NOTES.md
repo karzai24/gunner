@@ -1,3 +1,11 @@
+# Xbox-style controller input — 2026-09-20
+
+The movement range now supports analog movement/look, LT aim, RT fire/blind fire, contextual A cover/roll/hold-run, X reload, Y weapon swap, B melee, stick-click crouch/sprint, explicit LB roll, RB shoulder swap and D-pad weapon/jump shortcuts. Stick dead zones, a finer look curve and reduced ADS sensitivity improve controller precision. HUD hints follow the last meaningful controller or keyboard/mouse input. Existing keyboard bindings and original input assets are preserved. See [CONTROLLER_TESTING](CONTROLLER_TESTING.md) for setup and the full layout.
+
+Editor and Game builds and the fresh saved-input gate pass. Four completed rendered sessions pass 276 checks with zero failures: 90 controller checks and 186 keyboard/mouse regression checks. Final build evidence and the excluded initial probe-timing failures are recorded in TEST_MATRIX. Automated input cannot certify a physical controller's Bluetooth connection or in-hand feel. No aim assist, rumble, remapping menu or new animation feature is included; movement work stops here as requested.
+
+---
+
 # Cover movement extension — 2026-09-20
 
 Cover entry now uses a checked, swept approach with supported-floor validation, dynamic-obstruction cancellation and safe arrival. The optional local profile adds Space tap-roll/hold-sprint, faster wall travel, bounded sprint turning with free mouse look, genuine directional crouched ADS, a hunched rifle sprint and rifle high-wall idle/lateral motion. Rifle grip correction follows the evaluated pose. Rolls can start from clear crouch/cover, preserve cover on rejected wall routes and resume held ADS afterward.

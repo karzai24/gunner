@@ -1,0 +1,365 @@
+{
+  "schema": 1,
+  "status": "controller_input_asset_gate_passed",
+  "actions": {
+    "move": {
+      "path": "/Game/Gunner/Input/IA_Move.IA_Move",
+      "value_type": "<InputActionValueType.AXIS2D: 2>",
+      "accumulation": "<InputActionAccumulationBehavior.CUMULATIVE: 1>"
+    },
+    "stick_look": {
+      "path": "/Game/Gunner/Input/IA_StickLook.IA_StickLook",
+      "value_type": "<InputActionValueType.AXIS2D: 2>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "mouse_look": {
+      "path": "/Game/Gunner/Input/IA_MouseLook.IA_MouseLook",
+      "value_type": "<InputActionValueType.AXIS2D: 2>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "traverse": {
+      "path": "/Game/Gunner/Input/IA_Traverse.IA_Traverse",
+      "value_type": "<InputActionValueType.BOOLEAN: 0>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "reload": {
+      "path": "/Game/Gunner/Motion/Input/IA_Reload.IA_Reload",
+      "value_type": "<InputActionValueType.BOOLEAN: 0>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "cycle_weapon": {
+      "path": "/Game/Gunner/Motion/Input/IA_CycleWeapon.IA_CycleWeapon",
+      "value_type": "<InputActionValueType.BOOLEAN: 0>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "melee": {
+      "path": "/Game/Gunner/Motion/Input/IA_Melee.IA_Melee",
+      "value_type": "<InputActionValueType.BOOLEAN: 0>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "crouch_toggle": {
+      "path": "/Game/Gunner/Motion/Input/IA_CrouchToggle.IA_CrouchToggle",
+      "value_type": "<InputActionValueType.BOOLEAN: 0>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "sprint": {
+      "path": "/Game/Gunner/Motion/Input/IA_Sprint.IA_Sprint",
+      "value_type": "<InputActionValueType.BOOLEAN: 0>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "dodge": {
+      "path": "/Game/Gunner/Motion/Input/IA_Dodge.IA_Dodge",
+      "value_type": "<InputActionValueType.BOOLEAN: 0>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "shoulder_swap": {
+      "path": "/Game/Gunner/Motion/Input/IA_ShoulderSwap.IA_ShoulderSwap",
+      "value_type": "<InputActionValueType.BOOLEAN: 0>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "rifle": {
+      "path": "/Game/Gunner/Motion/Input/IA_Rifle.IA_Rifle",
+      "value_type": "<InputActionValueType.BOOLEAN: 0>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "pistol": {
+      "path": "/Game/Gunner/Motion/Input/IA_Pistol.IA_Pistol",
+      "value_type": "<InputActionValueType.BOOLEAN: 0>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "jump": {
+      "path": "/Game/Gunner/Motion/Input/IA_Jump.IA_Jump",
+      "value_type": "<InputActionValueType.BOOLEAN: 0>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "aim": {
+      "path": "/Game/Gunner/Motion/Input/IA_Aim.IA_Aim",
+      "value_type": "<InputActionValueType.BOOLEAN: 0>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    },
+    "fire": {
+      "path": "/Game/Gunner/Motion/Input/IA_Fire.IA_Fire",
+      "value_type": "<InputActionValueType.BOOLEAN: 0>",
+      "accumulation": "<InputActionAccumulationBehavior.TAKE_HIGHEST_ABSOLUTE_VALUE: 0>"
+    }
+  },
+  "limitations": [
+    "Fresh-process saved input composition and preservation check.",
+    "Does not certify rendered behavior, Bluetooth/USB delivery or physical hardware."
+  ],
+  "unchanged_input_sources": {
+    "Content/Gunner/Motion/Input/DA_MotionInput.uasset": "7400c4c1058b70388a70f21762f20add10ae02384d4d41174da0381b090a37b1",
+    "Content/Gunner/Motion/Input/IMC_Motion.uasset": "fc9ca1b0a5c01b9bedba280bd38e4a29f4161ac3abab6304f5b444332b2f563d"
+  },
+  "preserved_keyboard_mapping_count": 19,
+  "preserved_keyboard_mappings": [
+    {
+      "key": "W",
+      "action": "/Game/Gunner/Input/IA_Move.IA_Move",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": [
+        {
+          "class": "InputModifierSwizzleAxis",
+          "order": "<InputAxisSwizzle.YXZ: 0>"
+        }
+      ]
+    },
+    {
+      "key": "S",
+      "action": "/Game/Gunner/Input/IA_Move.IA_Move",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": [
+        {
+          "class": "InputModifierNegate",
+          "axes": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "class": "InputModifierSwizzleAxis",
+          "order": "<InputAxisSwizzle.YXZ: 0>"
+        }
+      ]
+    },
+    {
+      "key": "D",
+      "action": "/Game/Gunner/Input/IA_Move.IA_Move",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "A",
+      "action": "/Game/Gunner/Input/IA_Move.IA_Move",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": [
+        {
+          "class": "InputModifierNegate",
+          "axes": [
+            true,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "key": "MouseX",
+      "action": "/Game/Gunner/Input/IA_MouseLook.IA_MouseLook",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "MouseY",
+      "action": "/Game/Gunner/Input/IA_MouseLook.IA_MouseLook",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": [
+        {
+          "class": "InputModifierSwizzleAxis",
+          "order": "<InputAxisSwizzle.YXZ: 0>"
+        }
+      ]
+    },
+    {
+      "key": "SpaceBar",
+      "action": "/Game/Gunner/Input/IA_Traverse.IA_Traverse",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "RightMouseButton",
+      "action": "/Game/Gunner/Motion/Input/IA_Aim.IA_Aim",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "LeftMouseButton",
+      "action": "/Game/Gunner/Motion/Input/IA_Fire.IA_Fire",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "R",
+      "action": "/Game/Gunner/Motion/Input/IA_Reload.IA_Reload",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "C",
+      "action": "/Game/Gunner/Motion/Input/IA_CrouchToggle.IA_CrouchToggle",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "LeftControl",
+      "action": "/Game/Gunner/Motion/Input/IA_CrouchToggle.IA_CrouchToggle",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "LeftShift",
+      "action": "/Game/Gunner/Motion/Input/IA_Sprint.IA_Sprint",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "Q",
+      "action": "/Game/Gunner/Motion/Input/IA_ShoulderSwap.IA_ShoulderSwap",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "One",
+      "action": "/Game/Gunner/Motion/Input/IA_Rifle.IA_Rifle",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "Two",
+      "action": "/Game/Gunner/Motion/Input/IA_Pistol.IA_Pistol",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "F",
+      "action": "/Game/Gunner/Motion/Input/IA_Melee.IA_Melee",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "J",
+      "action": "/Game/Gunner/Motion/Input/IA_Jump.IA_Jump",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    {
+      "key": "E",
+      "action": "/Game/Gunner/Motion/Input/IA_Dodge.IA_Dodge",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    }
+  ],
+  "gamepad_mappings": {
+    "move": {
+      "key": "Gamepad_Left2D",
+      "action": "/Game/Gunner/Input/IA_Move.IA_Move",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": [
+        {
+          "class": "InputModifierDeadZone",
+          "lower": 0.18000000715255737,
+          "upper": 1.0,
+          "type": "<DeadZoneType.RADIAL: 1>"
+        }
+      ]
+    },
+    "stick_look": {
+      "key": "Gamepad_Right2D",
+      "action": "/Game/Gunner/Input/IA_StickLook.IA_StickLook",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": [
+        {
+          "class": "InputModifierDeadZone",
+          "lower": 0.18000000715255737,
+          "upper": 1.0,
+          "type": "<DeadZoneType.RADIAL: 1>"
+        },
+        {
+          "class": "InputModifierResponseCurveExponential",
+          "exponent": [
+            1.5,
+            1.5,
+            1.5
+          ]
+        }
+      ]
+    },
+    "traverse": {
+      "key": "Gamepad_FaceButton_Bottom",
+      "action": "/Game/Gunner/Input/IA_Traverse.IA_Traverse",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    "reload": {
+      "key": "Gamepad_FaceButton_Left",
+      "action": "/Game/Gunner/Motion/Input/IA_Reload.IA_Reload",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    "cycle_weapon": {
+      "key": "Gamepad_FaceButton_Top",
+      "action": "/Game/Gunner/Motion/Input/IA_CycleWeapon.IA_CycleWeapon",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    "melee": {
+      "key": "Gamepad_FaceButton_Right",
+      "action": "/Game/Gunner/Motion/Input/IA_Melee.IA_Melee",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    "crouch_toggle": {
+      "key": "Gamepad_RightThumbstick",
+      "action": "/Game/Gunner/Motion/Input/IA_CrouchToggle.IA_CrouchToggle",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    "sprint": {
+      "key": "Gamepad_LeftThumbstick",
+      "action": "/Game/Gunner/Motion/Input/IA_Sprint.IA_Sprint",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    "dodge": {
+      "key": "Gamepad_LeftShoulder",
+      "action": "/Game/Gunner/Motion/Input/IA_Dodge.IA_Dodge",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    "shoulder_swap": {
+      "key": "Gamepad_RightShoulder",
+      "action": "/Game/Gunner/Motion/Input/IA_ShoulderSwap.IA_ShoulderSwap",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    "rifle": {
+      "key": "Gamepad_DPad_Up",
+      "action": "/Game/Gunner/Motion/Input/IA_Rifle.IA_Rifle",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    "pistol": {
+      "key": "Gamepad_DPad_Down",
+      "action": "/Game/Gunner/Motion/Input/IA_Pistol.IA_Pistol",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    "jump": {
+      "key": "Gamepad_DPad_Right",
+      "action": "/Game/Gunner/Motion/Input/IA_Jump.IA_Jump",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    "aim": {
+      "key": "Gamepad_LeftTrigger",
+      "action": "/Game/Gunner/Motion/Input/IA_Aim.IA_Aim",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    },
+    "fire": {
+      "key": "Gamepad_RightTrigger",
+      "action": "/Game/Gunner/Motion/Input/IA_Fire.IA_Fire",
+      "setting_behavior": "<PlayerMappableKeySettingBehaviors.INHERIT_SETTINGS_FROM_ACTION: 0>",
+      "modifiers": []
+    }
+  },
+  "gamepad_mapping_count": 15,
+  "ads_scale": 0.550000011920929,
+  "config": "/Game/Gunner/Motion/Input/DA_XboxInput",
+  "context": "/Game/Gunner/Motion/Input/IMC_Xbox",
+  "portable_animation_class": "/Game/Gunner/Motion/Animation/ABP_WardenMotionPolish.ABP_WardenMotionPolish_C",
+  "motion_settings": "/Game/Gunner/Motion/Movement/DA_MotionSettings.DA_MotionSettings",
+  "action_count": 16,
+  "content_assets_modified": 0
+}

@@ -32,4 +32,8 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input") TObjectPtr<UInputAction> Melee;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input") TObjectPtr<UInputAction> Jump;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input") TObjectPtr<UInputAction> Dodge;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input") TObjectPtr<UInputAction> CycleWeapon;
+    /** Stick-only ADS tuning. Mouse sensitivity is independent. */
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input", meta=(ClampMin="0.1", ClampMax="1.0"))
+    float StickAimSensitivityScale = 1.f;
 };

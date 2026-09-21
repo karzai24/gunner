@@ -3,6 +3,7 @@
 #include "GunnerCombatComponent.h"
 #include "GunnerCharacter.h"
 #include "GunnerCoverComponent.h"
+#include "GunnerPlayerController.h"
 #include "Engine/Canvas.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
@@ -22,6 +23,8 @@ void AGunnerHUD::DrawHUD()
     }
     UGunnerCombatComponent* Combat = CachedCombat.Get();
     if (!Combat) return;
+    const auto* GunnerController = Cast<AGunnerPlayerController>(OwnerController);
+    const bool bGamepad = GunnerController && GunnerController->IsUsingGamepad();
 
     const float W = Canvas->ClipX;
     const float H = Canvas->ClipY;
@@ -76,27 +79,44 @@ void AGunnerHUD::DrawHUD()
     // a protected reload that stays in low cover throughout the montage.
     if (Combat->GetActionState() == EGunnerCombatAction::Idle || Combat->GetActionState() == EGunnerCombatAction::Firing)
     {
-        if (Combat->IsDryFiring()) Status = TEXT("EMPTY / R RELOAD");
+        if (Combat->IsDryFiring()) Status = bGamepad ? TEXT("EMPTY / X RELOAD") : TEXT("EMPTY / R RELOAD");
         else if (Combat->IsCombatBlocked()) Status = TEXT("WEAPON LOWERED");
-        else if (Combat->IsBlindFiring()) Status = TEXT("BLIND FIRE");
+        else if (Combat->IsBlindFiring()) Status = bGamepad ? TEXT("RT BLIND FIRE / LT EXPOSE") : TEXT("BLIND FIRE");
         else if (Combat->IsFireBlocked() && Combat->GetActionState() == EGunnerCombatAction::Idle)
         {
             const auto* Warden = Cast<AGunnerCharacter>(Pawn);
             if (Warden && Warden->IsInCover())
-                Status = Warden->GetCover()->IsLowCover() ? TEXT("LMB BLIND FIRE / RMB EXPOSE") : TEXT("HIGH COVER / HOLD ADS AT EDGE");
-            else Status = TEXT("ADS TO FIRE / R RELOAD");
+                Status = Warden->GetCover()->IsLowCover()
+                    ? (bGamepad ? TEXT("RT BLIND FIRE / LT EXPOSE") : TEXT("LMB BLIND FIRE / RMB EXPOSE"))
+                    : (bGamepad ? TEXT("HIGH COVER / HOLD LT AT EDGE") : TEXT("HIGH COVER / HOLD ADS AT EDGE"));
+            else Status = bGamepad ? TEXT("LT AIM / X RELOAD") : TEXT("ADS TO FIRE / R RELOAD");
         }
         else if (bObstructed) Status = TEXT("MUZZLE BLOCKED");
         else if (const auto* Warden = Cast<AGunnerCharacter>(Pawn); Warden && Warden->GetCover()->IsLowCover())
-            Status = TEXT("LMB BLIND FIRE / RMB EXPOSE");
+            Status = bGamepad ? TEXT("RT BLIND FIRE / LT EXPOSE") : TEXT("LMB BLIND FIRE / RMB EXPOSE");
     }
     DrawText(Status, Muted, X + 14.f * Scale, Y + 71.f * Scale, Font, 0.85f * Scale);
     DrawText(TEXT("GUNNER  /  MOVEMENT RANGE"), Ink, Margin, Margin, Font, Scale);
-    DrawText(TEXT("WASD Move   Mouse Aim   RMB Focus   LMB Fire   R Reload   1/2 Weapon   F Melee"), Muted,
-        Margin, H - Margin - 28.f * Scale, Font, 0.82f * Scale);
     const auto* ControlPawn = Cast<AGunnerCharacter>(Pawn);
-    DrawText(ControlPawn && ControlPawn->UsesContextualTraversal()
-        ? TEXT("Shift / Hold Space Run   Tap Space Cover/Roll   C Crouch   E Roll   Q Shoulder   J Jump")
-        : TEXT("Shift Sprint   C Crouch   Space Cover/Jump   E Roll   Q Shoulder"), Muted,
-        Margin, H - Margin - 10.f * Scale, Font, 0.82f * Scale);
+    const bool bContextual = ControlPawn && ControlPawn->UsesContextualTraversal();
+    if (bGamepad)
+    {
+        DrawText(TEXT("LS Move   RS Look   LT Aim   RT Fire   X Reload   Y Weapon   B Melee"), Muted,
+            Margin, H - Margin - 46.f * Scale, Font, 0.82f * Scale);
+        DrawText(bContextual
+            ? TEXT("Hold A / L3 Run   Tap A Cover/Roll   R3 Crouch   LB Roll   RB Shoulder")
+            : TEXT("L3 Sprint   A Cover/Jump   R3 Crouch   LB Roll   RB Shoulder"), Muted,
+            Margin, H - Margin - 28.f * Scale, Font, 0.82f * Scale);
+        DrawText(TEXT("D-pad Up Rifle   D-pad Down Pistol   D-pad Right Jump"), Muted,
+            Margin, H - Margin - 10.f * Scale, Font, 0.82f * Scale);
+    }
+    else
+    {
+        DrawText(TEXT("WASD Move   Mouse Look   RMB Aim   LMB Fire   R Reload   1/2 Weapon   F Melee"), Muted,
+            Margin, H - Margin - 28.f * Scale, Font, 0.82f * Scale);
+        DrawText(bContextual
+            ? TEXT("Shift / Hold Space Run   Tap Space Cover/Roll   C Crouch   E Roll   Q Shoulder   J Jump")
+            : TEXT("Shift Sprint   C Crouch   Space Cover/Jump   E Roll   Q Shoulder"), Muted,
+            Margin, H - Margin - 10.f * Scale, Font, 0.82f * Scale);
+    }
 }

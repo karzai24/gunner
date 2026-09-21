@@ -1,0 +1,25 @@
+# Sanitized build command, compilation, diagnostics and result from Saved/controller-build-editor.log
+Running dotnet Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.dll GunnerEditor Mac Development <PROJECT>/Gunner.uproject -WaitMutex -NoHotReloadFromIDE
+Compiling with Mac SDK 26.5, minimum Target OS version 14.00
+UHT compiled-in object format Default
+Building GunnerEditor...
+Using Clang compiler 21.1.6 (<XCODE>/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
+  Apple clang version 21.0.0 (clang-2100.1.1.101) Target: arm64-apple-darwin25.6.0 Thread model: posix InstalledDir: <XCODE>/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+Using Clang archiver (<XCODE>/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
+  Apple clang version 21.0.0 (clang-2100.1.1.101) Target: arm64-apple-darwin25.6.0 Thread model: posix InstalledDir: <XCODE>/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+[Adaptive Build] Excluded from Gunner unity file: GunnerCombatComponent.cpp, GunnerPlayerController.cpp, GunnerCharacter.cpp, GunnerGameMode.cpp, GunnerHUD.cpp, GunnerControllerProbe.cpp
+Using Unreal Build Accelerator local executor to run 9 action(s)
+  CPU 10 physical cores, 10 logical cores
+  Memory 16 GB physical, 14.55 GB/16 GB committed
+[1/9] Compile [Apple] GunnerGameMode.cpp
+[2/9] Compile [Apple] GunnerHUD.cpp
+[3/9] Compile [Apple] GunnerControllerProbe.cpp
+[4/9] Compile [Apple] GunnerPlayerController.cpp
+[5/9] Compile [Apple] GunnerCombatComponent.cpp
+[6/9] Compile [Apple] GunnerCharacter.cpp
+[7/9] Compile [Apple] Module.Gunner.cpp
+[8/9] Link [Apple] libUnrealEditor-Gunner.dylib
+[9/9] Link [Apple] libUnrealEditor-GunnerEditor.dylib
+Total time in Unreal Build Accelerator local executor: 32.69 seconds
+Result: Succeeded
+Total execution time: 38.57 seconds
